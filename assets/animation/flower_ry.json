@@ -1,0 +1,5715 @@
+{
+  "v": "5.7.13",
+  "fr": 8,
+  "ip": 0,
+  "op": 41,
+  "w": 500,
+  "h": 800,
+  "nm": "Comp 2",
+  "ddd": 0,
+  "assets": [
+    {
+      "id": "image_0",
+      "w": 35,
+      "h": 33,
+      "u": "",
+      "p": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACMAAAAdCAYAAAAgqdWEAAAACXBIWXMAAAsTAAALEwEAmpwYAAAFFmlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNi4wLWMwMDUgNzkuMTY0NTkwLCAyMDIwLzEyLzA5LTExOjU3OjQ0ICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyIgeG1sbnM6cGhvdG9zaG9wPSJodHRwOi8vbnMuYWRvYmUuY29tL3Bob3Rvc2hvcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RFdnQ9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZUV2ZW50IyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgMjIuMSAoV2luZG93cykiIHhtcDpDcmVhdGVEYXRlPSIyMDI1LTAxLTExVDE2OjEzOjAzKzA1OjMwIiB4bXA6TW9kaWZ5RGF0ZT0iMjAyNS0wMS0xMVQxNjoxNDoyOSswNTozMCIgeG1wOk1ldGFkYXRhRGF0ZT0iMjAyNS0wMS0xMVQxNjoxNDoyOSswNTozMCIgZGM6Zm9ybWF0PSJpbWFnZS9wbmciIHBob3Rvc2hvcDpDb2xvck1vZGU9IjMiIHBob3Rvc2hvcDpJQ0NQcm9maWxlPSJzUkdCIElFQzYxOTY2LTIuMSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDoyMjMxZjM0ZC1lYTJlLWFh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",
+      "e": 1
+    },
+    {
+      "id": "image_1",
+      "w": 35,
+      "h": 36,
+      "u": "",
+      "p": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACMAAAAsCAYAAADvjwGMAAAACXBIWXMAAAsTAAALEwEAmpwYAAAF42lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNi4wLWMwMDUgNzkuMTY0NTkwLCAyMDIwLzEyLzA5LTExOjU3OjQ0ICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyIgeG1sbnM6cGhvdG9zaG9wPSJodHRwOi8vbnMuYWRvYmUuY29tL3Bob3Rvc2hvcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RFdnQ9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZUV2ZW50IyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgMjIuMSAoV2luZG93cykiIHhtcDpDcmVhdGVEYXRlPSIyMDI1LTAxLTExVDE1OjQ0OjM3KzA1OjMwIiB4bXA6TW9kaWZ5RGF0ZT0iMjAyNS0wMS0xMVQxNjowODozMiswNTozMCIgeG1wOk1ldGFkYXRhRGF0ZT0iMjAyNS0wMS0xMVQxNjowODozMiswNTozMCIgZGM6Zm9ybWF0PSJpbWFnZS9wbmciIHBob3Rvc2hvcDpDb2xvck1vZGU9IjMiIHBob3Rvc2hvcDpJQ0NQcm9maWxlPSJzUkdCIElFQzYxOTY2LTIuMSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozNTg0OTg0NC1hOGZhLWY2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",
+      "e": 1
+    }
+  ],
+  "layers": [
+    {
+      "ddd": 0,
+      "ind": 1,
+      "ty": 2,
+      "nm": "Marigold_Flower_PNG_Clip_Art_Image 82.png",
+      "cl": "png",
+      "refId": "image_0",
+      "sr": 1,
+      "ks": {
+        "o": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": [
+                  0.667
+                ],
+                "y": [
+                  1
+                ]
+              },
+              "o": {
+                "x": [
+                  0.333
+                ],
+                "y": [
+                  0
+                ]
+              },
+              "t": 9,
+              "s": [
+                100
+              ]
+            },
+            {
+              "t": 17,
+              "s": [
+                0
+              ]
+            }
+          ],
+          "ix": 11
+        },
+        "r": {
+          "a": 0,
+          "k": 0,
+          "ix": 10
+        },
+        "p": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
+              "o": {
+                "x": 0.333,
+                "y": 0
+              },
+              "t": 2,
+              "s": [
+                30,
+                -100,
+                0
+              ],
+              "to": [
+                0,
+                160,
+                0
+              ],
+              "ti": [
+                0,
+                -160,
+                0
+              ]
+            },
+            {
+              "t": 17,
+              "s": [
+                30,
+                860,
+                0
+              ]
+            }
+          ],
+          "ix": 2,
+          "l": 2
+        },
+        "a": {
+          "a": 0,
+          "k": [
+            33.5,
+            31.5,
+            0
+          ],
+          "ix": 1,
+          "l": 2
+        },
+        "s": {
+          "a": 0,
+          "k": [
+            78,
+            78,
+            100
+          ],
+          "ix": 6,
+          "l": 2
+        }
+      },
+      "ao": 0,
+      "ip": 2,
+      "op": 44,
+      "st": 2,
+      "bm": 0
+    },
+    {
+      "ddd": 0,
+      "ind": 2,
+      "ty": 2,
+      "nm": "Marigold_Flower_PNG_Clip_Art_Image 82.png",
+      "cl": "png",
+      "refId": "image_0",
+      "sr": 1,
+      "ks": {
+        "o": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": [
+                  0.667
+                ],
+                "y": [
+                  1
+                ]
+              },
+              "o": {
+                "x": [
+                  0.333
+                ],
+                "y": [
+                  0
+                ]
+              },
+              "t": 9,
+              "s": [
+                100
+              ]
+            },
+            {
+              "t": 17,
+              "s": [
+                0
+              ]
+            }
+          ],
+          "ix": 11
+        },
+        "r": {
+          "a": 0,
+          "k": 0,
+          "ix": 10
+        },
+        "p": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
+              "o": {
+                "x": 0.333,
+                "y": 0
+              },
+              "t": 2,
+              "s": [
+                316.773,
+                -44.641,
+                0
+              ],
+              "to": [
+                23.204,
+                157.44,
+                0
+              ],
+              "ti": [
+                -23.204,
+                -157.44,
+                0
+              ]
+            },
+            {
+              "t": 17,
+              "s": [
+                456,
+                900,
+                0
+              ]
+            }
+          ],
+          "ix": 2,
+          "l": 2
+        },
+        "a": {
+          "a": 0,
+          "k": [
+            33.5,
+            31.5,
+            0
+          ],
+          "ix": 1,
+          "l": 2
+        },
+        "s": {
+          "a": 0,
+          "k": [
+            78,
+            78,
+            100
+          ],
+          "ix": 6,
+          "l": 2
+        }
+      },
+      "ao": 0,
+      "ip": 2,
+      "op": 44,
+      "st": 2,
+      "bm": 0
+    },
+    {
+      "ddd": 0,
+      "ind": 3,
+      "ty": 2,
+      "nm": "Marigold_Flower_PNG_Clip_Art_Image copydd 23.png",
+      "cl": "png",
+      "refId": "image_1",
+      "sr": 1,
+      "ks": {
+        "o": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": [
+                  0.667
+                ],
+                "y": [
+                  1
+                ]
+              },
+              "o": {
+                "x": [
+                  0.333
+                ],
+                "y": [
+                  0
+                ]
+              },
+              "t": 9,
+              "s": [
+                100
+              ]
+            },
+            {
+              "t": 17,
+              "s": [
+                0
+              ]
+            }
+          ],
+          "ix": 11
+        },
+        "r": {
+          "a": 0,
+          "k": 0,
+          "ix": 10
+        },
+        "p": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
+              "o": {
+                "x": 0.333,
+                "y": 0
+              },
+              "t": 2,
+              "s": [
+                178.818,
+                -17.16,
+                0
+              ],
+              "to": [
+                -15.47,
+                145.193,
+                0
+              ],
+              "ti": [
+                15.47,
+                -145.193,
+                0
+              ]
+            },
+            {
+              "t": 17,
+              "s": [
+                86,
+                854,
+                0
+              ]
+            }
+          ],
+          "ix": 2,
+          "l": 2
+        },
+        "a": {
+          "a": 0,
+          "k": [
+            29,
+            29.5,
+            0
+          ],
+          "ix": 1,
+          "l": 2
+        },
+        "s": {
+          "a": 0,
+          "k": [
+            78,
+            78,
+            100
+          ],
+          "ix": 6,
+          "l": 2
+        }
+      },
+      "ao": 0,
+      "ip": 2,
+      "op": 44,
+      "st": 2,
+      "bm": 0
+    },
+    {
+      "ddd": 0,
+      "ind": 4,
+      "ty": 2,
+      "nm": "Marigold_Flower_PNG_Clip_Art_Image copydd 23.png",
+      "cl": "png",
+      "refId": "image_1",
+      "sr": 1,
+      "ks": {
+        "o": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": [
+                  0.667
+                ],
+                "y": [
+                  1
+                ]
+              },
+              "o": {
+                "x": [
+                  0.333
+                ],
+                "y": [
+                  0
+                ]
+              },
+              "t": 9,
+              "s": [
+                100
+              ]
+            },
+            {
+              "t": 17,
+              "s": [
+                0
+              ]
+            }
+          ],
+          "ix": 11
+        },
+        "r": {
+          "a": 0,
+          "k": 0,
+          "ix": 10
+        },
+        "p": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
+              "o": {
+                "x": 0.333,
+                "y": 0
+              },
+              "t": 2,
+              "s": [
+                492.917,
+                -20.53,
+                0
+              ],
+              "to": [
+                -19.153,
+                154.088,
+                0
+              ],
+              "ti": [
+                19.153,
+                -154.088,
+                0
+              ]
+            },
+            {
+              "t": 17,
+              "s": [
+                378,
+                904,
+                0
+              ]
+            }
+          ],
+          "ix": 2,
+          "l": 2
+        },
+        "a": {
+          "a": 0,
+          "k": [
+            29,
+            29.5,
+            0
+          ],
+          "ix": 1,
+          "l": 2
+        },
+        "s": {
+          "a": 0,
+          "k": [
+            78,
+            78,
+            100
+          ],
+          "ix": 6,
+          "l": 2
+        }
+      },
+      "ao": 0,
+      "ip": 2,
+      "op": 44,
+      "st": 2,
+      "bm": 0
+    },
+    {
+      "ddd": 0,
+      "ind": 5,
+      "ty": 2,
+      "nm": "Marigold_Flower_PNG_Clip_Art_Image 82.png",
+      "cl": "png",
+      "refId": "image_0",
+      "sr": 1,
+      "ks": {
+        "o": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": [
+                  0.667
+                ],
+                "y": [
+                  1
+                ]
+              },
+              "o": {
+                "x": [
+                  0.333
+                ],
+                "y": [
+                  0
+                ]
+              },
+              "t": 19,
+              "s": [
+                100
+              ]
+            },
+            {
+              "t": 25,
+              "s": [
+                0
+              ]
+            }
+          ],
+          "ix": 11
+        },
+        "r": {
+          "a": 0,
+          "k": 0,
+          "ix": 10
+        },
+        "p": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
+              "o": {
+                "x": 0.333,
+                "y": 0
+              },
+              "t": 2,
+              "s": [
+                77.845,
+                -20.122,
+                0
+              ],
+              "to": [
+                35.359,
+                149.687,
+                0
+              ],
+              "ti": [
+                -35.359,
+                -149.687,
+                0
+              ]
+            },
+            {
+              "t": 25,
+              "s": [
+                290,
+                878,
+                0
+              ]
+            }
+          ],
+          "ix": 2,
+          "l": 2
+        },
+        "a": {
+          "a": 0,
+          "k": [
+            33.5,
+            31.5,
+            0
+          ],
+          "ix": 1,
+          "l": 2
+        },
+        "s": {
+          "a": 0,
+          "k": [
+            78,
+            78,
+            100
+          ],
+          "ix": 6,
+          "l": 2
+        }
+      },
+      "ao": 0,
+      "ip": 2,
+      "op": 44,
+      "st": 2,
+      "bm": 0
+    },
+    {
+      "ddd": 0,
+      "ind": 6,
+      "ty": 2,
+      "nm": "Marigold_Flower_PNG_Clip_Art_Image copydd 23.png",
+      "cl": "png",
+      "refId": "image_1",
+      "sr": 1,
+      "ks": {
+        "o": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": [
+                  0.667
+                ],
+                "y": [
+                  1
+                ]
+              },
+              "o": {
+                "x": [
+                  0.333
+                ],
+                "y": [
+                  0
+                ]
+              },
+              "t": 19,
+              "s": [
+                100
+              ]
+            },
+            {
+              "t": 25,
+              "s": [
+                0
+              ]
+            }
+          ],
+          "ix": 11
+        },
+        "r": {
+          "a": 0,
+          "k": 0,
+          "ix": 10
+        },
+        "p": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
+              "o": {
+                "x": 0.333,
+                "y": 0
+              },
+              "t": 2,
+              "s": [
+                381.116,
+                -30.42,
+                0
+              ],
+              "to": [
+                -26.519,
+                147.403,
+                0
+              ],
+              "ti": [
+                26.519,
+                -147.403,
+                0
+              ]
+            },
+            {
+              "t": 25,
+              "s": [
+                222,
+                854,
+                0
+              ]
+            }
+          ],
+          "ix": 2,
+          "l": 2
+        },
+        "a": {
+          "a": 0,
+          "k": [
+            29,
+            29.5,
+            0
+          ],
+          "ix": 1,
+          "l": 2
+        },
+        "s": {
+          "a": 0,
+          "k": [
+            78,
+            78,
+            100
+          ],
+          "ix": 6,
+          "l": 2
+        }
+      },
+      "ao": 0,
+      "ip": 2,
+      "op": 44,
+      "st": 2,
+      "bm": 0
+    },
+    {
+      "ddd": 0,
+      "ind": 7,
+      "ty": 2,
+      "nm": "Marigold_Flower_PNG_Clip_Art_Image 82.png",
+      "cl": "png",
+      "refId": "image_0",
+      "sr": 1,
+      "ks": {
+        "o": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": [
+                  0.667
+                ],
+                "y": [
+                  1
+                ]
+              },
+              "o": {
+                "x": [
+                  0.333
+                ],
+                "y": [
+                  0
+                ]
+              },
+              "t": 19,
+              "s": [
+                100
+              ]
+            },
+            {
+              "t": 25,
+              "s": [
+                0
+              ]
+            }
+          ],
+          "ix": 11
+        },
+        "r": {
+          "a": 0,
+          "k": 0,
+          "ix": 10
+        },
+        "p": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
+              "o": {
+                "x": 0.333,
+                "y": 0
+              },
+              "t": 2,
+              "s": [
+                24.033,
+                -88.42,
+                0
+              ],
+              "to": [
+                20.994,
+                154.07,
+                0
+              ],
+              "ti": [
+                -20.994,
+                -154.07,
+                0
+              ]
+            },
+            {
+              "t": 25,
+              "s": [
+                150,
+                836,
+                0
+              ]
+            }
+          ],
+          "ix": 2,
+          "l": 2
+        },
+        "a": {
+          "a": 0,
+          "k": [
+            33.5,
+            31.5,
+            0
+          ],
+          "ix": 1,
+          "l": 2
+        },
+        "s": {
+          "a": 0,
+          "k": [
+            78,
+            78,
+            100
+          ],
+          "ix": 6,
+          "l": 2
+        }
+      },
+      "ao": 0,
+      "ip": 2,
+      "op": 44,
+      "st": 2,
+      "bm": 0
+    },
+    {
+      "ddd": 0,
+      "ind": 8,
+      "ty": 2,
+      "nm": "Marigold_Flower_PNG_Clip_Art_Image 82.png",
+      "cl": "png",
+      "refId": "image_0",
+      "sr": 1,
+      "ks": {
+        "o": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": [
+                  0.667
+                ],
+                "y": [
+                  1
+                ]
+              },
+              "o": {
+                "x": [
+                  0.333
+                ],
+                "y": [
+                  0
+                ]
+              },
+              "t": 7,
+              "s": [
+                100
+              ]
+            },
+            {
+              "t": 15,
+              "s": [
+                0
+              ]
+            }
+          ],
+          "ix": 11
+        },
+        "r": {
+          "a": 0,
+          "k": 0,
+          "ix": 10
+        },
+        "p": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
+              "o": {
+                "x": 0.333,
+                "y": 0
+              },
+              "t": 0,
+              "s": [
+                30,
+                -100,
+                0
+              ],
+              "to": [
+                0,
+                160,
+                0
+              ],
+              "ti": [
+                0,
+                -160,
+                0
+              ]
+            },
+            {
+              "t": 15,
+              "s": [
+                30,
+                860,
+                0
+              ]
+            }
+          ],
+          "ix": 2,
+          "l": 2
+        },
+        "a": {
+          "a": 0,
+          "k": [
+            33.5,
+            31.5,
+            0
+          ],
+          "ix": 1,
+          "l": 2
+        },
+        "s": {
+          "a": 0,
+          "k": [
+            78,
+            78,
+            100
+          ],
+          "ix": 6,
+          "l": 2
+        }
+      },
+      "ao": 0,
+      "ip": 0,
+      "op": 42,
+      "st": 0,
+      "bm": 0
+    },
+    {
+      "ddd": 0,
+      "ind": 9,
+      "ty": 2,
+      "nm": "Marigold_Flower_PNG_Clip_Art_Image 82.png",
+      "cl": "png",
+      "refId": "image_0",
+      "sr": 1,
+      "ks": {
+        "o": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": [
+                  0.667
+                ],
+                "y": [
+                  1
+                ]
+              },
+              "o": {
+                "x": [
+                  0.333
+                ],
+                "y": [
+                  0
+                ]
+              },
+              "t": 7,
+              "s": [
+                100
+              ]
+            },
+            {
+              "t": 15,
+              "s": [
+                0
+              ]
+            }
+          ],
+          "ix": 11
+        },
+        "r": {
+          "a": 0,
+          "k": 0,
+          "ix": 10
+        },
+        "p": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
+              "o": {
+                "x": 0.333,
+                "y": 0
+              },
+              "t": 0,
+              "s": [
+                456,
+                -80,
+                0
+              ],
+              "to": [
+                0,
+                163.333,
+                0
+              ],
+              "ti": [
+                0,
+                -163.333,
+                0
+              ]
+            },
+            {
+              "t": 15,
+              "s": [
+                456,
+                900,
+                0
+              ]
+            }
+          ],
+          "ix": 2,
+          "l": 2
+        },
+        "a": {
+          "a": 0,
+          "k": [
+            33.5,
+            31.5,
+            0
+          ],
+          "ix": 1,
+          "l": 2
+        },
+        "s": {
+          "a": 0,
+          "k": [
+            78,
+            78,
+            100
+          ],
+          "ix": 6,
+          "l": 2
+        }
+      },
+      "ao": 0,
+      "ip": 0,
+      "op": 42,
+      "st": 0,
+      "bm": 0
+    },
+    {
+      "ddd": 0,
+      "ind": 10,
+      "ty": 2,
+      "nm": "Marigold_Flower_PNG_Clip_Art_Image copydd 23.png",
+      "cl": "png",
+      "refId": "image_1",
+      "sr": 1,
+      "ks": {
+        "o": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": [
+                  0.667
+                ],
+                "y": [
+                  1
+                ]
+              },
+              "o": {
+                "x": [
+                  0.333
+                ],
+                "y": [
+                  0
+                ]
+              },
+              "t": 7,
+              "s": [
+                100
+              ]
+            },
+            {
+              "t": 15,
+              "s": [
+                0
+              ]
+            }
+          ],
+          "ix": 11
+        },
+        "r": {
+          "a": 0,
+          "k": 0,
+          "ix": 10
+        },
+        "p": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
+              "o": {
+                "x": 0.333,
+                "y": 0
+              },
+              "t": 0,
+              "s": [
+                86,
+                -26,
+                0
+              ],
+              "to": [
+                0,
+                146.667,
+                0
+              ],
+              "ti": [
+                0,
+                -146.667,
+                0
+              ]
+            },
+            {
+              "t": 15,
+              "s": [
+                86,
+                854,
+                0
+              ]
+            }
+          ],
+          "ix": 2,
+          "l": 2
+        },
+        "a": {
+          "a": 0,
+          "k": [
+            29,
+            29.5,
+            0
+          ],
+          "ix": 1,
+          "l": 2
+        },
+        "s": {
+          "a": 0,
+          "k": [
+            78,
+            78,
+            100
+          ],
+          "ix": 6,
+          "l": 2
+        }
+      },
+      "ao": 0,
+      "ip": 0,
+      "op": 42,
+      "st": 0,
+      "bm": 0
+    },
+    {
+      "ddd": 0,
+      "ind": 11,
+      "ty": 2,
+      "nm": "Marigold_Flower_PNG_Clip_Art_Image copydd 23.png",
+      "cl": "png",
+      "refId": "image_1",
+      "sr": 1,
+      "ks": {
+        "o": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": [
+                  0.667
+                ],
+                "y": [
+                  1
+                ]
+              },
+              "o": {
+                "x": [
+                  0.333
+                ],
+                "y": [
+                  0
+                ]
+              },
+              "t": 7,
+              "s": [
+                100
+              ]
+            },
+            {
+              "t": 15,
+              "s": [
+                0
+              ]
+            }
+          ],
+          "ix": 11
+        },
+        "r": {
+          "a": 0,
+          "k": 0,
+          "ix": 10
+        },
+        "p": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
+              "o": {
+                "x": 0.333,
+                "y": 0
+              },
+              "t": 0,
+              "s": [
+                378,
+                -36,
+                0
+              ],
+              "to": [
+                0,
+                156.667,
+                0
+              ],
+              "ti": [
+                0,
+                -156.667,
+                0
+              ]
+            },
+            {
+              "t": 15,
+              "s": [
+                378,
+                904,
+                0
+              ]
+            }
+          ],
+          "ix": 2,
+          "l": 2
+        },
+        "a": {
+          "a": 0,
+          "k": [
+            29,
+            29.5,
+            0
+          ],
+          "ix": 1,
+          "l": 2
+        },
+        "s": {
+          "a": 0,
+          "k": [
+            78,
+            78,
+            100
+          ],
+          "ix": 6,
+          "l": 2
+        }
+      },
+      "ao": 0,
+      "ip": 0,
+      "op": 42,
+      "st": 0,
+      "bm": 0
+    },
+    {
+      "ddd": 0,
+      "ind": 12,
+      "ty": 2,
+      "nm": "Marigold_Flower_PNG_Clip_Art_Image 82.png",
+      "cl": "png",
+      "refId": "image_0",
+      "sr": 1,
+      "ks": {
+        "o": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": [
+                  0.667
+                ],
+                "y": [
+                  1
+                ]
+              },
+              "o": {
+                "x": [
+                  0.333
+                ],
+                "y": [
+                  0
+                ]
+              },
+              "t": 17,
+              "s": [
+                100
+              ]
+            },
+            {
+              "t": 23,
+              "s": [
+                0
+              ]
+            }
+          ],
+          "ix": 11
+        },
+        "r": {
+          "a": 0,
+          "k": 0,
+          "ix": 10
+        },
+        "p": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
+              "o": {
+                "x": 0.333,
+                "y": 0
+              },
+              "t": 0,
+              "s": [
+                290,
+                -82,
+                0
+              ],
+              "to": [
+                0,
+                160,
+                0
+              ],
+              "ti": [
+                0,
+                -160,
+                0
+              ]
+            },
+            {
+              "t": 23,
+              "s": [
+                290,
+                878,
+                0
+              ]
+            }
+          ],
+          "ix": 2,
+          "l": 2
+        },
+        "a": {
+          "a": 0,
+          "k": [
+            33.5,
+            31.5,
+            0
+          ],
+          "ix": 1,
+          "l": 2
+        },
+        "s": {
+          "a": 0,
+          "k": [
+            78,
+            78,
+            100
+          ],
+          "ix": 6,
+          "l": 2
+        }
+      },
+      "ao": 0,
+      "ip": 0,
+      "op": 42,
+      "st": 0,
+      "bm": 0
+    },
+    {
+      "ddd": 0,
+      "ind": 13,
+      "ty": 2,
+      "nm": "Marigold_Flower_PNG_Clip_Art_Image copydd 23.png",
+      "cl": "png",
+      "refId": "image_1",
+      "sr": 1,
+      "ks": {
+        "o": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": [
+                  0.667
+                ],
+                "y": [
+                  1
+                ]
+              },
+              "o": {
+                "x": [
+                  0.333
+                ],
+                "y": [
+                  0
+                ]
+              },
+              "t": 17,
+              "s": [
+                100
+              ]
+            },
+            {
+              "t": 23,
+              "s": [
+                0
+              ]
+            }
+          ],
+          "ix": 11
+        },
+        "r": {
+          "a": 0,
+          "k": 0,
+          "ix": 10
+        },
+        "p": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
+              "o": {
+                "x": 0.333,
+                "y": 0
+              },
+              "t": 0,
+              "s": [
+                222,
+                -26,
+                0
+              ],
+              "to": [
+                0,
+                146.667,
+                0
+              ],
+              "ti": [
+                0,
+                -146.667,
+                0
+              ]
+            },
+            {
+              "t": 23,
+              "s": [
+                222,
+                854,
+                0
+              ]
+            }
+          ],
+          "ix": 2,
+          "l": 2
+        },
+        "a": {
+          "a": 0,
+          "k": [
+            29,
+            29.5,
+            0
+          ],
+          "ix": 1,
+          "l": 2
+        },
+        "s": {
+          "a": 0,
+          "k": [
+            78,
+            78,
+            100
+          ],
+          "ix": 6,
+          "l": 2
+        }
+      },
+      "ao": 0,
+      "ip": 0,
+      "op": 42,
+      "st": 0,
+      "bm": 0
+    },
+    {
+      "ddd": 0,
+      "ind": 14,
+      "ty": 2,
+      "nm": "Marigold_Flower_PNG_Clip_Art_Image 82.png",
+      "cl": "png",
+      "refId": "image_0",
+      "sr": 1,
+      "ks": {
+        "o": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": [
+                  0.667
+                ],
+                "y": [
+                  1
+                ]
+              },
+              "o": {
+                "x": [
+                  0.333
+                ],
+                "y": [
+                  0
+                ]
+              },
+              "t": 17,
+              "s": [
+                100
+              ]
+            },
+            {
+              "t": 23,
+              "s": [
+                0
+              ]
+            }
+          ],
+          "ix": 11
+        },
+        "r": {
+          "a": 0,
+          "k": 0,
+          "ix": 10
+        },
+        "p": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
+              "o": {
+                "x": 0.333,
+                "y": 0
+              },
+              "t": 0,
+              "s": [
+                150,
+                -84,
+                0
+              ],
+              "to": [
+                0,
+                153.333,
+                0
+              ],
+              "ti": [
+                0,
+                -153.333,
+                0
+              ]
+            },
+            {
+              "t": 23,
+              "s": [
+                150,
+                836,
+                0
+              ]
+            }
+          ],
+          "ix": 2,
+          "l": 2
+        },
+        "a": {
+          "a": 0,
+          "k": [
+            33.5,
+            31.5,
+            0
+          ],
+          "ix": 1,
+          "l": 2
+        },
+        "s": {
+          "a": 0,
+          "k": [
+            78,
+            78,
+            100
+          ],
+          "ix": 6,
+          "l": 2
+        }
+      },
+      "ao": 0,
+      "ip": 0,
+      "op": 42,
+      "st": 0,
+      "bm": 0
+    },
+    {
+      "ddd": 0,
+      "ind": 15,
+      "ty": 2,
+      "nm": "Marigold_Flower_PNG_Clip_Art_Image 82.png",
+      "cl": "png",
+      "refId": "image_0",
+      "sr": 1,
+      "ks": {
+        "o": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": [
+                  0.667
+                ],
+                "y": [
+                  1
+                ]
+              },
+              "o": {
+                "x": [
+                  0.333
+                ],
+                "y": [
+                  0
+                ]
+              },
+              "t": 17,
+              "s": [
+                100
+              ]
+            },
+            {
+              "t": 25,
+              "s": [
+                0
+              ]
+            }
+          ],
+          "ix": 11
+        },
+        "r": {
+          "a": 0,
+          "k": 0,
+          "ix": 10
+        },
+        "p": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
+              "o": {
+                "x": 0.333,
+                "y": 0
+              },
+              "t": 10,
+              "s": [
+                30,
+                -100,
+                0
+              ],
+              "to": [
+                0,
+                160,
+                0
+              ],
+              "ti": [
+                0,
+                -160,
+                0
+              ]
+            },
+            {
+              "t": 25,
+              "s": [
+                30,
+                860,
+                0
+              ]
+            }
+          ],
+          "ix": 2,
+          "l": 2
+        },
+        "a": {
+          "a": 0,
+          "k": [
+            33.5,
+            31.5,
+            0
+          ],
+          "ix": 1,
+          "l": 2
+        },
+        "s": {
+          "a": 0,
+          "k": [
+            78,
+            78,
+            100
+          ],
+          "ix": 6,
+          "l": 2
+        }
+      },
+      "ao": 0,
+      "ip": 10,
+      "op": 52,
+      "st": 10,
+      "bm": 0
+    },
+    {
+      "ddd": 0,
+      "ind": 16,
+      "ty": 2,
+      "nm": "Marigold_Flower_PNG_Clip_Art_Image 82.png",
+      "cl": "png",
+      "refId": "image_0",
+      "sr": 1,
+      "ks": {
+        "o": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": [
+                  0.667
+                ],
+                "y": [
+                  1
+                ]
+              },
+              "o": {
+                "x": [
+                  0.333
+                ],
+                "y": [
+                  0
+                ]
+              },
+              "t": 17,
+              "s": [
+                100
+              ]
+            },
+            {
+              "t": 25,
+              "s": [
+                0
+              ]
+            }
+          ],
+          "ix": 11
+        },
+        "r": {
+          "a": 0,
+          "k": 0,
+          "ix": 10
+        },
+        "p": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
+              "o": {
+                "x": 0.333,
+                "y": 0
+              },
+              "t": 10,
+              "s": [
+                316.773,
+                -44.641,
+                0
+              ],
+              "to": [
+                23.204,
+                157.44,
+                0
+              ],
+              "ti": [
+                -23.204,
+                -157.44,
+                0
+              ]
+            },
+            {
+              "t": 25,
+              "s": [
+                456,
+                900,
+                0
+              ]
+            }
+          ],
+          "ix": 2,
+          "l": 2
+        },
+        "a": {
+          "a": 0,
+          "k": [
+            33.5,
+            31.5,
+            0
+          ],
+          "ix": 1,
+          "l": 2
+        },
+        "s": {
+          "a": 0,
+          "k": [
+            78,
+            78,
+            100
+          ],
+          "ix": 6,
+          "l": 2
+        }
+      },
+      "ao": 0,
+      "ip": 10,
+      "op": 52,
+      "st": 10,
+      "bm": 0
+    },
+    {
+      "ddd": 0,
+      "ind": 17,
+      "ty": 2,
+      "nm": "Marigold_Flower_PNG_Clip_Art_Image copydd 23.png",
+      "cl": "png",
+      "refId": "image_1",
+      "sr": 1,
+      "ks": {
+        "o": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": [
+                  0.667
+                ],
+                "y": [
+                  1
+                ]
+              },
+              "o": {
+                "x": [
+                  0.333
+                ],
+                "y": [
+                  0
+                ]
+              },
+              "t": 17,
+              "s": [
+                100
+              ]
+            },
+            {
+              "t": 25,
+              "s": [
+                0
+              ]
+            }
+          ],
+          "ix": 11
+        },
+        "r": {
+          "a": 0,
+          "k": 0,
+          "ix": 10
+        },
+        "p": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
+              "o": {
+                "x": 0.333,
+                "y": 0
+              },
+              "t": 10,
+              "s": [
+                178.818,
+                -17.16,
+                0
+              ],
+              "to": [
+                -15.47,
+                145.193,
+                0
+              ],
+              "ti": [
+                15.47,
+                -145.193,
+                0
+              ]
+            },
+            {
+              "t": 25,
+              "s": [
+                86,
+                854,
+                0
+              ]
+            }
+          ],
+          "ix": 2,
+          "l": 2
+        },
+        "a": {
+          "a": 0,
+          "k": [
+            29,
+            29.5,
+            0
+          ],
+          "ix": 1,
+          "l": 2
+        },
+        "s": {
+          "a": 0,
+          "k": [
+            78,
+            78,
+            100
+          ],
+          "ix": 6,
+          "l": 2
+        }
+      },
+      "ao": 0,
+      "ip": 10,
+      "op": 52,
+      "st": 10,
+      "bm": 0
+    },
+    {
+      "ddd": 0,
+      "ind": 18,
+      "ty": 2,
+      "nm": "Marigold_Flower_PNG_Clip_Art_Image copydd 23.png",
+      "cl": "png",
+      "refId": "image_1",
+      "sr": 1,
+      "ks": {
+        "o": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": [
+                  0.667
+                ],
+                "y": [
+                  1
+                ]
+              },
+              "o": {
+                "x": [
+                  0.333
+                ],
+                "y": [
+                  0
+                ]
+              },
+              "t": 17,
+              "s": [
+                100
+              ]
+            },
+            {
+              "t": 25,
+              "s": [
+                0
+              ]
+            }
+          ],
+          "ix": 11
+        },
+        "r": {
+          "a": 0,
+          "k": 0,
+          "ix": 10
+        },
+        "p": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
+              "o": {
+                "x": 0.333,
+                "y": 0
+              },
+              "t": 10,
+              "s": [
+                492.917,
+                -20.53,
+                0
+              ],
+              "to": [
+                -19.153,
+                154.088,
+                0
+              ],
+              "ti": [
+                19.153,
+                -154.088,
+                0
+              ]
+            },
+            {
+              "t": 25,
+              "s": [
+                378,
+                904,
+                0
+              ]
+            }
+          ],
+          "ix": 2,
+          "l": 2
+        },
+        "a": {
+          "a": 0,
+          "k": [
+            29,
+            29.5,
+            0
+          ],
+          "ix": 1,
+          "l": 2
+        },
+        "s": {
+          "a": 0,
+          "k": [
+            78,
+            78,
+            100
+          ],
+          "ix": 6,
+          "l": 2
+        }
+      },
+      "ao": 0,
+      "ip": 10,
+      "op": 52,
+      "st": 10,
+      "bm": 0
+    },
+    {
+      "ddd": 0,
+      "ind": 19,
+      "ty": 2,
+      "nm": "Marigold_Flower_PNG_Clip_Art_Image 82.png",
+      "cl": "png",
+      "refId": "image_0",
+      "sr": 1,
+      "ks": {
+        "o": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": [
+                  0.667
+                ],
+                "y": [
+                  1
+                ]
+              },
+              "o": {
+                "x": [
+                  0.333
+                ],
+                "y": [
+                  0
+                ]
+              },
+              "t": 27,
+              "s": [
+                100
+              ]
+            },
+            {
+              "t": 33,
+              "s": [
+                0
+              ]
+            }
+          ],
+          "ix": 11
+        },
+        "r": {
+          "a": 0,
+          "k": 0,
+          "ix": 10
+        },
+        "p": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
+              "o": {
+                "x": 0.333,
+                "y": 0
+              },
+              "t": 10,
+              "s": [
+                77.845,
+                -20.122,
+                0
+              ],
+              "to": [
+                35.359,
+                149.687,
+                0
+              ],
+              "ti": [
+                -35.359,
+                -149.687,
+                0
+              ]
+            },
+            {
+              "t": 33,
+              "s": [
+                290,
+                878,
+                0
+              ]
+            }
+          ],
+          "ix": 2,
+          "l": 2
+        },
+        "a": {
+          "a": 0,
+          "k": [
+            33.5,
+            31.5,
+            0
+          ],
+          "ix": 1,
+          "l": 2
+        },
+        "s": {
+          "a": 0,
+          "k": [
+            78,
+            78,
+            100
+          ],
+          "ix": 6,
+          "l": 2
+        }
+      },
+      "ao": 0,
+      "ip": 10,
+      "op": 52,
+      "st": 10,
+      "bm": 0
+    },
+    {
+      "ddd": 0,
+      "ind": 20,
+      "ty": 2,
+      "nm": "Marigold_Flower_PNG_Clip_Art_Image copydd 23.png",
+      "cl": "png",
+      "refId": "image_1",
+      "sr": 1,
+      "ks": {
+        "o": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": [
+                  0.667
+                ],
+                "y": [
+                  1
+                ]
+              },
+              "o": {
+                "x": [
+                  0.333
+                ],
+                "y": [
+                  0
+                ]
+              },
+              "t": 27,
+              "s": [
+                100
+              ]
+            },
+            {
+              "t": 33,
+              "s": [
+                0
+              ]
+            }
+          ],
+          "ix": 11
+        },
+        "r": {
+          "a": 0,
+          "k": 0,
+          "ix": 10
+        },
+        "p": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
+              "o": {
+                "x": 0.333,
+                "y": 0
+              },
+              "t": 10,
+              "s": [
+                381.116,
+                -30.42,
+                0
+              ],
+              "to": [
+                -26.519,
+                147.403,
+                0
+              ],
+              "ti": [
+                26.519,
+                -147.403,
+                0
+              ]
+            },
+            {
+              "t": 33,
+              "s": [
+                222,
+                854,
+                0
+              ]
+            }
+          ],
+          "ix": 2,
+          "l": 2
+        },
+        "a": {
+          "a": 0,
+          "k": [
+            29,
+            29.5,
+            0
+          ],
+          "ix": 1,
+          "l": 2
+        },
+        "s": {
+          "a": 0,
+          "k": [
+            78,
+            78,
+            100
+          ],
+          "ix": 6,
+          "l": 2
+        }
+      },
+      "ao": 0,
+      "ip": 10,
+      "op": 52,
+      "st": 10,
+      "bm": 0
+    },
+    {
+      "ddd": 0,
+      "ind": 21,
+      "ty": 2,
+      "nm": "Marigold_Flower_PNG_Clip_Art_Image 82.png",
+      "cl": "png",
+      "refId": "image_0",
+      "sr": 1,
+      "ks": {
+        "o": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": [
+                  0.667
+                ],
+                "y": [
+                  1
+                ]
+              },
+              "o": {
+                "x": [
+                  0.333
+                ],
+                "y": [
+                  0
+                ]
+              },
+              "t": 27,
+              "s": [
+                100
+              ]
+            },
+            {
+              "t": 33,
+              "s": [
+                0
+              ]
+            }
+          ],
+          "ix": 11
+        },
+        "r": {
+          "a": 0,
+          "k": 0,
+          "ix": 10
+        },
+        "p": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
+              "o": {
+                "x": 0.333,
+                "y": 0
+              },
+              "t": 10,
+              "s": [
+                24.033,
+                -88.42,
+                0
+              ],
+              "to": [
+                20.994,
+                154.07,
+                0
+              ],
+              "ti": [
+                -20.994,
+                -154.07,
+                0
+              ]
+            },
+            {
+              "t": 33,
+              "s": [
+                150,
+                836,
+                0
+              ]
+            }
+          ],
+          "ix": 2,
+          "l": 2
+        },
+        "a": {
+          "a": 0,
+          "k": [
+            33.5,
+            31.5,
+            0
+          ],
+          "ix": 1,
+          "l": 2
+        },
+        "s": {
+          "a": 0,
+          "k": [
+            78,
+            78,
+            100
+          ],
+          "ix": 6,
+          "l": 2
+        }
+      },
+      "ao": 0,
+      "ip": 10,
+      "op": 52,
+      "st": 10,
+      "bm": 0
+    },
+    {
+      "ddd": 0,
+      "ind": 22,
+      "ty": 2,
+      "nm": "Marigold_Flower_PNG_Clip_Art_Image 82.png",
+      "cl": "png",
+      "refId": "image_0",
+      "sr": 1,
+      "ks": {
+        "o": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": [
+                  0.667
+                ],
+                "y": [
+                  1
+                ]
+              },
+              "o": {
+                "x": [
+                  0.333
+                ],
+                "y": [
+                  0
+                ]
+              },
+              "t": 12,
+              "s": [
+                100
+              ]
+            },
+            {
+              "t": 20,
+              "s": [
+                0
+              ]
+            }
+          ],
+          "ix": 11
+        },
+        "r": {
+          "a": 0,
+          "k": 0,
+          "ix": 10
+        },
+        "p": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
+              "o": {
+                "x": 0.333,
+                "y": 0
+              },
+              "t": 5,
+              "s": [
+                142.707,
+                -88.95,
+                0
+              ],
+              "to": [
+                -18.785,
+                158.158,
+                0
+              ],
+              "ti": [
+                18.785,
+                -158.158,
+                0
+              ]
+            },
+            {
+              "t": 20,
+              "s": [
+                30,
+                860,
+                0
+              ]
+            }
+          ],
+          "ix": 2,
+          "l": 2
+        },
+        "a": {
+          "a": 0,
+          "k": [
+            33.5,
+            31.5,
+            0
+          ],
+          "ix": 1,
+          "l": 2
+        },
+        "s": {
+          "a": 0,
+          "k": [
+            78,
+            99.047,
+            100
+          ],
+          "ix": 6,
+          "l": 2
+        }
+      },
+      "ao": 0,
+      "ip": 5,
+      "op": 47,
+      "st": 5,
+      "bm": 0
+    },
+    {
+      "ddd": 0,
+      "ind": 23,
+      "ty": 2,
+      "nm": "Marigold_Flower_PNG_Clip_Art_Image 82.png",
+      "cl": "png",
+      "refId": "image_0",
+      "sr": 1,
+      "ks": {
+        "o": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": [
+                  0.667
+                ],
+                "y": [
+                  1
+                ]
+              },
+              "o": {
+                "x": [
+                  0.333
+                ],
+                "y": [
+                  0
+                ]
+              },
+              "t": 12,
+              "s": [
+                100
+              ]
+            },
+            {
+              "t": 20,
+              "s": [
+                0
+              ]
+            }
+          ],
+          "ix": 11
+        },
+        "r": {
+          "a": 0,
+          "k": 0,
+          "ix": 10
+        },
+        "p": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
+              "o": {
+                "x": 0.333,
+                "y": 0
+              },
+              "t": 5,
+              "s": [
+                456,
+                -80,
+                0
+              ],
+              "to": [
+                0,
+                163.333,
+                0
+              ],
+              "ti": [
+                0,
+                -163.333,
+                0
+              ]
+            },
+            {
+              "t": 20,
+              "s": [
+                456,
+                900,
+                0
+              ]
+            }
+          ],
+          "ix": 2,
+          "l": 2
+        },
+        "a": {
+          "a": 0,
+          "k": [
+            33.5,
+            31.5,
+            0
+          ],
+          "ix": 1,
+          "l": 2
+        },
+        "s": {
+          "a": 0,
+          "k": [
+            78,
+            78,
+            100
+          ],
+          "ix": 6,
+          "l": 2
+        }
+      },
+      "ao": 0,
+      "ip": 5,
+      "op": 47,
+      "st": 5,
+      "bm": 0
+    },
+    {
+      "ddd": 0,
+      "ind": 24,
+      "ty": 2,
+      "nm": "Marigold_Flower_PNG_Clip_Art_Image copydd 23.png",
+      "cl": "png",
+      "refId": "image_1",
+      "sr": 1,
+      "ks": {
+        "o": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": [
+                  0.667
+                ],
+                "y": [
+                  1
+                ]
+              },
+              "o": {
+                "x": [
+                  0.333
+                ],
+                "y": [
+                  0
+                ]
+              },
+              "t": 12,
+              "s": [
+                100
+              ]
+            },
+            {
+              "t": 20,
+              "s": [
+                0
+              ]
+            }
+          ],
+          "ix": 11
+        },
+        "r": {
+          "a": 0,
+          "k": 0,
+          "ix": 10
+        },
+        "p": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
+              "o": {
+                "x": 0.333,
+                "y": 0
+              },
+              "t": 5,
+              "s": [
+                86,
+                -26,
+                0
+              ],
+              "to": [
+                0,
+                146.667,
+                0
+              ],
+              "ti": [
+                0,
+                -146.667,
+                0
+              ]
+            },
+            {
+              "t": 20,
+              "s": [
+                86,
+                854,
+                0
+              ]
+            }
+          ],
+          "ix": 2,
+          "l": 2
+        },
+        "a": {
+          "a": 0,
+          "k": [
+            29,
+            29.5,
+            0
+          ],
+          "ix": 1,
+          "l": 2
+        },
+        "s": {
+          "a": 0,
+          "k": [
+            78,
+            78,
+            100
+          ],
+          "ix": 6,
+          "l": 2
+        }
+      },
+      "ao": 0,
+      "ip": 5,
+      "op": 47,
+      "st": 5,
+      "bm": 0
+    },
+    {
+      "ddd": 0,
+      "ind": 25,
+      "ty": 2,
+      "nm": "Marigold_Flower_PNG_Clip_Art_Image copydd 23.png",
+      "cl": "png",
+      "refId": "image_1",
+      "sr": 1,
+      "ks": {
+        "o": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": [
+                  0.667
+                ],
+                "y": [
+                  1
+                ]
+              },
+              "o": {
+                "x": [
+                  0.333
+                ],
+                "y": [
+                  0
+                ]
+              },
+              "t": 12,
+              "s": [
+                100
+              ]
+            },
+            {
+              "t": 20,
+              "s": [
+                0
+              ]
+            }
+          ],
+          "ix": 11
+        },
+        "r": {
+          "a": 0,
+          "k": 0,
+          "ix": 10
+        },
+        "p": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
+              "o": {
+                "x": 0.333,
+                "y": 0
+              },
+              "t": 5,
+              "s": [
+                378,
+                -36,
+                0
+              ],
+              "to": [
+                0,
+                156.667,
+                0
+              ],
+              "ti": [
+                0,
+                -156.667,
+                0
+              ]
+            },
+            {
+              "t": 20,
+              "s": [
+                378,
+                904,
+                0
+              ]
+            }
+          ],
+          "ix": 2,
+          "l": 2
+        },
+        "a": {
+          "a": 0,
+          "k": [
+            29,
+            29.5,
+            0
+          ],
+          "ix": 1,
+          "l": 2
+        },
+        "s": {
+          "a": 0,
+          "k": [
+            78,
+            78,
+            100
+          ],
+          "ix": 6,
+          "l": 2
+        }
+      },
+      "ao": 0,
+      "ip": 5,
+      "op": 47,
+      "st": 5,
+      "bm": 0
+    },
+    {
+      "ddd": 0,
+      "ind": 26,
+      "ty": 2,
+      "nm": "Marigold_Flower_PNG_Clip_Art_Image 82.png",
+      "cl": "png",
+      "refId": "image_0",
+      "sr": 1,
+      "ks": {
+        "o": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": [
+                  0.667
+                ],
+                "y": [
+                  1
+                ]
+              },
+              "o": {
+                "x": [
+                  0.333
+                ],
+                "y": [
+                  0
+                ]
+              },
+              "t": 22,
+              "s": [
+                100
+              ]
+            },
+            {
+              "t": 28,
+              "s": [
+                0
+              ]
+            }
+          ],
+          "ix": 11
+        },
+        "r": {
+          "a": 0,
+          "k": 0,
+          "ix": 10
+        },
+        "p": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
+              "o": {
+                "x": 0.333,
+                "y": 0
+              },
+              "t": 5,
+              "s": [
+                290,
+                -82,
+                0
+              ],
+              "to": [
+                0,
+                160,
+                0
+              ],
+              "ti": [
+                0,
+                -160,
+                0
+              ]
+            },
+            {
+              "t": 28,
+              "s": [
+                290,
+                878,
+                0
+              ]
+            }
+          ],
+          "ix": 2,
+          "l": 2
+        },
+        "a": {
+          "a": 0,
+          "k": [
+            33.5,
+            31.5,
+            0
+          ],
+          "ix": 1,
+          "l": 2
+        },
+        "s": {
+          "a": 0,
+          "k": [
+            78,
+            78,
+            100
+          ],
+          "ix": 6,
+          "l": 2
+        }
+      },
+      "ao": 0,
+      "ip": 5,
+      "op": 47,
+      "st": 5,
+      "bm": 0
+    },
+    {
+      "ddd": 0,
+      "ind": 27,
+      "ty": 2,
+      "nm": "Marigold_Flower_PNG_Clip_Art_Image copydd 23.png",
+      "cl": "png",
+      "refId": "image_1",
+      "sr": 1,
+      "ks": {
+        "o": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": [
+                  0.667
+                ],
+                "y": [
+                  1
+                ]
+              },
+              "o": {
+                "x": [
+                  0.333
+                ],
+                "y": [
+                  0
+                ]
+              },
+              "t": 22,
+              "s": [
+                100
+              ]
+            },
+            {
+              "t": 28,
+              "s": [
+                0
+              ]
+            }
+          ],
+          "ix": 11
+        },
+        "r": {
+          "a": 0,
+          "k": 0,
+          "ix": 10
+        },
+        "p": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
+              "o": {
+                "x": 0.333,
+                "y": 0
+              },
+              "t": 5,
+              "s": [
+                222,
+                -26,
+                0
+              ],
+              "to": [
+                0,
+                146.667,
+                0
+              ],
+              "ti": [
+                0,
+                -146.667,
+                0
+              ]
+            },
+            {
+              "t": 28,
+              "s": [
+                222,
+                854,
+                0
+              ]
+            }
+          ],
+          "ix": 2,
+          "l": 2
+        },
+        "a": {
+          "a": 0,
+          "k": [
+            29,
+            29.5,
+            0
+          ],
+          "ix": 1,
+          "l": 2
+        },
+        "s": {
+          "a": 0,
+          "k": [
+            78,
+            78,
+            100
+          ],
+          "ix": 6,
+          "l": 2
+        }
+      },
+      "ao": 0,
+      "ip": 5,
+      "op": 47,
+      "st": 5,
+      "bm": 0
+    },
+    {
+      "ddd": 0,
+      "ind": 28,
+      "ty": 2,
+      "nm": "Marigold_Flower_PNG_Clip_Art_Image 82.png",
+      "cl": "png",
+      "refId": "image_0",
+      "sr": 1,
+      "ks": {
+        "o": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": [
+                  0.667
+                ],
+                "y": [
+                  1
+                ]
+              },
+              "o": {
+                "x": [
+                  0.333
+                ],
+                "y": [
+                  0
+                ]
+              },
+              "t": 22,
+              "s": [
+                100
+              ]
+            },
+            {
+              "t": 28,
+              "s": [
+                0
+              ]
+            }
+          ],
+          "ix": 11
+        },
+        "r": {
+          "a": 0,
+          "k": 0,
+          "ix": 10
+        },
+        "p": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
+              "o": {
+                "x": 0.333,
+                "y": 0
+              },
+              "t": 5,
+              "s": [
+                150,
+                -84,
+                0
+              ],
+              "to": [
+                0,
+                153.333,
+                0
+              ],
+              "ti": [
+                0,
+                -153.333,
+                0
+              ]
+            },
+            {
+              "t": 28,
+              "s": [
+                150,
+                836,
+                0
+              ]
+            }
+          ],
+          "ix": 2,
+          "l": 2
+        },
+        "a": {
+          "a": 0,
+          "k": [
+            33.5,
+            31.5,
+            0
+          ],
+          "ix": 1,
+          "l": 2
+        },
+        "s": {
+          "a": 0,
+          "k": [
+            78,
+            78,
+            100
+          ],
+          "ix": 6,
+          "l": 2
+        }
+      },
+      "ao": 0,
+      "ip": 5,
+      "op": 47,
+      "st": 5,
+      "bm": 0
+    },
+    {
+      "ddd": 0,
+      "ind": 29,
+      "ty": 2,
+      "nm": "Marigold_Flower_PNG_Clip_Art_Image 82.png",
+      "cl": "png",
+      "refId": "image_0",
+      "sr": 1,
+      "ks": {
+        "o": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": [
+                  0.667
+                ],
+                "y": [
+                  1
+                ]
+              },
+              "o": {
+                "x": [
+                  0.333
+                ],
+                "y": [
+                  0
+                ]
+              },
+              "t": 27,
+              "s": [
+                100
+              ]
+            },
+            {
+              "t": 35,
+              "s": [
+                0
+              ]
+            }
+          ],
+          "ix": 11
+        },
+        "r": {
+          "a": 0,
+          "k": 0,
+          "ix": 10
+        },
+        "p": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
+              "o": {
+                "x": 0.333,
+                "y": 0
+              },
+              "t": 20,
+              "s": [
+                30,
+                -100,
+                0
+              ],
+              "to": [
+                0,
+                160,
+                0
+              ],
+              "ti": [
+                0,
+                -160,
+                0
+              ]
+            },
+            {
+              "t": 35,
+              "s": [
+                30,
+                860,
+                0
+              ]
+            }
+          ],
+          "ix": 2,
+          "l": 2
+        },
+        "a": {
+          "a": 0,
+          "k": [
+            33.5,
+            31.5,
+            0
+          ],
+          "ix": 1,
+          "l": 2
+        },
+        "s": {
+          "a": 0,
+          "k": [
+            78,
+            78,
+            100
+          ],
+          "ix": 6,
+          "l": 2
+        }
+      },
+      "ao": 0,
+      "ip": 20,
+      "op": 62,
+      "st": 20,
+      "bm": 0
+    },
+    {
+      "ddd": 0,
+      "ind": 30,
+      "ty": 2,
+      "nm": "Marigold_Flower_PNG_Clip_Art_Image 82.png",
+      "cl": "png",
+      "refId": "image_0",
+      "sr": 1,
+      "ks": {
+        "o": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": [
+                  0.667
+                ],
+                "y": [
+                  1
+                ]
+              },
+              "o": {
+                "x": [
+                  0.333
+                ],
+                "y": [
+                  0
+                ]
+              },
+              "t": 27,
+              "s": [
+                100
+              ]
+            },
+            {
+              "t": 35,
+              "s": [
+                0
+              ]
+            }
+          ],
+          "ix": 11
+        },
+        "r": {
+          "a": 0,
+          "k": 0,
+          "ix": 10
+        },
+        "p": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
+              "o": {
+                "x": 0.333,
+                "y": 0
+              },
+              "t": 20,
+              "s": [
+                316.773,
+                -44.641,
+                0
+              ],
+              "to": [
+                23.204,
+                157.44,
+                0
+              ],
+              "ti": [
+                -23.204,
+                -157.44,
+                0
+              ]
+            },
+            {
+              "t": 35,
+              "s": [
+                456,
+                900,
+                0
+              ]
+            }
+          ],
+          "ix": 2,
+          "l": 2
+        },
+        "a": {
+          "a": 0,
+          "k": [
+            33.5,
+            31.5,
+            0
+          ],
+          "ix": 1,
+          "l": 2
+        },
+        "s": {
+          "a": 0,
+          "k": [
+            78,
+            78,
+            100
+          ],
+          "ix": 6,
+          "l": 2
+        }
+      },
+      "ao": 0,
+      "ip": 20,
+      "op": 62,
+      "st": 20,
+      "bm": 0
+    },
+    {
+      "ddd": 0,
+      "ind": 31,
+      "ty": 2,
+      "nm": "Marigold_Flower_PNG_Clip_Art_Image copydd 23.png",
+      "cl": "png",
+      "refId": "image_1",
+      "sr": 1,
+      "ks": {
+        "o": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": [
+                  0.667
+                ],
+                "y": [
+                  1
+                ]
+              },
+              "o": {
+                "x": [
+                  0.333
+                ],
+                "y": [
+                  0
+                ]
+              },
+              "t": 27,
+              "s": [
+                100
+              ]
+            },
+            {
+              "t": 35,
+              "s": [
+                0
+              ]
+            }
+          ],
+          "ix": 11
+        },
+        "r": {
+          "a": 0,
+          "k": 0,
+          "ix": 10
+        },
+        "p": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
+              "o": {
+                "x": 0.333,
+                "y": 0
+              },
+              "t": 20,
+              "s": [
+                178.818,
+                -17.16,
+                0
+              ],
+              "to": [
+                -15.47,
+                145.193,
+                0
+              ],
+              "ti": [
+                15.47,
+                -145.193,
+                0
+              ]
+            },
+            {
+              "t": 35,
+              "s": [
+                86,
+                854,
+                0
+              ]
+            }
+          ],
+          "ix": 2,
+          "l": 2
+        },
+        "a": {
+          "a": 0,
+          "k": [
+            29,
+            29.5,
+            0
+          ],
+          "ix": 1,
+          "l": 2
+        },
+        "s": {
+          "a": 0,
+          "k": [
+            78,
+            78,
+            100
+          ],
+          "ix": 6,
+          "l": 2
+        }
+      },
+      "ao": 0,
+      "ip": 20,
+      "op": 62,
+      "st": 20,
+      "bm": 0
+    },
+    {
+      "ddd": 0,
+      "ind": 32,
+      "ty": 2,
+      "nm": "Marigold_Flower_PNG_Clip_Art_Image copydd 23.png",
+      "cl": "png",
+      "refId": "image_1",
+      "sr": 1,
+      "ks": {
+        "o": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": [
+                  0.667
+                ],
+                "y": [
+                  1
+                ]
+              },
+              "o": {
+                "x": [
+                  0.333
+                ],
+                "y": [
+                  0
+                ]
+              },
+              "t": 27,
+              "s": [
+                100
+              ]
+            },
+            {
+              "t": 35,
+              "s": [
+                0
+              ]
+            }
+          ],
+          "ix": 11
+        },
+        "r": {
+          "a": 0,
+          "k": 0,
+          "ix": 10
+        },
+        "p": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
+              "o": {
+                "x": 0.333,
+                "y": 0
+              },
+              "t": 20,
+              "s": [
+                492.917,
+                -20.53,
+                0
+              ],
+              "to": [
+                -19.153,
+                154.088,
+                0
+              ],
+              "ti": [
+                19.153,
+                -154.088,
+                0
+              ]
+            },
+            {
+              "t": 35,
+              "s": [
+                378,
+                904,
+                0
+              ]
+            }
+          ],
+          "ix": 2,
+          "l": 2
+        },
+        "a": {
+          "a": 0,
+          "k": [
+            29,
+            29.5,
+            0
+          ],
+          "ix": 1,
+          "l": 2
+        },
+        "s": {
+          "a": 0,
+          "k": [
+            78,
+            78,
+            100
+          ],
+          "ix": 6,
+          "l": 2
+        }
+      },
+      "ao": 0,
+      "ip": 20,
+      "op": 62,
+      "st": 20,
+      "bm": 0
+    },
+    {
+      "ddd": 0,
+      "ind": 33,
+      "ty": 2,
+      "nm": "Marigold_Flower_PNG_Clip_Art_Image 82.png",
+      "cl": "png",
+      "refId": "image_0",
+      "sr": 1,
+      "ks": {
+        "o": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": [
+                  0.667
+                ],
+                "y": [
+                  1
+                ]
+              },
+              "o": {
+                "x": [
+                  0.333
+                ],
+                "y": [
+                  0
+                ]
+              },
+              "t": 37,
+              "s": [
+                100
+              ]
+            },
+            {
+              "t": 43,
+              "s": [
+                0
+              ]
+            }
+          ],
+          "ix": 11
+        },
+        "r": {
+          "a": 0,
+          "k": 0,
+          "ix": 10
+        },
+        "p": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
+              "o": {
+                "x": 0.333,
+                "y": 0
+              },
+              "t": 20,
+              "s": [
+                77.845,
+                -20.122,
+                0
+              ],
+              "to": [
+                35.359,
+                149.687,
+                0
+              ],
+              "ti": [
+                -35.359,
+                -149.687,
+                0
+              ]
+            },
+            {
+              "t": 43,
+              "s": [
+                290,
+                878,
+                0
+              ]
+            }
+          ],
+          "ix": 2,
+          "l": 2
+        },
+        "a": {
+          "a": 0,
+          "k": [
+            33.5,
+            31.5,
+            0
+          ],
+          "ix": 1,
+          "l": 2
+        },
+        "s": {
+          "a": 0,
+          "k": [
+            78,
+            78,
+            100
+          ],
+          "ix": 6,
+          "l": 2
+        }
+      },
+      "ao": 0,
+      "ip": 20,
+      "op": 62,
+      "st": 20,
+      "bm": 0
+    },
+    {
+      "ddd": 0,
+      "ind": 34,
+      "ty": 2,
+      "nm": "Marigold_Flower_PNG_Clip_Art_Image copydd 23.png",
+      "cl": "png",
+      "refId": "image_1",
+      "sr": 1,
+      "ks": {
+        "o": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": [
+                  0.667
+                ],
+                "y": [
+                  1
+                ]
+              },
+              "o": {
+                "x": [
+                  0.333
+                ],
+                "y": [
+                  0
+                ]
+              },
+              "t": 37,
+              "s": [
+                100
+              ]
+            },
+            {
+              "t": 43,
+              "s": [
+                0
+              ]
+            }
+          ],
+          "ix": 11
+        },
+        "r": {
+          "a": 0,
+          "k": 0,
+          "ix": 10
+        },
+        "p": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
+              "o": {
+                "x": 0.333,
+                "y": 0
+              },
+              "t": 20,
+              "s": [
+                381.116,
+                -30.42,
+                0
+              ],
+              "to": [
+                -26.519,
+                147.403,
+                0
+              ],
+              "ti": [
+                26.519,
+                -147.403,
+                0
+              ]
+            },
+            {
+              "t": 43,
+              "s": [
+                222,
+                854,
+                0
+              ]
+            }
+          ],
+          "ix": 2,
+          "l": 2
+        },
+        "a": {
+          "a": 0,
+          "k": [
+            29,
+            29.5,
+            0
+          ],
+          "ix": 1,
+          "l": 2
+        },
+        "s": {
+          "a": 0,
+          "k": [
+            78,
+            78,
+            100
+          ],
+          "ix": 6,
+          "l": 2
+        }
+      },
+      "ao": 0,
+      "ip": 20,
+      "op": 62,
+      "st": 20,
+      "bm": 0
+    },
+    {
+      "ddd": 0,
+      "ind": 35,
+      "ty": 2,
+      "nm": "Marigold_Flower_PNG_Clip_Art_Image 82.png",
+      "cl": "png",
+      "refId": "image_0",
+      "sr": 1,
+      "ks": {
+        "o": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": [
+                  0.667
+                ],
+                "y": [
+                  1
+                ]
+              },
+              "o": {
+                "x": [
+                  0.333
+                ],
+                "y": [
+                  0
+                ]
+              },
+              "t": 37,
+              "s": [
+                100
+              ]
+            },
+            {
+              "t": 43,
+              "s": [
+                0
+              ]
+            }
+          ],
+          "ix": 11
+        },
+        "r": {
+          "a": 0,
+          "k": 0,
+          "ix": 10
+        },
+        "p": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
+              "o": {
+                "x": 0.333,
+                "y": 0
+              },
+              "t": 20,
+              "s": [
+                24.033,
+                -88.42,
+                0
+              ],
+              "to": [
+                20.994,
+                154.07,
+                0
+              ],
+              "ti": [
+                -20.994,
+                -154.07,
+                0
+              ]
+            },
+            {
+              "t": 43,
+              "s": [
+                150,
+                836,
+                0
+              ]
+            }
+          ],
+          "ix": 2,
+          "l": 2
+        },
+        "a": {
+          "a": 0,
+          "k": [
+            33.5,
+            31.5,
+            0
+          ],
+          "ix": 1,
+          "l": 2
+        },
+        "s": {
+          "a": 0,
+          "k": [
+            78,
+            78,
+            100
+          ],
+          "ix": 6,
+          "l": 2
+        }
+      },
+      "ao": 0,
+      "ip": 20,
+      "op": 62,
+      "st": 20,
+      "bm": 0
+    },
+    {
+      "ddd": 0,
+      "ind": 36,
+      "ty": 2,
+      "nm": "Marigold_Flower_PNG_Clip_Art_Image 82.png",
+      "cl": "png",
+      "refId": "image_0",
+      "sr": 1,
+      "ks": {
+        "o": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": [
+                  0.667
+                ],
+                "y": [
+                  1
+                ]
+              },
+              "o": {
+                "x": [
+                  0.333
+                ],
+                "y": [
+                  0
+                ]
+              },
+              "t": 22,
+              "s": [
+                100
+              ]
+            },
+            {
+              "t": 30,
+              "s": [
+                0
+              ]
+            }
+          ],
+          "ix": 11
+        },
+        "r": {
+          "a": 0,
+          "k": 0,
+          "ix": 10
+        },
+        "p": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
+              "o": {
+                "x": 0.333,
+                "y": 0
+              },
+              "t": 15,
+              "s": [
+                30,
+                -100,
+                0
+              ],
+              "to": [
+                0,
+                160,
+                0
+              ],
+              "ti": [
+                0,
+                -160,
+                0
+              ]
+            },
+            {
+              "t": 30,
+              "s": [
+                30,
+                860,
+                0
+              ]
+            }
+          ],
+          "ix": 2,
+          "l": 2
+        },
+        "a": {
+          "a": 0,
+          "k": [
+            33.5,
+            31.5,
+            0
+          ],
+          "ix": 1,
+          "l": 2
+        },
+        "s": {
+          "a": 0,
+          "k": [
+            78,
+            78,
+            100
+          ],
+          "ix": 6,
+          "l": 2
+        }
+      },
+      "ao": 0,
+      "ip": 15,
+      "op": 57,
+      "st": 15,
+      "bm": 0
+    },
+    {
+      "ddd": 0,
+      "ind": 37,
+      "ty": 2,
+      "nm": "Marigold_Flower_PNG_Clip_Art_Image 82.png",
+      "cl": "png",
+      "refId": "image_0",
+      "sr": 1,
+      "ks": {
+        "o": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": [
+                  0.667
+                ],
+                "y": [
+                  1
+                ]
+              },
+              "o": {
+                "x": [
+                  0.333
+                ],
+                "y": [
+                  0
+                ]
+              },
+              "t": 22,
+              "s": [
+                100
+              ]
+            },
+            {
+              "t": 30,
+              "s": [
+                0
+              ]
+            }
+          ],
+          "ix": 11
+        },
+        "r": {
+          "a": 0,
+          "k": 0,
+          "ix": 10
+        },
+        "p": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
+              "o": {
+                "x": 0.333,
+                "y": 0
+              },
+              "t": 15,
+              "s": [
+                456,
+                -80,
+                0
+              ],
+              "to": [
+                0,
+                163.333,
+                0
+              ],
+              "ti": [
+                0,
+                -163.333,
+                0
+              ]
+            },
+            {
+              "t": 30,
+              "s": [
+                456,
+                900,
+                0
+              ]
+            }
+          ],
+          "ix": 2,
+          "l": 2
+        },
+        "a": {
+          "a": 0,
+          "k": [
+            33.5,
+            31.5,
+            0
+          ],
+          "ix": 1,
+          "l": 2
+        },
+        "s": {
+          "a": 0,
+          "k": [
+            78,
+            78,
+            100
+          ],
+          "ix": 6,
+          "l": 2
+        }
+      },
+      "ao": 0,
+      "ip": 15,
+      "op": 57,
+      "st": 15,
+      "bm": 0
+    },
+    {
+      "ddd": 0,
+      "ind": 38,
+      "ty": 2,
+      "nm": "Marigold_Flower_PNG_Clip_Art_Image copydd 23.png",
+      "cl": "png",
+      "refId": "image_1",
+      "sr": 1,
+      "ks": {
+        "o": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": [
+                  0.667
+                ],
+                "y": [
+                  1
+                ]
+              },
+              "o": {
+                "x": [
+                  0.333
+                ],
+                "y": [
+                  0
+                ]
+              },
+              "t": 22,
+              "s": [
+                100
+              ]
+            },
+            {
+              "t": 30,
+              "s": [
+                0
+              ]
+            }
+          ],
+          "ix": 11
+        },
+        "r": {
+          "a": 0,
+          "k": 0,
+          "ix": 10
+        },
+        "p": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
+              "o": {
+                "x": 0.333,
+                "y": 0
+              },
+              "t": 15,
+              "s": [
+                86,
+                -26,
+                0
+              ],
+              "to": [
+                0,
+                146.667,
+                0
+              ],
+              "ti": [
+                0,
+                -146.667,
+                0
+              ]
+            },
+            {
+              "t": 30,
+              "s": [
+                86,
+                854,
+                0
+              ]
+            }
+          ],
+          "ix": 2,
+          "l": 2
+        },
+        "a": {
+          "a": 0,
+          "k": [
+            29,
+            29.5,
+            0
+          ],
+          "ix": 1,
+          "l": 2
+        },
+        "s": {
+          "a": 0,
+          "k": [
+            78,
+            78,
+            100
+          ],
+          "ix": 6,
+          "l": 2
+        }
+      },
+      "ao": 0,
+      "ip": 15,
+      "op": 57,
+      "st": 15,
+      "bm": 0
+    },
+    {
+      "ddd": 0,
+      "ind": 39,
+      "ty": 2,
+      "nm": "Marigold_Flower_PNG_Clip_Art_Image copydd 23.png",
+      "cl": "png",
+      "refId": "image_1",
+      "sr": 1,
+      "ks": {
+        "o": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": [
+                  0.667
+                ],
+                "y": [
+                  1
+                ]
+              },
+              "o": {
+                "x": [
+                  0.333
+                ],
+                "y": [
+                  0
+                ]
+              },
+              "t": 22,
+              "s": [
+                100
+              ]
+            },
+            {
+              "t": 30,
+              "s": [
+                0
+              ]
+            }
+          ],
+          "ix": 11
+        },
+        "r": {
+          "a": 0,
+          "k": 0,
+          "ix": 10
+        },
+        "p": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
+              "o": {
+                "x": 0.333,
+                "y": 0
+              },
+              "t": 15,
+              "s": [
+                378,
+                -36,
+                0
+              ],
+              "to": [
+                0,
+                156.667,
+                0
+              ],
+              "ti": [
+                0,
+                -156.667,
+                0
+              ]
+            },
+            {
+              "t": 30,
+              "s": [
+                378,
+                904,
+                0
+              ]
+            }
+          ],
+          "ix": 2,
+          "l": 2
+        },
+        "a": {
+          "a": 0,
+          "k": [
+            29,
+            29.5,
+            0
+          ],
+          "ix": 1,
+          "l": 2
+        },
+        "s": {
+          "a": 0,
+          "k": [
+            78,
+            78,
+            100
+          ],
+          "ix": 6,
+          "l": 2
+        }
+      },
+      "ao": 0,
+      "ip": 15,
+      "op": 57,
+      "st": 15,
+      "bm": 0
+    },
+    {
+      "ddd": 0,
+      "ind": 40,
+      "ty": 2,
+      "nm": "Marigold_Flower_PNG_Clip_Art_Image 82.png",
+      "cl": "png",
+      "refId": "image_0",
+      "sr": 1,
+      "ks": {
+        "o": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": [
+                  0.667
+                ],
+                "y": [
+                  1
+                ]
+              },
+              "o": {
+                "x": [
+                  0.333
+                ],
+                "y": [
+                  0
+                ]
+              },
+              "t": 32,
+              "s": [
+                100
+              ]
+            },
+            {
+              "t": 38,
+              "s": [
+                0
+              ]
+            }
+          ],
+          "ix": 11
+        },
+        "r": {
+          "a": 0,
+          "k": 0,
+          "ix": 10
+        },
+        "p": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
+              "o": {
+                "x": 0.333,
+                "y": 0
+              },
+              "t": 15,
+              "s": [
+                290,
+                -82,
+                0
+              ],
+              "to": [
+                0,
+                160,
+                0
+              ],
+              "ti": [
+                0,
+                -160,
+                0
+              ]
+            },
+            {
+              "t": 38,
+              "s": [
+                290,
+                878,
+                0
+              ]
+            }
+          ],
+          "ix": 2,
+          "l": 2
+        },
+        "a": {
+          "a": 0,
+          "k": [
+            33.5,
+            31.5,
+            0
+          ],
+          "ix": 1,
+          "l": 2
+        },
+        "s": {
+          "a": 0,
+          "k": [
+            78,
+            78,
+            100
+          ],
+          "ix": 6,
+          "l": 2
+        }
+      },
+      "ao": 0,
+      "ip": 15,
+      "op": 57,
+      "st": 15,
+      "bm": 0
+    },
+    {
+      "ddd": 0,
+      "ind": 41,
+      "ty": 2,
+      "nm": "Marigold_Flower_PNG_Clip_Art_Image copydd 23.png",
+      "cl": "png",
+      "refId": "image_1",
+      "sr": 1,
+      "ks": {
+        "o": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": [
+                  0.667
+                ],
+                "y": [
+                  1
+                ]
+              },
+              "o": {
+                "x": [
+                  0.333
+                ],
+                "y": [
+                  0
+                ]
+              },
+              "t": 32,
+              "s": [
+                100
+              ]
+            },
+            {
+              "t": 38,
+              "s": [
+                0
+              ]
+            }
+          ],
+          "ix": 11
+        },
+        "r": {
+          "a": 0,
+          "k": 0,
+          "ix": 10
+        },
+        "p": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
+              "o": {
+                "x": 0.333,
+                "y": 0
+              },
+              "t": 15,
+              "s": [
+                222,
+                -26,
+                0
+              ],
+              "to": [
+                0,
+                146.667,
+                0
+              ],
+              "ti": [
+                0,
+                -146.667,
+                0
+              ]
+            },
+            {
+              "t": 38,
+              "s": [
+                222,
+                854,
+                0
+              ]
+            }
+          ],
+          "ix": 2,
+          "l": 2
+        },
+        "a": {
+          "a": 0,
+          "k": [
+            29,
+            29.5,
+            0
+          ],
+          "ix": 1,
+          "l": 2
+        },
+        "s": {
+          "a": 0,
+          "k": [
+            78,
+            78,
+            100
+          ],
+          "ix": 6,
+          "l": 2
+        }
+      },
+      "ao": 0,
+      "ip": 15,
+      "op": 57,
+      "st": 15,
+      "bm": 0
+    },
+    {
+      "ddd": 0,
+      "ind": 42,
+      "ty": 2,
+      "nm": "Marigold_Flower_PNG_Clip_Art_Image 82.png",
+      "cl": "png",
+      "refId": "image_0",
+      "sr": 1,
+      "ks": {
+        "o": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": [
+                  0.667
+                ],
+                "y": [
+                  1
+                ]
+              },
+              "o": {
+                "x": [
+                  0.333
+                ],
+                "y": [
+                  0
+                ]
+              },
+              "t": 32,
+              "s": [
+                100
+              ]
+            },
+            {
+              "t": 38,
+              "s": [
+                0
+              ]
+            }
+          ],
+          "ix": 11
+        },
+        "r": {
+          "a": 0,
+          "k": 0,
+          "ix": 10
+        },
+        "p": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
+              "o": {
+                "x": 0.333,
+                "y": 0
+              },
+              "t": 15,
+              "s": [
+                150,
+                -84,
+                0
+              ],
+              "to": [
+                0,
+                153.333,
+                0
+              ],
+              "ti": [
+                0,
+                -153.333,
+                0
+              ]
+            },
+            {
+              "t": 38,
+              "s": [
+                150,
+                836,
+                0
+              ]
+            }
+          ],
+          "ix": 2,
+          "l": 2
+        },
+        "a": {
+          "a": 0,
+          "k": [
+            33.5,
+            31.5,
+            0
+          ],
+          "ix": 1,
+          "l": 2
+        },
+        "s": {
+          "a": 0,
+          "k": [
+            78,
+            78,
+            100
+          ],
+          "ix": 6,
+          "l": 2
+        }
+      },
+      "ao": 0,
+      "ip": 15,
+      "op": 57,
+      "st": 15,
+      "bm": 0
+    },
+    {
+      "ddd": 0,
+      "ind": 43,
+      "ty": 2,
+      "nm": "Marigold_Flower_PNG_Clip_Art_Image 82.png",
+      "cl": "png",
+      "refId": "image_0",
+      "sr": 1,
+      "ks": {
+        "o": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": [
+                  0.667
+                ],
+                "y": [
+                  1
+                ]
+              },
+              "o": {
+                "x": [
+                  0.333
+                ],
+                "y": [
+                  0
+                ]
+              },
+              "t": 32,
+              "s": [
+                100
+              ]
+            },
+            {
+              "t": 40,
+              "s": [
+                0
+              ]
+            }
+          ],
+          "ix": 11
+        },
+        "r": {
+          "a": 0,
+          "k": 0,
+          "ix": 10
+        },
+        "p": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
+              "o": {
+                "x": 0.333,
+                "y": 0
+              },
+              "t": 25,
+              "s": [
+                30,
+                -100,
+                0
+              ],
+              "to": [
+                0,
+                160,
+                0
+              ],
+              "ti": [
+                0,
+                -160,
+                0
+              ]
+            },
+            {
+              "t": 40,
+              "s": [
+                30,
+                860,
+                0
+              ]
+            }
+          ],
+          "ix": 2,
+          "l": 2
+        },
+        "a": {
+          "a": 0,
+          "k": [
+            33.5,
+            31.5,
+            0
+          ],
+          "ix": 1,
+          "l": 2
+        },
+        "s": {
+          "a": 0,
+          "k": [
+            78,
+            78,
+            100
+          ],
+          "ix": 6,
+          "l": 2
+        }
+      },
+      "ao": 0,
+      "ip": 25,
+      "op": 67,
+      "st": 25,
+      "bm": 0
+    },
+    {
+      "ddd": 0,
+      "ind": 44,
+      "ty": 2,
+      "nm": "Marigold_Flower_PNG_Clip_Art_Image 82.png",
+      "cl": "png",
+      "refId": "image_0",
+      "sr": 1,
+      "ks": {
+        "o": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": [
+                  0.667
+                ],
+                "y": [
+                  1
+                ]
+              },
+              "o": {
+                "x": [
+                  0.333
+                ],
+                "y": [
+                  0
+                ]
+              },
+              "t": 32,
+              "s": [
+                100
+              ]
+            },
+            {
+              "t": 40,
+              "s": [
+                0
+              ]
+            }
+          ],
+          "ix": 11
+        },
+        "r": {
+          "a": 0,
+          "k": 0,
+          "ix": 10
+        },
+        "p": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
+              "o": {
+                "x": 0.333,
+                "y": 0
+              },
+              "t": 25,
+              "s": [
+                456,
+                -80,
+                0
+              ],
+              "to": [
+                0,
+                163.333,
+                0
+              ],
+              "ti": [
+                0,
+                -163.333,
+                0
+              ]
+            },
+            {
+              "t": 40,
+              "s": [
+                456,
+                900,
+                0
+              ]
+            }
+          ],
+          "ix": 2,
+          "l": 2
+        },
+        "a": {
+          "a": 0,
+          "k": [
+            33.5,
+            31.5,
+            0
+          ],
+          "ix": 1,
+          "l": 2
+        },
+        "s": {
+          "a": 0,
+          "k": [
+            78,
+            78,
+            100
+          ],
+          "ix": 6,
+          "l": 2
+        }
+      },
+      "ao": 0,
+      "ip": 25,
+      "op": 67,
+      "st": 25,
+      "bm": 0
+    },
+    {
+      "ddd": 0,
+      "ind": 45,
+      "ty": 2,
+      "nm": "Marigold_Flower_PNG_Clip_Art_Image copydd 23.png",
+      "cl": "png",
+      "refId": "image_1",
+      "sr": 1,
+      "ks": {
+        "o": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": [
+                  0.667
+                ],
+                "y": [
+                  1
+                ]
+              },
+              "o": {
+                "x": [
+                  0.333
+                ],
+                "y": [
+                  0
+                ]
+              },
+              "t": 32,
+              "s": [
+                100
+              ]
+            },
+            {
+              "t": 40,
+              "s": [
+                0
+              ]
+            }
+          ],
+          "ix": 11
+        },
+        "r": {
+          "a": 0,
+          "k": 0,
+          "ix": 10
+        },
+        "p": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
+              "o": {
+                "x": 0.333,
+                "y": 0
+              },
+              "t": 25,
+              "s": [
+                86,
+                -26,
+                0
+              ],
+              "to": [
+                0,
+                146.667,
+                0
+              ],
+              "ti": [
+                0,
+                -146.667,
+                0
+              ]
+            },
+            {
+              "t": 40,
+              "s": [
+                86,
+                854,
+                0
+              ]
+            }
+          ],
+          "ix": 2,
+          "l": 2
+        },
+        "a": {
+          "a": 0,
+          "k": [
+            29,
+            29.5,
+            0
+          ],
+          "ix": 1,
+          "l": 2
+        },
+        "s": {
+          "a": 0,
+          "k": [
+            78,
+            78,
+            100
+          ],
+          "ix": 6,
+          "l": 2
+        }
+      },
+      "ao": 0,
+      "ip": 25,
+      "op": 67,
+      "st": 25,
+      "bm": 0
+    },
+    {
+      "ddd": 0,
+      "ind": 46,
+      "ty": 2,
+      "nm": "Marigold_Flower_PNG_Clip_Art_Image copydd 23.png",
+      "cl": "png",
+      "refId": "image_1",
+      "sr": 1,
+      "ks": {
+        "o": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": [
+                  0.667
+                ],
+                "y": [
+                  1
+                ]
+              },
+              "o": {
+                "x": [
+                  0.333
+                ],
+                "y": [
+                  0
+                ]
+              },
+              "t": 32,
+              "s": [
+                100
+              ]
+            },
+            {
+              "t": 40,
+              "s": [
+                0
+              ]
+            }
+          ],
+          "ix": 11
+        },
+        "r": {
+          "a": 0,
+          "k": 0,
+          "ix": 10
+        },
+        "p": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
+              "o": {
+                "x": 0.333,
+                "y": 0
+              },
+              "t": 25,
+              "s": [
+                378,
+                -36,
+                0
+              ],
+              "to": [
+                0,
+                156.667,
+                0
+              ],
+              "ti": [
+                0,
+                -156.667,
+                0
+              ]
+            },
+            {
+              "t": 40,
+              "s": [
+                378,
+                904,
+                0
+              ]
+            }
+          ],
+          "ix": 2,
+          "l": 2
+        },
+        "a": {
+          "a": 0,
+          "k": [
+            29,
+            29.5,
+            0
+          ],
+          "ix": 1,
+          "l": 2
+        },
+        "s": {
+          "a": 0,
+          "k": [
+            78,
+            78,
+            100
+          ],
+          "ix": 6,
+          "l": 2
+        }
+      },
+      "ao": 0,
+      "ip": 25,
+      "op": 67,
+      "st": 25,
+      "bm": 0
+    },
+    {
+      "ddd": 0,
+      "ind": 47,
+      "ty": 2,
+      "nm": "Marigold_Flower_PNG_Clip_Art_Image 82.png",
+      "cl": "png",
+      "refId": "image_0",
+      "sr": 1,
+      "ks": {
+        "o": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": [
+                  0.667
+                ],
+                "y": [
+                  1
+                ]
+              },
+              "o": {
+                "x": [
+                  0.333
+                ],
+                "y": [
+                  0
+                ]
+              },
+              "t": 42,
+              "s": [
+                100
+              ]
+            },
+            {
+              "t": 48,
+              "s": [
+                0
+              ]
+            }
+          ],
+          "ix": 11
+        },
+        "r": {
+          "a": 0,
+          "k": 0,
+          "ix": 10
+        },
+        "p": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
+              "o": {
+                "x": 0.333,
+                "y": 0
+              },
+              "t": 25,
+              "s": [
+                290,
+                -82,
+                0
+              ],
+              "to": [
+                0,
+                160,
+                0
+              ],
+              "ti": [
+                0,
+                -160,
+                0
+              ]
+            },
+            {
+              "t": 48,
+              "s": [
+                290,
+                878,
+                0
+              ]
+            }
+          ],
+          "ix": 2,
+          "l": 2
+        },
+        "a": {
+          "a": 0,
+          "k": [
+            33.5,
+            31.5,
+            0
+          ],
+          "ix": 1,
+          "l": 2
+        },
+        "s": {
+          "a": 0,
+          "k": [
+            78,
+            78,
+            100
+          ],
+          "ix": 6,
+          "l": 2
+        }
+      },
+      "ao": 0,
+      "ip": 25,
+      "op": 67,
+      "st": 25,
+      "bm": 0
+    },
+    {
+      "ddd": 0,
+      "ind": 48,
+      "ty": 2,
+      "nm": "Marigold_Flower_PNG_Clip_Art_Image copydd 23.png",
+      "cl": "png",
+      "refId": "image_1",
+      "sr": 1,
+      "ks": {
+        "o": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": [
+                  0.667
+                ],
+                "y": [
+                  1
+                ]
+              },
+              "o": {
+                "x": [
+                  0.333
+                ],
+                "y": [
+                  0
+                ]
+              },
+              "t": 42,
+              "s": [
+                100
+              ]
+            },
+            {
+              "t": 48,
+              "s": [
+                0
+              ]
+            }
+          ],
+          "ix": 11
+        },
+        "r": {
+          "a": 0,
+          "k": 0,
+          "ix": 10
+        },
+        "p": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
+              "o": {
+                "x": 0.333,
+                "y": 0
+              },
+              "t": 25,
+              "s": [
+                222,
+                -26,
+                0
+              ],
+              "to": [
+                0,
+                146.667,
+                0
+              ],
+              "ti": [
+                0,
+                -146.667,
+                0
+              ]
+            },
+            {
+              "t": 48,
+              "s": [
+                222,
+                854,
+                0
+              ]
+            }
+          ],
+          "ix": 2,
+          "l": 2
+        },
+        "a": {
+          "a": 0,
+          "k": [
+            29,
+            29.5,
+            0
+          ],
+          "ix": 1,
+          "l": 2
+        },
+        "s": {
+          "a": 0,
+          "k": [
+            78,
+            78,
+            100
+          ],
+          "ix": 6,
+          "l": 2
+        }
+      },
+      "ao": 0,
+      "ip": 25,
+      "op": 67,
+      "st": 25,
+      "bm": 0
+    },
+    {
+      "ddd": 0,
+      "ind": 49,
+      "ty": 2,
+      "nm": "Marigold_Flower_PNG_Clip_Art_Image 82.png",
+      "cl": "png",
+      "refId": "image_0",
+      "sr": 1,
+      "ks": {
+        "o": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": [
+                  0.667
+                ],
+                "y": [
+                  1
+                ]
+              },
+              "o": {
+                "x": [
+                  0.333
+                ],
+                "y": [
+                  0
+                ]
+              },
+              "t": 42,
+              "s": [
+                100
+              ]
+            },
+            {
+              "t": 48,
+              "s": [
+                0
+              ]
+            }
+          ],
+          "ix": 11
+        },
+        "r": {
+          "a": 0,
+          "k": 0,
+          "ix": 10
+        },
+        "p": {
+          "a": 1,
+          "k": [
+            {
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
+              "o": {
+                "x": 0.333,
+                "y": 0
+              },
+              "t": 25,
+              "s": [
+                150,
+                -84,
+                0
+              ],
+              "to": [
+                0,
+                153.333,
+                0
+              ],
+              "ti": [
+                0,
+                -153.333,
+                0
+              ]
+            },
+            {
+              "t": 48,
+              "s": [
+                150,
+                836,
+                0
+              ]
+            }
+          ],
+          "ix": 2,
+          "l": 2
+        },
+        "a": {
+          "a": 0,
+          "k": [
+            33.5,
+            31.5,
+            0
+          ],
+          "ix": 1,
+          "l": 2
+        },
+        "s": {
+          "a": 0,
+          "k": [
+            78,
+            78,
+            100
+          ],
+          "ix": 6,
+          "l": 2
+        }
+      },
+      "ao": 0,
+      "ip": 25,
+      "op": 67,
+      "st": 25,
+      "bm": 0
+    }
+  ],
+  "markers": []
+}

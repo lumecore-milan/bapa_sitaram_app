@@ -1,0 +1,54 @@
+import 'dart:async';
+import 'package:razorpay_flutter/razorpay_flutter.dart';
+
+import '../services/loger_service.dart';
+
+class RazorPayService{
+  final StreamController<PaymentSuccessResponse> _paymentSuccessController =StreamController<PaymentSuccessResponse>.broadcast();
+  Stream<PaymentSuccessResponse> get onPaymentSuccess =>_paymentSuccessController.stream;
+  factory RazorPayService() => _instance;
+  RazorPayService._internal(){
+    _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
+    _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
+    _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
+  }
+  static final RazorPayService _instance = RazorPayService._internal();
+
+  final _razorpay = Razorpay();
+  late final String _key;
+  void _handlePaymentSuccess(PaymentSuccessResponse response) {
+    _paymentSuccessController.add(response);
+
+  }
+
+  void _handlePaymentError(PaymentFailureResponse response) {
+    // Do something when payment fails
+  }
+void setKey({required String key}){
+  _key=key;
+}
+  void _handleExternalWallet(ExternalWalletResponse response) {
+    // Do something when an external wallet was selected
+  }
+
+  Future<void> makePayment({required Map<String,dynamic> data})async{
+    try{
+      var options = {
+        'key': _key,
+        "order_id": data['orderId'],
+        "currency": "INR",
+        'amount': data['amount'],
+        'name': data['name'],
+        'description': data['description'],
+        'prefill': {
+          'contact': data['contact'],
+          'email': data['email']
+        }
+      };
+
+      _razorpay.open(options);
+    }catch(e){
+      LoggerService().log(message: e.toString());
+    }
+  }
+}
