@@ -1,3 +1,5 @@
+import 'dart:core';
+
 import 'package:bapa_sitaram/view/aarti.dart';
 import 'package:bapa_sitaram/view/about.dart';
 import 'package:bapa_sitaram/view/contact.dart';
@@ -124,11 +126,14 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         );
       case detailRoute:
         bool showAppbar = false;
+        int index=-1;
         if (settings.arguments != null) {
-          showAppbar = settings.arguments as bool;
+          final Map<String,dynamic> temp= settings.arguments as Map<String,dynamic>;
+          showAppbar=temp['showAppbar']??false;
+          index=temp['index']??-1;
         }
         return MaterialPageRoute(
-          builder: (context) => DetailPage(showAppbar: showAppbar),
+          builder: (context) => DetailPage(showAppbar: showAppbar, eventIndex: index),
         );
       case videoRoute:
         String path = '';

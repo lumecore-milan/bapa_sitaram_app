@@ -26,8 +26,8 @@ import '../widget/like_comment_post_bottom_sheet.dart';
 import '../widget/video_thumbnail.dart';
 
 class FeedsPage extends StatefulWidget {
-  const FeedsPage({super.key});
-
+  const FeedsPage({super.key, this.detailId=''});
+  final String detailId;
   @override
   State<FeedsPage> createState() => _FeedsPageState();
 }
@@ -60,6 +60,21 @@ class _FeedsPageState extends State<FeedsPage> {
     }catch(e){
       LoggerService().log(message: e.toString());
     }
+    WidgetsBinding.instance.addPostFrameCallback((_){
+      _controller.getHomeDetail().then((t){
+          if(_controller.posts.isNotEmpty && widget.detailId.isNotEmpty){
+            int ind=_controller.posts.indexWhere((e)=>e.postImage==widget.detailId);
+            if(ind>=0) {
+              navigate(
+                context: context,
+                replace: false,
+                path: videoRoute,
+                param: _controller.posts[ind].postImage,
+              );
+            }
+          }
+      });
+    });
     super.initState();
   }
   @override

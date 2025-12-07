@@ -26,7 +26,7 @@ dependencies:
   path_provider: 2.1.5
   permission_handler: 12.0.1
   firebase_core: 4.0.0
-  firebase_messaging: 16.0.0
+  #firebase_messaging: 16.0.0
   http: 1.5.0
   encrypt: 5.0.3
   hive: 2.2.3
@@ -34,13 +34,13 @@ dependencies:
   intl: 0.20.2
   device_info_plus: 11.5.0
   flutter_svg: 2.2.1
-  flutter_local_notifications: 19.4.0
+  #flutter_local_notifications: 19.4.0
   cached_network_image: 3.4.1
   just_audio: 0.10.5
   open_filex: ^4.7.0
   firebase_analytics: ^12.0.0
   firebase_crashlytics: ^5.0.0
-  #onesignal_flutter: ^5.3.4
+  onesignal_flutter: ^5.3.4
 
 
 

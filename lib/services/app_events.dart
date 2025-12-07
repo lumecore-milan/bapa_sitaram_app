@@ -1,10 +1,8 @@
 import 'dart:async';
 
-import 'package:bapa_sitaram/services/notification_service.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' show AppLifecycleListener, WidgetsBinding;
 
-import '../services/firebase_service.dart';
 import 'connectivity_service.dart';
 import 'enums.dart';
 
@@ -57,8 +55,8 @@ class AppEventsStream {
     if(!kIsWeb) {
 
       WidgetsBinding.instance.addPostFrameCallback((_) async {
-        await NotificationServiceMobile().getLaunchDetails();
-        await FirebaseService().getInitialMessage();
+       // await NotificationServiceMobile().getLaunchDetails();
+       // await FirebaseService().getInitialMessage();
       });
     }
   }

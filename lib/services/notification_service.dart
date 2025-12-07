@@ -1,4 +1,4 @@
-import 'dart:convert';
+/*import 'dart:convert';
 import 'package:bapa_sitaram/services/download/download_helper_mobile.dart';
 import 'package:bapa_sitaram/services/permission_service.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -13,6 +13,10 @@ void notificationTapBackground(NotificationResponse notificationResponse) {
 }
 
 class NotificationServiceMobile {
+  final String notificationIcon='notification_icon';
+  final largeIcon=DrawableResourceAndroidBitmap('notification_icon');
+  final String notificationChannel='high_importance_channel';
+  final String notificationChannelDescription='This channel is used for important notifications.';
   factory NotificationServiceMobile() => _instance;
   NotificationServiceMobile._internal();
   static final NotificationServiceMobile _instance =
@@ -20,13 +24,12 @@ class NotificationServiceMobile {
   final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin =
   FlutterLocalNotificationsPlugin();
 
-  final  AndroidInitializationSettings _androidInit =
-  AndroidInitializationSettings('@drawable/notification_icon');
+  late final  AndroidInitializationSettings _androidInit =
+  AndroidInitializationSettings(notificationIcon);
   final DarwinInitializationSettings _iosInit = DarwinInitializationSettings(
     requestAlertPermission: true,
     requestBadgePermission: true,
     requestSoundPermission: true,
-
   );
 
 
@@ -68,10 +71,10 @@ class NotificationServiceMobile {
         },
         onDidReceiveBackgroundNotificationResponse: notificationTapBackground,
       );
-      const AndroidNotificationChannel channel = AndroidNotificationChannel(
-        'high_importance_channel', // id
-        'high_importance_channel', // name
-        description: 'This channel is used for important notifications.',
+      AndroidNotificationChannel channel = AndroidNotificationChannel(
+          notificationChannel,
+        notificationChannelDescription,
+        description: notificationChannelDescription,
         importance: Importance.high,
           sound: RawResourceAndroidNotificationSound('slow_spring_board')
       );
@@ -93,7 +96,7 @@ class NotificationServiceMobile {
       if(permission==false){
         return;
       }
-      if (payload.channelKey.isNotEmpty) {
+       {
 
         StyleInformation style=DefaultStyleInformation(false,false);
         if(payload.imageURL.isNotEmpty){
@@ -111,17 +114,17 @@ class NotificationServiceMobile {
         }
         AndroidNotificationDetails androidDetails =
         AndroidNotificationDetails(
-          'high_importance_channel',
-          'high_importance_channel',
-          icon: '@mipmap/ic_launcher',
-    //      largeIcon: '@mipmap/ic_launcher',
+            notificationChannel,
+            notificationChannelDescription,
+          icon: notificationIcon,
+          largeIcon: largeIcon,
+          visibility: NotificationVisibility.public,
           importance: Importance.max,
           priority: Priority.high,
           styleInformation:style,
-          playSound: payload.notificationSound.isNotEmpty,
+          playSound: true,
           sound: RawResourceAndroidNotificationSound(payload.notificationSound)
         );
-
         NotificationDetails details = NotificationDetails(
           android: androidDetails,
           iOS: DarwinNotificationDetails(
@@ -148,3 +151,4 @@ class NotificationServiceMobile {
     }
   }
 }
+*/

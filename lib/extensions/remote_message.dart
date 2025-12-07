@@ -1,4 +1,4 @@
-import 'package:firebase_messaging/firebase_messaging.dart' show RemoteMessage;
+/*import 'package:firebase_messaging/firebase_messaging.dart' show RemoteMessage;
 
 extension RemoteMessageMapper on RemoteMessage {
   Map<String, dynamic> toMap() {
@@ -15,4 +15,4 @@ extension RemoteMessageMapper on RemoteMessage {
       }
     };
   }
-}
+}*/

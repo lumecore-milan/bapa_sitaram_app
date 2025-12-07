@@ -1,4 +1,5 @@
-import 'package:firebase_messaging/firebase_messaging.dart';
+//import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import 'loger_service.dart';
@@ -41,7 +42,9 @@ class PermissionService {
   }) async {
     bool status = false;
     try {
-      final settings = await FirebaseMessaging.instance.requestPermission(
+
+      status=await OneSignal.Notifications.requestPermission(false);
+      /*final settings = await FirebaseMessaging.instance.requestPermission(
         alert: alert,
         announcement: announcement,
         badge: badge,
@@ -53,7 +56,7 @@ class PermissionService {
       );
       status =
           settings.authorizationStatus == AuthorizationStatus.authorized ||
-          settings.authorizationStatus == AuthorizationStatus.provisional;
+          settings.authorizationStatus == AuthorizationStatus.provisional;*/
     } catch (e) {
       LoggerService().log(message: e);
     }

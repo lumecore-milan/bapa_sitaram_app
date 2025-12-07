@@ -1,4 +1,5 @@
 const String homeRoute = '/home';
+const String feedRoute = '/feed';
 const String punamListRoute = '/punamlist';
 const String aartiRoute = '/aarti';
 const String splashRoute = '/';

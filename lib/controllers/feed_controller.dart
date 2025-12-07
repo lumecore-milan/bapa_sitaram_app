@@ -15,9 +15,6 @@ class FeedController extends GetxController
   RxList<PostModel> posts=RxList();
   RxList<dynamic> currentPostDetail=RxList();
   Rx<bool> isLoading=false.obs;
-  FeedController(){
-    getHomeDetail();
-  }
   Future<void> getHomeDetail()async{
     try{
       isLoading.value=true;

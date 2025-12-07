@@ -1,28 +1,21 @@
-import 'dart:isolate';
-import 'dart:ui';
 
-import 'package:bapa_sitaram/services/preference_service.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
+//import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 
 
 
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-
-import 'app_events.dart';
-import 'enums.dart';
-import 'loger_service.dart';
+//import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 
+/*
 @pragma('vm:entry-point')
 Future<void> onBackgroundMessage(RemoteMessage message) async {
   WidgetsFlutterBinding.ensureInitialized();
 
   final port = IsolateNameServer.lookupPortByName('callback_port');
   port?.send(message.data);
-}
+}*/
 
 class FirebaseService {
   factory FirebaseService() => _instance;
@@ -41,7 +34,7 @@ class FirebaseService {
           ),
         );
       } else {
-        const portName = 'callback_port';
+      /*  const portName = 'callback_port';
         IsolateNameServer.removePortNameMapping(portName);
         final port = ReceivePort();
         IsolateNameServer.registerPortWithName(port.sendPort, portName);
@@ -58,10 +51,10 @@ class FirebaseService {
               AppEvent(type: AppEventType.localNotificationTapped, data: data),
             );
           }
-        });
+        });*/
         await Firebase.initializeApp();
 
-        FirebaseMessaging.onBackgroundMessage(onBackgroundMessage);
+      /*  FirebaseMessaging.onBackgroundMessage(onBackgroundMessage);
         FirebaseMessaging.onMessage.listen((message) {
           AppEventsStream().addEvent(
             AppEvent(type: AppEventType.notificationReceived, data: message),
@@ -74,7 +67,7 @@ class FirebaseService {
           AppEventsStream().addEvent(
             AppEvent(type: AppEventType.notificationClick, data: message),
           );
-        });
+        });*/
       }
     } catch (e) {
       print('Firebase Service error==>${e.toString()}');
@@ -82,7 +75,7 @@ class FirebaseService {
   }
 
   Future<void> getInitialMessage() async {
-    try {
+   /* try {
       RemoteMessage? msg = await FirebaseMessaging.instance.getInitialMessage();
       if (msg != null) {
         AppEventsStream().addEvent(
@@ -91,12 +84,12 @@ class FirebaseService {
       }
     } catch (e) {
       //
-    }
+    }*/
   }
 
   Future<String> getFcmToken() async {
     String token = '';
-    try {
+   /* try {
       token = PreferenceService().getString(key: 'fcmToken');
       if (token.isEmpty) {
         token = await FirebaseMessaging.instance.getToken() ?? '';
@@ -106,7 +99,7 @@ class FirebaseService {
       LoggerService().log(
         message: 'error occurred while getting fcm token===>${e.toString()}',
       );
-    }
+    }*/
     return token;
   }
 }

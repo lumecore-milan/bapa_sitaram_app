@@ -28,7 +28,10 @@ class EventsPage extends StatelessWidget {
                   children: [
                     InkWell(
                       onTap: (){
-                        navigate(context: context, replace: false, path: detailRoute);
+                        navigate(context: context, replace: false, path: detailRoute,param: {
+                            'showAppbar':false,
+                            'index':index
+                        });
                       },
                       child:
                       RoundedImage(

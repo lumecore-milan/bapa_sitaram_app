@@ -1,6 +1,6 @@
-import 'dart:ui';
+/*import 'dart:ui';
 
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+//import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class CustomNotificationDetailModel{
   CustomNotificationDetailModel({
@@ -36,3 +36,4 @@ class CustomNotificationDetailModel{
 
 
 }
+*/

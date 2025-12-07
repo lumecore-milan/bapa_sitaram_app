@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bapa_sitaram/constants/app_colors.dart';
 import 'package:bapa_sitaram/constants/routes.dart';
 import 'package:bapa_sitaram/utils/events.dart';
@@ -10,6 +12,7 @@ import 'package:lottie/lottie.dart';
 
 import '../controllers/home_controller.dart';
 import '../extensions/size_box_extension.dart';
+import '../utils/helper.dart';
 import '../utils/size_config.dart';
 import '../widget/image_widget.dart';
 import '../widget/marquee_text.dart';
@@ -27,14 +30,52 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
     HomeDetailController(),
     permanent: true,
   );
-
+  late StreamSubscription<NotificationCLickDetail> _notificationClickListener;
   @override
   void initState() {
+
+    _notificationClickListener= notificationClicked.stream.listen((data){
+      if (data.type== 'post') {
+        jumpPage.sink.add(PageJumpDetail(page: 'ફીડ',additionalData: data.id));
+      } else if (data.type == 'event') {
+        Future.delayed(Duration(milliseconds: 500)).then((t){
+          int ind=_controller.homeDetail.value.events.indexWhere((e)=>e.eventId==int.parse(data.id));
+          if(ind>=0) {
+            navigate(context: context, replace: false, path: detailRoute, param: {
+              'showAppbar': false,
+              'index': ind
+            });
+          }
+        });
+      } else if (data.type == 'Notification') {
+      } else if (data.type == 'externalLink') {
+        Helper.launch(url: data.id);
+      } else if (data.type == 'liveArti') {
+        navigate(
+          context: context,
+          replace: false,
+          path:
+          data.id.startsWith(
+            'https://www.youtube.com',
+          )
+              ? youtubeVideoRoute
+              : videoRoute,
+          param: data.id,
+        );
+      }
+    });
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      String? currentRoute = ModalRoute.of(context)?.settings.name;
+      print('current route inside notification click ====${currentRoute??''}');
+    });
+
     super.initState();
   }
 
   @override
   void dispose() {
+    _notificationClickListener.cancel();
     super.dispose();
   }
 
@@ -195,9 +236,10 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
             return InkWell(
               onTap: () async {
                 if (e['navigate'] == donationRoute) {
-                  jumpPage.sink.add(donationRoute);
+                  jumpPage.sink.add(PageJumpDetail(page: donationRoute,additionalData: ''));
+
                 } else if (e['navigate'] == punamListRoute) {
-                  jumpPage.sink.add(punamListRoute);
+                  jumpPage.sink.add(PageJumpDetail(page: punamListRoute,additionalData: ''));
                 } else if (e['navigate'] == eventsRoute) {
                   navigate(context: context, replace: false, path: eventsRoute);
                 } else if (e['navigate'] == galleryRoute) {
@@ -323,7 +365,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                   ),
                   Positioned(
                     top: 0,
-                    left: 80,
+                    left: 100,
                     child: LottieBuilder.asset(
                       'assets/animation/diya.json',
                       height: 50,
