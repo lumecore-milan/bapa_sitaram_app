@@ -1,4 +1,6 @@
 //import 'package:firebase_messaging/firebase_messaging.dart';
+import 'dart:io';
+
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -102,17 +104,25 @@ class PermissionService {
   Future<bool> manageExternalStorage() async {
     bool status = false;
     try {
-      status = await Permission.manageExternalStorage.isGranted;
-      if (status == true) {
+      if(Platform.isIOS){
+        status=true;
         return status;
       }
-      final permissionStatus = await Permission.manageExternalStorage.request();
-      status = permissionStatus.isGranted;
-      return status;
+      else if(Platform.isAndroid) {
+        status = await Permission.manageExternalStorage.isGranted;
+        if (status == true) {
+          return status;
+        }
+        final permissionStatus = await Permission.manageExternalStorage
+            .request();
+        status = permissionStatus.isGranted;
+        return status;
+      }
     } catch (e) {
       LoggerService().log(message: e);
       return false;
     }
+    return status;
   }
 
   Future<bool> requestPreciseAlarmPermission() async {

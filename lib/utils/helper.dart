@@ -34,6 +34,17 @@ class Helper {
      LoggerService().log(message: 'Error while launching url ${e.toString()}');
     }
   }
+  static Future<void> launchEmail({required String email})async{
+    try{
+      final Uri emailUri = Uri(
+        scheme: 'mailto',
+        path: email,
+      );
+      await launchUrl(emailUri);
+    }catch(e){
+      LoggerService().log(message: 'Error while launching url ${e.toString()}');
+    }
+  }
   static void showLoader() async {
     try {
       await showDialog(
@@ -134,7 +145,7 @@ class Helper {
     required String title,
     required String message,
     required bool isSuccess,
-    int durationInSecond = 2,
+    int durationInSecond = 4,
     bool showIcon = true,
   }) {
       HelperService().hideKeyboard(
@@ -165,13 +176,13 @@ class Helper {
                   message,
                   maxLines: 2,
                   style: isSuccess
-                      ? semiBold(
+                      ? bolder(
                     fontSize:
-                      12,
+                      14,
                     color: CustomColors().green500,
                   )
                       : semiBold(
-                    fontSize: 12,
+                    fontSize: 14,
                     color: CustomColors().red500,
                   ),
                 ),

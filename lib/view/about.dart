@@ -38,26 +38,36 @@ final HomeDetailController controller=Get.find<HomeDetailController>();
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  ImageWidget(height: 24,width: 24,url: 'assets/images/ic_email.svg'),
-                  5.w,
-                  Text(controller.aboutUs['about_email'],style: bolder(
-                      fontSize: 14,color: CustomColors().grey500
-                  ),),
-                ],
+              InkWell(
+                onTap: (){
+                  Helper.launchEmail(email: controller.aboutUs['about_email']);
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    ImageWidget(height: 24,width: 24,url: 'assets/images/ic_email.svg'),
+                    5.w,
+                    Text(controller.aboutUs['about_email'],style: bolder(
+                        fontSize: 14,color: CustomColors().grey500
+                    ),),
+                  ],
+                ),
               ),
               10.h,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  ImageWidget(height: 24,width: 24,url: 'assets/images/ic_phone.svg'),
-                  5.w,
-                  Text(controller.aboutUs['about_phone'],style: bolder(
-                      fontSize: 14,color: CustomColors().grey500
-                  ),),
-                ],
+              InkWell(
+                onTap: (){
+                  Helper.launch(url: 'tel:${controller.aboutUs['about_phone']}');
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    ImageWidget(height: 24,width: 24,url: 'assets/images/ic_phone.svg'),
+                    5.w,
+                    Text(controller.aboutUs['about_phone'],style: bolder(
+                        fontSize: 14,color: CustomColors().grey500
+                    ),),
+                  ],
+                ),
               ),
               10.h,
               Row(

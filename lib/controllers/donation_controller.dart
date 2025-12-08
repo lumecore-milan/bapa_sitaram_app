@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bapa_sitaram/constants/app_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -30,6 +32,17 @@ class DonationController extends GetxController {
       }
     });
   }
+  void clearForm(){
+    type.clear();
+    name.clear();
+    mobile.clear();
+    amount.clear();
+    email.clear();
+    pinCode.clear();
+    address.clear();
+    panCard.clear();
+
+  }
 
   Rx<bool> otpSent = false.obs;
 
@@ -41,17 +54,18 @@ class DonationController extends GetxController {
           .post(
             url: APIConstant().apiCreateOrder,
             requestBody: {
-              'user_id': PreferenceService().getInt(
+              'user_id':Platform.isIOS ?1: PreferenceService().getInt(
                 key: AppConstants().prefKeyUserId,
               ),
-              'amount': double.parse(amount.text) * 100,
+              'amount': int.parse(amount.text) * 100,
             },
-            isFormData: false,
+            isFormData: true,
           )
-          .then((data) {
+          .then((data)async {
+            LoggerService().log(message: data);
             if (data.isNotEmpty) {
               if (data['httpStatusCode'] == 200) {
-                RazorPayService().makePayment(
+                await RazorPayService().makePayment(
                   data: {
                     'amount': data['amount'],
                     'name': name.text.trim(),
@@ -91,6 +105,7 @@ class DonationController extends GetxController {
           .then((data) {
             if (data.isNotEmpty) {
               if (data['httpStatusCode'] == 200) {
+                    clearForm();
                     Helper.showMessage(title: 'Success', message: 'Payment successful', isSuccess: true);
               }
             }

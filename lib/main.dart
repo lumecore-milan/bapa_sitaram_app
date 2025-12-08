@@ -10,6 +10,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 
+import 'constants/app_constant.dart';
 import 'my_app.dart';
 
 void main() async {
@@ -38,7 +39,10 @@ Future<void> runMicrotask() async {
     });
     OneSignal.Notifications.addForegroundWillDisplayListener((event) {
       event.preventDefault();
-      event.notification.display();
+      if(PreferenceService().getString(key: AppConstants().prefKeyNotificationEnabled)=='false') {
+        event.notification.display();
+      }
+
     });
 
     ConnectivityService().setPingUrl(pingUrl: APIConstant().apiMainMenu);

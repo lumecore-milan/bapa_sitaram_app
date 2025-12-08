@@ -1,7 +1,7 @@
 import Flutter
 import UIKit
 import Firebase
-import flutter_local_notifications
+
 
 @main
 @objc class AppDelegate: FlutterAppDelegate,FlutterImplicitEngineDelegate {
@@ -9,9 +9,9 @@ import flutter_local_notifications
     func didInitializeImplicitFlutterEngine(_ engineBridge: FlutterImplicitEngineBridge) {
 
       GeneratedPluginRegistrant.register(with: engineBridge.pluginRegistry)
-FlutterLocalNotificationsPlugin.setPluginRegistrantCallback { (registry) in
+/*FlutterLocalNotificationsPlugin.setPluginRegistrantCallback { (registry) in
         GeneratedPluginRegistrant.register(with: registry)
-    }
+    }*/
 
 //      let batteryChannel = FlutterMethodChannel(
 //        name: "samples.flutter.dev/battery",

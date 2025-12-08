@@ -27,10 +27,18 @@ class DownloadServiceMobile {
     try {
 
       String downloadPath=await HelperService().getDownloadDirectory();
+
+
+      final directory = Directory(
+          '$downloadPath/bapaSitaram');
+      bool isExist = await directory.exists();
+      if (!isExist) {
+        await directory.create(recursive: false);
+      }
       Map<String, dynamic> param = {
         'url': url,
         'sendPort': receivePort.sendPort,
-        'path': downloadPath,
+        'path': directory.path,
       };
       Isolate isolate = await Isolate.spawn(_isolateEntryPoint, param);
 

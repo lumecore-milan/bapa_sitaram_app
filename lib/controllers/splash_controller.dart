@@ -17,9 +17,9 @@ class SplashController extends GetxController
   Future<(bool,String)> getData()async{
     (bool,String) resp=(false,'');
     try{
-      final String userId=PreferenceService().getString(key: AppConstants().prefKeyUserId);
+      final int userId=PreferenceService().getInt(key: AppConstants().prefKeyUserId);
       await _apiInstance.post(url: APIConstant().apiLoading, requestBody: {
-        'user_id':userId.isEmpty ? 'nologin':userId
+        'user_id':userId==0 ? 'nologin':userId
       }, isFormData: true).then((data){
         if(data['httpStatusCode']==200 && data.isNotEmpty){
                   resp=(true,'');

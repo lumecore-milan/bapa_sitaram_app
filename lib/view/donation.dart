@@ -36,6 +36,14 @@ final items=[
   "સામાજિક સેવા",
   "માનવ સેવા",
 ];
+
+  @override
+  void dispose() {
+    Get.delete<DonationController>();
+    super.dispose();
+  }
+
+
 String getInitialItem(){
   return items[0];
 }
@@ -135,7 +143,7 @@ String getInitialItem(){
                               greyBorder: false,
                               required: true,
                               formatter: [LengthLimitingTextInputFormatter(10),
-                              formatterAmount
+                                formatterDigitsOnly
                               ],
                               inputType: TextInputType.numberWithOptions(decimal: false,signed: true),
                               controller: _controller.amount,
@@ -273,7 +281,10 @@ String getInitialItem(){
                           if(PreferenceService().getBoolean(key: AppConstants().prefKeyIsLoggedIn)) {
                             if (_formKey.currentState!.validate()) {
                               if (_controller.isPrivacyAccepted.value == true) {
-                                await _controller.submit();
+                                Helper.showLoader();
+                                await _controller.submit().then((resp){
+                                  Helper.closeLoader();
+                                });
                               }
                             }
                           }else{

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:bapa_sitaram/constants/app_colors.dart';
 import 'package:bapa_sitaram/constants/routes.dart';
@@ -365,7 +366,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                   ),
                   Positioned(
                     top: 0,
-                    left: 100,
+                    left: Platform.isIOS? 80:60,
                     child: LottieBuilder.asset(
                       'assets/animation/diya.json',
                       height: 50,

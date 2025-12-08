@@ -11,6 +11,8 @@ import '../services/network/api_mobile.dart';
 import '../services/preference_service.dart';
 class FeedController extends GetxController
 {
+
+  int shareIndex = -1;
   final _apiInstance=NetworkServiceMobile();
   RxList<PostModel> posts=RxList();
   RxList<dynamic> currentPostDetail=RxList();
@@ -50,8 +52,58 @@ class FeedController extends GetxController
                 int temp=posts.indexWhere((e)=>e.postId==postId);
                 if(temp>=0){
                   posts[temp].isLiked=posts[temp].isLiked==1 ? 0:1;
+
+                 if(posts[temp].isLiked==1){
+                   posts[temp].likeCount=posts[temp].likeCount+1;
+                 }else{
+                   posts[temp].likeCount=posts[temp].likeCount-1;
+                 }
+
                   posts.refresh();
                 }
+          }
+        }
+      });
+    }catch(e){
+      LoggerService().log(message: e.toString());
+    }
+  }
+  Future<void> view({required int postId})async{
+
+    try{
+      await _apiInstance.post(url: APIConstant().apiPostView,isFormData: true,requestBody: {
+        'post_id':postId,
+        'user_id':PreferenceService().getInt(key: AppConstants().prefKeyUserId),
+      }).then((resp){
+        LoggerService().log(message: json.encode(resp));
+        if(resp.isNotEmpty){
+          if(resp['httpStatusCode']==200){
+            int temp=posts.indexWhere((e)=>e.postId==postId);
+            if(temp>=0){
+                posts[temp].viewCount=posts[temp].viewCount+1;
+                 posts.refresh();
+            }
+          }
+        }
+      });
+    }catch(e){
+      LoggerService().log(message: e.toString());
+    }
+  }
+  Future<void> share({required int postId})async{
+
+    try{
+      await _apiInstance.post(url: APIConstant().apiPostShare,isFormData: true,requestBody: {
+        'post_id':postId,
+        'user_id':PreferenceService().getInt(key: AppConstants().prefKeyUserId),
+      }).then((resp){
+        if(resp.isNotEmpty){
+          if(resp['httpStatusCode']==200){
+            int temp=posts.indexWhere((e)=>e.postId==postId);
+            if(temp>=0){
+                posts[temp].shareCount=posts[temp].shareCount+1;
+                posts.refresh();
+            }
           }
         }
       });
@@ -69,6 +121,15 @@ class FeedController extends GetxController
       }).then((resp){
         if(resp.isNotEmpty){
           if(resp['httpStatusCode']==200){
+            int temp=posts.indexWhere((e)=>e.postId==postId);
+            if(temp>=0) {
+              posts[temp].commentCount = posts[temp].commentCount + 1;
+              posts.refresh();
+
+
+
+
+            }
             success=true;
           }
         }
@@ -77,7 +138,8 @@ class FeedController extends GetxController
       LoggerService().log(message: e.toString());
     }
     return success;
-  }Future<void> getCommentByPostId({required int postId})async{
+  }
+  Future<void> getCommentByPostId({required int postId})async{
     try{
       await _apiInstance.get(url: "${APIConstant().apiGetCommentByPost}/$postId").then((resp){
         if(resp.isNotEmpty){

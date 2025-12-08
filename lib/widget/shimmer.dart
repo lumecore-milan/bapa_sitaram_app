@@ -6,12 +6,12 @@ class ShimmerDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      padding: const EdgeInsets.all(20),
-      itemCount: 6,
+      padding: const EdgeInsets.all(0),
+      itemCount: 20,
       itemBuilder: (_, index) {
         return const Padding(
           padding: EdgeInsets.only(bottom: 20),
-          child: ShimmerWidget.rectangular(height: 120),
+          child: ShimmerWidget.rectangular(height: 70),
         );
       },
     );

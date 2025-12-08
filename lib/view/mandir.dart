@@ -2,6 +2,7 @@ import 'package:bapa_sitaram/constants/app_colors.dart';
 import 'package:bapa_sitaram/services/network/api_mobile.dart';
 import 'package:bapa_sitaram/utils/font_styles.dart';
 import 'package:bapa_sitaram/widget/custom_tabs.dart';
+import 'package:bapa_sitaram/widget/shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
@@ -70,7 +71,7 @@ class _TempleDetailState extends State<TempleDetail> {
       child: FutureBuilder(future: getMenuDetail(menu: 'મંદિર'), builder: (_,snapshot){
 
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
+          return const ShimmerDemo();
         } else if (snapshot.hasError) {
           return Center(child: Text("Error: ${snapshot.error}"));
         } else {

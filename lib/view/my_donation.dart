@@ -19,6 +19,7 @@ import '../services/loger_service.dart';
 import '../services/network/api_mobile.dart';
 import '../services/preference_service.dart';
 import '../utils/helper.dart';
+import '../widget/shimmer.dart';
 
 class MyDonationList extends StatefulWidget {
   MyDonationList({super.key});
@@ -113,7 +114,7 @@ String donationUrl='';
             future: getDetail(),
             builder: (_, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator());
+                return const ShimmerDemo();
               } else if (snapshot.hasError) {
                 return Center(child: Text("Error: ${snapshot.error}"));
               } else {

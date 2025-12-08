@@ -9,6 +9,7 @@ class APIConstant {
   String get baseUrl => _baseUrl;
   String get apiMainMenu => '${_baseUrl}main-menu';
   String get apiLogin => '${_baseUrl}login';
+  String get apiContactUs => '${_baseUrl}contact-us';
   String get apiUpdateProfile => '${_baseUrl}update-profile';
   String get apiLoading => '${_baseUrl}app-loading';
   String get apiHomePage => '${_baseUrl}home-page';

@@ -6,8 +6,7 @@ import '../connectivity_service.dart';
 import '../enums.dart';
 import '../loger_service.dart';
 
-
-class NetworkServiceMobile  {
+class NetworkServiceMobile {
   factory NetworkServiceMobile() => _instance;
 
   NetworkServiceMobile._internal();
@@ -17,12 +16,11 @@ class NetworkServiceMobile  {
 
   int timeOut = 60;
 
-
-
   Map<String, String> _getHeader({bool isFormData = false}) {
-    return {if (isFormData == false) 'Content-Type': 'application/json'};
+    return isFormData == false
+        ? {'Content-Type': 'application/json'}
+        : {'Content-Type': 'multipart/form-data'};
   }
-
 
   Future<Map<String, dynamic>> delete({
     required String url,
@@ -95,7 +93,6 @@ class NetworkServiceMobile  {
     return apiResponse;
   }
 
-
   Future<Map<String, dynamic>> get({
     required String url,
     Map<String, String> headers = const {},
@@ -128,9 +125,9 @@ class NetworkServiceMobile  {
         }
         final temp = json.decode(response.body);
 
-        if(temp is List){
+        if (temp is List) {
           apiResponse['data'] = json.decode(response.body);
-        }else{
+        } else {
           apiResponse = json.decode(response.body);
         }
 
@@ -142,7 +139,6 @@ class NetworkServiceMobile  {
     }
     return apiResponse;
   }
-
 
   Future<Map<String, dynamic>> post({
     required String url,
@@ -161,18 +157,20 @@ class NetworkServiceMobile  {
           (v) => v is http.MultipartFile || v is File,
         );
 
-
         late final http.Response response;
         if (hasFile || isFormData) {
           final reqClient = http.Client();
           var request = http.MultipartRequest('POST', Uri.parse(url));
+          bool fileFound = false;
           for (var entry in requestBody.entries) {
             var key = entry.key;
             var value = entry.value;
 
             if (value is http.MultipartFile) {
+              fileFound = true;
               request.files.add(value);
             } else if (value is File) {
+              fileFound = true;
               request.files.add(
                 await http.MultipartFile.fromPath(key, value.path),
               );
@@ -180,10 +178,10 @@ class NetworkServiceMobile  {
               request.fields[key] = '$value';
             }
           }
-
-          await reqClient.send(request).then((resp) async {
-            response = await http.Response.fromStream(resp);
-          });
+          print(request.fields);
+         request.headers.addAll(_getHeader(isFormData: true));
+          final streamResponse= await reqClient.send(request);
+          response=await http.Response.fromStream(streamResponse);
         } else {
           final reqClient = http.Client();
           response = await reqClient
@@ -205,15 +203,15 @@ class NetworkServiceMobile  {
 
         if (response.statusCode != 200) {
           LoggerService().log(
-            message: 'API status code warning',
+            message: 'API status code warning  ${response.statusCode}====> ${response.body}',
             level: LogLevel.warning,
           );
         }
         final temp = json.decode(response.body);
 
-        if(temp is List){
+        if (temp is List) {
           apiResponse['data'] = json.decode(response.body);
-        }else{
+        } else {
           apiResponse = json.decode(response.body);
         }
 

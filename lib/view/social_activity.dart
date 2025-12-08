@@ -11,6 +11,7 @@ import '../constants/api_constant.dart';
 import '../services/loger_service.dart';
 
 import '../utils/size_config.dart';
+import '../widget/shimmer.dart';
 
 class SocialActivities extends StatelessWidget {
   const SocialActivities({super.key});
@@ -51,7 +52,7 @@ class SocialActivities extends StatelessWidget {
             future: getDetail(),
             builder: (_, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator());
+                return const ShimmerDemo();
               } else if (snapshot.hasError) {
                 return Center(child: Text("Error: ${snapshot.error}"));
               } else {

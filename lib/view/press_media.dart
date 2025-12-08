@@ -2,6 +2,7 @@ import 'package:bapa_sitaram/constants/app_colors.dart';
 import 'package:bapa_sitaram/services/network/api_mobile.dart';
 import 'package:bapa_sitaram/utils/font_styles.dart';
 import 'package:bapa_sitaram/widget/app_bar.dart';
+import 'package:bapa_sitaram/widget/shimmer.dart';
 import 'package:flutter/material.dart';
 
 import '../constants/api_constant.dart';
@@ -48,7 +49,7 @@ class PressMedia extends StatelessWidget {
             future: getDetail(),
             builder: (_, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator());
+                return const ShimmerDemo();
               } else if (snapshot.hasError) {
                 return Center(child: Text("Error: ${snapshot.error}"));
               } else {

@@ -87,19 +87,31 @@ import '../widget/custom_button.dart';
 import '../widget/custom_text_field.dart';
 import '../widget/image_widget.dart';
 
-class ContactUs extends StatelessWidget {
-  ContactUs({super.key});
+class ContactUs extends StatefulWidget {
+  const ContactUs({super.key});
 
+  @override
+  State<ContactUs> createState() => _ContactUsState();
+}
+
+class _ContactUsState extends State<ContactUs> {
   final GlobalKey<FormState> _formKey = GlobalKey();
 
    final HomeDetailController controller=Get.find<HomeDetailController>();
+
   final TextEditingController type=TextEditingController();
+
   final TextEditingController name=TextEditingController();
+
   final TextEditingController mobile=TextEditingController();
+
   final TextEditingController amount=TextEditingController();
+
   final TextEditingController email=TextEditingController();
+
   final TextEditingController pinCode=TextEditingController();
-  final TextEditingController address=TextEditingController();
+
+  final TextEditingController message=TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -212,7 +224,7 @@ class ContactUs extends StatelessWidget {
                         maxLines: 5,
                         isMobile: true,
                         formatter: [LengthLimitingTextInputFormatter(200)],
-                        controller: address,
+                        controller: message,
                         inputType: TextInputType.streetAddress,
                         label: 'સંદેશ*',
                         hint: 'સંદેશ',
@@ -227,19 +239,29 @@ class ContactUs extends StatelessWidget {
                             if (_formKey.currentState!.validate()) {
 
                               try{
-                                await NetworkServiceMobile().post(url: APIConstant().apiLogin, requestBody: {
+                                Helper.showLoader();
+                                await NetworkServiceMobile().post(url: APIConstant().apiContactUs, requestBody: {
                                   'name':name.text,
                                   'mobile_no':mobile.text,
                                   'email':email.text,
-                                  'message':address.text,
+                                  'message':message.text,
                                 }, isFormData: true).then((data) {
-                                    Navigator.pop(context);
+                                    Helper.closeLoader();
                                     Helper.showMessage(title:data['httpStatusCode']==200 ? 'Success':"Error", message: data['message'], isSuccess: data['httpStatusCode']==200);
+                                    
+                                    if(data['httpStatusCode']==200){
+                                      name.clear();
+                                      mobile.clear();
+                                      email.clear();
+                                      message.clear();
+                                      _formKey.currentState?.reset();
+
+                                    }
+                                  
                                 });
                               }catch(e){
                                 LoggerService().log(message: e.toString());
                               }
-
                             }
                         }, title: 'સંદેશ મોકલો'),
                     ],
@@ -252,7 +274,6 @@ class ContactUs extends StatelessWidget {
       ),
     );
   }
-
 
   Widget _contactDetail({required String image,required String title,required String value}){
 

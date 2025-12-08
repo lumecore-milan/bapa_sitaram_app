@@ -1,12 +1,16 @@
+import 'dart:io';
+
 import 'package:bapa_sitaram/constants/app_colors.dart';
 import 'package:bapa_sitaram/constants/app_constant.dart';
 import 'package:bapa_sitaram/constants/routes.dart';
 import 'package:bapa_sitaram/controllers/home_controller.dart';
 import 'package:bapa_sitaram/utils/font_styles.dart';
+import 'package:bapa_sitaram/utils/helper.dart';
 import 'package:bapa_sitaram/utils/route_generate.dart';
 import 'package:bapa_sitaram/widget/app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:path_provider/path_provider.dart';
 
 import '../extensions/size_box_extension.dart';
 import '../services/preference_service.dart';
@@ -20,12 +24,16 @@ class SettingPage extends StatefulWidget {
 
 class _SettingPageState extends State<SettingPage> {
   RxBool isSwitchOn = true.obs;
-
+Rx<String> cacheSize=''.obs;
   @override
   void initState() {
     super.initState();
-
     isSwitchOn.value=PreferenceService().getString(key: AppConstants().prefKeyNotificationEnabled)!='false';
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async{
+      await getCacheSize();
+    });
+
 
   }
   @override
@@ -72,7 +80,7 @@ class _SettingPageState extends State<SettingPage> {
               detailList(
                 context: context,
                 title: 'Clear Cache',
-                image: SizedBox(),
+                image: Obx(()=>Text(cacheSize.value,style: semiBold(fontSize: 12),)),
               ),
               20.h,
               Text(
@@ -139,6 +147,8 @@ class _SettingPageState extends State<SettingPage> {
                     'data': cnt.aboutUs['term_condition'],
               },
             );
+          }else if(title=='Clear Cache'){
+                clearCache();
           }
 
 
@@ -175,4 +185,64 @@ class _SettingPageState extends State<SettingPage> {
       ),
     );
   }
+  Future<void> clearCache() async {
+    try {
+
+      Helper.showLoader();
+      Directory tempDir = await getTemporaryDirectory();
+      Directory appCacheDir = await getApplicationSupportDirectory();
+
+      if (tempDir.existsSync()) {
+        await tempDir.delete(recursive: true);
+      }
+
+      if (appCacheDir.existsSync()) {
+        await appCacheDir.delete(recursive: true);
+      }
+    }catch(e){
+
+    }
+    await getCacheSize();
+    Helper.closeLoader();
+  }
+
+
+  Future<void> getCacheSize() async {
+    Directory tempDir = await getTemporaryDirectory();
+    Directory appCacheDir = await getApplicationSupportDirectory();
+
+    int totalBytes = await _getDirectorySize(tempDir);
+    totalBytes += await _getDirectorySize(appCacheDir);
+
+    cacheSize.value= _formatBytes(totalBytes);
+    cacheSize.refresh();
+  }
+
+  Future<int> _getDirectorySize(Directory dir) async {
+    int size = 0;
+
+    if (dir.existsSync()) {
+      try {
+        await for (FileSystemEntity entity in dir.list(recursive: true)) {
+          if (entity is File) size += await entity.length();
+        }
+      } catch (_) {}
+    }
+
+    return size;
+  }
+
+  String _formatBytes(int bytes) {
+    if (bytes <= 0) return "0 KB";
+    const kb = 1024;
+    const mb = kb * 1024;
+
+    if (bytes < mb) return "${(bytes / kb).toStringAsFixed(2)} KB";
+    return "${(bytes / mb).toStringAsFixed(2)} MB";
+  }
 }
+
+
+
+
+
