@@ -21,6 +21,7 @@ enum AppEventType {
   internetDisConnected,
   downloadProgress,
   uploadProgress,
+  paymentSuccess
 }
 
 enum InputType {

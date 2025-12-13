@@ -34,7 +34,7 @@ Future<String?> generateThumbnail({
     final thumbPath = await VideoThumbnail.thumbnailFile(
       video: videoPath,
       imageFormat: ImageFormat.JPEG,
-      quality: 60,
+      quality: 100,
       maxHeight: height,
       thumbnailPath: fileName,
       maxWidth: width,
@@ -70,37 +70,39 @@ Widget getThumbNails({
         );
       } else {
         //   generated(true);
-        return Stack(
-          children: [
-            Image.file(
-              File(snapshot.data!),
-              height: height.toDouble(),
-              width: width.toDouble(),
-              fit: BoxFit.cover,
-            ),
-            Positioned(
-              top: (height / 2) - 37,
-              left: (width / 2) - 37,
-              child: InkWell(
-                onTap: () {
-                  onTap();
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.25),
-                    shape: BoxShape.circle,
-                  ),
-                  padding: EdgeInsets.all(12),
-                  child: ImageWidget(
-                    url: 'assets/images/ic_play.svg',
-                    height: 50,
-                    width: 50,
-                    color: CustomColors().white1000,
+        return InkWell(
+          onTap: (){
+            onTap();
+          },
+          child: Stack(
+            children: [
+              Image.file(
+                File(snapshot.data!),
+                height: height.toDouble(),
+                width: width.toDouble(),
+                fit: BoxFit.cover,
+              ),
+              Positioned(
+                top: (height / 2) - 37,
+                left: (width / 2) - 37,
+                child: IgnorePointer(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.black.withOpacity(0.25),
+                      shape: BoxShape.circle,
+                    ),
+                    padding: EdgeInsets.all(12),
+                    child: ImageWidget(
+                      url: 'assets/images/ic_play.svg',
+                      height: 50,
+                      width: 50,
+                      color: CustomColors().white1000,
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         );
       }
     },

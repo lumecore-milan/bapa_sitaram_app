@@ -17,18 +17,25 @@ class RazorPayService{
   final _razorpay = Razorpay();
   late final String _key;
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
+    print('razor payment successful');
     _paymentSuccessController.add(response);
-
+      print(response.data??{});
+      print(response.orderId);
+      print(response.signature);
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {
-    // Do something when payment fails
+    print('razor payment error');
+    print(response.code??{});
+    print(response.error);
+    print(response.message);
   }
 void setKey({required String key}){
   _key=key;
 }
   void _handleExternalWallet(ExternalWalletResponse response) {
-    // Do something when an external wallet was selected
+    print('razor payment handle external wallet');
+    print(response.walletName??{});
   }
 
   Future<void> makePayment({required Map<String,dynamic> data})async{

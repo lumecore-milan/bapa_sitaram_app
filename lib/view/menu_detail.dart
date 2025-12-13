@@ -3,12 +3,12 @@ import 'package:bapa_sitaram/utils/font_styles.dart';
 import 'package:bapa_sitaram/widget/app_bar.dart';
 import 'package:bapa_sitaram/widget/custom_tabs.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
+
 import 'package:get/get.dart';
 
 import '../extensions/size_box_extension.dart';
 import '../utils/size_config.dart';
-import '../widget/image_widget.dart';
+import '../widget/custom_html_widget.dart';
 import '../widget/rounded_image.dart';
 
 class MenuDetailPage extends StatefulWidget {
@@ -61,70 +61,63 @@ class _MenuDetailPageState extends State<MenuDetailPage> {
           PageView.builder(
             itemCount: widget.detail.length,
             reverse: false,
+            physics: NeverScrollableScrollPhysics(),
             scrollDirection: Axis.horizontal,
             controller: _pageController,
             itemBuilder: (_, index) {
-              return SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: .min,
-                  children: [
-                    60.h,
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: Column(
-                        children: [
-                          Obx(
-                            () => RoundedImage(
-                              url:
-                                  widget.detail[currentTabIndex
-                                      .value]['details']['image'],
-                            ),
+              return Column(
+                mainAxisSize: .min,
+                crossAxisAlignment: .center,
+                children: [
+                  60.h,
+                /*  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Column(
+                      crossAxisAlignment: .start,
+                      children: [
+                        Obx(
+                          () => RoundedImage(
+                            height: 250,
+                            width: SizeConfig().width,
+                            fit: .fitWidth,
+                            url:
+                                widget.detail[currentTabIndex
+                                    .value]['details']['image'],
                           ),
-                          16.h,
-                
-                          Obx(
-                            () => Text(
-                              widget.detail[currentTabIndex
-                                  .value]['details']['title'],
-                              style: bolder(
-                                fontSize: 18,
-                                color: CustomColors().black,
-                              ),
-                            ),
-                          ),
-                          10.h,
-                          ImageWidget(
-                            url: 'assets/images/flag_deco.png',
-                            height: 60,
-                          ),
-                        ],
-                      ),
-                    ),
-                    Obx(
-                      () => Html(
-                        data:
+                        ),
+                        16.h,
+              
+                        Obx(
+                          () => Text(
                             widget.detail[currentTabIndex
-                                .value]['details']['description'],
-                        style: {
-                          "p": Style(
-                            fontSize: FontSize(18),
-                            color: Colors.black87,
-                            textAlign: TextAlign.justify,
-                            lineHeight: LineHeight(1.5),
-                            fontFamily: "Hind Vadodara",
+                                .value]['details']['title'],
+                            style: bolder(
+                              fontSize: 18,
+                              color: CustomColors().black,
+                            ),
                           ),
-                          "h4": Style(
-                            fontSize: FontSize(20),
-                            fontWeight: FontWeight.bold,
-                            color: const Color(0xFF962020),
-                          ),
-                          "div": Style(textAlign: TextAlign.justify),
-                          "span": Style(fontSize: FontSize(18)),
-                        },
-                      ),
+                        ),
+                     10.h,
+
+                     /*   ImageWidget(
+                          url: 'assets/images/flag_deco.png',
+                          height: 60,
+                        ),*/
+                      ],
                     ),
-                  ],
-                ),
+                  ),*/
+                  Expanded(
+                    child: Obx(
+                      () =>
+                      CustomHtmlWidget(
+                          content: widget.detail[currentTabIndex.value]['details']['description'],
+                          title: widget.detail[currentTabIndex.value]['details']['title'],
+                          image: widget.detail[currentTabIndex.value]['details']['image'],
+
+                      )
+                    ),
+                  ),
+                ],
               );
             },
             onPageChanged: (index) {

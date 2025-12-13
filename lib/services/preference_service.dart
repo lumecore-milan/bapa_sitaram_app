@@ -16,7 +16,7 @@ class PreferenceService {
   static final PreferenceService _instance = PreferenceService._internal();
   late final Box<dynamic> _box;
   bool isInitialized = false;
-  bool isEncryptionEnabled = false;
+  bool isEncryptionEnabled = true;
   Future<void> initPreference({bool encryptionEnabled = false}) async {
     try {
       isEncryptionEnabled = encryptionEnabled;

@@ -56,13 +56,12 @@ class _SplashScreenState extends State<SplashScreen>
         Future.delayed(Duration(seconds: 3)).then((y){
           if (data.$1 == true) {
             if (PreferenceService().getBoolean(
-              key: AppConstants().prefKeyIsRegistered,
-            ) ==
-                true) {
+              key: AppConstants().prefKeyIsLoggedIn,
+            )==false) {
               navigate(
                 context: context,
                 replace: true,
-                path: userRegistrationRoute,
+                path: loginRoute,
                 param: _controller.detail.value,
               );
             } else {
@@ -86,7 +85,6 @@ class _SplashScreenState extends State<SplashScreen>
       });
     });
     super.initState();
-
     _animationController2.forward();
   }
 

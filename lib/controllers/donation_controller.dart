@@ -1,6 +1,9 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:bapa_sitaram/constants/app_constant.dart';
+import 'package:bapa_sitaram/services/app_events.dart';
+import 'package:bapa_sitaram/services/enums.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
@@ -25,6 +28,20 @@ class DonationController extends GetxController {
   final _apiInstance = NetworkServiceMobile();
 
   DonationController() {
+
+    final String userDetail=PreferenceService().getString(key: AppConstants().prefKeyUserDetail);
+    if(userDetail.isNotEmpty){
+
+          Map<String,dynamic> detail=json.decode(userDetail);
+          if(detail.isNotEmpty){
+              name.text=detail['name']??'';
+              email.text=detail['email']??'';
+              mobile.text=detail['mobile']??'';
+              pinCode.text=detail['pinCode']??'';
+              address.text=detail['address']??'';
+              panCard.text=detail['panCard']??'';
+          }
+    }
     RazorPayService().onPaymentSuccess.listen((payment) {
       if(payment.paymentId!=null) {
         paymentSuccess(paymentId: payment.paymentId??'');
@@ -106,6 +123,7 @@ class DonationController extends GetxController {
             if (data.isNotEmpty) {
               if (data['httpStatusCode'] == 200) {
                     clearForm();
+                    AppEventsStream().addEvent( AppEvent(type: AppEventType.paymentSuccess,data: data));
                     Helper.showMessage(title: 'Success', message: 'Payment successful', isSuccess: true);
               }
             }

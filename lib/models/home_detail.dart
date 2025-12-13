@@ -1,3 +1,6 @@
+import 'package:bapa_sitaram/services/helper_service.dart';
+import 'package:bapa_sitaram/utils/helper.dart';
+
 class HomeDetailModel {
   List<SliderItem> slider;
   String impMsg;
@@ -148,18 +151,18 @@ class ArtiItem {
 // ---------------- EVENTS ----------------
 
 class EventItem {
-  int eventId;
-  String eventTitle;
-  String eventDesc;
-  String eventImage;
-  String eventDate;
+  final int eventId;
+  final String eventTitle;
+  final String eventDesc;
+  final String eventImage;
+  final DateTime eventDate;
 
-  EventItem({
+  const EventItem({
     this.eventId = 0,
     this.eventTitle = '',
     this.eventDesc = '',
     this.eventImage = '',
-    this.eventDate = '',
+    required this.eventDate,
   });
 
   factory EventItem.fromJson(Map<String, dynamic> json) {
@@ -168,7 +171,7 @@ class EventItem {
       eventTitle: json['event_title'] ?? '',
       eventDesc: json['event_desc'] ?? '',
       eventImage: json['event_image'] ?? '',
-      eventDate: json['event_date'] ?? '',
+      eventDate: HelperService().parseDate(date:  json['event_date'] ?? '',inputFormat: 'dd MMMM, yyyy'),
     );
   }
 }

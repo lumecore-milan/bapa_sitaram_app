@@ -49,7 +49,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                         mainTitle: 'Main',
                         subItems: [
                           {
-                            'image': "assets/images/home.svg",
+                            'image': "assets/images/ic_home.svg",
                             'title': "હોમ",
                             'navigate': homeRoute,
                           },
@@ -111,7 +111,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                               'navigate': userRegistrationRoute,
                             },
                           {
-                            'image': "assets/images/download-svgrepo-com.svg",
+                            'image': "assets/images/ic_download.svg",
                             'title': "ડાઉનલોડ પોસ્ટ",
                             'navigate': downloadPostRoute,
                           },
@@ -136,7 +136,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                         mainTitle: 'Application',
                         subItems: [
                           {
-                            'image': "assets/images/setting.png",
+                            'image': "assets/images/ic_setting.svg",
                             'title': "સેટિંગ્સ",
                             'navigate': settingRoute,
                           },
@@ -242,14 +242,14 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 children: [
                   ImageWidget(
                     url: menu.subItems[index]['image'],
-                    height: 30,
-                    width: 30,
-                    color: (menu.subItems[index]['title']=='હોમ') ? CustomColors().primaryColorDark:null,
+                    height: 24,
+                    width: 24,
+                    color: (menu.subItems[index]['title']=='હોમ' || menu.subItems[index]['title']=='ડાઉનલોડ પોસ્ટ') ? CustomColors().primaryColorDark:null,
                   ),
                   10.w,
                   Text(
                     menu.subItems[index]['title'],
-                    style: bolder(fontSize: 14, color: CustomColors().black),
+                    style: bolder(fontSize: 16, color: CustomColors().black),
                   ),
                 ],
               ),

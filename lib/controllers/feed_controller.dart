@@ -17,20 +17,45 @@ class FeedController extends GetxController
   RxList<PostModel> posts=RxList();
   RxList<dynamic> currentPostDetail=RxList();
   Rx<bool> isLoading=false.obs;
+  Rx<bool> isLoadMore=false.obs;
+  bool canLoadMore=false;
+  int initialPage=50;
+  int increment=30;
   Future<void> getHomeDetail()async{
     try{
-      isLoading.value=true;
+      if(canLoadMore==false) {
+        isLoading.value = true;
+      }
       await Future.wait([
         _apiInstance.post(url: APIConstant().apiFeeds,isFormData: true,requestBody: {
           'user_id':PreferenceService().getInt(key: AppConstants().prefKeyUserId),
-          'no_of_post':30,
+          'no_of_post':initialPage,
         }),
       ]).then((responses){
-        isLoading.value=false;
+        if(canLoadMore==false) {
+          isLoading.value=false;
+        }
         if(responses[0].isNotEmpty){
           if(responses[0]['httpStatusCode']==200){
-            posts.value=PostModel.fromJsonList(responses[0]['data']);
-            posts.refresh();
+            final temp=PostModel.fromJsonList(responses[0]['data']);
+            if(isLoadMore.value=false){
+              posts.value=PostModel.fromJsonList(responses[0]['data']);
+              if(posts.length>=initialPage){
+                canLoadMore=true;
+              }
+            }else{
+              final int oldCount = posts.length;
+              if (temp.length > oldCount) {
+                temp.removeRange(0, oldCount);
+              } else {
+                temp.clear();
+              }
+              if(temp.isNotEmpty) {
+                canLoadMore=true;
+                posts.addAll(temp);
+              //  posts.refresh();
+              }
+            }
           }
         }
       });
@@ -141,6 +166,7 @@ class FeedController extends GetxController
   }
   Future<void> getCommentByPostId({required int postId})async{
     try{
+      currentPostDetail.clear();
       await _apiInstance.get(url: "${APIConstant().apiGetCommentByPost}/$postId").then((resp){
         if(resp.isNotEmpty){
           if(resp['httpStatusCode']==200){

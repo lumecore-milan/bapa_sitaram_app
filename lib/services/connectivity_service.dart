@@ -57,6 +57,10 @@ class ConnectivityService {
         results.contains(ConnectivityResult.mobile) ||
         results.contains(ConnectivityResult.wifi) ||
         results.contains(ConnectivityResult.ethernet);
+
+    if(!d){
+      return d;
+    }
     bool d1 = await testInternet();
     return d1;
   }

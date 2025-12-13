@@ -80,7 +80,7 @@ class LoginController extends GetxController {
   }
 
 
-  Future<(bool, String)> register() async {
+  Future<(bool, String)> register({required String mobileNumber}) async {
     (bool, String) resp = (false, '');
     try {
       Map<String,dynamic> existingDetail={};
@@ -90,10 +90,8 @@ class LoginController extends GetxController {
 
       }
 
-
-
       Map<String, dynamic> body = {
-        'mobile_no': existingDetail['mobile'],
+        'mobile_no': mobileNumber,
         'profile_photo': '',
         'name': name.text,
         'email': email.text,

@@ -92,44 +92,7 @@ class Helper {
 
 
 
-  static Future<void> noInternetDialog() async {
-    try {
-      await showDialog(
-        barrierDismissible: false,
-        useSafeArea: true,
-        useRootNavigator: true,
-        context: AppConstants().scaffoldMessengerKey.currentContext!,
-        builder: (_) {
-          return AlertDialog(
-            contentPadding: EdgeInsets.zero,
-            insetPadding: const EdgeInsets.all(20),
-            titlePadding: EdgeInsets.zero,
-            actionsPadding: EdgeInsets.zero,
-            title: Container(
-              padding: const EdgeInsets.all(14),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Expanded(child: Text('No Internet')),
-                  GestureDetector(
-                    onTap: () => Navigator.pop(
-                      AppConstants().scaffoldMessengerKey.currentContext!,
-                    ),
-                    child: const Icon(Icons.close, size: 24, color: Colors.red),
-                  ),
-                ],
-              ),
-            ),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular((5).toDouble()),
-            ),
-          );
-        },
-      );
-    } catch (e) {
-      LoggerService().log(message: e.toString());
-    }
-  }
+
 
   static void hideDialog() {
     try {

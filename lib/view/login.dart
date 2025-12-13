@@ -46,6 +46,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void initState() {
+
     FirebaseOtpHelper().otpController.stream.listen((d) {
       if (d.sent == true) {
         _controller.otpSent.value = true;
@@ -56,6 +57,12 @@ class _LoginPageState extends State<LoginPage> {
       }
     });
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+         isUserRegistered.value=PreferenceService().getBoolean(key: AppConstants().prefKeyIsRegistered);
+         if(isUserRegistered.value==true){
+              _mobileController.text=PreferenceService().getString(key: AppConstants().prefKeyMobile);
+         }
+    });
   }
 
   @override
@@ -83,24 +90,11 @@ class _LoginPageState extends State<LoginPage> {
                         width: SizeConfig().width,
                         decoration: BoxDecoration(
                           color: CustomColors().white,
-                          borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(30),
-                            bottomRight: Radius.circular(30),
-                          ),
+                          borderRadius: BorderRadius.only(bottomLeft: Radius.circular(30), bottomRight: Radius.circular(30)),
                         ),
                         child: ClipRRect(
-                          borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(30),
-                            bottomRight: Radius.circular(30),
-                          ),
-                          child: Image.asset(
-                            'assets/images/bg_image.jpeg',
-                            fit: BoxFit.cover,
-                            color: CustomColors().primaryColorDark.withOpacity(
-                              0.7,
-                            ),
-                            colorBlendMode: BlendMode.multiply,
-                          ),
+                          borderRadius: BorderRadius.only(bottomLeft: Radius.circular(30), bottomRight: Radius.circular(30)),
+                          child: Image.asset('assets/images/bg_image.jpeg', fit: BoxFit.cover, color: CustomColors().primaryColorDark.withOpacity(0.7), colorBlendMode: BlendMode.multiply),
                         ),
                       ),
                       Positioned(
@@ -109,13 +103,8 @@ class _LoginPageState extends State<LoginPage> {
                         child: Container(
                           height: 80,
                           width: 80,
-                          decoration: BoxDecoration(
-                            color: CustomColors().white,
-                            shape: BoxShape.circle,
-                          ),
-                          child: ImageWidget(
-                            url: 'assets/images/asram_logo.png',
-                          ),
+                          decoration: BoxDecoration(color: CustomColors().white, shape: BoxShape.circle),
+                          child: ImageWidget(url: 'assets/images/asram_logo.png'),
                         ),
                       ),
                     ],
@@ -123,9 +112,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 Expanded(
                   child: Container(
-                    decoration: BoxDecoration(
-                      color: CustomColors().layoutPrimaryBackground,
-                    ),
+                    decoration: BoxDecoration(color: CustomColors().layoutPrimaryBackground),
                     child: Padding(
                       padding: .only(top: 50, left: 16, right: 16),
                       child: Column(
@@ -134,10 +121,7 @@ class _LoginPageState extends State<LoginPage> {
                           Container(
                             color: CustomColors().yellow600,
                             padding: .symmetric(horizontal: 5),
-                            child: Text(
-                              'Login Your Account',
-                              style: bolder(fontSize: 16),
-                            ),
+                            child: Text('Login Your Account', style: bolder(fontSize: 16)),
                           ),
                           16.h,
                           Text('બાપા સીતારામ', style: bolder(fontSize: 20)),
@@ -148,40 +132,25 @@ class _LoginPageState extends State<LoginPage> {
                                 : Column(
                                     crossAxisAlignment: .start,
                                     children: [
-                                      Text(
-                                        'Enter Your Mobile Number to Login',
-                                        style: semiBold(fontSize: 14),
-                                      ),
+                                      Text('Enter Your Mobile Number to Login', style: semiBold(fontSize: 14)),
                                       10.h,
                                       Form(
                                         key: _formKey,
                                         child: CustomTextFormField(
                                           validator: (val) {
-                                            if ((val ?? '').trim().length !=
-                                                10) {
+                                            if ((val ?? '').trim().length != 10) {
                                               return 'ફક્ત 10 આકડાનો મોબાઇલ નંબર દાખલ કરો';
                                             }
                                             return null;
                                           },
                                           isMobile: true,
                                           showMainTitle: false,
-                                          formatter: [
-                                            LengthLimitingTextInputFormatter(
-                                              10,
-                                            ),
-                                            FilteringTextInputFormatter
-                                                .digitsOnly,
-                                          ],
-                                          inputType:
-                                              TextInputType.numberWithOptions(
-                                                decimal: false,
-                                                signed: true,
-                                              ),
+                                          formatter: [LengthLimitingTextInputFormatter(10), FilteringTextInputFormatter.digitsOnly],
+                                          inputType: TextInputType.numberWithOptions(decimal: false, signed: true),
                                           controller: _mobileController,
                                           label: 'મોબાઇલ',
                                           hint: 'મોબાઇલ નંબર દાખલ કરો',
-                                          errorMessage:
-                                              'ફક્ત 10 આકડાનો મોબાઇલ નંબર દાખલ કરો',
+                                          errorMessage: 'ફક્ત 10 આકડાનો મોબાઇલ નંબર દાખલ કરો',
                                         ),
                                       ),
 
@@ -190,61 +159,27 @@ class _LoginPageState extends State<LoginPage> {
                                           InkWell(
                                             onTap: () {
                                               isPrivacyAccepted.toggle();
-                                              if (isPrivacyAccepted.value ==
-                                                  true) {
-                                                navigate(
-                                                  context: context,
-                                                  replace: false,
-                                                  path: policyRoute,
-                                                  param: {
-                                                    'title': 'Privacy Policy',
-                                                    'data': widget
-                                                        .detail
-                                                        .aboutUs
-                                                        .privacyPolicy,
-                                                  },
-                                                );
+                                              if (isPrivacyAccepted.value == true) {
+                                                navigate(context: context, replace: false, path: policyRoute, param: {'title': 'Privacy Policy', 'data': widget.detail.aboutUs.privacyPolicy});
                                               }
                                             },
                                             child: Obx(
                                               () => Container(
                                                 alignment: .center,
                                                 decoration: BoxDecoration(
-                                                  color:
-                                                      isPrivacyAccepted.value ==
-                                                          true
-                                                      ? CustomColors()
-                                                            .primaryColorDark
-                                                      : null,
-                                                  borderRadius:
-                                                      BorderRadius.circular(0),
-                                                  border: .all(
-                                                    color:
-                                                        CustomColors().grey600,
-                                                    width: 1,
-                                                  ),
+                                                  color: isPrivacyAccepted.value == true ? CustomColors().primaryColorDark : null,
+                                                  borderRadius: BorderRadius.circular(0),
+                                                  border: .all(color: CustomColors().grey600, width: 1),
                                                 ),
                                                 height: 18,
                                                 width: 18,
 
-                                                child:
-                                                    isPrivacyAccepted.value ==
-                                                        true
-                                                    ? Icon(
-                                                        Icons.check,
-                                                        color: CustomColors()
-                                                            .white,
-                                                        size: 12,
-                                                      )
-                                                    : SizedBox.shrink(),
+                                                child: isPrivacyAccepted.value == true ? Icon(Icons.check, color: CustomColors().white, size: 12) : SizedBox.shrink(),
                                               ),
                                             ),
                                           ),
                                           10.w,
-                                          Text(
-                                            'Are you agree with this privacy policy ?',
-                                            style: semiBold(fontSize: 12),
-                                          ),
+                                          Text('Are you agree with this privacy policy ?', style: semiBold(fontSize: 12)),
                                         ],
                                       ),
                                       10.h,
@@ -253,186 +188,63 @@ class _LoginPageState extends State<LoginPage> {
                                             ? SizedBox.shrink()
                                             : Column(
                                                 children: [
-                                                  Text(
-                                                    'OTP has been sent to your',
-                                                    style: semiBold(
-                                                      fontSize: 12,
-                                                      color: CustomColors()
-                                                          .grey600,
-                                                    ),
-                                                  ),
-                                                  Text(
-                                                    'mobile number, Please enter it below',
-                                                    style: semiBold(
-                                                      fontSize: 12,
-                                                      color: CustomColors()
-                                                          .grey600,
-                                                    ),
-                                                  ),
+                                                  Text('OTP has been sent to your', style: semiBold(fontSize: 12, color: CustomColors().grey600)),
+                                                  Text('mobile number, Please enter it below', style: semiBold(fontSize: 12, color: CustomColors().grey600)),
                                                   10.h,
                                                   Pinput(
                                                     onChanged: (val) async {
                                                       if (val.length == 6) {
                                                         Helper.showLoader();
-                                                        await FirebaseOtpHelper().verifyOTP(otp: val).then((
-                                                          status,
-                                                        ) async {
+                                                        await FirebaseOtpHelper().verifyOTP(otp: val).then((status) async {
                                                           Helper.closeLoader();
-                                                          if (status.$1 ==
-                                                              true) {
-                                                            Map<String, dynamic>
-                                                            userDetail =
-                                                                status.$2;
+                                                          if (status.$1 == true) {
+                                                            Map<String, dynamic> userDetail = status.$2;
 
-                                                            final loginStatus =
-                                                                await _controller
-                                                                    .login(
-                                                                      mobileNo:
-                                                                          userDetail['mobile'],
-                                                                    );
-                                                            if (loginStatus
-                                                                    .$1 ==
-                                                                true) {
-                                                              if ((loginStatus
-                                                                          .$2['userStatus']
-                                                                      as String) ==
-                                                                  'created') {
-                                                                PreferenceService()
-                                                                    .setBoolean(
-                                                                      key: AppConstants()
-                                                                          .prefKeyIsRegistered,
-                                                                      value:
-                                                                          true,
-                                                                    );
+                                                            final loginStatus = await _controller.login(mobileNo: userDetail['mobile']);
+                                                            if (loginStatus.$1 == true) {
+                                                              if ((loginStatus.$2['userStatus'] as String) == 'created') {
+                                                                PreferenceService().setBoolean(key: AppConstants().prefKeyIsRegistered, value: true);
+                                                                PreferenceService().setString(key: AppConstants().prefKeyMobile, value: _mobileController.text);
                                                               } else {
-                                                                userDetail['userId'] =
-                                                                    loginStatus
-                                                                        .$2['userId'] ??
-                                                                    '';
-                                                                userDetail['name'] =
-                                                                    loginStatus
-                                                                        .$2['name'] ??
-                                                                    '';
-                                                                userDetail['email'] =
-                                                                    loginStatus
-                                                                        .$2['email'] ??
-                                                                    '';
-                                                                userDetail['panCard'] =
-                                                                    loginStatus
-                                                                        .$2['panCard'] ??
-                                                                    '';
-                                                                userDetail['pinCode'] =
-                                                                    loginStatus
-                                                                        .$2['pinCode'] ??
-                                                                    '';
-                                                                userDetail['address'] =
-                                                                    loginStatus
-                                                                        .$2['address'] ??
-                                                                    '';
-                                                                userDetail['profileImage'] =
-                                                                    loginStatus
-                                                                        .$2['profileImage'] ??
-                                                                    '';
-                                                                PreferenceService()
-                                                                    .setBoolean(
-                                                                      key: AppConstants()
-                                                                          .prefKeyIsLoggedIn,
-                                                                      value:
-                                                                          true,
-                                                                    );
+                                                                userDetail['userId'] = loginStatus.$2['userId'] ?? '';
+                                                                userDetail['mobile'] = loginStatus.$2['mobile'] ?? '';
+                                                                userDetail['name'] = loginStatus.$2['name'] ?? '';
+                                                                userDetail['email'] = loginStatus.$2['email'] ?? '';
+                                                                userDetail['panCard'] = loginStatus.$2['panCard'] ?? '';
+                                                                userDetail['pinCode'] = loginStatus.$2['pinCode'] ?? '';
+                                                                userDetail['address'] = loginStatus.$2['address'] ?? '';
+                                                                userDetail['profileImage'] = loginStatus.$2['profileImage'] ?? '';
+                                                                PreferenceService().setBoolean(key: AppConstants().prefKeyIsLoggedIn, value: true);
                                                               }
 
-                                                              PreferenceService().setInt(
-                                                                key: AppConstants()
-                                                                    .prefKeyUserId,
-                                                                value: int.parse(
-                                                                  loginStatus
-                                                                          .$2['userId']
-                                                                      as String,
-                                                                ),
-                                                              );
-                                                              PreferenceService().setString(
-                                                                key: AppConstants()
-                                                                    .prefKeyUserDetail,
-                                                                value: json
-                                                                    .encode(
-                                                                      userDetail,
-                                                                    ),
-                                                              );
-                                                              if ((loginStatus
-                                                                          .$2['userStatus']
-                                                                      as String) ==
-                                                                  'created') {
-                                                                isUserRegistered
-                                                                        .value =
-                                                                    true;
-                                                                isUserRegistered
-                                                                    .refresh();
+                                                              PreferenceService().setInt(key: AppConstants().prefKeyUserId, value: int.parse(loginStatus.$2['userId'] as String));
+                                                              PreferenceService().setString(key: AppConstants().prefKeyUserDetail, value: json.encode(userDetail));
+                                                              if ((loginStatus.$2['userStatus'] as String) == 'created') {
+                                                                isUserRegistered.value = true;
+                                                                isUserRegistered.refresh();
                                                               } else {
-                                                                navigate(
-                                                                  context:
-                                                                      context,
-                                                                  replace: true,
-                                                                  path:
-                                                                      homeRoute,
-                                                                  param: widget
-                                                                      .detail,
-                                                                  removePreviousRoute:
-                                                                      true,
-                                                                );
+                                                                navigate(context: context, replace: true, path: homeRoute, param: widget.detail, removePreviousRoute: true);
                                                               }
                                                             } else {
-                                                              Helper.showMessage(
-                                                                title: 'Error',
-                                                                message:
-                                                                    loginStatus
-                                                                            .$2['error']
-                                                                        as String,
-                                                                isSuccess:
-                                                                    false,
-                                                              );
+                                                              Helper.showMessage(title: 'Error', message: loginStatus.$2['error'] as String, isSuccess: false);
                                                             }
                                                           } else {
-                                                            Helper.showMessage(
-                                                              title: 'Error',
-                                                              message:
-                                                                  'Opt verification failed',
-                                                              isSuccess: false,
-                                                            );
+                                                            Helper.showMessage(title: 'Error', message: 'Opt verification failed', isSuccess: false);
                                                           }
                                                         });
                                                       }
                                                     },
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
+                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                     length: 6,
-                                                    keyboardType:
-                                                        TextInputType.number,
-                                                    inputFormatters: [
-                                                      FilteringTextInputFormatter
-                                                          .digitsOnly,
-                                                      LengthLimitingTextInputFormatter(
-                                                        6,
-                                                      ),
-                                                    ],
+                                                    keyboardType: TextInputType.number,
+                                                    inputFormatters: [FilteringTextInputFormatter.digitsOnly, LengthLimitingTextInputFormatter(6)],
                                                     defaultPinTheme: PinTheme(
                                                       width: 40,
                                                       height: 40,
-                                                      textStyle: bolder(
-                                                        fontSize: 18,
-                                                        color: CustomColors()
-                                                            .black,
-                                                      ),
+                                                      textStyle: bolder(fontSize: 18, color: CustomColors().black),
                                                       decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius.circular(
-                                                              4,
-                                                            ),
-                                                        border: Border.all(
-                                                          color: CustomColors()
-                                                              .grey500,
-                                                        ),
+                                                        borderRadius: BorderRadius.circular(4),
+                                                        border: Border.all(color: CustomColors().grey500),
                                                       ),
                                                     ),
                                                     controller: _otpController,
@@ -443,62 +255,44 @@ class _LoginPageState extends State<LoginPage> {
                                       20.h,
                                       CommonButton(
                                         onTap: () async {
-                                          if (_formKey.currentState!
-                                                  .validate() &&
-                                              _mobileController.text.length ==
-                                                  10) {
-                                            if (isPrivacyAccepted.value ==
-                                                true) {
-
+                                          if (_formKey.currentState!.validate() && _mobileController.text.length == 10) {
+                                            if (isPrivacyAccepted.value == true) {
                                               if (Platform.isAndroid) {
                                                 Helper.showLoader();
-                                                await FirebaseOtpHelper()
-                                                    .sendOTP(
-                                                      mobile:
-                                                          '+91${_mobileController.text}',
-                                                    )
-                                                    .then((t) {
-                                                      Helper.closeLoader();
-                                                    });
+                                                await FirebaseOtpHelper().sendOTP(mobile: '+91${_mobileController.text}').then((t) {
+                                                  Helper.closeLoader();
+                                                });
                                               } else {
-                                                Map<String, dynamic>
-                                                userDetail = {
-                                                  'userId': 5,
-                                                  'name': 'milan',
-                                                  'email': 'milan',
-                                                  'mobile': '9574347238',
-                                                  'panCard': 'IDHDN8888D',
-                                                  'pinCode': '364002',
-                                                  'address': 'bhavnagar',
-                                                  'profileImage':
-                                                      'https://brandbaba.in/temple/uploads/22bfe26e-c587-48c8-841b-a6b0fbb15ae4.jpg',
-                                                };
-                                                PreferenceService().setBoolean(
-                                                  key: AppConstants()
-                                                      .prefKeyIsLoggedIn,
-                                                  value: true,
-                                                );
-                                                PreferenceService().setInt(
-                                                  key: AppConstants()
-                                                      .prefKeyUserId,
-                                                  value: int.parse(
-                                                    '${userDetail['userId']}',
-                                                  ),
-                                                );
-                                                PreferenceService().setString(
-                                                  key: AppConstants()
-                                                      .prefKeyUserDetail,
-                                                  value: json.encode(
-                                                    userDetail,
-                                                  ),
-                                                );
-                                                navigate(
-                                                  context: context,
-                                                  replace: true,
-                                                  path: homeRoute,
-                                                  param: widget.detail,
-                                                  removePreviousRoute: true,
-                                                );
+                                                Map<String, dynamic> userDetail = {};
+                                                Helper.showLoader();
+                                                final loginStatus = await _controller.login(mobileNo: _mobileController.text);
+                                                Helper.closeLoader();
+                                                if (loginStatus.$1 == true) {
+                                                  if ((loginStatus.$2['userStatus'] as String) == 'created') {
+                                                    PreferenceService().setBoolean(key: AppConstants().prefKeyIsRegistered, value: true);
+                                                  } else {
+                                                    userDetail['userId'] = loginStatus.$2['userId'] ?? '';
+                                                    userDetail['mobile'] = loginStatus.$2['mobile'] ?? '';
+                                                    userDetail['name'] = loginStatus.$2['name'] ?? '';
+                                                    userDetail['email'] = loginStatus.$2['email'] ?? '';
+                                                    userDetail['panCard'] = loginStatus.$2['panCard'] ?? '';
+                                                    userDetail['pinCode'] = loginStatus.$2['pinCode'] ?? '';
+                                                    userDetail['address'] = loginStatus.$2['address'] ?? '';
+                                                    userDetail['profileImage'] = loginStatus.$2['profileImage'] ?? '';
+                                                    PreferenceService().setBoolean(key: AppConstants().prefKeyIsLoggedIn, value: true);
+                                                  }
+
+                                                  PreferenceService().setInt(key: AppConstants().prefKeyUserId, value: int.parse(loginStatus.$2['userId'] as String));
+                                                  PreferenceService().setString(key: AppConstants().prefKeyUserDetail, value: json.encode(userDetail));
+                                                  if ((loginStatus.$2['userStatus'] as String) == 'created') {
+                                                    isUserRegistered.value = true;
+                                                    isUserRegistered.refresh();
+                                                  } else {
+                                                    navigate(context: context, replace: true, path: homeRoute, param: widget.detail, removePreviousRoute: true);
+                                                  }
+                                                } else {
+                                                  Helper.showMessage(title: 'Error', message: loginStatus.$2['error'] as String, isSuccess: false);
+                                                }
                                               }
                                             }
                                           }
@@ -534,14 +328,8 @@ class _LoginPageState extends State<LoginPage> {
             readOnly: true,
             enabled: false,
             showMainTitle: false,
-            formatter: [
-              LengthLimitingTextInputFormatter(10),
-              FilteringTextInputFormatter.digitsOnly,
-            ],
-            inputType: TextInputType.numberWithOptions(
-              decimal: false,
-              signed: true,
-            ),
+            formatter: [LengthLimitingTextInputFormatter(10), FilteringTextInputFormatter.digitsOnly],
+            inputType: TextInputType.numberWithOptions(decimal: false, signed: true),
             controller: _mobileController,
             label: '',
             hint: '',
@@ -566,8 +354,7 @@ class _LoginPageState extends State<LoginPage> {
           10.h,
           CustomTextFormField(
             validator: (val) {
-              if ((val ?? '').trim().isEmpty ||
-                  GetUtils.isEmail(val ?? '') == false) {
+              if ((val ?? '').trim().isEmpty || GetUtils.isEmail(val ?? '') == false) {
                 return 'ઈમેલ દાખલ કરો';
               }
               return null;
@@ -589,45 +376,26 @@ class _LoginPageState extends State<LoginPage> {
                 onTap: () {
                   isPrivacyAccepted.toggle();
                   if (isPrivacyAccepted.value == true) {
-                    navigate(
-                      context: context,
-                      replace: false,
-                      path: policyRoute,
-                      param: {
-                        'title': 'Privacy Policy',
-                        'data': widget.detail.aboutUs.privacyPolicy,
-                      },
-                    );
+                    navigate(context: context, replace: false, path: policyRoute, param: {'title': 'Privacy Policy', 'data': widget.detail.aboutUs.privacyPolicy});
                   }
                 },
                 child: Obx(
                   () => Container(
                     alignment: .center,
                     decoration: BoxDecoration(
-                      color: isPrivacyAccepted.value == true
-                          ? CustomColors().primaryColorDark
-                          : null,
+                      color: isPrivacyAccepted.value == true ? CustomColors().primaryColorDark : null,
                       borderRadius: BorderRadius.circular(0),
                       border: .all(color: CustomColors().grey600, width: 1),
                     ),
                     height: 18,
                     width: 18,
 
-                    child: isPrivacyAccepted.value == true
-                        ? Icon(
-                            Icons.check,
-                            color: CustomColors().white,
-                            size: 12,
-                          )
-                        : SizedBox.shrink(),
+                    child: isPrivacyAccepted.value == true ? Icon(Icons.check, color: CustomColors().white, size: 12) : SizedBox.shrink(),
                   ),
                 ),
               ),
               10.w,
-              Text(
-                'Are you agree with this privacy policy ?',
-                style: semiBold(fontSize: 12),
-              ),
+              Text('Are you agree with this privacy policy ?', style: semiBold(fontSize: 12)),
             ],
           ),
           10.h,
@@ -636,20 +404,12 @@ class _LoginPageState extends State<LoginPage> {
               if (_formKey.currentState!.validate()) {
                 if (isPrivacyAccepted.value == true) {
                   Helper.showLoader();
-                  await _controller.register().then((result) {
+                  await _controller.register(mobileNumber: _mobileController.text).then((result) {
                     Helper.closeLoader();
                     if (result.$1 == true) {
-                      navigate(
-                        context: context,
-                        replace: true,
-                        path: homeRoute,
-                      );
+                      navigate(context: context, replace: true, path: homeRoute);
                     } else {
-                      Helper.showMessage(
-                        title: 'Error',
-                        message: result.$2,
-                        isSuccess: false,
-                      );
+                      Helper.showMessage(title: 'Error', message: result.$2, isSuccess: false);
                     }
                   });
                 }

@@ -32,6 +32,7 @@ class SocialActivities extends StatelessWidget {
     } catch (e) {
       LoggerService().log(message: e.toString());
     }
+    list=(list.reversed??[]).toList();
     return list;
   }
 
@@ -73,10 +74,30 @@ class SocialActivities extends StatelessWidget {
                                     'data':data[index]
                                   });
                                 },
-                                child: RoundedImage(
-                                  height: 180,
-                                    width:SizeConfig().width,
-                                    url: data[index]['event_image'],fit: .cover)),
+                                  child: RoundedImage(
+                                    height: 180,
+                                      width:SizeConfig().width,
+                                      url: data[index]['event_image'],fit: .cover),
+
+                            ),
+                            Positioned.fill(child: Container(
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                  colors: [
+                                    Colors.transparent,
+                                    Colors.transparent,
+                                    CustomColors().black1000.withOpacity(0.7)
+                                  ],
+                                  stops: [
+                                    0.0,
+                                    0.6,
+                                    1.0,
+                                  ],
+                                ),
+                              ),
+                            )),
                             Positioned(
                                 bottom: 10,
                                 left: 20,

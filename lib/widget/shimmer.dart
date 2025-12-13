@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 
 class ShimmerDemo extends StatelessWidget {
-  const ShimmerDemo({super.key});
+  const ShimmerDemo({super.key, this.count=20});
+  final int count;
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       padding: const EdgeInsets.all(0),
-      itemCount: 20,
+      itemCount: count,
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
       itemBuilder: (_, index) {
         return const Padding(
           padding: EdgeInsets.only(bottom: 20),

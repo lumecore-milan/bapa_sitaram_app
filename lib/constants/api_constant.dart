@@ -4,7 +4,19 @@ class APIConstant {
   static const bool isLocalEnv = false;
   static final APIConstant _instance = APIConstant._internal();
 
-  static final String _baseUrl = 'https://brandbaba.in/temple/1234/';
+
+  static final devUrl='https://brandbaba.in/temple/1234/';
+  static final prodUrl='https://bapasitaramtemple.org/76238Bapa6631bhagat/';
+
+  void setUrl({required bool isDev}){
+    if(isDev){
+      _baseUrl=devUrl;
+    }else{
+      _baseUrl=prodUrl;
+    }
+  }
+
+  static String _baseUrl = 'https://brandbaba.in/temple/1234/';
 
   String get baseUrl => _baseUrl;
   String get apiMainMenu => '${_baseUrl}main-menu';

@@ -180,6 +180,20 @@ class HelperService {
     }
   }
 
+  DateTime parseDate({
+    required String date,
+    String inputFormat = 'dd-MM-yyyy',
+  }) {
+    try {
+      return DateFormat(inputFormat).parse(date);
+    } catch (e) {
+      LoggerService().log(message: 'Invalid date format exception==>$e');
+    }
+    return DateTime.now();
+  }
+
+
+
   bool isUrl(String string) {
     final urlPattern = RegExp(
       r'^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-zA-Z0-9]+([-.]{1}[a-zA-Z0-9]+)*\.[a-zA-Z]{2,5}(:[0-9]{1,5})?(\/.*)?$',

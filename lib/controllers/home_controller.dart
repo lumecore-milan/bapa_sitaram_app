@@ -31,6 +31,8 @@ class HomeDetailController extends GetxController
            if(responses[0].isNotEmpty){
              if(responses[0]['httpStatusCode']==200){
                homeDetail.value=HomeDetailModel.fromJson(responses[0]);
+
+               homeDetail.value.events.sort((a,b)=>b.eventDate.compareTo(a.eventDate));
                homeDetail.refresh();
              }
            }

@@ -24,3 +24,4 @@ const String imageRoute = '/image';
 const String socialActivityDetailRoute = '/socialDetail';
 const String userRegistrationRoute = '/userRegistration';
 const String myDonationRoute = '/myDonationRoute';
+//const String singleDetailRoute = '/singleDetail';

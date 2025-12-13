@@ -1,14 +1,14 @@
+import 'package:bapa_sitaram/services/helper_service.dart';
 import 'package:bapa_sitaram/widget/app_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
-
 import '../constants/app_colors.dart';
 import '../controllers/home_controller.dart';
 import '../extensions/size_box_extension.dart';
 import '../utils/font_styles.dart';
 import '../utils/size_config.dart';
+import '../widget/custom_html_widget.dart';
+import '../widget/image_widget.dart';
 import '../widget/rounded_image.dart';
 
 class DetailPage extends StatelessWidget {
@@ -28,7 +28,11 @@ class DetailPage extends StatelessWidget {
     return Container(
       height: SizeConfig().height,
       width: SizeConfig().width,
-      child: SingleChildScrollView(
+      child:
+      1>0 ?
+      CustomHtmlWidget(content: _controller.homeDetail.value.events[eventIndex].eventDesc, title: _controller.homeDetail.value.events[eventIndex].eventTitle, image: _controller.homeDetail.value.events[eventIndex].eventImage,):
+
+      SingleChildScrollView(
         child:
         Column(
           mainAxisSize: .min,
@@ -36,9 +40,12 @@ class DetailPage extends StatelessWidget {
             16.h,
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Column(
+              child:
+
+              Column(
                 crossAxisAlignment: .start,
                 children: [
+                  20.h,
                   Obx(
                         () => RoundedImage(
                       url:
@@ -53,32 +60,33 @@ class DetailPage extends StatelessWidget {
                         color: CustomColors().black,
                       ),
                     ),
+                  5.h,
+                 Row(
+                   children: [
+                     ImageWidget(
+                       url: 'assets/images/ic_time.svg',
+                       height: 14,
+                       width: 14,
+                       color: CustomColors().grey600,
+                     ),
+                     5.w,
+                     Text(
+                         HelperService().getFormattedDate (date: _controller.homeDetail.value.events[eventIndex].eventDate.toIso8601String(),outputFormat: 'dd MMM, yyyy')??'' ,
+                          style: bolder(
+                            fontSize: 12,
+                            color: CustomColors().grey500,
+                          ),
+                        ),
+                   ],
+                 ),
                 ],
               ),
             ),
             Obx(
                   () => Padding(
-                    padding: .symmetric(horizontal:16),
-                    child: Html(
-                                    data:
-                                    _controller.homeDetail.value.events[eventIndex].eventDesc,
-                                    style: {
-                    "p": Style(
-                      fontSize: FontSize(18),
-                      color: Colors.black87,
-                      textAlign: TextAlign.justify,
-                      lineHeight: LineHeight(1.5),
-                      fontFamily: "Hind Vadodara",
-                    ),
-                    "h4": Style(
-                      fontSize: FontSize(20),
-                      fontWeight: FontWeight.bold,
-                      color: const Color(0xFF962020),
-                    ),
-                    "div": Style(textAlign: TextAlign.justify),
-                    "span": Style(fontSize: FontSize(18)),
-                                    },
-                                  ),
+                    padding: .symmetric(horizontal:6),
+                    child:
+                    CustomHtmlWidget(content: _controller.homeDetail.value.events[eventIndex].eventDesc, title: _controller.homeDetail.value.events[eventIndex].eventTitle, image: _controller.homeDetail.value.events[eventIndex].eventImage,)
                   ),
             ),
           ],

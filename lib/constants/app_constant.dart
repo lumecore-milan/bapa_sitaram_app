@@ -13,6 +13,7 @@ class AppConstants {
   final String prefKeyDeviceInfo = 'deviceInfo';
   final String prefKeyIsLoggedIn = 'isLoggedIn';
   final String prefKeyIsRegistered = 'isRegistered';
+  final String prefKeyMobile = 'mobileNumber';
   final String prefKeyUserDetail = 'userDetail';
   final String prefKeyUserId = 'userId';
   final String prefKeyEncKey = 'encKey';

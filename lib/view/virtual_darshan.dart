@@ -119,7 +119,8 @@ class _VirtualDarshanState extends State<VirtualDarshan>
     ));
 
     HelperService().initSoundSources(
-       soundFiles: ['assets/sound/shankh_audio.mp3']
+       soundFiles: ['assets/sound/shankh_audio.mp3','assets/sound/bell_audio.mp3'],
+
     );
   }
 
@@ -142,7 +143,7 @@ class _VirtualDarshanState extends State<VirtualDarshan>
                   child: ImageWidget(
                     url: 'assets/images/top1.png',
                     fit: .fill,
-                    height: 240,
+                    height: 180,
                     width: SizeConfig().width,
                   ),
                 ),
@@ -170,17 +171,27 @@ class _VirtualDarshanState extends State<VirtualDarshan>
                 Positioned(
                   top: 180,
                   left: 0,
-                  child: LottieBuilder.asset(
-                    'assets/animation/leftBell.json',
-                    height: 170,
+                  child: InkWell(
+                    onTap: (){
+                      HelperService().playSound(sound: 'assets/sound/bell_audio.mp3');
+                    },
+                    child: LottieBuilder.asset(
+                      'assets/animation/leftBell.json',
+                      height: 170,
+                    ),
                   ),
                 ),
                 Positioned(
                   top: 180,
                   right: 0,
-                  child: LottieBuilder.asset(
-                    'assets/animation/leftBell.json',
-                    height: 170,
+                  child: InkWell(
+                    onTap: (){
+                      HelperService().playSound(sound: 'assets/sound/bell_audio.mp3');
+                    },
+                    child: LottieBuilder.asset(
+                      'assets/animation/leftBell.json',
+                      height: 170,
+                    ),
                   ),
                 ),
 
@@ -193,7 +204,12 @@ class _VirtualDarshanState extends State<VirtualDarshan>
                     'assets/animation/flower_ry.json',
                     height: SizeConfig().height - 130,
                     width: 200,
-                    onLoaded: (composition) {},
+                    onLoaded: (composition) {
+                      _shankhController.duration =
+                          composition.duration * 2.5;
+
+                      _shankhController.reset();
+                    },
                   ),
                 ),
 

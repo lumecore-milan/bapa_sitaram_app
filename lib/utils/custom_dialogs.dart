@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:open_filex/open_filex.dart';
+import '../constants/app_constant.dart';
 import '../extensions/size_box_extension.dart';
 import '../widget/image_widget.dart';
 import 'helper.dart';
@@ -54,8 +55,15 @@ void showLoginDialog({required BuildContext context}) {
               CommonButton(
                 width: 100,
                 onTap: () {
+                  final d = Get.find<HomeDetailController>().appSetting;
                   Navigator.pop(context);
-                  navigate(context: context, replace: false, path: loginRoute);
+
+                  navigate(
+                    context: context,
+                    replace: false,
+                    path: loginRoute,
+                    param: d,
+                  );
                 },
                 title: 'OK',
                 color: CustomColors().orange600,
@@ -318,7 +326,6 @@ void showDarshanTimeDialog1({required BuildContext context}) {
                   left: (SizeConfig().width / 2) - 14,
                   child: GestureDetector(
                     onTap: () {
-
                       Navigator.pop(context);
                     },
                     child: Container(
@@ -359,16 +366,13 @@ void showDarshanTimeDialog({required BuildContext context}) {
               children: [
                 Container(
                   color: Colors.transparent,
-                  constraints: BoxConstraints(
-                    maxHeight: 500,
-                    minHeight: 400,
-                  ),
+                  constraints: BoxConstraints(maxHeight: 500, minHeight: 400),
                   padding: .symmetric(vertical: 50),
                   margin: const EdgeInsets.symmetric(horizontal: 40),
                   child: Container(
                     constraints: BoxConstraints(maxHeight: 370),
                     padding: const EdgeInsets.all(16),
-                    margin: .only(bottom:20),
+                    margin: .only(bottom: 20),
                     decoration: BoxDecoration(
                       color: CustomColors().layoutPrimaryBackground,
                       borderRadius: BorderRadius.circular(10),
@@ -400,21 +404,16 @@ void showDarshanTimeDialog({required BuildContext context}) {
 
                         ListView.builder(
                           shrinkWrap: true,
-                          itemCount:3,
+                          itemCount: 3,
                           itemBuilder: (_, index) {
-                            final item = controller
-                                .homeDetail
-                                .value
-                                .arti
-                                .data[index];
-
-
+                            final item =
+                                controller.homeDetail.value.arti.data[index];
 
                             return Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 ImageWidget(
-                                  url: 'assets/images/dt_${index+1}.png',
+                                  url: 'assets/images/dt_${index + 1}.png',
                                   width: 30,
                                   height: 30,
                                 ),
@@ -425,24 +424,31 @@ void showDarshanTimeDialog({required BuildContext context}) {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                       ['મંગળા આરતી','રાજભોગ આરતી','સંધ્યા આરતી'][index],
+                                        [
+                                          'મંગળા આરતી',
+                                          'રાજભોગ આરતી',
+                                          'સંધ્યા આરતી',
+                                        ][index],
                                         style: semiBold(fontSize: 16),
                                       ),
                                       Text(
-                                      index==0?   controller
-                                          .homeDetail
-                                          .value
-                                          .darshanTime.manglaArti:
-                                       index==1?
-                                        controller
-                                            .homeDetail
-                                            .value
-                                            .darshanTime.rajbhogArti:
-                                      controller
-                                          .homeDetail
-                                          .value
-                                          .darshanTime.sandhyaArti
-                                        ,
+                                        index == 0
+                                            ? controller
+                                                  .homeDetail
+                                                  .value
+                                                  .darshanTime
+                                                  .manglaArti
+                                            : index == 1
+                                            ? controller
+                                                  .homeDetail
+                                                  .value
+                                                  .darshanTime
+                                                  .rajbhogArti
+                                            : controller
+                                                  .homeDetail
+                                                  .value
+                                                  .darshanTime
+                                                  .sandhyaArti,
                                         style: medium(
                                           fontSize: 16,
                                           color: CustomColors().grey600,
@@ -459,10 +465,7 @@ void showDarshanTimeDialog({required BuildContext context}) {
                         16.h,
 
                         Text(
-                          controller
-                              .homeDetail
-                              .value
-                              .darshanTime.note,
+                          controller.homeDetail.value.darshanTime.note,
                           style: semiBold(fontSize: 16),
                           textAlign: TextAlign.center,
                         ),
@@ -833,18 +836,9 @@ void downloadReceiptDialog({
                                   Helper.closeLoader();
                                   Navigator.pop(context);
                                   if (d != null) {
-                                    final result=await OpenFilex.open(d);
+                                    final result = await OpenFilex.open(d);
 
-                                    if(result.type==ResultType.done){
-
-                                    }else{
-                                      Helper.showMessage(
-                                        title: 'Download',
-                                        message: 'Receipt Downloaded at $d',
-                                        isSuccess: true,
-                                        durationInSecond: 5,
-                                      );
-                                    }
+                                    if (result.type == ResultType.done) {
                                     } else {
                                       Helper.showMessage(
                                         title: 'Download',
@@ -853,7 +847,14 @@ void downloadReceiptDialog({
                                         durationInSecond: 5,
                                       );
                                     }
-
+                                  } else {
+                                    Helper.showMessage(
+                                      title: 'Download',
+                                      message: 'Receipt Downloaded at $d',
+                                      isSuccess: true,
+                                      durationInSecond: 5,
+                                    );
+                                  }
                                 });
                           },
                           title: 'Download Receipt',
@@ -893,3 +894,47 @@ void downloadReceiptDialog({
     },
   );
 }
+
+
+void noInternetDialog() {
+  AppConstants().isDialogOpen=true;
+  showDialog(
+    context: AppConstants().navigatorKey.currentContext!,
+    barrierDismissible: false,
+    useSafeArea: true,
+    useRootNavigator: true,
+    barrierColor: Colors.black.withOpacity(0.4),
+    builder: (context) {
+      return PopScope(
+        canPop: false,
+        child: SafeArea(
+          child: Center(
+            child: Material(
+              color: Colors.transparent,
+              child: Container(
+                constraints: BoxConstraints(maxHeight: 150),
+                padding: const EdgeInsets.all(16),
+                margin: .all(40),
+                decoration: BoxDecoration(
+                  color: CustomColors().layoutPrimaryBackground,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Center(
+                  child: Text(
+                    "No Internet",
+                    style: semiBold(
+                      fontSize: 22,
+                      color: CustomColors().blue700,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+    },
+  );
+}
+
+

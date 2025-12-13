@@ -38,6 +38,7 @@ class FeedsPage extends StatefulWidget {
 class _FeedsPageState extends State<FeedsPage> {
   final FeedController _controller = Get.put(FeedController());
   final TextEditingController message = TextEditingController();
+  final ScrollController _scrollController=ScrollController();
   Rx<double> progress = (0.0).obs;
   String downloadPath = '';
 
@@ -45,6 +46,7 @@ class _FeedsPageState extends State<FeedsPage> {
 
   @override
   void dispose() {
+    _scrollController.dispose();
     Get.delete<FeedController>();
     super.dispose();
   }
@@ -79,6 +81,22 @@ class _FeedsPageState extends State<FeedsPage> {
     } catch (e) {
       LoggerService().log(message: e.toString());
     }
+
+    _scrollController.addListener(() async {
+
+        var maxScroll = _scrollController.position.maxScrollExtent;
+        var currentPosition = _scrollController.position.pixels;
+        if (maxScroll == currentPosition) {
+          if(_controller.canLoadMore=true) {
+            _controller.isLoadMore.value = true;
+            _controller.initialPage=_controller.initialPage+_controller.increment;
+            await _controller.getHomeDetail().then((value) {
+
+            });
+          }
+        }
+    });
+    
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _controller.getHomeDetail().then((t) {
         if (_controller.posts.isNotEmpty && widget.detailId.isNotEmpty) {
@@ -103,18 +121,33 @@ class _FeedsPageState extends State<FeedsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Padding(
+        child: Container(
+          height: SizeConfig().height,
           padding: const EdgeInsets.all(16),
           child: Obx(
-            () => _controller.isLoading.value
+            () => _controller.isLoading.value && _controller.isLoadMore.value==false
                 ? ShimmerDemo()
-                : ListView.separated(
-                    separatorBuilder: (_, index) => SizedBox(height: 10),
-                    itemCount: _controller.posts.length,
-                    itemBuilder: (_, index) {
-                      return Container(
-                        padding: .all(8),
-                        child: Column(
+                : 
+                   SingleChildScrollView(
+                     controller: _scrollController,
+                     child: ListView.separated(
+                      separatorBuilder: (_, index) => SizedBox(height: 10),
+                      itemCount:_controller.isLoadMore.value==false ? _controller.posts.length:
+                      _controller.posts.length+1
+                       ,
+                      physics: NeverScrollableScrollPhysics(),
+                     shrinkWrap: true,
+                     // controller: _scrollController,
+                      itemBuilder: (_, index) {
+
+                        if (index >= _controller.posts.length) {
+                          return _controller.isLoadMore.value ==
+                              false
+                              ? const SizedBox.shrink()
+                              :  ShimmerDemo(count: 1);
+                        }
+
+                        return Column(
                           crossAxisAlignment: .start,
                           children: [
                             Padding(
@@ -180,12 +213,15 @@ class _FeedsPageState extends State<FeedsPage> {
                               ),
                             ),
                             10.h,
-                            Padding(
+                           /* Padding(
                               padding: const .symmetric(horizontal: 10),
                               child: CustomHtmlWidget(
+                                showHtml: true,
                                 content: _controller.posts[index].postDesc,
+                                title: '',
+                                image: '',
                               ),
-                            ),
+                            ),*/
                             10.h,
                             _controller.posts[index].postType.toLowerCase() ==
                                     'image'
@@ -217,7 +253,7 @@ class _FeedsPageState extends State<FeedsPage> {
                                       );
                                     },
                                     url: _controller.posts[index].postImage,
-                                    height: 250,
+                                    height: 400,
                                     width: SizeConfig().width.toInt(),
                                   ),
                             10.h,
@@ -470,10 +506,10 @@ class _FeedsPageState extends State<FeedsPage> {
                               ),
                             ),
                           ],
-                        ),
-                      );
-                    },
-                  ),
+                        );
+                      },
+                                       ),
+                   ),
           ),
         ),
       ),

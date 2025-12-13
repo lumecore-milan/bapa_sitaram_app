@@ -27,6 +27,7 @@ import '../view/image_view.dart';
 import '../view/login.dart';
 import '../view/menu_detail.dart';
 import '../view/policy.dart';
+import '../view/single_event_detail.dart';
 import '../view/social_activity_detail.dart';
 import '../view/splash.dart';
 import '../view/virtual_darshan.dart';
@@ -38,6 +39,18 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         return MaterialPageRoute(builder: (context) => const SplashScreen());
         case myDonationRoute:
         return MaterialPageRoute(builder: (context) => MyDonationList());
+
+      /*  case singleDetailRoute:
+          String image='';
+          String content='';
+          String title='';
+          if (settings.arguments != null) {
+            final t = settings.arguments as Map<String,dynamic>;
+            image=t['image']??'';
+            content=t['content']??'';
+            title=t['title']??'';
+          }
+        return MaterialPageRoute(builder: (context) => SingleDetailPage(imageUrl: image, content: content, title: title));*/
       case userRegistrationRoute:
         return MaterialPageRoute(
           builder: (context) => const UserRegistrationPage(),
@@ -47,6 +60,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         if (settings.arguments != null) {
           detail = settings.arguments as AppSettingModel;
         }
+
         return MaterialPageRoute(
           builder: (context) => LoginPage(detail: detail),
         );
