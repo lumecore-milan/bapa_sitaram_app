@@ -55,7 +55,7 @@ class _FeedsPageState extends State<FeedsPage> {
   void initState() {
     try {
       AppEventsStream().stream.listen((event) async {
-        if (event.type == AppEventType.downloadProgress) {
+        if (mounted && event.type == AppEventType.downloadProgress) {
           final d = event.data as DownloadMessage;
           progress.value = d.progress;
 
@@ -213,15 +213,16 @@ class _FeedsPageState extends State<FeedsPage> {
                               ),
                             ),
                             10.h,
-                           /* Padding(
-                              padding: const .symmetric(horizontal: 10),
+                            Container(
+                             // height: _controller.posts[index].postDesc.isNotEmpty? 40:0,
+                             // padding: const .symmetric(horizontal: 10),
                               child: CustomHtmlWidget(
                                 showHtml: true,
                                 content: _controller.posts[index].postDesc,
                                 title: '',
                                 image: '',
                               ),
-                            ),*/
+                            ),
                             10.h,
                             _controller.posts[index].postType.toLowerCase() ==
                                     'image'

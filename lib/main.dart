@@ -17,7 +17,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await PreferenceService().initPreference();
   const flavor = String.fromEnvironment('FLAVOR', defaultValue: 'prod');
-  APIConstant().setUrl(isDev: flavor=='dev');
+  await APIConstant().setUrl(isDev: flavor=='dev');
 
   runApp(const MyApp());
   Future.microtask(runMicrotask);

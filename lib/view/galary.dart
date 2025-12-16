@@ -74,34 +74,28 @@ class _GalleryListState extends State<GalleryList> {
                 ? ShimmerDemo()
                 : Stack(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 60,left: 16,right:16),
+                      Container(
+                        height: SizeConfig().height - 60,
+                        width: SizeConfig().width,
+                        padding: const EdgeInsets.only(top: 60, left: 16, right: 16),
                         child: Obx(
                           () => PageView.builder(
                             itemCount: list.length,
                             reverse: false,
+                            physics: NeverScrollableScrollPhysics(),
                             scrollDirection: Axis.horizontal,
                             controller: _pageController,
                             itemBuilder: (_, index) {
-                              final List<String> img =
-                                  (list[index]['gallery'] as List).map((e) {
-                                    return e['image'] as String;
-                                  }).toList();
+                              final List<String> img = (list[index]['gallery'] as List).map((e) {
+                                return e['image'] as String;
+                              }).toList();
                               return _getImages(images: img);
                             },
                             onPageChanged: (index) {
                               if (index > currentState.value) {
-                                tabScrollController.animateTo(
-                                  currentOffset + 100,
-                                  duration: const Duration(milliseconds: 1000),
-                                  curve: Curves.easeOut,
-                                );
+                                tabScrollController.animateTo(currentOffset + 100, duration: const Duration(milliseconds: 1000), curve: Curves.easeOut);
                               } else if (index < currentState.value) {
-                                tabScrollController.animateTo(
-                                  currentOffset - 100,
-                                  duration: const Duration(milliseconds: 1000),
-                                  curve: Curves.easeOut,
-                                );
+                                tabScrollController.animateTo(currentOffset - 100, duration: const Duration(milliseconds: 1000), curve: Curves.easeOut);
                               }
                               currentState.value = index;
                               currentState.refresh();
@@ -119,17 +113,9 @@ class _GalleryListState extends State<GalleryList> {
                             onTap: (index) {
                               //scrollController.animateTo(0, duration: const Duration(milliseconds: 100), curve: Curves.easeOut);
                               if (index > currentState.value) {
-                                tabScrollController.animateTo(
-                                  currentOffset + 100,
-                                  duration: const Duration(milliseconds: 1000),
-                                  curve: Curves.easeOut,
-                                );
+                                tabScrollController.animateTo(currentOffset + 100, duration: const Duration(milliseconds: 1000), curve: Curves.easeOut);
                               } else if (index < currentState.value) {
-                                tabScrollController.animateTo(
-                                  currentOffset - 100,
-                                  duration: const Duration(milliseconds: 1000),
-                                  curve: Curves.easeOut,
-                                );
+                                tabScrollController.animateTo(currentOffset - 100, duration: const Duration(milliseconds: 1000), curve: Curves.easeOut);
                               }
                               currentState.value = index;
                               _pageController.jumpToPage(index);
@@ -152,29 +138,45 @@ class _GalleryListState extends State<GalleryList> {
   Widget _getImages({required List<String> images}) {
     return SizedBox(
       width: (SizeConfig().width - 50),
-      child: Wrap(
-        runSpacing: 10,
-        spacing: 10,
-        children: images.map((e) {
-          return SizedBox(
-            width: (SizeConfig().width - 50) / 2,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(5),
-              child: InkWell(
-                onTap: () {
-                  navigate(
-                    context: context,
-                    replace: false,
-                    path: imageRoute,
-                    param: e,
-                  );
-                },
-                child: ImageWidget(url: e, height: 150, fit: .cover),
-              ),
+      child: 1 > 0
+          ? GridView.builder(
+              padding: const EdgeInsets.only(bottom: 20),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, crossAxisSpacing: 5, mainAxisSpacing: 10, childAspectRatio: 1),
+              itemCount: images.length,
+              itemBuilder: (_, index) {
+                return ClipRRect(
+                  borderRadius: BorderRadius.circular(5),
+                  child: InkWell(
+                    onTap: () {
+                      navigate(context: context, replace: false, path: imageRoute, param:
+                          {
+                            'image':images[index],
+                            'showDownloadIcon':true,
+                          });
+                    },
+                    child: ImageWidget(url: images[index], height: 150, fit: .cover),
+                  ),
+                );
+              },
+            )
+          : Wrap(
+              runSpacing: 10,
+              spacing: 10,
+              children: images.map((e) {
+                return SizedBox(
+                  width: (SizeConfig().width - 50) / 2,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(5),
+                    child: InkWell(
+                      onTap: () {
+                        navigate(context: context, replace: false, path: imageRoute, param: e);
+                      },
+                      child: ImageWidget(url: e, height: 150, fit: .cover),
+                    ),
+                  ),
+                );
+              }).toList(),
             ),
-          );
-        }).toList(),
-      ),
     );
   }
 }

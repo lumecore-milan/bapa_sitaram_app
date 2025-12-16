@@ -27,7 +27,6 @@ import '../view/image_view.dart';
 import '../view/login.dart';
 import '../view/menu_detail.dart';
 import '../view/policy.dart';
-import '../view/single_event_detail.dart';
 import '../view/social_activity_detail.dart';
 import '../view/splash.dart';
 import '../view/virtual_darshan.dart';
@@ -37,7 +36,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case splashRoute:
         return MaterialPageRoute(builder: (context) => const SplashScreen());
-        case myDonationRoute:
+      case myDonationRoute:
         return MaterialPageRoute(builder: (context) => MyDonationList());
 
       /*  case singleDetailRoute:
@@ -52,26 +51,20 @@ Route<dynamic> generateRoute(RouteSettings settings) {
           }
         return MaterialPageRoute(builder: (context) => SingleDetailPage(imageUrl: image, content: content, title: title));*/
       case userRegistrationRoute:
-        return MaterialPageRoute(
-          builder: (context) => const UserRegistrationPage(),
-        );
+        return MaterialPageRoute(builder: (context) => const UserRegistrationPage());
       case loginRoute:
         AppSettingModel detail = AppSettingModel();
         if (settings.arguments != null) {
           detail = settings.arguments as AppSettingModel;
         }
 
-        return MaterialPageRoute(
-          builder: (context) => LoginPage(detail: detail),
-        );
+        return MaterialPageRoute(builder: (context) => LoginPage(detail: detail));
       case homeRoute:
         AppSettingModel detail = AppSettingModel();
         if (settings.arguments != null) {
           detail = settings.arguments as AppSettingModel;
         }
-        return MaterialPageRoute(
-          builder: (context) => HomePage(detail: detail),
-        );
+        return MaterialPageRoute(builder: (context) => HomePage(detail: detail));
       case punamListRoute:
         return MaterialPageRoute(builder: (context) => PunamListPage());
       case aartiRoute:
@@ -79,11 +72,9 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         if (settings.arguments != null) {
           detail = settings.arguments as Arti;
         }
-        return MaterialPageRoute(
-          builder: (context) => AartiPage(detail: detail),
-        );
+        return MaterialPageRoute(builder: (context) => AartiPage(detail: detail));
       case donationRoute:
-        bool showAppBBar=false;
+        bool showAppBBar = false;
         if (settings.arguments != null) {
           showAppBBar = settings.arguments as bool;
         }
@@ -91,9 +82,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       case pressRoute:
         return MaterialPageRoute(builder: (context) => const PressMedia());
       case socialActivityRoute:
-        return MaterialPageRoute(
-          builder: (context) => const SocialActivities(),
-        );
+        return MaterialPageRoute(builder: (context) => const SocialActivities());
       case contactRoute:
         return MaterialPageRoute(builder: (context) => ContactUs());
       case downloadPostRoute:
@@ -111,10 +100,15 @@ Route<dynamic> generateRoute(RouteSettings settings) {
 
       case imageRoute:
         String url = '';
+        bool showDownloadIcon = true;
         if (settings.arguments != null) {
-          url = settings.arguments as String;
+          final data = settings.arguments as Map;
+          url = data['image'] ?? '';
+          showDownloadIcon = data['showDownloadIcon'] ?? false;
         }
-        return MaterialPageRoute(builder: (context) => ImageView(url: url));
+        return MaterialPageRoute(
+          builder: (context) => ImageView(url: url, showDownloadIcon: showDownloadIcon),
+        );
 
       case menuDetailRoute:
         String title = '';
@@ -140,11 +134,11 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         );
       case detailRoute:
         bool showAppbar = false;
-        int index=-1;
+        int index = -1;
         if (settings.arguments != null) {
-          final Map<String,dynamic> temp= settings.arguments as Map<String,dynamic>;
-          showAppbar=temp['showAppbar']??false;
-          index=temp['index']??-1;
+          final Map<String, dynamic> temp = settings.arguments as Map<String, dynamic>;
+          showAppbar = temp['showAppbar'] ?? false;
+          index = temp['index'] ?? -1;
         }
         return MaterialPageRoute(
           builder: (context) => DetailPage(showAppbar: showAppbar, eventIndex: index),
@@ -154,17 +148,13 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         if (settings.arguments != null) {
           path = (settings.arguments as String);
         }
-        return MaterialPageRoute(
-          builder: (context) => CustomVideoPlayer(path: path),
-        );
+        return MaterialPageRoute(builder: (context) => CustomVideoPlayer(path: path));
       case youtubeVideoRoute:
         String detail = '';
         if (settings.arguments != null) {
           detail = settings.arguments as String;
         }
-        return MaterialPageRoute(
-          builder: (context) => CustomYoutubeVideoPlayer(url: detail),
-        );
+        return MaterialPageRoute(builder: (context) => CustomYoutubeVideoPlayer(url: detail));
       case policyRoute:
         String title = '';
         String detail = '';
@@ -178,36 +168,21 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         );
       default:
         return MaterialPageRoute(
-          builder: (_) => Scaffold(
-            body: Center(child: Text('No route defined for ${settings.name}')),
-          ),
+          builder: (_) => Scaffold(body: Center(child: Text('No route defined for ${settings.name}'))),
         );
     }
   } catch (e) {
     return MaterialPageRoute(
-      builder: (_) => Scaffold(
-        body: Center(child: Text('No route defined for ${settings.name}')),
-      ),
+      builder: (_) => Scaffold(body: Center(child: Text('No route defined for ${settings.name}'))),
     );
   }
 }
 
-void navigate({
-  required BuildContext context,
-  required bool replace,
-  required String path,
-  bool removePreviousRoute = false,
-  dynamic param,
-}) {
+void navigate({required BuildContext context, required bool replace, required String path, bool removePreviousRoute = false, dynamic param}) {
   try {
     if (replace) {
       if (removePreviousRoute) {
-        Navigator.pushNamedAndRemoveUntil(
-          context,
-          path,
-          arguments: param,
-          (route) => false,
-        );
+        Navigator.pushNamedAndRemoveUntil(context, path, arguments: param, (route) => false);
       } else {
         Navigator.pushReplacementNamed(context, path, arguments: param);
       }

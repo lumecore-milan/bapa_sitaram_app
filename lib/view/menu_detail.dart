@@ -1,5 +1,3 @@
-import 'package:bapa_sitaram/constants/app_colors.dart';
-import 'package:bapa_sitaram/utils/font_styles.dart';
 import 'package:bapa_sitaram/widget/app_bar.dart';
 import 'package:bapa_sitaram/widget/custom_tabs.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +7,6 @@ import 'package:get/get.dart';
 import '../extensions/size_box_extension.dart';
 import '../utils/size_config.dart';
 import '../widget/custom_html_widget.dart';
-import '../widget/rounded_image.dart';
 
 class MenuDetailPage extends StatefulWidget {
   const MenuDetailPage({super.key, required this.title, required this.detail});

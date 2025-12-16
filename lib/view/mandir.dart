@@ -1,6 +1,4 @@
-import 'package:bapa_sitaram/constants/app_colors.dart';
 import 'package:bapa_sitaram/services/network/api_mobile.dart';
-import 'package:bapa_sitaram/utils/font_styles.dart';
 import 'package:bapa_sitaram/widget/custom_html_widget.dart';
 import 'package:bapa_sitaram/widget/custom_tabs.dart';
 import 'package:bapa_sitaram/widget/shimmer.dart';
@@ -8,10 +6,8 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import '../constants/api_constant.dart';
-import '../extensions/size_box_extension.dart';
 import '../services/loger_service.dart';
 import '../utils/size_config.dart';
-import '../widget/rounded_image.dart';
 
 class TempleDetail extends StatefulWidget {
   const TempleDetail({super.key});
@@ -75,43 +71,61 @@ class _TempleDetailState extends State<TempleDetail> {
                 PageView.builder(
                   itemCount: list.length,
                   reverse: false,
+                  physics: NeverScrollableScrollPhysics(),
                   scrollDirection: Axis.horizontal,
                   controller: _pageController,
                   itemBuilder: (_, index) {
-                    return SingleChildScrollView(
-                      child: Column(
-                        crossAxisAlignment: .center,
-                        mainAxisSize: .min,
-                        children: [
-                          60.h,
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16),
-                            child: Column(
-                              children: [
-                                Obx(() => RoundedImage(url: list[currentTabIndex.value]['details']['image'])),
-                                16.h,
+                    return Container(
+                      height: SizeConfig().height,
+                      width: SizeConfig().width,
+                      padding: .only(top:60),
+                      child: Expanded(
+                        child: Obx(()=>
+                           CustomHtmlWidget(
 
-                                Obx(() => Text(list[currentTabIndex.value]['details']['title'], style: bolder(fontSize: 18, color: CustomColors().black))),
-                                10.h,
-                                /* ImageWidget(
-                                url: 'assets/images/flag_deco.png',
-                                height: 60,
-                              ),*/
-                              ],
-                            ),
+                            content: list[currentTabIndex.value]['details']['description'],
+                            title: list[currentTabIndex.value]['details']['title'],
+                            image: list[currentTabIndex.value]['details']['image'],
                           ),
-                          Obx(() => CustomHtmlWidget(
+                        ),
+                      ),
+                    );
 
+/*
+
+                    Column(
+                      crossAxisAlignment: .center,
+                      mainAxisSize: .min,
+                      children: [
+                        60.h,
+                       /* Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: Column(
+                            children: [
+                             /* Obx(() => RoundedImage(url: list[currentTabIndex.value]['details']['image'])),
+                              16.h,
+
+                              Obx(() => Text(list[currentTabIndex.value]['details']['title'], style: bolder(fontSize: 18, color: CustomColors().black))),
+                              10.h,*/
+                              /* ImageWidget(
+                              url: 'assets/images/flag_deco.png',
+                              height: 60,
+                            ),*/
+                            ],
+                          ),
+                        ),*/
+                        Expanded(
+                          child: CustomHtmlWidget(
+                          
                               content: list[currentTabIndex.value]['details']['description'],
                               title: list[currentTabIndex.value]['details']['title'],
                               image: list[currentTabIndex.value]['details']['image'],
-
                           )
-
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     );
+
+                    */
                   },
                   onPageChanged: (index) {
                     if (index > currentTabIndex.value) {

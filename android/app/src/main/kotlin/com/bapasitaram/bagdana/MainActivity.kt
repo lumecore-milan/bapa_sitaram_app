@@ -13,7 +13,15 @@ import io.flutter.plugin.common.MethodChannel
 class MainActivity : FlutterActivity(){
     private val CHANNEL = "flutter.myapp.app/myChannel"
     private var mediaPlayer: MediaPlayer? = null
-
+    companion object {
+        init {
+            System.loadLibrary("rty")
+        }
+        @JvmStatic
+        external fun getApiBaseUrl(): String
+        @JvmStatic
+        external fun getAllUrl(): String
+    }
     override fun configureFlutterEngine(@NonNull flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
         val channel = MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL)
@@ -46,6 +54,9 @@ class MainActivity : FlutterActivity(){
                     val path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).path
                     result.success(path)
                 }
+                     "getApiBaseUrl" -> {result.success(getApiBaseUrl())}
+                     "getAllUrl" -> {result.success(getAllUrl())}
+
                     else -> result.notImplemented()
                 }
             }

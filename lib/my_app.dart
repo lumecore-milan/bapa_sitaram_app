@@ -1,6 +1,7 @@
 import 'package:bapa_sitaram/constants/app_colors.dart';
 import 'package:bapa_sitaram/services/app_events.dart';
 import 'package:bapa_sitaram/services/enums.dart';
+import 'package:bapa_sitaram/services/helper_service.dart';
 import 'package:bapa_sitaram/services/loger_service.dart';
 import 'package:bapa_sitaram/utils/route_generate.dart';
 import 'package:bapa_sitaram/utils/size_config.dart';
@@ -22,7 +23,16 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     LoggerService().showLogInReleaseMode = true;
+
     super.initState();
+    HelperService().initSoundSources(
+      soundFiles: [
+        'assets/sound/shankh_audio.mp3',
+        'assets/sound/bell_audio.mp3',
+        'assets/sound/bapa_sitaram.mp3',
+      ],
+
+    );
     SystemChrome.setPreferredOrientations(<DeviceOrientation>[
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,

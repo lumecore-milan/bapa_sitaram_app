@@ -1,5 +1,4 @@
 import 'package:bapa_sitaram/services/helper_service.dart';
-import 'package:bapa_sitaram/utils/helper.dart';
 
 class HomeDetailModel {
   List<SliderItem> slider;

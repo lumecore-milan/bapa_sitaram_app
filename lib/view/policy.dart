@@ -1,6 +1,5 @@
 import 'package:bapa_sitaram/utils/size_config.dart';
 import 'package:flutter/material.dart';
-import '../extensions/size_box_extension.dart';
 import '../widget/app_bar.dart';
 import '../widget/custom_html_widget.dart';
 

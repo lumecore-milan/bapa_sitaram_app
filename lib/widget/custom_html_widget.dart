@@ -1,9 +1,8 @@
 import 'package:bapa_sitaram/constants/app_colors.dart';
-import 'package:bapa_sitaram/utils/size_config.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/gestures.dart';
+import 'package:bapa_sitaram/widget/shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:get/get.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class CustomHtmlWidget extends StatefulWidget {
@@ -21,6 +20,7 @@ class CustomHtmlWidget extends StatefulWidget {
 class _CustomHtmlWidgetState extends State<CustomHtmlWidget> {
   late final WebViewController controller;
   String mainContent='';
+  RxBool showPage=false.obs;
 @override
   void initState() {
   // 1. Google Font Link
@@ -147,14 +147,24 @@ class _CustomHtmlWidgetState extends State<CustomHtmlWidget> {
 
   controller = WebViewController()
     ..loadHtmlString(fullHtml)..setJavaScriptMode(JavaScriptMode.unrestricted);
+
+   if(widget.image.isNotEmpty) {
+     Future.delayed(Duration(seconds: 1)).then((t) {
+       showPage.value = true;
+     });
+   }else{
+     showPage.value = true;
+   }
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-  print('webview loaded');
-    return widget.showHtml==false ? WebViewWidget(controller: controller):
+    return widget.showHtml==false ?
+          Obx(()=>
 
+          showPage.value==false ? ShimmerDemo(count: 10):
+              WebViewWidget(controller: controller)):
       Html(
       data: widget.content,
       style: {

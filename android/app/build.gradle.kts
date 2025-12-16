@@ -17,7 +17,11 @@ android {
     namespace = "com.bapasitaram.bagdana"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = "29.0.13113456"
-
+    externalNativeBuild {
+        cmake {
+            path = file("CMakeLists.txt")
+        }
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -34,6 +38,11 @@ android {
         targetSdk = 36
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+        externalNativeBuild {
+            cmake {
+                cppFlags += "-std=c++17"
+            }
+        }
     }
     buildFeatures {
         viewBinding = false

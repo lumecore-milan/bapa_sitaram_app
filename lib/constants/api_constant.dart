@@ -1,45 +1,72 @@
+import 'dart:convert';
+
+import 'package:bapa_sitaram/services/loger_service.dart';
+import 'package:flutter/services.dart';
+
 class APIConstant {
   factory APIConstant() => _instance;
   APIConstant._internal();
   static const bool isLocalEnv = false;
   static final APIConstant _instance = APIConstant._internal();
 
+  Future<void> setUrl({required bool isDev})async{
+    try{
+      final d=await MethodChannel(
+        'flutter.myapp.app/myChannel',
+      ).invokeMethod('getAllUrl');
+      Map<String,dynamic> apis=json.decode(d);
+      apiMainMenu = apis['main-menu']??'';
+      apiLogin = apis['login']??'';
+      apiContactUs = apis['contact-us']??'';
+      apiUpdateProfile = apis['update-profile']??'';
+      apiLoading = apis['app-loading']??'';
+      apiHomePage = apis['home-page']??'';
+      apiPunamList = apis['poonam-list']??'';
+      apiPresMedia = apis['press-media']??'';
+      apiMyDonation = apis['my-donation']??'';
+      apiDownloadInvoice = apis['download-invoice']??'';
+      apiMenu = apis['menu-detail']??'';
+      apiGallery = apis['gallery']??'';
+      apiSocialActivity = apis['event']??'';
+      apiAboutUs = apis['about-us']??'';
+      apiDownloadPost = apis['download-post']??'';
+      apiPostComment = apis['post-comment']??'';
+      apiPostView = apis['post-view']??'';
+      apiPostShare = apis['post-share']??'';
+      apiPostLike = apis['post-like-unlike']??'';
+      apiFeeds = apis['app-post']??'';
+      apiGetCommentByPost = apis['comment-by-post']??'';
+      apiCreateOrder = apis['create-order']??'';
+      apiPaymentSuccess = apis['payment-success']??'';
 
-  static final devUrl='https://brandbaba.in/temple/1234/';
-  static final prodUrl='https://bapasitaramtemple.org/76238Bapa6631bhagat/';
 
-  void setUrl({required bool isDev}){
-    if(isDev){
-      _baseUrl=devUrl;
-    }else{
-      _baseUrl=prodUrl;
+
+      LoggerService().log(message: apiMainMenu);
+    }catch(e){
+        LoggerService().log(message: 'error occurred while getting api url');
     }
   }
-
-  static String _baseUrl = 'https://brandbaba.in/temple/1234/';
-
-  String get baseUrl => _baseUrl;
-  String get apiMainMenu => '${_baseUrl}main-menu';
-  String get apiLogin => '${_baseUrl}login';
-  String get apiContactUs => '${_baseUrl}contact-us';
-  String get apiUpdateProfile => '${_baseUrl}update-profile';
-  String get apiLoading => '${_baseUrl}app-loading';
-  String get apiHomePage => '${_baseUrl}home-page';
-  String get apiPunamList => '${_baseUrl}poonam-list';
-  String get apiPresMedia => '${_baseUrl}press-media';
-  String get apiMyDonation => '${_baseUrl}my-donation';
-  String get apiDownloadInvoice => '${_baseUrl}download-invoice';
-  String get apiMenu => '${_baseUrl}menu-detail';
-  String get apiGallery => '${_baseUrl}gallery';
-  String get apiSocialActivity => '${_baseUrl}event';
-  String get apiAboutUs => '${_baseUrl}about-us';
-  String get apiDownloadPost => '${_baseUrl}app-post';
-  String get apiPostComment => '${_baseUrl}post-comment';
-  String get apiPostView => '${_baseUrl}post-view';
-  String get apiPostShare => '${_baseUrl}post-share';
-  String get apiPostLike => '${_baseUrl}post-like-unlike';
-  String get apiFeeds => '${_baseUrl}app-post';
-  String get apiGetCommentByPost => '${_baseUrl}comment-by-post';
-  String get apiCreateOrder => '${_baseUrl}create-order';
-  String get apiPaymentSuccess => '${_baseUrl}payment-success';
+  late final String apiMainMenu;
+  late final String apiLogin;
+  late final String apiContactUs;
+  late final String apiUpdateProfile ;
+  late final String apiLoading ;
+  late final String apiHomePage ;
+  late final String apiPunamList ;
+  late final String apiPresMedia ;
+  late final String apiMyDonation ;
+  late final String apiDownloadInvoice ;
+  late final String apiMenu ;
+  late final String apiGallery ;
+  late final String apiSocialActivity ;
+  late final String apiAboutUs ;
+  late final String apiDownloadPost ;
+  late final String apiPostComment ;
+  late final String apiPostView ;
+  late final String apiPostShare ;
+  late final String apiPostLike ;
+  late final String apiFeeds ;
+  late final String apiGetCommentByPost ;
+  late final String apiCreateOrder ;
+  late final String apiPaymentSuccess ;
 }

@@ -11,9 +11,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  file_picker: ^10.3.1
-  get: ^4.7.2
-  pinput: ^6.0.0
+  file_picker: 10.3.1
+  get: 4.7.2
+  pinput: 6.0.1
   firebase_auth: ^6.0.1
   video_player: 2.10.1
   video_thumbnail: ^0.5.3
@@ -26,7 +26,6 @@ dependencies:
   path_provider: 2.1.5
   permission_handler: 12.0.1
   firebase_core: 4.0.0
-  #firebase_messaging: 16.0.0
   http: 1.5.0
   encrypt: 5.0.3
   hive: 2.2.3
@@ -37,11 +36,11 @@ dependencies:
   #flutter_local_notifications: 19.4.0
   cached_network_image: 3.4.1
   just_audio: 0.10.5
-  open_filex: ^4.7.0
-  firebase_analytics: ^12.0.0
-  firebase_crashlytics: ^5.0.0
-  onesignal_flutter: ^5.3.4
-  webview_flutter: ^4.13.0
+  open_filex: 4.7.0
+  firebase_analytics: 12.0.0
+  firebase_crashlytics: 5.0.0
+  onesignal_flutter: 5.3.4
+  webview_flutter: 4.13.0
 
 
 

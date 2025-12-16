@@ -1,6 +1,7 @@
 import 'package:bapa_sitaram/constants/app_constant.dart';
 import 'package:bapa_sitaram/constants/routes.dart';
 import 'package:bapa_sitaram/controllers/splash_controller.dart';
+import 'package:bapa_sitaram/services/helper_service.dart';
 import 'package:bapa_sitaram/services/preference_service.dart';
 import 'package:bapa_sitaram/utils/route_generate.dart';
 import 'package:bapa_sitaram/utils/size_config.dart';
@@ -35,6 +36,7 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   void initState() {
+
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 8), // rotation speed
@@ -53,9 +55,12 @@ class _SplashScreenState extends State<SplashScreen>
       _startLeftRoRight4();
       _startLeftRoRight5();
       _controller.getData().then((data) {
+        HelperService().playSound(sound: 'assets/sound/bapa_sitaram.mp3');
         Future.delayed(Duration(seconds: 3)).then((y){
           if (data.$1 == true) {
             if (PreferenceService().getBoolean(
+              key: AppConstants().prefKeyIsRegistered,
+            )==true &&   PreferenceService().getBoolean(
               key: AppConstants().prefKeyIsLoggedIn,
             )==false) {
               navigate(
@@ -86,6 +91,7 @@ class _SplashScreenState extends State<SplashScreen>
     });
     super.initState();
     _animationController2.forward();
+
   }
 
   Future<void> _startScroll() async {

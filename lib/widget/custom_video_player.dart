@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:bapa_sitaram/constants/app_colors.dart';
 import 'package:bapa_sitaram/services/helper_service.dart';
-import 'package:bapa_sitaram/widget/app_bar.dart';
 import 'package:bapa_sitaram/widget/custom_html_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -179,6 +178,17 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
                             ),
 
                             if(controller.posts[index].postDesc.isNotEmpty)
+                              Container(
+                               // height: controller.posts[index].postDesc.isNotEmpty? 40:0,
+                                padding: const .only(right:20),
+                                child: CustomHtmlWidget(
+                                  showHtml: true,
+                                  fontColor: CustomColors().white,
+                                  content:controller.posts[index].postDesc,
+                                  title: '',
+                                  image: '',
+                                ),
+                              ),
                            /* CustomHtmlWidget(
                               title: '',
                                 image: '',
@@ -256,7 +266,15 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
                             5.h,
                             Obx(() => Text('${controller.posts[index].likeCount}', style: semiBold(fontSize: 12, color: CustomColors().white))),
                             10.h,
-                            ImageWidget(url: 'assets/images/ic_download.svg', height: 24, width: 24,color: CustomColors().white ),
+                            InkWell(
+                                onTap: ()async{
+                                   Helper.showLoader();
+                                  await HelperService().downloadFile(url: controller.posts[index].postImage).then((r){
+                                    Helper.closeLoader();
+                                  });
+                                },
+
+                                child: ImageWidget(url: 'assets/images/ic_download.svg', height: 24, width: 24,color: CustomColors().white )),
                             5.h,
                             Text('Save', style: semiBold(fontSize: 12, color: CustomColors().white)),
                             10.h,

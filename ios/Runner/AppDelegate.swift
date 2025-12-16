@@ -6,18 +6,26 @@ import Firebase
 @main
 @objc class AppDelegate: FlutterAppDelegate,FlutterImplicitEngineDelegate {
     
+    
     func didInitializeImplicitFlutterEngine(_ engineBridge: FlutterImplicitEngineBridge) {
 
       GeneratedPluginRegistrant.register(with: engineBridge.pluginRegistry)
-/*FlutterLocalNotificationsPlugin.setPluginRegistrantCallback { (registry) in
-        GeneratedPluginRegistrant.register(with: registry)
-    }*/
-
-//      let batteryChannel = FlutterMethodChannel(
-//        name: "samples.flutter.dev/battery",
-//        binaryMessenger: engineBridge.applicationRegistrar.messenger()
-//      )
-//      let factory = FLNativeViewFactory(messenger: engineBridge.applicationRegistrar.messenger())
+      let channel = FlutterMethodChannel(
+        name: "flutter.myapp.app/myChannel",
+        binaryMessenger: engineBridge.applicationRegistrar.messenger()
+      )
+        
+        channel.setMethodCallHandler { (call: FlutterMethodCall, result: @escaping FlutterResult) in
+                switch call.method {
+                case "getAllUrl":
+                    result(ios_getAllUrl())
+                default:
+                    result(FlutterMethodNotImplemented)
+                }
+            }
+        
+        
+      //let factory = FLNativeViewFactory(messenger: engineBridge.applicationRegistrar.messenger())
     }
 
     

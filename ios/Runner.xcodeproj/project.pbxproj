@@ -10,11 +10,14 @@
 		1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */; };
 		3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */; };
 		74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74858FAE1ED2DC5600515810 /* AppDelegate.swift */; };
+		810BF59E54756F1014778B55 /* Pods_OneSignalNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3109FAA3FC056BBC549F366E /* Pods_OneSignalNotificationServiceExtension.framework */; };
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
 		F1179F312EDEA8EE00C3EB0B /* res_morph_power_rangers.aiff in Resources */ = {isa = PBXBuildFile; fileRef = F1179F302EDEA8EE00C3EB0B /* res_morph_power_rangers.aiff */; };
 		F121ED7C2EDD825700131FF1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F121ED7B2EDD825700131FF1 /* GoogleService-Info.plist */; };
+		F169564F2EF174C5000374B5 /* rty.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F169564E2EF174BB000374B5 /* rty.cpp */; };
+		F16956522EF175E8000374B5 /* rty_wrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = F16956512EF175DB000374B5 /* rty_wrapper.mm */; };
 		F177F0B82EDD99E500679EE7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F177F0B72EDD99D600679EE7 /* SceneDelegate.swift */; };
 		F19CC94D2EE5A5AD00CA5A30 /* OneSignalNotificationServiceExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = F19CC9462EE5A5AD00CA5A30 /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -68,6 +71,10 @@
 		F1179F302EDEA8EE00C3EB0B /* res_morph_power_rangers.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = res_morph_power_rangers.aiff; sourceTree = "<group>"; };
 		F121ED7B2EDD825700131FF1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F121ED7D2EDD82C100131FF1 /* Runner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Runner.entitlements; sourceTree = "<group>"; };
+		F169564E2EF174BB000374B5 /* rty.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = rty.cpp; sourceTree = "<group>"; };
+		F16956502EF1759F000374B5 /* rty.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = rty.h; sourceTree = "<group>"; };
+		F16956512EF175DB000374B5 /* rty_wrapper.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = rty_wrapper.mm; sourceTree = "<group>"; };
+		F169565E2EF179E4000374B5 /* rty_wrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = rty_wrapper.h; sourceTree = "<group>"; };
 		F177F0B72EDD99D600679EE7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		F19CC9462EE5A5AD00CA5A30 /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -98,6 +105,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				810BF59E54756F1014778B55 /* Pods_OneSignalNotificationServiceExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -161,6 +169,8 @@
 		97C146F01CF9000F007C117D /* Runner */ = {
 			isa = PBXGroup;
 			children = (
+				F16956512EF175DB000374B5 /* rty_wrapper.mm */,
+				F169564E2EF174BB000374B5 /* rty.cpp */,
 				F1179F302EDEA8EE00C3EB0B /* res_morph_power_rangers.aiff */,
 				F177F0B72EDD99D600679EE7 /* SceneDelegate.swift */,
 				F121ED7D2EDD82C100131FF1 /* Runner.entitlements */,
@@ -173,6 +183,8 @@
 				1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */,
 				74858FAE1ED2DC5600515810 /* AppDelegate.swift */,
 				74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */,
+				F16956502EF1759F000374B5 /* rty.h */,
+				F169565E2EF179E4000374B5 /* rty_wrapper.h */,
 			);
 			path = Runner;
 			sourceTree = "<group>";
@@ -414,6 +426,8 @@
 				74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */,
 				1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */,
 				F177F0B82EDD99E500679EE7 /* SceneDelegate.swift in Sources */,
+				F16956522EF175E8000374B5 /* rty_wrapper.mm in Sources */,
+				F169564F2EF174C5000374B5 /* rty.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

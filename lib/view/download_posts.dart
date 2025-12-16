@@ -53,7 +53,7 @@ class DownloadedPosts extends StatelessWidget {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.only(left: 16, right: 16, top: 20),
+          padding: const EdgeInsets.only(left: 16, right: 16, top: 16),
           child: FutureBuilder(
             future: getDownloadedFile(),
             builder: (_, snapshot) {
@@ -63,48 +63,53 @@ class DownloadedPosts extends StatelessWidget {
                 return Center(child: Text("Error: ${snapshot.error}"));
               } else {
                 final List<String> data = snapshot.data ?? [];
-                return Wrap(
-                  runSpacing: 10,
-                  spacing: 10,
-                  children: data.map((e) {
-                    String type = Helper.getFileType(path: e);
-                    return type == 'IMAGE'
-                        ? InkWell(
-                            onTap: () {
-                              navigate(
-                                context: context,
-                                replace: false,
-                                path: imageRoute,
-                                param: e,
-                              );
-                            },
-                            child: RoundedImage(
-                              height: 180,
-                              width: SizeConfig().width,
-                              url: e,
-                              fit: .cover,
-                            ),
-                          )
-                        : type == 'VIDEO'
-                        ? InkWell(
-                            onTap: () {
-                              navigate(
-                                context: context,
-                                replace: false,
-                                path: videoRoute,
-                                param: e,
-                              );
-                            },
+                return
 
-                            child: getThumbNails(
-                              url: e,
-                              height: 150,
-                              width: ((SizeConfig().width / 2) - 32).toInt(),
-                              onTap: () {},
-                            ),
-                          )
-                        : SizedBox.shrink();
-                  }).toList(),
+                  GridView.builder(
+                    padding: const EdgeInsets.only(bottom: 20),
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, crossAxisSpacing: 5, mainAxisSpacing: 10, childAspectRatio: 1),
+                    itemCount:  data.length,
+                    itemBuilder: (_, index) {
+                      String type = Helper.getFileType(path: data[index]);
+                      return type == 'IMAGE'
+                          ? InkWell(
+                        onTap: () {
+                          navigate(
+                            context: context,
+                            replace: false,
+                            path: imageRoute,
+                            param: {'image':data[index],
+                              'showDownloadIcon':false,
+                            },
+                          );
+                        },
+                        child: RoundedImage(
+                          height: 180,
+                          width: SizeConfig().width,
+                          url: data[index],
+                          fit: .cover,
+                        ),
+                      )
+                          : type == 'VIDEO'
+                          ? InkWell(
+                        onTap: () {
+                          navigate(
+                            context: context,
+                            replace: false,
+                            path: videoRoute,
+                            param: data[index],
+                          );
+                        },
+
+                        child: getThumbNails(
+                          url: data[index],
+                          height: 150,
+                          width: ((SizeConfig().width / 2) - 32).toInt(),
+                          onTap: () {},
+                        ),
+                      )
+                          : SizedBox.shrink();
+                    }
                 );
               }
             },

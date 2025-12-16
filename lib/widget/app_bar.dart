@@ -11,8 +11,10 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
     required this.onBackTap,
     this.onDrawerIconTap,
     this.isDrawerOpen=false,
+    this.showDownloadButton=false,
   });
 
+  final bool showDownloadButton;
   final String title;
   final List<Widget>? actions;
   final bool showDrawerIcon;
