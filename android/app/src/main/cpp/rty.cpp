@@ -37,7 +37,7 @@ Java_com_bapasitaram_bagdana_MainActivity_getStoredBaseUrl(JNIEnv* env, jclass) 
 
 extern "C" JNIEXPORT jstring JNICALL
 Java_com_bapasitaram_bagdana_MainActivity_getAllUrl(JNIEnv* env, jclass) {
-    // ensure base URL is available
+
     if (g_baseUrl.empty()) {
         static const unsigned char secret[] = {
                 207, 211, 211, 215, 212, 157, 136, 136,
@@ -94,10 +94,10 @@ Java_com_bapasitaram_bagdana_MainActivity_getAllUrl(JNIEnv* env, jclass) {
     add("payment-success", "payment-success");
     add("event", "event");
 
-    // corrected: use the actual endpoint path for download-post (not aliasing to app-post)
+
     add("download-post", "download-post");
 
-    // keep feeds alias mapped to app-post
+
     add("feeds", "app-post");
 
     json += "}";

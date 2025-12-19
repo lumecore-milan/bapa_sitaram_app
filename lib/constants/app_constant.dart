@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 class AppConstants {
+
+  final String androidAppVersion="9";
+  final String iOSAppVersion="1";
+
   factory AppConstants() => _instance;
   AppConstants._internal();
   static final AppConstants _instance = AppConstants._internal();

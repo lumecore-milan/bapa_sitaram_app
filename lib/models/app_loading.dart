@@ -1,3 +1,5 @@
+import 'dart:io';
+
 class AppSettingModel {
   VersionModel version;
   UserInfoModel userInfo;
@@ -12,8 +14,9 @@ class AppSettingModel {
   });
 
   factory AppSettingModel.fromJson(Map<String, dynamic> json) {
+    final bool isAndroid=Platform.isAndroid;
     return AppSettingModel(
-      version: VersionModel.fromJson(json['version'] ?? {}),
+      version: VersionModel.fromJson(json[isAndroid ? 'version':'ios_version'] ?? {}),
       userInfo: UserInfoModel.fromJson(json['user_info'] ?? {}),
       aboutUs: AboutUsModel.fromJson(json['aboutUs'] ?? {}),
       notice: NoticeModel.fromJson(json['notice'] ?? {}),
@@ -46,12 +49,15 @@ class VersionModel {
   });
 
   factory VersionModel.fromJson(Map<String, dynamic> json) {
+
+    final bool isAndroid=Platform.isAndroid;
+
     return VersionModel(
-      versionNo: json['version_no'] ?? '',
-      versionForceUpdate: json['version_force_update'] ?? '',
-      versionTitle: json['version_title'] ?? '',
-      versionMessage: json['version_message'] ?? '',
-      versionNeedClearData: json['version_need_clear_data'] ?? '',
+      versionNo: isAndroid ?  (json['version_no'] ?? ''):json['ios_version_no'] ?? '',
+      versionForceUpdate: isAndroid ? (json['version_force_update'] ?? ''):json['ios_version_force_update'] ?? '',
+      versionTitle:isAndroid ? (json['version_title'] ?? ''):json['ios_version_title'] ?? '',
+      versionMessage: isAndroid ? (json['version_message'] ?? ''):json['ios_version_message'] ?? '',
+      versionNeedClearData:isAndroid ? (json['version_need_clear_data'] ?? ''):json['ios_version_need_clear_data'] ?? '',
     );
   }
 
@@ -65,6 +71,7 @@ class VersionModel {
     };
   }
 }
+
 
 class UserInfoModel {
   final String userStatus;

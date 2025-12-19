@@ -2,6 +2,7 @@ import 'package:bapa_sitaram/constants/app_colors.dart';
 import 'package:bapa_sitaram/constants/routes.dart';
 import 'package:bapa_sitaram/controllers/home_controller.dart';
 import 'package:bapa_sitaram/services/download/download_helper_mobile.dart';
+import 'package:bapa_sitaram/services/helper_service.dart';
 import 'package:bapa_sitaram/utils/font_styles.dart';
 import 'package:bapa_sitaram/utils/route_generate.dart';
 import 'package:bapa_sitaram/utils/size_config.dart';
@@ -929,6 +930,108 @@ void noInternetDialog() {
                   ),
                 ),
               ),
+            ),
+          ),
+        ),
+      );
+    },
+  );
+}
+
+void appUpdateDialog({required BuildContext context,required String title,required String message,bool forceUpdate=false}) {
+  showDialog(
+    context: context,
+    barrierDismissible:forceUpdate==true ? false:true,
+    useSafeArea: true,
+    useRootNavigator: true,
+    barrierColor: Colors.black.withOpacity(0.4),
+    builder: (context) {
+      return SafeArea(
+        child: Center(
+          child: Material(
+            color: Colors.transparent,
+            child: Stack(
+              clipBehavior: Clip.none, // IMPORTANT
+              children: [
+                Container(
+                  color: Colors.transparent,
+                  constraints: BoxConstraints(maxHeight: 350, minHeight: 350),
+                  padding: .symmetric(vertical: 50),
+                  margin: const EdgeInsets.symmetric(horizontal: 40),
+                  child: Container(
+                    constraints: BoxConstraints(maxHeight: 350),
+                    padding: const EdgeInsets.all(16),
+                    margin: .only(bottom: 20),
+                    decoration: BoxDecoration(
+                      color: CustomColors().layoutPrimaryBackground,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Center(
+                          child: Text(
+                            title,
+                            style: semiBold(
+                              fontSize: 22,
+                              color: CustomColors().blue700,
+                            ),
+                          ),
+                        ),
+                        8.h,
+                        Text(
+                          message,
+                          textAlign: TextAlign.left,
+                          softWrap: true,
+                          maxLines: null,
+                          overflow: TextOverflow.visible,
+                          style: semiBold(fontSize: 16),
+                        ),
+                        15.h,
+                        Expanded(
+                          child: Align(
+                            alignment: .bottomCenter,
+                            child: SizedBox(
+                              height: 50,
+                              child: CommonButton(
+
+                                color: CustomColors().blue700,
+                                onTap: () async{
+                                    await HelperService().openAppStore();
+                                },
+                                title: 'Update',
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                if(forceUpdate==false)
+                Positioned(
+                  bottom: 0, // now clickable
+                  left: (SizeConfig().width / 2) - 20,
+                  child: GestureDetector(
+                    onTap: () {
+                        Navigator.pop(context);
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: Colors.black.withOpacity(0.4),
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(
+                        Icons.close,
+                        color: Colors.white,
+                        size: 28,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ),

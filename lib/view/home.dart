@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:bapa_sitaram/constants/app_colors.dart';
 import 'package:bapa_sitaram/constants/routes.dart';
 import 'package:bapa_sitaram/services/preference_service.dart';
@@ -7,6 +8,7 @@ import 'package:bapa_sitaram/view/punam_list.dart';
 import 'package:bapa_sitaram/widget/custom_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../constants/app_constant.dart';
 import '../controllers/home_controller.dart';
 import '../models/app_loading.dart';
 import '../utils/custom_dialogs.dart';
@@ -78,6 +80,10 @@ class _HomePageState extends State<HomePage> {
       Get.find<HomeDetailController>().appSetting = widget.detail;
 
       Future.delayed(Duration(seconds: 4)).then((t) async {
+        String appVersion=Platform.isAndroid ? AppConstants().androidAppVersion:AppConstants().iOSAppVersion;
+        if(widget.detail.version.versionNo.isNotEmpty &&  appVersion!= widget.detail.version.versionNo){
+          appUpdateDialog(context: context, title: widget.detail.version.versionTitle, message: widget.detail.version.versionMessage,forceUpdate: widget.detail.version.versionForceUpdate=='1');
+        }
         /* final status=await PermissionService().requestNotificationPermission();
           if(status){
             String fcmToken=await FirebaseService().getFcmToken();

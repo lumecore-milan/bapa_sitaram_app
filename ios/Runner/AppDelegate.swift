@@ -18,6 +18,7 @@ import Firebase
         channel.setMethodCallHandler { (call: FlutterMethodCall, result: @escaping FlutterResult) in
                 switch call.method {
                 case "getAllUrl":
+                    
                     result(ios_getAllUrl())
                 default:
                     result(FlutterMethodNotImplemented)

@@ -9,7 +9,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.bapasitaram.bagdana</string>
+	<string>com.bapasitaram.bagdanadham</string>
 	<key>PROJECT_ID</key>
 	<string>bapa-sitaram-7a3b2</string>
 	<key>STORAGE_BUCKET</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:37795912856:ios:a56a51280d2b727e96c4ed</string>
+	<string>1:37795912856:ios:3f0eb7a336bc171b96c4ed</string>
 </dict>
 </plist>

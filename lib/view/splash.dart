@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bapa_sitaram/constants/app_constant.dart';
 import 'package:bapa_sitaram/constants/routes.dart';
 import 'package:bapa_sitaram/controllers/splash_controller.dart';
@@ -11,6 +13,7 @@ import 'package:get/get_instance/src/extension_instance.dart';
 
 import '../constants/app_colors.dart';
 import '../services/loger_service.dart';
+import '../utils/custom_dialogs.dart';
 import '../widget/image_widget.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -56,20 +59,28 @@ class _SplashScreenState extends State<SplashScreen>
       _startLeftRoRight5();
       _controller.getData().then((data) {
         HelperService().playSound(sound: 'assets/sound/bapa_sitaram.mp3');
-        Future.delayed(Duration(seconds: 3)).then((y){
-          if (data.$1 == true) {
-            if (PreferenceService().getBoolean(
-              key: AppConstants().prefKeyIsRegistered,
-            )==true &&   PreferenceService().getBoolean(
-              key: AppConstants().prefKeyIsLoggedIn,
-            )==false) {
-              navigate(
-                context: context,
-                replace: true,
-                path: loginRoute,
-                param: _controller.detail.value,
-              );
-            } else {
+          Future.delayed(Duration(seconds: 3)).then((y){
+            if (data.$1 == true) {
+              if (PreferenceService().getBoolean(
+                key: AppConstants().prefKeyIsRegistered,
+              )==true &&   PreferenceService().getBoolean(
+                key: AppConstants().prefKeyIsLoggedIn,
+              )==false) {
+                navigate(
+                  context: context,
+                  replace: true,
+                  path: loginRoute,
+                  param: _controller.detail.value,
+                );
+              } else {
+                navigate(
+                  context: context,
+                  replace: true,
+                  path: homeRoute,
+                  param: _controller.detail.value,
+                );
+              }
+            }else{
               navigate(
                 context: context,
                 replace: true,
@@ -77,15 +88,7 @@ class _SplashScreenState extends State<SplashScreen>
                 param: _controller.detail.value,
               );
             }
-          }else{
-            navigate(
-              context: context,
-              replace: true,
-              path: homeRoute,
-              param: _controller.detail.value,
-            );
-          }
-        });
+          });
 
       });
     });

@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-
-
 	<key>AwnAppGroupName</key>
 	<string>group.awn.fixedAppGroup</string>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
@@ -57,9 +55,8 @@
 	<true/>
 	<key>UIBackgroundModes</key>
 	<array>
+		<string>remote-notification</string>
 		<string>fetch</string>
-		<string>processing</string>
-		<string>critical-alerts</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
