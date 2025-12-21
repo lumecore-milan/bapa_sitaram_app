@@ -17,7 +17,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await PreferenceService().initPreference();
   const flavor = String.fromEnvironment('FLAVOR', defaultValue: 'prod');
-  await APIConstant().setUrl(isDev: flavor=='dev');
+  await APIConstant().setUrl(isDev: flavor == 'dev');
 
   runApp(const MyApp());
   Future.microtask(runMicrotask);
@@ -32,21 +32,25 @@ Future<void> runMicrotask() async {
     OneSignal.LiveActivities.setupDefault();
     OneSignal.Notifications.addClickListener((event) {
       final Map<String, dynamic> data = event.notification.additionalData ?? {};
-
+      print('Notification clicked event data====>$data');
       if (data.isNotEmpty) {
-        Future.delayed(Duration(milliseconds: 700)).then((time){
-          notificationClicked.sink.add(NotificationCLickDetail(id: '${data['value']??''}',type: '${data['type']??''}'));
+        pendingDetail = NotificationCLickDetail(
+          id: '${data['value'] ?? ''}',
+          type: '${data['type'] ?? ''}',
+        );
+        Future.delayed(Duration(milliseconds: 700)).then((time) {
+          notificationClicked.sink.add(pendingDetail);
         });
       }
     });
     OneSignal.Notifications.addForegroundWillDisplayListener((event) {
       event.preventDefault();
-      if(PreferenceService().getString(key: AppConstants().prefKeyNotificationEnabled)=='false') {
+      if (PreferenceService().getString(
+            key: AppConstants().prefKeyNotificationEnabled,
+          ) !='false') {
         event.notification.display();
       }
-
     });
-
     ConnectivityService().setPingUrl(pingUrl: APIConstant().apiMainMenu);
     await Future.wait([
       FirebaseService().initialize(

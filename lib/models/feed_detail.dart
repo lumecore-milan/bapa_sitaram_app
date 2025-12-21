@@ -12,7 +12,8 @@ class PostModel {
   int isLiked;
   String addedDate;
   UserData userData;
-  Rx<bool> thumbGenerated=false.obs;
+  bool hide = false;
+  Rx<bool> thumbGenerated = false.obs;
 
   PostModel({
     this.postId = 0,
@@ -25,13 +26,17 @@ class PostModel {
     this.viewCount = 0,
     this.isLiked = 0,
     this.addedDate = '',
-    this.userData=const UserData()
+    this.hide = false,
+    this.userData = const UserData(),
   });
 
-  factory PostModel.fromJson(Map<String, dynamic> json) {
-
+  factory PostModel.fromJson(
+    Map<String, dynamic> json, {
+    bool hidedetail = false,
+  }) {
     return PostModel(
       postId: json['post_id'] ?? 0,
+      hide: hidedetail,
       postDesc: json['post_desc'] ?? '',
       postImage: json['post_image'] ?? '',
       postType: json['post_type'] ?? '',
@@ -68,9 +73,7 @@ class PostModel {
   static List<PostModel> fromJsonList(dynamic jsonList) {
     if (jsonList == null) return [];
     return List<PostModel>.from(
-      (jsonList as List).map(
-            (item) => PostModel.fromJson(item ?? {}),
-      ),
+      (jsonList as List).map((item) => PostModel.fromJson(item ?? {})),
     );
   }
 }
@@ -79,11 +82,7 @@ class UserData {
   final int userId;
   final String userName;
   final String userProfile;
-  const UserData({
-    this.userId = 0,
-    this.userName = '',
-    this.userProfile = '',
-  });
+  const UserData({this.userId = 0, this.userName = '', this.userProfile = ''});
 
   factory UserData.fromJson(Map<String, dynamic> json) {
     return UserData(

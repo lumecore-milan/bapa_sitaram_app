@@ -41,6 +41,7 @@ class APIConstant {
         apiGetCommentByPost = apis['comment-by-post']??'';
         apiCreateOrder = apis['create-order']??'';
         apiPaymentSuccess = apis['payment-success']??'';
+        apiEventById = apis['event-by-id']??'';
       }else{
         apiMainMenu          = api("main-menu");
         apiLogin             = api("login");
@@ -65,6 +66,7 @@ class APIConstant {
         apiGetCommentByPost  = api("comment-by-post");
         apiCreateOrder       = api("create-order");
         apiPaymentSuccess    = api("payment-success");
+        apiPostById          = api("post-by-id");
 
 
 
@@ -120,4 +122,6 @@ class APIConstant {
   String apiGetCommentByPost='' ;
   String apiCreateOrder='' ;
   String apiPaymentSuccess ='';
+  String apiPostById ='';
+  String apiEventById = '';
 }

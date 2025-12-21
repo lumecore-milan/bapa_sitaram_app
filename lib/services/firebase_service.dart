@@ -23,55 +23,7 @@ class FirebaseService {
   static final FirebaseService _instance = FirebaseService._internal();
 
   Future<void> initialize({required Map<String, dynamic> options}) async {
-    try {
-      if (kIsWeb) {
-        Firebase.initializeApp(
-          options: FirebaseOptions(
-            apiKey: options['apiKey'] as String,
-            appId: options['appId'] as String,
-            messagingSenderId: options['messagingSenderId'] as String,
-            projectId: options['projectId'] as String,
-          ),
-        );
-      } else {
-      /*  const portName = 'callback_port';
-        IsolateNameServer.removePortNameMapping(portName);
-        final port = ReceivePort();
-        IsolateNameServer.registerPortWithName(port.sendPort, portName);
-        port.listen((dynamic data) {
-          if (data is RemoteMessage) {
-            AppEventsStream().addEvent(
-              AppEvent(
-                type: AppEventType.backgroundNotificationReceived,
-                data: data,
-              ),
-            );
-          } else if (data is NotificationResponse) {
-            AppEventsStream().addEvent(
-              AppEvent(type: AppEventType.localNotificationTapped, data: data),
-            );
-          }
-        });*/
-        await Firebase.initializeApp();
-
-      /*  FirebaseMessaging.onBackgroundMessage(onBackgroundMessage);
-        FirebaseMessaging.onMessage.listen((message) {
-          AppEventsStream().addEvent(
-            AppEvent(type: AppEventType.notificationReceived, data: message),
-          );
-          //  const MethodChannel channel = MethodChannel('flutter.core.module/channel');
-          // channel.invokeMethod('notificationReceived',message.toMap());
-        });
-
-        FirebaseMessaging.onMessageOpenedApp.listen((message) {
-          AppEventsStream().addEvent(
-            AppEvent(type: AppEventType.notificationClick, data: message),
-          );
-        });*/
-      }
-    } catch (e) {
-      print('Firebase Service error==>${e.toString()}');
-    }
+    await Firebase.initializeApp();
   }
 
   Future<void> getInitialMessage() async {

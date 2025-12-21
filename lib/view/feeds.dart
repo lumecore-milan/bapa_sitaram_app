@@ -38,7 +38,7 @@ class FeedsPage extends StatefulWidget {
 class _FeedsPageState extends State<FeedsPage> {
   final FeedController _controller = Get.put(FeedController());
   final TextEditingController message = TextEditingController();
-  final ScrollController _scrollController=ScrollController();
+  final ScrollController _scrollController = ScrollController();
   Rx<double> progress = (0.0).obs;
   String downloadPath = '';
 
@@ -59,21 +59,24 @@ class _FeedsPageState extends State<FeedsPage> {
           final d = event.data as DownloadMessage;
           progress.value = d.progress;
 
-          if (d.filePath != null && shareDialogOpen==false) {
-            shareDialogOpen=true;
+          if (d.filePath != null && shareDialogOpen == false) {
+            shareDialogOpen = true;
             final result = await SharePlus.instance.share(
               ShareParams(files: [XFile(d.filePath ?? '')]),
             );
-            if (result.status == ShareResultStatus.success && _controller.shareIndex>=0) {
-              shareDialogOpen=false;
+            if (result.status == ShareResultStatus.success &&
+                _controller.shareIndex >= 0) {
+              shareDialogOpen = false;
               Helper.showLoader();
               await _controller
-                  .share(postId: _controller.posts[_controller.shareIndex].postId)
+                  .share(
+                    postId: _controller.posts[_controller.shareIndex].postId,
+                  )
                   .then((t) {
                     Helper.closeLoader();
                   });
-            }else if(result.status == ShareResultStatus.dismissed){
-              shareDialogOpen=false;
+            } else if (result.status == ShareResultStatus.dismissed) {
+              shareDialogOpen = false;
             }
           }
         }
@@ -83,25 +86,23 @@ class _FeedsPageState extends State<FeedsPage> {
     }
 
     _scrollController.addListener(() async {
-
-        var maxScroll = _scrollController.position.maxScrollExtent;
-        var currentPosition = _scrollController.position.pixels;
-        if (maxScroll == currentPosition) {
-          if(_controller.canLoadMore=true) {
-            _controller.isLoadMore.value = true;
-            _controller.initialPage=_controller.initialPage+_controller.increment;
-            await _controller.getHomeDetail().then((value) {
-
-            });
-          }
+      var maxScroll = _scrollController.position.maxScrollExtent;
+      var currentPosition = _scrollController.position.pixels;
+      if (maxScroll == currentPosition) {
+        if (_controller.canLoadMore = true) {
+          _controller.isLoadMore.value = true;
+          _controller.initialPage =
+              _controller.initialPage + _controller.increment;
+          await _controller.getHomeDetail().then((value) {});
         }
+      }
     });
-    
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _controller.getHomeDetail().then((t) {
         if (_controller.posts.isNotEmpty && widget.detailId.isNotEmpty) {
           int ind = _controller.posts.indexWhere(
-            (e) => e.postImage == widget.detailId,
+            (e) => '${e.postId}' == widget.detailId,
           );
           if (ind >= 0) {
             navigate(
@@ -110,6 +111,22 @@ class _FeedsPageState extends State<FeedsPage> {
               path: videoRoute,
               param: _controller.posts[ind].postImage,
             );
+          } else {
+            _controller.getPostBySpecificId(postId: widget.detailId).then((
+              post,
+            ) {
+              int ind = _controller.posts.indexWhere(
+                (e) => '${e.postId}' == widget.detailId,
+              );
+              if (ind >= 0) {
+                navigate(
+                  context: context,
+                  replace: false,
+                  path: videoRoute,
+                  param: _controller.posts[ind].postImage,
+                );
+              }
+            });
           }
         }
       });
@@ -125,26 +142,27 @@ class _FeedsPageState extends State<FeedsPage> {
           height: SizeConfig().height,
           padding: const EdgeInsets.all(16),
           child: Obx(
-            () => _controller.isLoading.value && _controller.isLoadMore.value==false
+            () =>
+                _controller.isLoading.value &&
+                    _controller.isLoadMore.value == false
                 ? ShimmerDemo()
-                : 
-                   SingleChildScrollView(
-                     controller: _scrollController,
-                     child: ListView.separated(
+                : SingleChildScrollView(
+                    controller: _scrollController,
+                    child: ListView.separated(
                       separatorBuilder: (_, index) => SizedBox(height: 10),
-                      itemCount:_controller.isLoadMore.value==false ? _controller.posts.length:
-                      _controller.posts.length+1
-                       ,
+                      itemCount: _controller.isLoadMore.value == false
+                          ? _controller.posts.length
+                          : _controller.posts.length + 1,
                       physics: NeverScrollableScrollPhysics(),
-                     shrinkWrap: true,
-                     // controller: _scrollController,
+                      shrinkWrap: true,
+                      // controller: _scrollController,
                       itemBuilder: (_, index) {
-
                         if (index >= _controller.posts.length) {
-                          return _controller.isLoadMore.value ==
-                              false
+                          return _controller.isLoadMore.value == false
                               ? const SizedBox.shrink()
-                              :  ShimmerDemo(count: 1);
+                              : ShimmerDemo(count: 1);
+                        } else if (_controller.posts[index].hide == true) {
+                          return SizedBox.shrink();
                         }
 
                         return Column(
@@ -214,8 +232,8 @@ class _FeedsPageState extends State<FeedsPage> {
                             ),
                             10.h,
                             Container(
-                             // height: _controller.posts[index].postDesc.isNotEmpty? 40:0,
-                             // padding: const .symmetric(horizontal: 10),
+                              // height: _controller.posts[index].postDesc.isNotEmpty? 40:0,
+                              // padding: const .symmetric(horizontal: 10),
                               child: CustomHtmlWidget(
                                 showHtml: true,
                                 content: _controller.posts[index].postDesc,
@@ -227,20 +245,20 @@ class _FeedsPageState extends State<FeedsPage> {
                             _controller.posts[index].postType.toLowerCase() ==
                                     'image'
                                 ? InkWell(
-                              onTap: (){
-                                navigate(
-                                  context: context,
-                                  replace: false,
-                                  path: videoRoute,
-                                  param:
-                                  _controller.posts[index].postImage,
-                                );
-                              },
-                                  child: ImageWidget(
+                                    onTap: () {
+                                      navigate(
+                                        context: context,
+                                        replace: false,
+                                        path: videoRoute,
+                                        param:
+                                            _controller.posts[index].postImage,
+                                      );
+                                    },
+                                    child: ImageWidget(
                                       url: _controller.posts[index].postImage,
                                       width: SizeConfig().width,
                                     ),
-                                )
+                                  )
                                 : _controller.posts[index].postImage.isEmpty
                                 ? SizedBox.shrink()
                                 : getThumbNails(
@@ -461,7 +479,7 @@ class _FeedsPageState extends State<FeedsPage> {
                                               progress: progress,
                                               context: context,
                                             );
-                                            _controller.shareIndex=index;
+                                            _controller.shareIndex = index;
                                             DownloadServiceMobile().download(
                                               url: _controller
                                                   .posts[index]
@@ -509,8 +527,8 @@ class _FeedsPageState extends State<FeedsPage> {
                           ],
                         );
                       },
-                                       ),
-                   ),
+                    ),
+                  ),
           ),
         ),
       ),

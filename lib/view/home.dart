@@ -13,6 +13,7 @@ import '../controllers/home_controller.dart';
 import '../models/app_loading.dart';
 import '../utils/custom_dialogs.dart';
 import '../utils/events.dart';
+import '../utils/helper.dart';
 import '../utils/route_generate.dart';
 import '../utils/size_config.dart';
 import '../widget/app_bar.dart';
@@ -38,9 +39,10 @@ class _HomePageState extends State<HomePage> {
 
   Rx<bool> drawerOpen = false.obs;
   String detailId = '';
-
+  late StreamSubscription<NotificationCLickDetail> _notificationClickListener;
   @override
   void dispose() {
+    _notificationClickListener.cancel();
     _pageController.dispose();
     _pageListener.cancel();
     super.dispose();
@@ -48,8 +50,13 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
+    _notificationClickListener = notificationClicked.stream.listen((data) {
+      final cnt= Get.find<HomeDetailController>();
+      _handleClick(data: data, homeController: cnt);
+    });
     _pageListener = jumpPage.stream.listen((route) {
       detailId = route.additionalData;
+      print('route notification click detail in page event');
       if (route.page == donationRoute) {
         currentPageIndex.value = 4;
         appBarTitle.value = 'ડોનેશન';
@@ -68,6 +75,7 @@ class _HomePageState extends State<HomePage> {
         currentPageIndex.refresh();
         _pageController.jumpToPage(0);
       } else if (route.page == feedRoute) {
+        print('feed route notification click detail');
         currentPageIndex.value = 2;
         appBarTitle.value = 'ફીડ';
         appBarTitle.refresh();
@@ -77,12 +85,30 @@ class _HomePageState extends State<HomePage> {
     });
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Get.find<HomeDetailController>().appSetting = widget.detail;
+     final cnt= Get.find<HomeDetailController>();
+     cnt.appSetting = widget.detail;
+      String? currentRoute = ModalRoute.of(context)?.settings.name;
+      print('current page===.$currentRoute');
+      if(pendingDetail.id.isNotEmpty){
+        if(currentRoute==eventsRoute || currentRoute==videoRoute){
+          Navigator.pop(context);
+        }
+        _handleClick(data: pendingDetail,homeController: cnt);
+      }
 
-      Future.delayed(Duration(seconds: 4)).then((t) async {
-        String appVersion=Platform.isAndroid ? AppConstants().androidAppVersion:AppConstants().iOSAppVersion;
-        if(widget.detail.version.versionNo.isNotEmpty &&  appVersion!= widget.detail.version.versionNo){
-          appUpdateDialog(context: context, title: widget.detail.version.versionTitle, message: widget.detail.version.versionMessage,forceUpdate: widget.detail.version.versionForceUpdate=='1');
+
+      Future.delayed(Duration(seconds: 10)).then((t) async {
+        String appVersion = Platform.isAndroid
+            ? AppConstants().androidAppVersion
+            : AppConstants().iOSAppVersion;
+        if (widget.detail.version.versionNo.isNotEmpty &&
+            appVersion != widget.detail.version.versionNo) {
+          appUpdateDialog(
+            context: context,
+            title: widget.detail.version.versionTitle,
+            message: widget.detail.version.versionMessage,
+            forceUpdate: widget.detail.version.versionForceUpdate == '1',
+          );
         }
         /* final status=await PermissionService().requestNotificationPermission();
           if(status){
@@ -92,7 +118,62 @@ class _HomePageState extends State<HomePage> {
             }
           }*/
       });
+
     });
+  }
+  void _handleClick({required NotificationCLickDetail data,required HomeDetailController homeController}){
+    try{
+      if (data.type == 'post') {
+        jumpPage.sink.add(
+          PageJumpDetail(page: feedRoute, additionalData: data.id),
+        );
+      } else if (data.type == 'event') {
+        Future.delayed(Duration(milliseconds: 500)).then((t) {
+          int ind = homeController.homeDetail.value.events.indexWhere(
+                (e) => e.eventId == int.parse(data.id),
+          );
+          if (ind >= 0) {
+            navigate(
+              context: context,
+              replace: false,
+              path: detailRoute,
+              param: {'showAppbar': false, 'index': ind},
+            );
+          } else {
+            homeController.getEventById(eventId: data.id).then((value) {
+              int newInd = homeController.homeDetail.value.events.indexWhere(
+                    (e) => e.eventId == int.parse(data.id),
+              );
+              if (newInd >= 0) {
+                navigate(
+                  context: context,
+                  replace: false,
+                  path: detailRoute,
+                  param: {'showAppbar': false, 'index': newInd},
+                );
+              }
+            });
+          }
+        });
+      } else if (data.type == 'Notification') {
+      } else if (data.type == 'externalLink') {
+        Helper.launch(url: data.id);
+      } else if (data.type == 'liveArti') {
+        if (data.id.toLowerCase().startsWith('https://www.youtube.com')) {
+          navigate(
+            context: context,
+            replace: false,
+            path: youtubeVideoRoute,
+            param: data.id,
+          );
+        }
+      }
+      pendingDetail=NotificationCLickDetail();
+    }catch(e){
+
+    }
+
+
   }
 
   RxString appBarTitle = "બાપા સીતારામ".obs;
@@ -278,7 +359,9 @@ class _HomePageState extends State<HomePage> {
           controller: _pageController,
           itemCount: 5,
           physics: NeverScrollableScrollPhysics(),
-          onPageChanged: (index) {},
+          onPageChanged: (index) {
+            print('on page change index');
+          },
           itemBuilder: (BuildContext context, int index) {
             if (index == 0) {
               return HomeDetailPage();

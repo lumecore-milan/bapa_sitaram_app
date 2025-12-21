@@ -1,0 +1,8 @@
+{
+    "editor.minimap.maxColumn": 200,
+    "dart.flutterHotReloadOnSave": true,
+    "dart.enableSdkFormatter": true,
+    "dart.previewFlutterUiGuides": true,
+    "editor.fontSize": 16,
+    "editor.fontVariations": false
+}

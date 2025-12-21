@@ -31,24 +31,31 @@ class _MyAppState extends State<MyApp> {
         'assets/sound/bell_audio.mp3',
         'assets/sound/bapa_sitaram.mp3',
       ],
-
     );
     SystemChrome.setPreferredOrientations(<DeviceOrientation>[
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-  //  ConnectivityService().startListening();
+    //  ConnectivityService().startListening();
 
     AppEventsStream().stream.listen((event) async {
-        if (event.type == AppEventType.internetDisConnected) {
-          AppConstants().isDialogOpen=true;
+      if (event.type == AppEventType.internetDisConnected) {
+        AppConstants().isDialogOpen = true;
         //  noInternetDialog();
-        }
-        else if (event.type == AppEventType.internetConnected) {
-          AppConstants().isDialogOpen=false;
+      } else if (event.type == AppEventType.internetConnected) {
+        AppConstants().isDialogOpen = false;
         //  Helper.closeLoader();
-        }
-      });
+      }
+    });
+
+    /*Future.delayed(Duration(seconds: 10)).then((t) {
+      notificationClicked.sink.add(
+        NotificationCLickDetail(
+          id: 'https://vimeo.com/347119375?fl=pl&fe=cm',
+          type: 'liveArti',
+        ),
+      );
+    });*/
   }
 
   @override

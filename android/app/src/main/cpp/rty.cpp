@@ -99,6 +99,8 @@ Java_com_bapasitaram_bagdana_MainActivity_getAllUrl(JNIEnv* env, jclass) {
 
 
     add("feeds", "app-post");
+    add("postById", "post-by-id");
+    add("eventById", "event-by-id");
 
     json += "}";
     return env->NewStringUTF(json.c_str());

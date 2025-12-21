@@ -17,9 +17,9 @@ class HomeDetailModel {
     this.events = const [],
     DarshanTime? darshanTime,
     this.liveArti = '',
-  })  : aboutBapa = aboutBapa ?? AboutBapa(),
-        arti = arti ?? Arti(),
-        darshanTime = darshanTime ?? DarshanTime();
+  }) : aboutBapa = aboutBapa ?? AboutBapa(),
+       arti = arti ?? Arti(),
+       darshanTime = darshanTime ?? DarshanTime();
 
   factory HomeDetailModel.fromJson(Map<String, dynamic> json) {
     return HomeDetailModel(
@@ -110,11 +110,7 @@ class Arti {
   String description;
   List<ArtiItem> data;
 
-  Arti({
-    this.title = '',
-    this.description = '',
-    this.data = const [],
-  });
+  Arti({this.title = '', this.description = '', this.data = const []});
 
   factory Arti.fromJson(Map<String, dynamic> json) {
     return Arti(
@@ -132,11 +128,7 @@ class ArtiItem {
   String descp;
   String image;
 
-  ArtiItem({
-    this.title = '',
-    this.descp = '',
-    this.image = '',
-  });
+  ArtiItem({this.title = '', this.descp = '', this.image = ''});
 
   factory ArtiItem.fromJson(Map<String, dynamic> json) {
     return ArtiItem(
@@ -156,6 +148,7 @@ class EventItem {
   final String eventImage;
   final DateTime eventDate;
 
+
   const EventItem({
     this.eventId = 0,
     this.eventTitle = '',
@@ -170,7 +163,10 @@ class EventItem {
       eventTitle: json['event_title'] ?? '',
       eventDesc: json['event_desc'] ?? '',
       eventImage: json['event_image'] ?? '',
-      eventDate: HelperService().parseDate(date:  json['event_date'] ?? '',inputFormat: 'dd MMMM, yyyy'),
+      eventDate: HelperService().parseDate(
+        date: json['event_date'] ?? '',
+        inputFormat: 'dd MMMM, yyyy',
+      ),
     );
   }
 }
