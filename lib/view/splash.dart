@@ -1,4 +1,4 @@
-import 'dart:io';
+
 
 import 'package:bapa_sitaram/constants/app_constant.dart';
 import 'package:bapa_sitaram/constants/routes.dart';
@@ -13,7 +13,7 @@ import 'package:get/get_instance/src/extension_instance.dart';
 
 import '../constants/app_colors.dart';
 import '../services/loger_service.dart';
-import '../utils/custom_dialogs.dart';
+
 import '../widget/image_widget.dart';
 
 class SplashScreen extends StatefulWidget {

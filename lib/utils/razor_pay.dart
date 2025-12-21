@@ -17,11 +17,9 @@ class RazorPayService{
   final _razorpay = Razorpay();
   late final String _key;
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
-    print('razor payment successful');
+
     _paymentSuccessController.add(response);
-      print(response.data??{});
-      print(response.orderId);
-      print(response.signature);
+
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {

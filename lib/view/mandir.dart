@@ -79,15 +79,18 @@ class _TempleDetailState extends State<TempleDetail> {
                       height: SizeConfig().height,
                       width: SizeConfig().width,
                       padding: .only(top:60),
-                      child: Expanded(
-                        child: Obx(()=>
-                           CustomHtmlWidget(
-
-                            content: list[currentTabIndex.value]['details']['description'],
-                            title: list[currentTabIndex.value]['details']['title'],
-                            image: list[currentTabIndex.value]['details']['image'],
+                      child: Column(
+                        children: [
+                          Expanded(
+                            child: Obx(()=>
+                               CustomHtmlWidget(
+                                content: list[currentTabIndex.value]['details']['description'],
+                                title: list[currentTabIndex.value]['details']['title'],
+                                image: list[currentTabIndex.value]['details']['image'],
+                              ),
+                            ),
                           ),
-                        ),
+                        ],
                       ),
                     );
 

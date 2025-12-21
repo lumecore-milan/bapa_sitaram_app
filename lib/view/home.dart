@@ -88,7 +88,7 @@ class _HomePageState extends State<HomePage> {
      final cnt= Get.find<HomeDetailController>();
      cnt.appSetting = widget.detail;
       String? currentRoute = ModalRoute.of(context)?.settings.name;
-      print('current page===.$currentRoute');
+
       if(pendingDetail.id.isNotEmpty){
         if(currentRoute==eventsRoute || currentRoute==videoRoute){
           Navigator.pop(context);
@@ -360,7 +360,7 @@ class _HomePageState extends State<HomePage> {
           itemCount: 5,
           physics: NeverScrollableScrollPhysics(),
           onPageChanged: (index) {
-            print('on page change index');
+
           },
           itemBuilder: (BuildContext context, int index) {
             if (index == 0) {

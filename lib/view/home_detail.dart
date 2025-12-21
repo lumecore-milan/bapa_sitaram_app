@@ -1,4 +1,4 @@
-import 'dart:async';
+
 import 'dart:io';
 import 'dart:math';
 
@@ -77,7 +77,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                   .sliderType;
                               String value =
                                   '${_controller.homeDetail.value.slider[index].value}';
-                              print(type);
+
                               if (type == 'event') {
                                 int t = _controller.homeDetail.value.events
                                     .indexWhere(
