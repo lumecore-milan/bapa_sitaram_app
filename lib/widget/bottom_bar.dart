@@ -21,7 +21,7 @@ class BottomBar extends StatelessWidget {
     BottomList(image: 'assets/images/ic_temple.svg', title: 'મંદિર'),
     BottomList(image: 'assets/images/feed.svg', title: 'ફીડ'),
     BottomList(image: 'assets/images/ic_poonam_menu.svg', title: 'પૂનમ લિસ્ટ'),
-    BottomList(image: 'assets/images/ic_donation_menu.svg', title: 'ડોનેશન'),
+  //  BottomList(image: 'assets/images/ic_donation_menu.svg', title: 'ડોનેશન'),
   ];
 
   @override

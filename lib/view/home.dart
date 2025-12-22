@@ -193,12 +193,13 @@ class _HomePageState extends State<HomePage> {
                         }
                         jumpPage.sink.add(PageJumpDetail(page: punamListRoute, additionalData: ''));
                       } else if (path == donationRoute) {
-                        if (ModalRoute.of(context)?.settings.name != null && ModalRoute.of(context)?.settings.name != homeRoute) {
+                        Helper.launch(url: 'https://bapasitaramtemple.org/donate');
+                       /* if (ModalRoute.of(context)?.settings.name != null && ModalRoute.of(context)?.settings.name != homeRoute) {
                           Navigator.popUntil(context, (route) {
                             return route.settings.name == homeRoute;
                           });
                         }
-                        jumpPage.sink.add(PageJumpDetail(page: donationRoute, additionalData: ''));
+                        jumpPage.sink.add(PageJumpDetail(page: donationRoute, additionalData: ''));*/
                       } else if (path == aartiRoute) {
                         final HomeDetailController controller = Get.find<HomeDetailController>();
                         navigate(context: context, replace: false, path: aartiRoute, param: controller.homeDetail.value.arti);
