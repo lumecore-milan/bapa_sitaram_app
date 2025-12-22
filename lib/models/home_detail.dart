@@ -9,29 +9,18 @@ class HomeDetailModel {
   DarshanTime darshanTime;
   String liveArti;
 
-  HomeDetailModel({
-    this.slider = const [],
-    this.impMsg = '',
-    AboutBapa? aboutBapa,
-    Arti? arti,
-    this.events = const [],
-    DarshanTime? darshanTime,
-    this.liveArti = '',
-  }) : aboutBapa = aboutBapa ?? AboutBapa(),
-       arti = arti ?? Arti(),
-       darshanTime = darshanTime ?? DarshanTime();
+  HomeDetailModel({this.slider = const [], this.impMsg = '', AboutBapa? aboutBapa, Arti? arti, this.events = const [], DarshanTime? darshanTime, this.liveArti = ''})
+    : aboutBapa = aboutBapa ?? AboutBapa(),
+      arti = arti ?? Arti(),
+      darshanTime = darshanTime ?? DarshanTime();
 
   factory HomeDetailModel.fromJson(Map<String, dynamic> json) {
     return HomeDetailModel(
-      slider: (json['slider'] as List? ?? [])
-          .map((e) => SliderItem.fromJson(e ?? {}))
-          .toList(),
+      slider: (json['slider'] as List? ?? []).map((e) => SliderItem.fromJson(e ?? {})).toList(),
       impMsg: json['imp_msg'] ?? '',
       aboutBapa: AboutBapa.fromJson(json['about_bapa'] ?? {}),
       arti: Arti.fromJson(json['arti'] ?? {}),
-      events: (json['events'] as List? ?? [])
-          .map((e) => EventItem.fromJson(e ?? {}))
-          .toList(),
+      events: (json['events'] as List? ?? []).map((e) => EventItem.fromJson(e ?? {})).toList(),
       darshanTime: DarshanTime.fromJson(json['darshan_time'] ?? {}),
       liveArti: json['live_arti'] ?? '',
     );
@@ -46,20 +35,10 @@ class SliderItem {
   String sliderType;
   dynamic value;
 
-  SliderItem({
-    this.sliderId = 0,
-    this.sliderImage = '',
-    this.sliderType = '',
-    this.value = '',
-  });
+  SliderItem({this.sliderId = 0, this.sliderImage = '', this.sliderType = '', this.value = ''});
 
   factory SliderItem.fromJson(Map<String, dynamic> json) {
-    return SliderItem(
-      sliderId: json['slider_id'] ?? 0,
-      sliderImage: json['slider_image'] ?? '',
-      sliderType: json['slider_type'] ?? '',
-      value: json['value'] ?? '',
-    );
+    return SliderItem(sliderId: json['slider_id'] ?? 0, sliderImage: json['slider_image'] ?? '', sliderType: json['slider_type'] ?? '', value: json['value'] ?? '');
   }
 }
 
@@ -76,17 +55,7 @@ class AboutBapa {
   String tab2Desc;
   String btnText;
 
-  AboutBapa({
-    this.title = '',
-    this.subTitle = '',
-    this.description = '',
-    this.image = '',
-    this.tab1Title = '',
-    this.tab1Desc = '',
-    this.tab2Title = '',
-    this.tab2Desc = '',
-    this.btnText = '',
-  });
+  AboutBapa({this.title = '', this.subTitle = '', this.description = '', this.image = '', this.tab1Title = '', this.tab1Desc = '', this.tab2Title = '', this.tab2Desc = '', this.btnText = ''});
 
   factory AboutBapa.fromJson(Map<String, dynamic> json) {
     return AboutBapa(
@@ -113,13 +82,7 @@ class Arti {
   Arti({this.title = '', this.description = '', this.data = const []});
 
   factory Arti.fromJson(Map<String, dynamic> json) {
-    return Arti(
-      title: json['title'] ?? '',
-      description: json['description'] ?? '',
-      data: (json['data'] as List? ?? [])
-          .map((e) => ArtiItem.fromJson(e ?? {}))
-          .toList(),
-    );
+    return Arti(title: json['title'] ?? '', description: json['description'] ?? '', data: (json['data'] as List? ?? []).map((e) => ArtiItem.fromJson(e ?? {})).toList());
   }
 }
 
@@ -131,11 +94,7 @@ class ArtiItem {
   ArtiItem({this.title = '', this.descp = '', this.image = ''});
 
   factory ArtiItem.fromJson(Map<String, dynamic> json) {
-    return ArtiItem(
-      title: json['title'] ?? '',
-      descp: json['descp'] ?? '',
-      image: json['image'] ?? '',
-    );
+    return ArtiItem(title: json['title'] ?? '', descp: json['descp'] ?? '', image: json['image'] ?? '');
   }
 }
 
@@ -148,14 +107,7 @@ class EventItem {
   final String eventImage;
   final DateTime eventDate;
 
-
-  const EventItem({
-    this.eventId = 0,
-    this.eventTitle = '',
-    this.eventDesc = '',
-    this.eventImage = '',
-    required this.eventDate,
-  });
+  const EventItem({this.eventId = 0, this.eventTitle = '', this.eventDesc = '', this.eventImage = '', required this.eventDate});
 
   factory EventItem.fromJson(Map<String, dynamic> json) {
     return EventItem(
@@ -163,10 +115,7 @@ class EventItem {
       eventTitle: json['event_title'] ?? '',
       eventDesc: json['event_desc'] ?? '',
       eventImage: json['event_image'] ?? '',
-      eventDate: HelperService().parseDate(
-        date: json['event_date'] ?? '',
-        inputFormat: 'dd MMMM, yyyy',
-      ),
+      eventDate: HelperService().parseDate(date: json['event_date'] ?? '', inputFormat: 'dd MMMM, yyyy'),
     );
   }
 }
@@ -180,21 +129,9 @@ class DarshanTime {
   String darshanClose;
   String note;
 
-  DarshanTime({
-    this.manglaArti = '',
-    this.rajbhogArti = '',
-    this.sandhyaArti = '',
-    this.darshanClose = '',
-    this.note = '',
-  });
+  DarshanTime({this.manglaArti = '', this.rajbhogArti = '', this.sandhyaArti = '', this.darshanClose = '', this.note = ''});
 
   factory DarshanTime.fromJson(Map<String, dynamic> json) {
-    return DarshanTime(
-      manglaArti: json['mangla_arti'] ?? '',
-      rajbhogArti: json['rajbhog_arti'] ?? '',
-      sandhyaArti: json['sandhya_arti'] ?? '',
-      darshanClose: json['darshan_close'] ?? '',
-      note: json['note'] ?? '',
-    );
+    return DarshanTime(manglaArti: json['mangla_arti'] ?? '', rajbhogArti: json['rajbhog_arti'] ?? '', sandhyaArti: json['sandhya_arti'] ?? '', darshanClose: json['darshan_close'] ?? '', note: json['note'] ?? '');
   }
 }

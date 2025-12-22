@@ -7,7 +7,6 @@ import 'package:flutter/foundation.dart';
 
 import 'loger_service.dart';
 
-
 class DeviceInfoService {
   factory DeviceInfoService() => _instance;
   DeviceInfoService._internal();
@@ -15,44 +14,26 @@ class DeviceInfoService {
 
   Future<void> load() async {
     try {
-      if (PreferenceService().getString(key:'prefKeyDeviceInfo').isEmpty) {
-      //  await device_info.loadLibrary();
-        String fcmToken = PreferenceService().getString(key:'prefKeyFcmToken');
+      if (PreferenceService().getString(key: 'prefKeyDeviceInfo').isEmpty) {
+        //  await device_info.loadLibrary();
+        String fcmToken = PreferenceService().getString(key: 'prefKeyFcmToken');
         if (kIsWeb) {
           final data = await device_info.DeviceInfoPlugin().webBrowserInfo;
           PreferenceService().setString(
-            key:'prefKeyDeviceInfo',
-            value:json.encode({
-              'sdkVersion': data.browserName.name,
-              'platform': 'web',
-              'deviceModel': data.appName,
-              'brand': data.appVersion,
-              'deviceId': data.browserName.name,
-              'fcmToken': fcmToken,
-              'serialNumber': '',
-              'osVersion': 'Chrome',
-            }),
+            key: 'prefKeyDeviceInfo',
+            value: json.encode({'sdkVersion': data.browserName.name, 'platform': 'web', 'deviceModel': data.appName, 'brand': data.appVersion, 'deviceId': data.browserName.name, 'fcmToken': fcmToken, 'serialNumber': '', 'osVersion': 'Chrome'}),
           );
         } else if (Platform.isAndroid) {
           final build = await device_info.DeviceInfoPlugin().androidInfo;
           PreferenceService().setString(
-            key:'prefKeyDeviceInfo',
-            value:json.encode({
-              'platform': 'android',
-              'sdkVersion': build.version.sdkInt,
-              'deviceModel': build.model,
-              'brand': build.brand,
-              'fcmToken': fcmToken,
-              'deviceId': build.id,
-              'serialNumber': build.serialNumber,
-              'osVersion': 'Android',
-            }),
+            key: 'prefKeyDeviceInfo',
+            value: json.encode({'platform': 'android', 'sdkVersion': build.version.sdkInt, 'deviceModel': build.model, 'brand': build.brand, 'fcmToken': fcmToken, 'deviceId': build.id, 'serialNumber': build.serialNumber, 'osVersion': 'Android'}),
           );
         } else if (Platform.isIOS) {
           final data = await device_info.DeviceInfoPlugin().iosInfo;
           PreferenceService().setString(
-            key:'prefKeyDeviceInfo',
-            value:json.encode({
+            key: 'prefKeyDeviceInfo',
+            value: json.encode({
               'sdkVersion': data.systemVersion,
               'platform': 'ios',
               'fcmToken': fcmToken,
@@ -73,22 +54,19 @@ class DeviceInfoService {
 
   Map<String, dynamic> getDeviceData() {
     try {
-      String data = PreferenceService().getString(key:'prefKeyDeviceInfo');
+      String data = PreferenceService().getString(key: 'prefKeyDeviceInfo');
       if (data.isEmpty) {
         return {};
       } else {
-       Map<String,dynamic> temp= json.decode(data);
-       if(temp.containsKey('fcmToken')==false || temp['fcmToken'].isEmpty){
-         String fcmToken = PreferenceService().getString(key:'fcmToken');
-         temp['fcmToken']=fcmToken;
-         PreferenceService().setString(
-           key:'prefKeyDeviceInfo',
-           value:json.encode(temp),
-         );
-         return temp;
-       }else{
-         return temp;
-       }
+        Map<String, dynamic> temp = json.decode(data);
+        if (temp.containsKey('fcmToken') == false || temp['fcmToken'].isEmpty) {
+          String fcmToken = PreferenceService().getString(key: 'fcmToken');
+          temp['fcmToken'] = fcmToken;
+          PreferenceService().setString(key: 'prefKeyDeviceInfo', value: json.encode(temp));
+          return temp;
+        } else {
+          return temp;
+        }
       }
     } catch (e) {
       LoggerService().log(message: e);

@@ -14,9 +14,7 @@ class EncryptionService {
     try {
       final keyTemp = enc.Key.fromUtf8(key);
       final ivv = enc.IV.fromUtf8(iv);
-      final encrypter = enc.Encrypter(
-        enc.AES(keyTemp, mode: enc.AESMode.cbc, padding: 'PKCS7'),
-      );
+      final encrypter = enc.Encrypter(enc.AES(keyTemp, mode: enc.AESMode.cbc, padding: 'PKCS7'));
 
       final encrypted = encrypter.encrypt(content, iv: ivv);
       return base64Encode(encrypted.bytes);
@@ -29,9 +27,7 @@ class EncryptionService {
   String decrypt({required String encryptedContent}) {
     final keyTemp = enc.Key.fromUtf8(key);
     final ivv = enc.IV.fromUtf8(iv);
-    final encrypter = enc.Encrypter(
-      enc.AES(keyTemp, mode: enc.AESMode.cbc, padding: 'PKCS7'),
-    );
+    final encrypter = enc.Encrypter(enc.AES(keyTemp, mode: enc.AESMode.cbc, padding: 'PKCS7'));
 
     final encrypted = enc.Encrypted(base64Decode(encryptedContent));
     return encrypter.decrypt(encrypted, iv: ivv);

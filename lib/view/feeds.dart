@@ -61,20 +61,13 @@ class _FeedsPageState extends State<FeedsPage> {
 
           if (d.filePath != null && shareDialogOpen == false) {
             shareDialogOpen = true;
-            final result = await SharePlus.instance.share(
-              ShareParams(files: [XFile(d.filePath ?? '')]),
-            );
-            if (result.status == ShareResultStatus.success &&
-                _controller.shareIndex >= 0) {
+            final result = await SharePlus.instance.share(ShareParams(files: [XFile(d.filePath ?? '')]));
+            if (result.status == ShareResultStatus.success && _controller.shareIndex >= 0) {
               shareDialogOpen = false;
               Helper.showLoader();
-              await _controller
-                  .share(
-                    postId: _controller.posts[_controller.shareIndex].postId,
-                  )
-                  .then((t) {
-                    Helper.closeLoader();
-                  });
+              await _controller.share(postId: _controller.posts[_controller.shareIndex].postId).then((t) {
+                Helper.closeLoader();
+              });
             } else if (result.status == ShareResultStatus.dismissed) {
               shareDialogOpen = false;
             }
@@ -91,8 +84,7 @@ class _FeedsPageState extends State<FeedsPage> {
       if (maxScroll == currentPosition) {
         if (_controller.canLoadMore = true) {
           _controller.isLoadMore.value = true;
-          _controller.initialPage =
-              _controller.initialPage + _controller.increment;
+          _controller.initialPage = _controller.initialPage + _controller.increment;
           await _controller.getHomeDetail().then((value) {});
         }
       }
@@ -101,30 +93,14 @@ class _FeedsPageState extends State<FeedsPage> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _controller.getHomeDetail().then((t) {
         if (_controller.posts.isNotEmpty && widget.detailId.isNotEmpty) {
-          int ind = _controller.posts.indexWhere(
-            (e) => '${e.postId}' == widget.detailId,
-          );
+          int ind = _controller.posts.indexWhere((e) => '${e.postId}' == widget.detailId);
           if (ind >= 0) {
-            navigate(
-              context: context,
-              replace: false,
-              path: videoRoute,
-              param: _controller.posts[ind].postImage,
-            );
+            navigate(context: context, replace: false, path: videoRoute, param: _controller.posts[ind].postImage);
           } else {
-            _controller.getPostBySpecificId(postId: widget.detailId).then((
-              post,
-            ) {
-              int ind = _controller.posts.indexWhere(
-                (e) => '${e.postId}' == widget.detailId,
-              );
+            _controller.getPostBySpecificId(postId: widget.detailId).then((post) {
+              int ind = _controller.posts.indexWhere((e) => '${e.postId}' == widget.detailId);
               if (ind >= 0) {
-                navigate(
-                  context: context,
-                  replace: false,
-                  path: videoRoute,
-                  param: _controller.posts[ind].postImage,
-                );
+                navigate(context: context, replace: false, path: videoRoute, param: _controller.posts[ind].postImage);
               }
             });
           }
@@ -142,25 +118,19 @@ class _FeedsPageState extends State<FeedsPage> {
           height: SizeConfig().height,
           padding: const EdgeInsets.all(16),
           child: Obx(
-            () =>
-                _controller.isLoading.value &&
-                    _controller.isLoadMore.value == false
+            () => _controller.isLoading.value && _controller.isLoadMore.value == false
                 ? ShimmerDemo()
                 : SingleChildScrollView(
                     controller: _scrollController,
                     child: ListView.separated(
                       separatorBuilder: (_, index) => SizedBox(height: 10),
-                      itemCount: _controller.isLoadMore.value == false
-                          ? _controller.posts.length
-                          : _controller.posts.length + 1,
+                      itemCount: _controller.isLoadMore.value == false ? _controller.posts.length : _controller.posts.length + 1,
                       physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       // controller: _scrollController,
                       itemBuilder: (_, index) {
                         if (index >= _controller.posts.length) {
-                          return _controller.isLoadMore.value == false
-                              ? const SizedBox.shrink()
-                              : ShimmerDemo(count: 1);
+                          return _controller.isLoadMore.value == false ? const SizedBox.shrink() : ShimmerDemo(count: 1);
                         } else if (_controller.posts[index].hide == true) {
                           return SizedBox.shrink();
                         }
@@ -177,51 +147,21 @@ class _FeedsPageState extends State<FeedsPage> {
                                   Container(
                                     height: 50,
                                     width: 50,
-                                    decoration: BoxDecoration(
-                                      color: CustomColors().white,
-                                      shape: BoxShape.circle,
-                                    ),
-                                    child: ImageWidget(
-                                      url: _controller
-                                          .posts[index]
-                                          .userData
-                                          .userProfile,
-                                    ),
+                                    decoration: BoxDecoration(color: CustomColors().white, shape: BoxShape.circle),
+                                    child: ImageWidget(url: _controller.posts[index].userData.userProfile),
                                   ),
                                   10.w,
                                   Expanded(
                                     child: Column(
                                       crossAxisAlignment: .start,
                                       children: [
-                                        Text(
-                                          _controller
-                                              .posts[index]
-                                              .userData
-                                              .userName,
-                                          style: bolder(
-                                            fontSize: 16,
-                                            color: CustomColors().black1000,
-                                          ),
-                                        ),
+                                        Text(_controller.posts[index].userData.userName, style: bolder(fontSize: 16, color: CustomColors().black1000)),
                                         2.h,
                                         Row(
                                           children: [
-                                            ImageWidget(
-                                              url: 'assets/images/ic_time.svg',
-                                              height: 14,
-                                              width: 14,
-                                              color: CustomColors().grey600,
-                                            ),
+                                            ImageWidget(url: 'assets/images/ic_time.svg', height: 14, width: 14, color: CustomColors().grey600),
                                             5.w,
-                                            Text(
-                                              _controller
-                                                  .posts[index]
-                                                  .addedDate,
-                                              style: medium(
-                                                fontSize: 12,
-                                                color: CustomColors().grey600,
-                                              ),
-                                            ),
+                                            Text(_controller.posts[index].addedDate, style: medium(fontSize: 12, color: CustomColors().grey600)),
                                           ],
                                         ),
                                       ],
@@ -234,42 +174,21 @@ class _FeedsPageState extends State<FeedsPage> {
                             Container(
                               // height: _controller.posts[index].postDesc.isNotEmpty? 40:0,
                               // padding: const .symmetric(horizontal: 10),
-                              child: CustomHtmlWidget(
-                                showHtml: true,
-                                content: _controller.posts[index].postDesc,
-                                title: '',
-                                image: '',
-                              ),
+                              child: CustomHtmlWidget(showHtml: true, content: _controller.posts[index].postDesc, title: '', image: ''),
                             ),
                             10.h,
-                            _controller.posts[index].postType.toLowerCase() ==
-                                    'image'
+                            _controller.posts[index].postType.toLowerCase() == 'image'
                                 ? InkWell(
                                     onTap: () {
-                                      navigate(
-                                        context: context,
-                                        replace: false,
-                                        path: videoRoute,
-                                        param:
-                                            _controller.posts[index].postImage,
-                                      );
+                                      navigate(context: context, replace: false, path: videoRoute, param: _controller.posts[index].postImage);
                                     },
-                                    child: ImageWidget(
-                                      url: _controller.posts[index].postImage,
-                                      width: SizeConfig().width,
-                                    ),
+                                    child: ImageWidget(url: _controller.posts[index].postImage, width: SizeConfig().width),
                                   )
                                 : _controller.posts[index].postImage.isEmpty
                                 ? SizedBox.shrink()
                                 : getThumbNails(
                                     onTap: () {
-                                      navigate(
-                                        context: context,
-                                        replace: false,
-                                        path: videoRoute,
-                                        param:
-                                            _controller.posts[index].postImage,
-                                      );
+                                      navigate(context: context, replace: false, path: videoRoute, param: _controller.posts[index].postImage);
                                     },
                                     url: _controller.posts[index].postImage,
                                     height: 400,
@@ -277,46 +196,20 @@ class _FeedsPageState extends State<FeedsPage> {
                                   ),
                             10.h,
                             Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 8,
-                              ),
+                              padding: const EdgeInsets.symmetric(horizontal: 8),
                               child: Row(
                                 children: [
-                                  Text(
-                                    '${_controller.posts[index].likeCount} Likes',
-                                    style: semiBold(
-                                      fontSize: 14,
-                                      color: CustomColors().grey500,
-                                    ),
-                                  ),
+                                  Text('${_controller.posts[index].likeCount} Likes', style: semiBold(fontSize: 14, color: CustomColors().grey500)),
                                   Expanded(
                                     child: Row(
                                       mainAxisSize: .max,
                                       mainAxisAlignment: .end,
                                       children: [
-                                        Text(
-                                          '${_controller.posts[index].commentCount} Comments',
-                                          style: semiBold(
-                                            fontSize: 14,
-                                            color: CustomColors().grey500,
-                                          ),
-                                        ),
+                                        Text('${_controller.posts[index].commentCount} Comments', style: semiBold(fontSize: 14, color: CustomColors().grey500)),
                                         10.w,
-                                        Text(
-                                          '${_controller.posts[index].shareCount} Shares',
-                                          style: semiBold(
-                                            fontSize: 14,
-                                            color: CustomColors().grey500,
-                                          ),
-                                        ),
+                                        Text('${_controller.posts[index].shareCount} Shares', style: semiBold(fontSize: 14, color: CustomColors().grey500)),
                                         10.w,
-                                        Text(
-                                          '${_controller.posts[index].viewCount} Views',
-                                          style: semiBold(
-                                            fontSize: 14,
-                                            color: CustomColors().grey500,
-                                          ),
-                                        ),
+                                        Text('${_controller.posts[index].viewCount} Views', style: semiBold(fontSize: 14, color: CustomColors().grey500)),
                                       ],
                                     ),
                                   ),
@@ -325,28 +218,18 @@ class _FeedsPageState extends State<FeedsPage> {
                             ),
                             10.h,
                             Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 16,
-                              ),
+                              padding: const EdgeInsets.symmetric(horizontal: 16),
                               child: Row(
                                 mainAxisAlignment: .spaceBetween,
                                 children: [
                                   GestureDetector(
                                     onTap: () async {
                                       message.clear();
-                                      if (PreferenceService().getBoolean(
-                                        key: AppConstants().prefKeyIsLoggedIn,
-                                      )) {
+                                      if (PreferenceService().getBoolean(key: AppConstants().prefKeyIsLoggedIn)) {
                                         Helper.showLoader();
-                                        await _controller
-                                            .like(
-                                              postId: _controller
-                                                  .posts[index]
-                                                  .postId,
-                                            )
-                                            .then((t) {
-                                              Helper.closeLoader();
-                                            });
+                                        await _controller.like(postId: _controller.posts[index].postId).then((t) {
+                                          Helper.closeLoader();
+                                        });
                                       } else {
                                         showLoginDialog(context: context);
                                       }
@@ -355,80 +238,43 @@ class _FeedsPageState extends State<FeedsPage> {
                                       children: [
                                         Obx(
                                           () => ImageWidget(
-                                            url:
-                                                _controller
-                                                        .posts[index]
-                                                        .isLiked ==
-                                                    1
-                                                ? 'assets/images/redHeart.svg'
-                                                : 'assets/images/heart.svg',
+                                            url: _controller.posts[index].isLiked == 1 ? 'assets/images/redHeart.svg' : 'assets/images/heart.svg',
                                             height: 24,
                                             width: 24,
-                                            color:
-                                                _controller
-                                                        .posts[index]
-                                                        .isLiked ==
-                                                    1
-                                                ? CustomColors().red500
-                                                : CustomColors().grey600,
+                                            color: _controller.posts[index].isLiked == 1 ? CustomColors().red500 : CustomColors().grey600,
                                           ),
                                         ),
                                         5.w,
-                                        Text(
-                                          'Like',
-                                          style: semiBold(
-                                            fontSize: 14,
-                                            color: CustomColors().grey700,
-                                          ),
-                                        ),
+                                        Text('Like', style: semiBold(fontSize: 14, color: CustomColors().grey700)),
                                       ],
                                     ),
                                   ),
                                   GestureDetector(
                                     onTap: () async {
-                                      if (PreferenceService().getBoolean(
-                                        key: AppConstants().prefKeyIsLoggedIn,
-                                      )) {
-                                        _controller.getCommentByPostId(
-                                          postId:
-                                              _controller.posts[index].postId,
-                                        );
+                                      if (PreferenceService().getBoolean(key: AppConstants().prefKeyIsLoggedIn)) {
+                                        _controller.getCommentByPostId(postId: _controller.posts[index].postId);
 
                                         showModalBottomSheet(
                                           isScrollControlled: true,
-                                          backgroundColor: CustomColors()
-                                              .layoutPrimaryBackground,
+                                          backgroundColor: CustomColors().layoutPrimaryBackground,
                                           enableDrag: true,
                                           useSafeArea: true,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.zero,
-                                          ),
-                                          constraints: BoxConstraints(
-                                            minHeight: SizeConfig().height,
-                                            maxHeight: SizeConfig().height,
-                                          ),
+                                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+                                          constraints: BoxConstraints(minHeight: SizeConfig().height, maxHeight: SizeConfig().height),
                                           context: context,
-                                          builder: (context) =>
-                                              LikeCommentPostBottomSheet(
-                                                message: message,
+                                          builder: (context) => LikeCommentPostBottomSheet(
+                                            message: message,
 
-                                                onSend: (msg) async {
-                                                  Helper.showLoader();
-                                                  await _controller
-                                                      .comment(
-                                                        comment: msg,
-                                                        postId: _controller
-                                                            .posts[index]
-                                                            .postId,
-                                                      )
-                                                      .then((t) {
-                                                        Helper.closeLoader();
-                                                        if (t == true) {
-                                                          message.clear();
-                                                        }
-                                                      });
-                                                },
-                                              ),
+                                            onSend: (msg) async {
+                                              Helper.showLoader();
+                                              await _controller.comment(comment: msg, postId: _controller.posts[index].postId).then((t) {
+                                                Helper.closeLoader();
+                                                if (t == true) {
+                                                  message.clear();
+                                                }
+                                              });
+                                            },
+                                          ),
                                         );
                                       } else {
                                         showLoginDialog(context: context);
@@ -436,67 +282,32 @@ class _FeedsPageState extends State<FeedsPage> {
                                     },
                                     child: Row(
                                       children: [
-                                        ImageWidget(
-                                          url: 'assets/images/ic_comment.svg',
-                                          height: 24,
-                                          width: 24,
-                                          color: CustomColors().grey600,
-                                        ),
+                                        ImageWidget(url: 'assets/images/ic_comment.svg', height: 24, width: 24, color: CustomColors().grey600),
                                         5.w,
-                                        Text(
-                                          'Comment',
-                                          style: semiBold(
-                                            fontSize: 14,
-                                            color: CustomColors().grey700,
-                                          ),
-                                        ),
+                                        Text('Comment', style: semiBold(fontSize: 14, color: CustomColors().grey700)),
                                       ],
                                     ),
                                   ),
                                   GestureDetector(
                                     onTap: () async {
-                                      if (PreferenceService().getBoolean(
-                                        key: AppConstants().prefKeyIsLoggedIn,
-                                      )) {
+                                      if (PreferenceService().getBoolean(key: AppConstants().prefKeyIsLoggedIn)) {
                                         try {
-                                          final b = await PermissionService()
-                                              .manageExternalStorage();
+                                          final b = await PermissionService().manageExternalStorage();
                                           if (b) {
-                                            final downloadPath =
-                                                await HelperService()
-                                                    .getDownloadDirectory();
-                                            final directory = Directory(
-                                              '$downloadPath/bapaSitaram',
-                                            );
-                                            bool isExist = await directory
-                                                .exists();
+                                            final downloadPath = await HelperService().getDownloadDirectory();
+                                            final directory = Directory('$downloadPath/bapaSitaram');
+                                            bool isExist = await directory.exists();
                                             if (!isExist) {
-                                              await directory.create(
-                                                recursive: false,
-                                              );
+                                              await directory.create(recursive: false);
                                             }
-                                            downloadProgress(
-                                              progress: progress,
-                                              context: context,
-                                            );
+                                            downloadProgress(progress: progress, context: context);
                                             _controller.shareIndex = index;
-                                            DownloadServiceMobile().download(
-                                              url: _controller
-                                                  .posts[index]
-                                                  .postImage,
-                                            );
+                                            DownloadServiceMobile().download(url: _controller.posts[index].postImage);
                                           } else {
-                                            Helper.showMessage(
-                                              title: 'Error',
-                                              message:
-                                                  'Storage permission not found',
-                                              isSuccess: false,
-                                            );
+                                            Helper.showMessage(title: 'Error', message: 'Storage permission not found', isSuccess: false);
                                           }
                                         } catch (e) {
-                                          LoggerService().log(
-                                            message: e.toString(),
-                                          );
+                                          LoggerService().log(message: e.toString());
                                         }
                                       } else {
                                         showLoginDialog(context: context);
@@ -504,20 +315,9 @@ class _FeedsPageState extends State<FeedsPage> {
                                     },
                                     child: Row(
                                       children: [
-                                        ImageWidget(
-                                          url: 'assets/images/whatsapp.svg',
-                                          height: 22,
-                                          width: 22,
-                                          color: CustomColors().grey600,
-                                        ),
+                                        ImageWidget(url: 'assets/images/whatsapp.svg', height: 22, width: 22, color: CustomColors().grey600),
                                         5.w,
-                                        Text(
-                                          'Share',
-                                          style: semiBold(
-                                            fontSize: 14,
-                                            color: CustomColors().grey700,
-                                          ),
-                                        ),
+                                        Text('Share', style: semiBold(fontSize: 14, color: CustomColors().grey700)),
                                       ],
                                     ),
                                   ),

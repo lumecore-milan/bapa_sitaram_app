@@ -11,28 +11,19 @@ class NetworkServiceMobile {
 
   NetworkServiceMobile._internal();
 
-  static final NetworkServiceMobile _instance =
-      NetworkServiceMobile._internal();
+  static final NetworkServiceMobile _instance = NetworkServiceMobile._internal();
 
   int timeOut = 60;
 
   Map<String, String> _getHeader({bool isFormData = false}) {
-    return isFormData == false
-        ? {'Content-Type': 'application/json'}
-        : {'Content-Type': 'multipart/form-data'};
+    return isFormData == false ? {'Content-Type': 'application/json'} : {'Content-Type': 'multipart/form-data'};
   }
 
-  Future<Map<String, dynamic>> get({
-    required String url,
-    Map<String, String> headers = const {},
-  }) async {
+  Future<Map<String, dynamic>> get({required String url, Map<String, String> headers = const {}}) async {
     Map<String, dynamic> apiResponse = {};
     try {
       if (ConnectivityService().hasInternet == false) {
-        apiResponse.addAll({
-          'httpStatusCode': -2,
-          'error': 'No Internet connection',
-        });
+        apiResponse.addAll({'httpStatusCode': -2, 'error': 'No Internet connection'});
       } else {
         final reqClient = http.Client();
         final response = await reqClient
@@ -40,17 +31,11 @@ class NetworkServiceMobile {
             .timeout(
               Duration(seconds: timeOut),
               onTimeout: () {
-                return http.Response(
-                  json.encode({'error': 'Request timed out'}),
-                  408,
-                );
+                return http.Response(json.encode({'error': 'Request timed out'}), 408);
               },
             );
         if (response.statusCode != 200) {
-          LoggerService().log(
-            message: 'API status code warning  ${response.statusCode}====> $url',
-            level: LogLevel.warning,
-          );
+          LoggerService().log(message: 'API status code warning  ${response.statusCode}====> $url', level: LogLevel.warning);
         }
         final temp = json.decode(response.body);
 
@@ -69,48 +54,37 @@ class NetworkServiceMobile {
     return apiResponse;
   }
 
-  Future<Map<String, dynamic>> post({
-    required String url,
-    required Map<String, dynamic> requestBody,
-    bool isFormData = false,
-  }) async {
+  Future<Map<String, dynamic>> post({required String url, required Map<String, dynamic> requestBody, bool isFormData = false}) async {
     Map<String, dynamic> apiResponse = {};
     try {
       if (ConnectivityService().hasInternet == false) {
-        apiResponse.addAll({
-          'httpStatusCode': -2,
-          'error': 'No Internet connection',
-        });
+        apiResponse.addAll({'httpStatusCode': -2, 'error': 'No Internet connection'});
       } else {
-        bool hasFile = requestBody.values.any(
-          (v) => v is http.MultipartFile || v is File,
-        );
+        bool hasFile = requestBody.values.any((v) => v is http.MultipartFile || v is File);
 
         late final http.Response response;
         if (hasFile || isFormData) {
           final reqClient = http.Client();
           var request = http.MultipartRequest('POST', Uri.parse(url));
-          bool fileFound = false;
+          
           for (var entry in requestBody.entries) {
             var key = entry.key;
             var value = entry.value;
 
             if (value is http.MultipartFile) {
-              fileFound = true;
+            
               request.files.add(value);
             } else if (value is File) {
-              fileFound = true;
-              request.files.add(
-                await http.MultipartFile.fromPath(key, value.path),
-              );
+             
+              request.files.add(await http.MultipartFile.fromPath(key, value.path));
             } else {
               request.fields[key] = '$value';
             }
           }
-          print(request.fields);
-         request.headers.addAll(_getHeader(isFormData: true));
-          final streamResponse= await reqClient.send(request);
-          response=await http.Response.fromStream(streamResponse);
+        
+          request.headers.addAll(_getHeader(isFormData: true));
+          final streamResponse = await reqClient.send(request);
+          response = await http.Response.fromStream(streamResponse);
         } else {
           final reqClient = http.Client();
           response = await reqClient
@@ -122,19 +96,13 @@ class NetworkServiceMobile {
               .timeout(
                 Duration(seconds: timeOut),
                 onTimeout: () {
-                  return http.Response(
-                    json.encode({'error': 'Request timed out'}),
-                    408,
-                  );
+                  return http.Response(json.encode({'error': 'Request timed out'}), 408);
                 },
               );
         }
 
         if (response.statusCode != 200) {
-          LoggerService().log(
-            message: 'API status code warning  ${response.statusCode}====> $url',
-            level: LogLevel.warning,
-          );
+          LoggerService().log(message: 'API status code warning  ${response.statusCode}====> $url', level: LogLevel.warning);
         }
         final temp = json.decode(response.body);
 
@@ -152,7 +120,8 @@ class NetworkServiceMobile {
     }
     return apiResponse;
   }
-/*
+
+  /*
   Future<Map<String, dynamic>> put({
     required String url,
     required Map<String, dynamic> requestBody,

@@ -15,7 +15,7 @@ class LoggerService {
   void log({required dynamic message, LogLevel level = LogLevel.debug}) {
     if (kReleaseMode && !showLogInReleaseMode) return;
 
-    final time = HelperService().getFormattedDate(date: DateTime.now().toIso8601String(),outputFormat: 'yyyy-MM-dd hh:mm');// ;
+    final time = HelperService().getFormattedDate(date: DateTime.now().toIso8601String(), outputFormat: 'yyyy-MM-dd hh:mm'); // ;
     String emoji;
     switch (level) {
       case LogLevel.debug:
@@ -49,9 +49,9 @@ class LoggerService {
         break;
     }
 
-    if(showLogInReleaseMode){
+    if (showLogInReleaseMode) {
       print(coloredMessage);
-    }else {
+    } else {
       developer.log(coloredMessage);
     }
     _writeLogToFile(message: coloredMessage);
@@ -70,11 +70,7 @@ class LoggerService {
         await internalLogsDir.create(recursive: true);
       }
       final internalFile = File('${internalLogsDir.path}/$fileName');
-      await internalFile.writeAsString(
-        '$message\n',
-        mode: FileMode.append,
-        flush: false,
-      );
+      await internalFile.writeAsString('$message\n', mode: FileMode.append, flush: false);
     } catch (e) {
       //
     }

@@ -44,8 +44,7 @@ class PermissionService {
   }) async {
     bool status = false;
     try {
-
-      status=await OneSignal.Notifications.requestPermission(false);
+      status = await OneSignal.Notifications.requestPermission(false);
       /*final settings = await FirebaseMessaging.instance.requestPermission(
         alert: alert,
         announcement: announcement,
@@ -104,17 +103,15 @@ class PermissionService {
   Future<bool> manageExternalStorage() async {
     bool status = false;
     try {
-      if(Platform.isIOS){
-        status=true;
+      if (Platform.isIOS) {
+        status = true;
         return status;
-      }
-      else if(Platform.isAndroid) {
+      } else if (Platform.isAndroid) {
         status = await Permission.manageExternalStorage.isGranted;
         if (status == true) {
           return status;
         }
-        final permissionStatus = await Permission.manageExternalStorage
-            .request();
+        final permissionStatus = await Permission.manageExternalStorage.request();
         status = permissionStatus.isGranted;
         return status;
       }
@@ -127,8 +124,7 @@ class PermissionService {
 
   Future<bool> requestPreciseAlarmPermission() async {
     bool status = false;
-    PermissionStatus status1 = await Permission.ignoreBatteryOptimizations
-        .request();
+    PermissionStatus status1 = await Permission.ignoreBatteryOptimizations.request();
     if (status1.isGranted) {
       status = true;
     } else {

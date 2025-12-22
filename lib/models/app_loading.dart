@@ -6,17 +6,12 @@ class AppSettingModel {
   AboutUsModel aboutUs;
   NoticeModel notice;
 
-  AppSettingModel({
-    this.version = const VersionModel(),
-    this.userInfo = const UserInfoModel(),
-    this.aboutUs = const AboutUsModel(),
-    this.notice = const NoticeModel(),
-  });
+  AppSettingModel({this.version = const VersionModel(), this.userInfo = const UserInfoModel(), this.aboutUs = const AboutUsModel(), this.notice = const NoticeModel()});
 
   factory AppSettingModel.fromJson(Map<String, dynamic> json) {
-    final bool isAndroid=Platform.isAndroid;
+    final bool isAndroid = Platform.isAndroid;
     return AppSettingModel(
-      version: VersionModel.fromJson(json[isAndroid ? 'version':'ios_version'] ?? {}),
+      version: VersionModel.fromJson(json[isAndroid ? 'version' : 'ios_version'] ?? {}),
       userInfo: UserInfoModel.fromJson(json['user_info'] ?? {}),
       aboutUs: AboutUsModel.fromJson(json['aboutUs'] ?? {}),
       notice: NoticeModel.fromJson(json['notice'] ?? {}),
@@ -24,12 +19,7 @@ class AppSettingModel {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      "version": version.toJson(),
-      "user_info": userInfo.toJson(),
-      "aboutUs": aboutUs.toJson(),
-      "notice": notice.toJson(),
-    };
+    return {"version": version.toJson(), "user_info": userInfo.toJson(), "aboutUs": aboutUs.toJson(), "notice": notice.toJson()};
   }
 }
 
@@ -40,56 +30,36 @@ class VersionModel {
   final String versionMessage;
   final String versionNeedClearData;
 
-  const VersionModel({
-    this.versionNo = '',
-    this.versionForceUpdate = '',
-    this.versionTitle = '',
-    this.versionMessage = '',
-    this.versionNeedClearData = '',
-  });
+  const VersionModel({this.versionNo = '', this.versionForceUpdate = '', this.versionTitle = '', this.versionMessage = '', this.versionNeedClearData = ''});
 
   factory VersionModel.fromJson(Map<String, dynamic> json) {
-
-    final bool isAndroid=Platform.isAndroid;
+    final bool isAndroid = Platform.isAndroid;
 
     return VersionModel(
-      versionNo: isAndroid ?  (json['version_no'] ?? ''):json['ios_version_no'] ?? '',
-      versionForceUpdate: isAndroid ? (json['version_force_update'] ?? ''):json['ios_version_force_update'] ?? '',
-      versionTitle:isAndroid ? (json['version_title'] ?? ''):json['ios_version_title'] ?? '',
-      versionMessage: isAndroid ? (json['version_message'] ?? ''):json['ios_version_message'] ?? '',
-      versionNeedClearData:isAndroid ? (json['version_need_clear_data'] ?? ''):json['ios_version_need_clear_data'] ?? '',
+      versionNo: isAndroid ? (json['version_no'] ?? '') : json['ios_version_no'] ?? '',
+      versionForceUpdate: isAndroid ? (json['version_force_update'] ?? '') : json['ios_version_force_update'] ?? '',
+      versionTitle: isAndroid ? (json['version_title'] ?? '') : json['ios_version_title'] ?? '',
+      versionMessage: isAndroid ? (json['version_message'] ?? '') : json['ios_version_message'] ?? '',
+      versionNeedClearData: isAndroid ? (json['version_need_clear_data'] ?? '') : json['ios_version_need_clear_data'] ?? '',
     );
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      "version_no": versionNo,
-      "version_force_update": versionForceUpdate,
-      "version_title": versionTitle,
-      "version_message": versionMessage,
-      "version_need_clear_data": versionNeedClearData,
-    };
+    return {"version_no": versionNo, "version_force_update": versionForceUpdate, "version_title": versionTitle, "version_message": versionMessage, "version_need_clear_data": versionNeedClearData};
   }
 }
-
 
 class UserInfoModel {
   final String userStatus;
 
-  const UserInfoModel({
-    this.userStatus = '',
-  });
+  const UserInfoModel({this.userStatus = ''});
 
   factory UserInfoModel.fromJson(Map<String, dynamic> json) {
-    return UserInfoModel(
-      userStatus: json['user_status'] ?? '',
-    );
+    return UserInfoModel(userStatus: json['user_status'] ?? '');
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      "user_status": userStatus,
-    };
+    return {"user_status": userStatus};
   }
 }
 
@@ -190,25 +160,13 @@ class NoticeModel {
   final String noticeImage;
   final String noticeShow;
 
-  const NoticeModel({
-    this.noticeTitle = '',
-    this.noticeImage = '',
-    this.noticeShow = '',
-  });
+  const NoticeModel({this.noticeTitle = '', this.noticeImage = '', this.noticeShow = ''});
 
   factory NoticeModel.fromJson(Map<String, dynamic> json) {
-    return NoticeModel(
-      noticeTitle: json['notice_title'] ?? '',
-      noticeImage: json['notice_image'] ?? '',
-      noticeShow: json['notice_show'] ?? '',
-    );
+    return NoticeModel(noticeTitle: json['notice_title'] ?? '', noticeImage: json['notice_image'] ?? '', noticeShow: json['notice_show'] ?? '');
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      "notice_title": noticeTitle,
-      "notice_image": noticeImage,
-      "notice_show": noticeShow,
-    };
+    return {"notice_title": noticeTitle, "notice_image": noticeImage, "notice_show": noticeShow};
   }
 }

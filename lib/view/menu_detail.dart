@@ -67,7 +67,7 @@ class _MenuDetailPageState extends State<MenuDetailPage> {
                 crossAxisAlignment: .center,
                 children: [
                   60.h,
-                /*  Padding(
+                  /*  Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Column(
                       crossAxisAlignment: .start,
@@ -105,13 +105,7 @@ class _MenuDetailPageState extends State<MenuDetailPage> {
                   ),*/
                   Expanded(
                     child: Obx(
-                      () =>
-                      CustomHtmlWidget(
-                          content: widget.detail[currentTabIndex.value]['details']['description'],
-                          title: widget.detail[currentTabIndex.value]['details']['title'],
-                          image: widget.detail[currentTabIndex.value]['details']['image'],
-
-                      )
+                      () => CustomHtmlWidget(content: widget.detail[currentTabIndex.value]['details']['description'], title: widget.detail[currentTabIndex.value]['details']['title'], image: widget.detail[currentTabIndex.value]['details']['image']),
                     ),
                   ),
                 ],
@@ -119,17 +113,9 @@ class _MenuDetailPageState extends State<MenuDetailPage> {
             },
             onPageChanged: (index) {
               if (index > currentTabIndex.value) {
-                tabScrollController.animateTo(
-                  currentOffset + 100,
-                  duration: const Duration(milliseconds: 1000),
-                  curve: Curves.easeOut,
-                );
+                tabScrollController.animateTo(currentOffset + 100, duration: const Duration(milliseconds: 1000), curve: Curves.easeOut);
               } else if (index < currentTabIndex.value) {
-                tabScrollController.animateTo(
-                  currentOffset - 100,
-                  duration: const Duration(milliseconds: 1000),
-                  curve: Curves.easeOut,
-                );
+                tabScrollController.animateTo(currentOffset - 100, duration: const Duration(milliseconds: 1000), curve: Curves.easeOut);
               }
               currentTabIndex.value = index;
               currentTabIndex.refresh();
@@ -140,22 +126,14 @@ class _MenuDetailPageState extends State<MenuDetailPage> {
             left: 0,
             right: 0,
             child: Obx(
-                  () => CustomTabs(
+              () => CustomTabs(
                 scrollController: tabScrollController,
                 onTap: (index) {
                   //scrollController.animateTo(0, duration: const Duration(milliseconds: 100), curve: Curves.easeOut);
                   if (index > currentTabIndex.value) {
-                    tabScrollController.animateTo(
-                      currentOffset + 100,
-                      duration: const Duration(milliseconds: 1000),
-                      curve: Curves.easeOut,
-                    );
+                    tabScrollController.animateTo(currentOffset + 100, duration: const Duration(milliseconds: 1000), curve: Curves.easeOut);
                   } else if (index < currentTabIndex.value) {
-                    tabScrollController.animateTo(
-                      currentOffset - 100,
-                      duration: const Duration(milliseconds: 1000),
-                      curve: Curves.easeOut,
-                    );
+                    tabScrollController.animateTo(currentOffset - 100, duration: const Duration(milliseconds: 1000), curve: Curves.easeOut);
                   }
                   currentTabIndex.value = index;
                   _pageController.jumpToPage(index);

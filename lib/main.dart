@@ -32,12 +32,9 @@ Future<void> runMicrotask() async {
     OneSignal.LiveActivities.setupDefault();
     OneSignal.Notifications.addClickListener((event) {
       final Map<String, dynamic> data = event.notification.additionalData ?? {};
-      print('Notification clicked event data====>$data');
+
       if (data.isNotEmpty) {
-        pendingDetail = NotificationCLickDetail(
-          id: '${data['value'] ?? ''}',
-          type: '${data['type'] ?? ''}',
-        );
+        pendingDetail = NotificationCLickDetail(id: '${data['value'] ?? ''}', type: '${data['type'] ?? ''}');
         Future.delayed(Duration(milliseconds: 700)).then((time) {
           notificationClicked.sink.add(pendingDetail);
         });
@@ -45,22 +42,13 @@ Future<void> runMicrotask() async {
     });
     OneSignal.Notifications.addForegroundWillDisplayListener((event) {
       event.preventDefault();
-      if (PreferenceService().getString(
-            key: AppConstants().prefKeyNotificationEnabled,
-          ) !='false') {
+      if (PreferenceService().getString(key: AppConstants().prefKeyNotificationEnabled) != 'false') {
         event.notification.display();
       }
     });
     ConnectivityService().setPingUrl(pingUrl: APIConstant().apiMainMenu);
     await Future.wait([
-      FirebaseService().initialize(
-        options: const {
-          'apiKey': 'AIzaSyCpwuGMmEgNaJ3v0zvwMEL1z02EnEZmEUs',
-          'appId': '1:37795912856:android:3ef0533bd290649696c4ed',
-          'messagingSenderId': '',
-          'projectId': 'bapa-sitaram-7a3b2',
-        },
-      ),
+      FirebaseService().initialize(options: const {'apiKey': 'AIzaSyCpwuGMmEgNaJ3v0zvwMEL1z02EnEZmEUs', 'appId': '1:37795912856:android:3ef0533bd290649696c4ed', 'messagingSenderId': '', 'projectId': 'bapa-sitaram-7a3b2'}),
       //NotificationServiceMobile().initialize(),
     ]);
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;

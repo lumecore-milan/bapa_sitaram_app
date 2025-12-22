@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../services/loger_service.dart';
 
-enum MarqueeDirection{
-  ltr,rtl
-}
+enum MarqueeDirection { ltr, rtl }
+
 class MarqueeText extends StatefulWidget {
-  const MarqueeText({super.key, required this.widget,this.direction=MarqueeDirection.rtl});
+  const MarqueeText({super.key, required this.widget, this.direction = MarqueeDirection.rtl});
 
   final Text widget;
   final MarqueeDirection direction;
@@ -15,8 +14,7 @@ class MarqueeText extends StatefulWidget {
   _MarqueeTextState createState() => _MarqueeTextState();
 }
 
-class _MarqueeTextState extends State<MarqueeText>
-    with SingleTickerProviderStateMixin {
+class _MarqueeTextState extends State<MarqueeText> with SingleTickerProviderStateMixin {
   late AnimationController controller;
   late Animation<Offset> animation;
   bool _isScrolling = true;
@@ -72,14 +70,7 @@ class _MarqueeTextState extends State<MarqueeText>
   Widget build(BuildContext context) {
     return 1 > 0
         ? ClipRect(
-            child: ListView(
-              padding: .zero,
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              controller: _controller,
-              physics: const NeverScrollableScrollPhysics(),
-              children: [widget.widget, const SizedBox(width: 10), widget.widget],
-            ),
+            child: ListView(padding: .zero, shrinkWrap: true, scrollDirection: Axis.horizontal, controller: _controller, physics: const NeverScrollableScrollPhysics(), children: [widget.widget, const SizedBox(width: 10), widget.widget]),
           )
         : ClipRect(
             child: SingleChildScrollView(

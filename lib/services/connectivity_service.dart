@@ -4,7 +4,6 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'app_events.dart';
 import 'enums.dart';
 
-
 class ConnectivityService {
   factory ConnectivityService() => _instance;
   ConnectivityService._internal();
@@ -17,33 +16,17 @@ class ConnectivityService {
   void startListening() {
     testInternet().then((result) {
       hasInternet = result;
-      AppEventsStream().addEvent(
-        AppEvent(
-          type: result == true
-              ? AppEventType.internetConnected
-              : AppEventType.internetDisConnected,
-          data: result,
-        ),
-      );
+      AppEventsStream().addEvent(AppEvent(type: result == true ? AppEventType.internetConnected : AppEventType.internetDisConnected, data: result));
     });
     _subscription = _connectivity.onConnectivityChanged.listen((results) async {
       final hasConnection = await _hasConnection(results);
 
       if (hasConnection) {
         hasInternet = hasConnection;
-        AppEventsStream().addEvent(
-          AppEvent(
-            type: hasConnection == true
-                ? AppEventType.internetConnected
-                : AppEventType.internetDisConnected,
-            data: hasConnection,
-          ),
-        );
+        AppEventsStream().addEvent(AppEvent(type: hasConnection == true ? AppEventType.internetConnected : AppEventType.internetDisConnected, data: hasConnection));
       } else {
         hasInternet = false;
-        AppEventsStream().addEvent(
-          AppEvent(type: AppEventType.internetDisConnected, data: false),
-        );
+        AppEventsStream().addEvent(AppEvent(type: AppEventType.internetDisConnected, data: false));
       }
     });
   }
@@ -53,12 +36,9 @@ class ConnectivityService {
   }
 
   Future<bool> _hasConnection(List<ConnectivityResult> results) async {
-    bool d =
-        results.contains(ConnectivityResult.mobile) ||
-        results.contains(ConnectivityResult.wifi) ||
-        results.contains(ConnectivityResult.ethernet);
+    bool d = results.contains(ConnectivityResult.mobile) || results.contains(ConnectivityResult.wifi) || results.contains(ConnectivityResult.ethernet);
 
-    if(!d){
+    if (!d) {
       return d;
     }
     bool d1 = await testInternet();
@@ -73,9 +53,7 @@ class ConnectivityService {
     bool status = false;
     try {
       await _apiInstance.get(url: _defaultUrlToCheckInternet).then((resp) {
-        if (resp['httpStatusCode'] != -1 &&
-            resp['httpStatusCode'] != -2 &&
-            resp['httpStatusCode'] != 408) {
+        if (resp['httpStatusCode'] != -1 && resp['httpStatusCode'] != -2 && resp['httpStatusCode'] != 408) {
           status = true;
         }
       });

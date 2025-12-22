@@ -1,8 +1,38 @@
 {
+    "editor.fontSize": 15,
+    "editor.formatOnSave": true,
+    "files.autoSave": "afterDelay",
+    "editor.defaultFormatter": "Dart-Code.dart-code",
+    "editor.formatOnPaste": true,
+    "editor.lineHeight": 2,
     "editor.minimap.maxColumn": 200,
-    "dart.flutterHotReloadOnSave": true,
-    "dart.enableSdkFormatter": true,
-    "dart.previewFlutterUiGuides": true,
-    "editor.fontSize": 16,
-    "editor.fontVariations": false
+    "terminal.integrated.defaultProfile.windows": "",
+     "editor.cursorBlinking": "smooth",
+  "editor.cursorSmoothCaretAnimation": "on",
+  "editor.cursorStyle": "line",
+  "editor.cursorWidth": 2,
+
+  "editor.guides.indentation": true,
+  "workbench.iconTheme": "material-icon-theme",
+  "editor.bracketPairColorization.enabled": true,
+  "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+  "editor.guides.bracketPairs": "active",
+  "editor.guides.bracketPairsHorizontal": true,
+  "workbench.colorCustomizations": {
+     "editorBracketHighlight.unexpectedBracket.foreground": "#FF5555",
+  "editor.guides.highlightActiveBracketPair": true,
+    "editorBracketHighlight.foreground1": "#FFD166",  // yellow
+    "editorBracketHighlight.foreground2": "#06D6A0",  // green
+    "editorBracketHighlight.foreground3": "#118AB2",  // blue
+    "editorBracketHighlight.foreground4": "#EF476F",  // red
+    "editorBracketHighlight.foreground5": "#9B5DE5",  // purple
+    "editorBracketHighlight.foreground6": "#F77F00"   // orange
+  },
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false
+ 
+
+
+  
 }

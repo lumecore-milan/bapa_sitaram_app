@@ -91,7 +91,7 @@ class FeedController extends GetxController {
               responses[0]['data'],
               hidedetail: true,
             );
-            posts.value.add(temp);
+            posts.add(temp);
             posts.refresh();
           }
         }

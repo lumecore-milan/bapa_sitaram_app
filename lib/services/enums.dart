@@ -1,6 +1,7 @@
 enum LogLevel { debug, info, warning, error }
 
 enum ApiMethod { post, put, get, delete }
+
 enum DeviceType { mobile, tablet, desktop }
 
 enum AppEventType {
@@ -21,21 +22,9 @@ enum AppEventType {
   internetDisConnected,
   downloadProgress,
   uploadProgress,
-  paymentSuccess
+  paymentSuccess,
 }
 
-enum InputType {
-  email,
-  phone,
-  username,
-  number,
-  currency,
-  text,
-  panNumber,
-  aadhaarNumber,
+enum InputType { email, phone, username, number, currency, text, panNumber, aadhaarNumber }
 
-}
-
-enum AllowedFileType{
-   image,pdf,audio,video,any
-}
+enum AllowedFileType { image, pdf, audio, video, any }

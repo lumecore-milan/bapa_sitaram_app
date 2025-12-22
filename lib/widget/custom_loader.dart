@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 
 import '../utils/size_config.dart';
+
 class CustomLoader extends StatefulWidget {
   const CustomLoader({super.key});
 
@@ -25,6 +26,7 @@ class _CustomLoaderState extends State<CustomLoader> {
     }
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return PopScope(

@@ -32,12 +32,17 @@ class _UserRegistrationPageState extends State<UserRegistrationPage> {
     Get.delete<RegistrationController>();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppbar(title: 'પ્રોફાઈલ', showDrawerIcon: false, onBackTap: (){
-        Navigator.pop(context);
-      }),
+      appBar: CustomAppbar(
+        title: 'પ્રોફાઈલ',
+        showDrawerIcon: false,
+        onBackTap: () {
+          Navigator.pop(context);
+        },
+      ),
       body: SafeArea(
         child: Stack(
           children: [
@@ -48,9 +53,7 @@ class _UserRegistrationPageState extends State<UserRegistrationPage> {
                   160.h,
 
                   Container(
-                    decoration: BoxDecoration(
-                      color: CustomColors().layoutPrimaryBackground,
-                    ),
+                    decoration: BoxDecoration(color: CustomColors().layoutPrimaryBackground),
                     child: Padding(
                       padding: .only(top: 16, left: 16, right: 16),
                       child: Column(
@@ -84,26 +87,18 @@ class _UserRegistrationPageState extends State<UserRegistrationPage> {
                                   isMobile: true,
                                   readOnly: true,
                                   required: false,
-                                  enabled:false,
+                                  enabled: false,
                                   showMainTitle: true,
-                                  formatter: [
-                                    LengthLimitingTextInputFormatter(10),
-                                    FilteringTextInputFormatter.digitsOnly,
-                                  ],
-                                  inputType: TextInputType.numberWithOptions(
-                                    decimal: false,
-                                    signed: true,
-                                  ),
+                                  formatter: [LengthLimitingTextInputFormatter(10), FilteringTextInputFormatter.digitsOnly],
+                                  inputType: TextInputType.numberWithOptions(decimal: false, signed: true),
                                   controller: _controller.mobile,
                                   label: 'મોબાઇલ',
                                   hint: '',
-                                  errorMessage:
-                                  '',
+                                  errorMessage: '',
                                 ),
                                 CustomTextFormField(
                                   validator: (val) {
-                                    if ((val ?? '').trim().isEmpty ||
-                                        GetUtils.isEmail(val ?? '') == false) {
+                                    if ((val ?? '').trim().isEmpty || GetUtils.isEmail(val ?? '') == false) {
                                       return 'ઈમેલ દાખલ કરો';
                                     }
                                     return null;
@@ -121,8 +116,7 @@ class _UserRegistrationPageState extends State<UserRegistrationPage> {
                                 10.h,
                                 CustomTextFormField(
                                   validator: (val) {
-                                    if ((val ?? '').isNotEmpty &&
-                                        (val ?? '').trim().length != 10) {
+                                    if ((val ?? '').isNotEmpty && (val ?? '').trim().length != 10) {
                                       return 'પાનકાર્ડ નંબર દાખલ કરો';
                                     }
                                     return null;
@@ -139,8 +133,7 @@ class _UserRegistrationPageState extends State<UserRegistrationPage> {
                                 10.h,
                                 CustomTextFormField(
                                   validator: (val) {
-                                    if ((val ?? '').isNotEmpty &&
-                                        (val ?? '').trim().length != 6) {
+                                    if ((val ?? '').isNotEmpty && (val ?? '').trim().length != 6) {
                                       return 'પીનકોડ દાખલ કરો';
                                     }
                                     return null;
@@ -148,14 +141,8 @@ class _UserRegistrationPageState extends State<UserRegistrationPage> {
                                   greyBorder: false,
                                   isMobile: false,
                                   required: false,
-                                  formatter: [
-                                    formatterPostalCodeLength,
-                                    formatterDigitsOnly,
-                                  ],
-                                  inputType: TextInputType.numberWithOptions(
-                                    decimal: false,
-                                    signed: true,
-                                  ),
+                                  formatter: [formatterPostalCodeLength, formatterDigitsOnly],
+                                  inputType: TextInputType.numberWithOptions(decimal: false, signed: true),
                                   controller: _controller.pinCode,
                                   label: 'પીનકોડ',
                                   hint: 'પીનકોડ દાખલ કરો',
@@ -187,17 +174,9 @@ class _UserRegistrationPageState extends State<UserRegistrationPage> {
                                       await _controller.register().then((result) {
                                         Helper.closeLoader();
                                         if (result.$1 == true) {
-                                          navigate(
-                                            context: context,
-                                            replace: true,
-                                            path: homeRoute,
-                                          );
+                                          navigate(context: context, replace: true, path: homeRoute);
                                         } else {
-                                          Helper.showMessage(
-                                            title: 'Error',
-                                            message: result.$2,
-                                            isSuccess: false,
-                                          );
+                                          Helper.showMessage(title: 'Error', message: result.$2, isSuccess: false);
                                         }
                                       });
                                     }
@@ -211,7 +190,6 @@ class _UserRegistrationPageState extends State<UserRegistrationPage> {
                       ),
                     ),
                   ),
-
                 ],
               ),
             ),
@@ -226,13 +204,8 @@ class _UserRegistrationPageState extends State<UserRegistrationPage> {
                       Container(
                         height: 150,
                         width: SizeConfig().width,
-                        decoration: BoxDecoration(
-                          color: CustomColors().white,
-                        ),
-                        child: Image.asset(
-                          'assets/images/bg_image.jpeg',
-                          fit: BoxFit.cover,
-                        ),
+                        decoration: BoxDecoration(color: CustomColors().white),
+                        child: Image.asset('assets/images/bg_image.jpeg', fit: BoxFit.cover),
                       ),
                     ],
                   ),
@@ -245,37 +218,32 @@ class _UserRegistrationPageState extends State<UserRegistrationPage> {
                           height: 80,
                           width: 80,
 
-                          decoration: BoxDecoration(
-                            color: CustomColors().white,
-                            shape: BoxShape.circle,
+                          decoration: BoxDecoration(color: CustomColors().white, shape: BoxShape.circle),
+                          child: Obx(
+                            () => ClipOval(
+                              child: ImageWidget(url: _controller.profileImagePath.value, fit: .cover, height: 80, width: 80),
+                            ),
                           ),
-                          child: Obx(()=>
-                           ClipOval(
-                               child: ImageWidget(url:  _controller.profileImagePath.value,fit: .cover,
-                                 height: 80,
-                                 width: 80,
-                               ))),
                         ),
                         Positioned(
-                            right: -0,
-                            top: 0,
-                            child: InkWell(
-                              onTap: ()async{
-                                final String? path=await HelperService().pickFile(fileType: AllowedFileType.image);
-                                if(path!=null){
-                                  _controller.profileImagePath.value=path;
-                                  _controller.profileImagePath.refresh();
-                                }
-                              },
-                              child: Container(
-                                height: 24,
-                                  width: 24,
-                                  decoration: BoxDecoration(
-                                    color: CustomColors().white,
-                                    shape: BoxShape.circle,
-                                  ),
-                                  child: Icon(Icons.edit,size: 10,)),
-                            ))
+                          right: -0,
+                          top: 0,
+                          child: InkWell(
+                            onTap: () async {
+                              final String? path = await HelperService().pickFile(fileType: AllowedFileType.image);
+                              if (path != null) {
+                                _controller.profileImagePath.value = path;
+                                _controller.profileImagePath.refresh();
+                              }
+                            },
+                            child: Container(
+                              height: 24,
+                              width: 24,
+                              decoration: BoxDecoration(color: CustomColors().white, shape: BoxShape.circle),
+                              child: Icon(Icons.edit, size: 10),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),

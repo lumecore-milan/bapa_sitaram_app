@@ -148,11 +148,7 @@ class _GalleryListState extends State<GalleryList> {
                   borderRadius: BorderRadius.circular(5),
                   child: InkWell(
                     onTap: () {
-                      navigate(context: context, replace: false, path: imageRoute, param:
-                          {
-                            'image':images[index],
-                            'showDownloadIcon':true,
-                          });
+                      navigate(context: context, replace: false, path: imageRoute, param: {'image': images[index], 'showDownloadIcon': true});
                     },
                     child: ImageWidget(url: images[index], height: 150, fit: .cover),
                   ),

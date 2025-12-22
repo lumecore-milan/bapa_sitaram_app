@@ -3,7 +3,6 @@ import 'package:bapa_sitaram/utils/font_styles.dart';
 import 'package:bapa_sitaram/widget/app_bar.dart';
 import 'package:flutter/material.dart';
 
-
 import '../extensions/size_box_extension.dart';
 import '../models/home_detail.dart';
 import '../utils/size_config.dart';
@@ -25,61 +24,41 @@ class AartiPage extends StatelessWidget {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal:16.0),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: SingleChildScrollView(
             child: Column(
               children: [
                 12.h,
-                Text(
-                  detail.description,
-                  style: bolder(fontSize: 16, color: CustomColors().black),
-                ),
+                Text(detail.description, style: bolder(fontSize: 16, color: CustomColors().black)),
                 50.h,
                 ListView.separated(
-                  separatorBuilder: (_,index)=>SizedBox(height: 50),
+                  separatorBuilder: (_, index) => SizedBox(height: 50),
                   itemCount: detail.data.length,
-                   shrinkWrap: true,
+                  shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
                   itemBuilder: (_, index) {
                     return Stack(
                       clipBehavior: Clip.none,
                       children: [
                         Container(
-                          width:SizeConfig().width,
+                          width: SizeConfig().width,
                           padding: const EdgeInsets.fromLTRB(18, 40, 18, 22),
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(16),
                             border: Border(
-                                left: BorderSide(color: CustomColors().primaryColorDark,width: 5),
-                                right: BorderSide(color: CustomColors().primaryColorDark,width: 5),
-                                bottom: BorderSide(color: CustomColors().primaryColorDark,width: 5),
+                              left: BorderSide(color: CustomColors().primaryColorDark, width: 5),
+                              right: BorderSide(color: CustomColors().primaryColorDark, width: 5),
+                              bottom: BorderSide(color: CustomColors().primaryColorDark, width: 5),
                             ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.12),
-                                blurRadius: 12,
-                                spreadRadius: 1,
-                                offset: const Offset(0, 5),
-                              ),
-                            ],
+                            boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.12), blurRadius: 12, spreadRadius: 1, offset: const Offset(0, 5))],
                           ),
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
-                            children:  [
-                              Text(
-                                detail.data[index].title,
-                                style: semiBold(fontSize: 18,color: CustomColors().primaryColorDark),
-                              ),
+                            children: [
+                              Text(detail.data[index].title, style: semiBold(fontSize: 18, color: CustomColors().primaryColorDark)),
                               SizedBox(height: 12),
-                              Text(
-                                detail.data[index].descp,
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  height: 1.4,
-                                ),
-                              ),
+                              Text(detail.data[index].descp, textAlign: TextAlign.center, style: TextStyle(fontSize: 15, height: 1.4)),
                             ],
                           ),
                         ),
@@ -94,10 +73,7 @@ class AartiPage extends StatelessWidget {
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 border: Border.all(color: Colors.red, width: 1),
-                                image: DecorationImage(
-                                  image: AssetImage("assets/images/aarti_${index+1}.png"),
-                                  fit: BoxFit.cover,
-                                ),
+                                image: DecorationImage(image: AssetImage("assets/images/aarti_${index + 1}.png"), fit: BoxFit.cover),
                               ),
                             ),
                           ),

@@ -16,11 +16,7 @@ final class DrawerItem {
 }
 
 class CustomDrawer extends StatefulWidget {
-  const CustomDrawer({
-    super.key,
-    required this.currentIndex,
-    required this.onTap,
-  });
+  const CustomDrawer({super.key, required this.currentIndex, required this.onTap});
 
   final Function(String) onTap;
   final int currentIndex;
@@ -39,7 +35,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
         child: Stack(
           children: [
             Padding(
-              padding: .only(left: 10,right:10,top:240),
+              padding: .only(left: 10, right: 10, top: 240),
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: .start,
@@ -48,55 +44,22 @@ class _CustomDrawerState extends State<CustomDrawer> {
                       menu: DrawerItem(
                         mainTitle: 'Main',
                         subItems: [
-                          {
-                            'image': "assets/images/ic_home.svg",
-                            'title': "હોમ",
-                            'navigate': homeRoute,
-                          },
-                          {
-                            'image': "assets/images/ic_poonam_clr.svg",
-                            'title': "પૂનમ લિસ્ટ",
-                            'navigate': punamListRoute,
-                          },
-                          {
-                            'image': "assets/images/ic_aarti_clr.svg",
-                            'title': "આરતી",
-                            'navigate': aartiRoute,
-                          },
-                          {
-                            'image': "assets/images/ic_donation_clr.svg",
-                            'title': "ડોનેશન",
-                            'navigate': donationRoute,
-                          },
+                          {'image': "assets/images/ic_home.svg", 'title': "હોમ", 'navigate': homeRoute},
+                          {'image': "assets/images/ic_poonam_clr.svg", 'title': "પૂનમ લિસ્ટ", 'navigate': punamListRoute},
+                          {'image': "assets/images/ic_aarti_clr.svg", 'title': "આરતી", 'navigate': aartiRoute},
+                          {'image': "assets/images/ic_donation_clr.svg", 'title': "ડોનેશન", 'navigate': donationRoute},
                         ],
                       ),
                     ),
-                
+
                     _drawerItem(
                       menu: DrawerItem(
                         mainTitle: 'Quick Link',
                         subItems: [
-                          {
-                            'image': "assets/images/ic_press.svg",
-                            'title': "પ્રેસ મીડિયા",
-                            'navigate': pressRoute,
-                          },
-                          {
-                            'image': "assets/images/ic_social_act.svg",
-                            'title': "સામાજિક પ્રવૃત્તિ",
-                            'navigate': socialActivityRoute,
-                          },
-                          if(PreferenceService().getBoolean(key: AppConstants().prefKeyIsLoggedIn)==true)
-                            {
-                              'image': "assets/images/ic_comment.svg",
-                              'title': "My Donation",
-                              'navigate': myDonationRoute,
-                            },
-                          {
-                            'image': "assets/images/ic_contact.svg",
-                            'title': "સંપર્ક કરો",
-                            'navigate': contactRoute,
-                          },
+                          {'image': "assets/images/ic_press.svg", 'title': "પ્રેસ મીડિયા", 'navigate': pressRoute},
+                          {'image': "assets/images/ic_social_act.svg", 'title': "સામાજિક પ્રવૃત્તિ", 'navigate': socialActivityRoute},
+                          if (PreferenceService().getBoolean(key: AppConstants().prefKeyIsLoggedIn) == true) {'image': "assets/images/ic_comment.svg", 'title': "My Donation", 'navigate': myDonationRoute},
+                          {'image': "assets/images/ic_contact.svg", 'title': "સંપર્ક કરો", 'navigate': contactRoute},
                         ],
                       ),
                     ),
@@ -104,30 +67,10 @@ class _CustomDrawerState extends State<CustomDrawer> {
                       menu: DrawerItem(
                         mainTitle: 'User Info',
                         subItems: [
-                          if(PreferenceService().getBoolean(key: AppConstants().prefKeyIsLoggedIn)==true)
-                            {
-                              'image': "assets/images/profile.png",
-                              'title': "પ્રોફાઈલ",
-                              'navigate': userRegistrationRoute,
-                            },
-                          {
-                            'image': "assets/images/ic_download.svg",
-                            'title': "ડાઉનલોડ પોસ્ટ",
-                            'navigate': downloadPostRoute,
-                          },
-                          if(PreferenceService().getBoolean(key: AppConstants().prefKeyIsLoggedIn)==false)
-                          {
-                            'image': "assets/images/logout.png",
-                            'title': "Login Now",
-                            'navigate':
-                            loginRoute,
-                          },
-                          if(PreferenceService().getBoolean(key: AppConstants().prefKeyIsLoggedIn)==true)
-                          {
-                            'image': "assets/images/logout.png",
-                            'title': "Logout",
-                            'navigate': loginRoute,
-                          },
+                          if (PreferenceService().getBoolean(key: AppConstants().prefKeyIsLoggedIn) == true) {'image': "assets/images/profile.png", 'title': "પ્રોફાઈલ", 'navigate': userRegistrationRoute},
+                          {'image': "assets/images/ic_download.svg", 'title': "ડાઉનલોડ પોસ્ટ", 'navigate': downloadPostRoute},
+                          if (PreferenceService().getBoolean(key: AppConstants().prefKeyIsLoggedIn) == false) {'image': "assets/images/logout.png", 'title': "Login Now", 'navigate': loginRoute},
+                          if (PreferenceService().getBoolean(key: AppConstants().prefKeyIsLoggedIn) == true) {'image': "assets/images/logout.png", 'title': "Logout", 'navigate': loginRoute},
                         ],
                       ),
                     ),
@@ -135,16 +78,8 @@ class _CustomDrawerState extends State<CustomDrawer> {
                       menu: DrawerItem(
                         mainTitle: 'Application',
                         subItems: [
-                          {
-                            'image': "assets/images/ic_setting.svg",
-                            'title': "સેટિંગ્સ",
-                            'navigate': settingRoute,
-                          },
-                          {
-                            'image': "assets/images/info.png",
-                            'title': "અમારા વિશે",
-                            'navigate': aboutRoute,
-                          },
+                          {'image': "assets/images/ic_setting.svg", 'title': "સેટિંગ્સ", 'navigate': settingRoute},
+                          {'image': "assets/images/info.png", 'title': "અમારા વિશે", 'navigate': aboutRoute},
                         ],
                       ),
                     ),
@@ -166,32 +101,16 @@ class _CustomDrawerState extends State<CustomDrawer> {
                         width: SizeConfig().width * 0.70,
                         decoration: BoxDecoration(
                           color: CustomColors().white,
-                          borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(30),
-                            bottomRight: Radius.circular(30),
-                          ),
+                          borderRadius: BorderRadius.only(bottomLeft: Radius.circular(30), bottomRight: Radius.circular(30)),
                         ),
-                        child: Image.asset(
-                          'assets/images/bg_image.jpeg',
-                          fit: BoxFit.cover,
-                          color: CustomColors().primaryColorDark.withOpacity(
-                            0.7,
-                          ),
-                          colorBlendMode: BlendMode.multiply,
-                        ),
+                        child: Image.asset('assets/images/bg_image.jpeg', fit: BoxFit.cover, color: CustomColors().primaryColorDark..withOpacity(0.7), colorBlendMode: BlendMode.multiply),
                       ),
                       40.h,
                       Center(
-                        child: Text(
-                          'Bapa Sitaram',
-                          style: semiBold(
-                            fontSize: 22,
-                            color: CustomColors().black,
-                          ),
-                        ),
+                        child: Text('Bapa Sitaram', style: semiBold(fontSize: 22, color: CustomColors().black)),
                       ),
                       10.h,
-                      Container(height: 1,width: (SizeConfig().width * 0.70), color: CustomColors().grey600,),
+                      Container(height: 1, width: (SizeConfig().width * 0.70), color: CustomColors().grey600),
                     ],
                   ),
                   Positioned(
@@ -200,10 +119,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                     child: Container(
                       height: 80,
                       width: 80,
-                      decoration: BoxDecoration(
-                        color: CustomColors().white,
-                        shape: BoxShape.circle,
-                      ),
+                      decoration: BoxDecoration(color: CustomColors().white, shape: BoxShape.circle),
                       child: ImageWidget(url: 'assets/images/asram_logo.png'),
                     ),
                   ),
@@ -220,10 +136,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
     return Column(
       crossAxisAlignment: .start,
       children: [
-        Text(
-          menu.mainTitle,
-          style: semiBold(fontSize: 16, color: CustomColors().grey600),
-        ),
+        Text(menu.mainTitle, style: semiBold(fontSize: 16, color: CustomColors().grey600)),
         10.h,
         ListView.separated(
           shrinkWrap: true,
@@ -234,23 +147,15 @@ class _CustomDrawerState extends State<CustomDrawer> {
           itemBuilder: (_, index) {
             return InkWell(
               onTap: () {
-                  widget.onTap(menu.subItems[index]['navigate']);
+                widget.onTap(menu.subItems[index]['navigate']);
               },
               child: Row(
                 mainAxisSize: .min,
                 mainAxisAlignment: .start,
                 children: [
-                  ImageWidget(
-                    url: menu.subItems[index]['image'],
-                    height: 24,
-                    width: 24,
-                    color: (menu.subItems[index]['title']=='હોમ' || menu.subItems[index]['title']=='ડાઉનલોડ પોસ્ટ') ? CustomColors().primaryColorDark:null,
-                  ),
+                  ImageWidget(url: menu.subItems[index]['image'], height: 24, width: 24, color: (menu.subItems[index]['title'] == 'હોમ' || menu.subItems[index]['title'] == 'ડાઉનલોડ પોસ્ટ') ? CustomColors().primaryColorDark : null),
                   10.w,
-                  Text(
-                    menu.subItems[index]['title'],
-                    style: bolder(fontSize: 16, color: CustomColors().black),
-                  ),
+                  Text(menu.subItems[index]['title'], style: bolder(fontSize: 16, color: CustomColors().black)),
                 ],
               ),
             );

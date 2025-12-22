@@ -3,16 +3,7 @@ import 'package:bapa_sitaram/utils/font_styles.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppbar({
-    super.key,
-    required this.title,
-    this.actions,
-    required this.showDrawerIcon,
-    required this.onBackTap,
-    this.onDrawerIconTap,
-    this.isDrawerOpen=false,
-    this.showDownloadButton=false,
-  });
+  const CustomAppbar({super.key, required this.title, this.actions, required this.showDrawerIcon, required this.onBackTap, this.onDrawerIconTap, this.isDrawerOpen = false, this.showDownloadButton = false});
 
   final bool showDownloadButton;
   final String title;
@@ -26,30 +17,24 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       titleSpacing: 5,
-      actionsPadding: .only(right:10),
+      actionsPadding: .only(right: 10),
       backgroundColor: CustomColors().primaryColor,
       leading: showDrawerIcon
           ? InkWell(
-          onTap: (){
-            if(onDrawerIconTap!=null) {
-              onDrawerIconTap!();
-            }
-          },
-          child: Icon(Icons.menu, size: 24, color: CustomColors().white))
+              onTap: () {
+                if (onDrawerIconTap != null) {
+                  onDrawerIconTap!();
+                }
+              },
+              child: Icon(Icons.menu, size: 24, color: CustomColors().white),
+            )
           : InkWell(
               onTap: () {
                 onBackTap();
               },
-              child: Icon(
-                Icons.arrow_back_outlined,
-                size: 24,
-                color: CustomColors().white,
-              ),
+              child: Icon(Icons.arrow_back_outlined, size: 24, color: CustomColors().white),
             ),
-      title: Text(
-        title,
-        style: bolder(fontSize: 18, color: CustomColors().white),
-      ),
+      title: Text(title, style: bolder(fontSize: 18, color: CustomColors().white)),
       centerTitle: false,
       actions: actions,
       elevation: 0,

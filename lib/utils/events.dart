@@ -13,5 +13,4 @@ class PageJumpDetail {
 }
 
 final StreamController<PageJumpDetail> jumpPage = StreamController.broadcast();
-final StreamController<NotificationCLickDetail> notificationClicked =
-    StreamController.broadcast();
+final StreamController<NotificationCLickDetail> notificationClicked = StreamController.broadcast();

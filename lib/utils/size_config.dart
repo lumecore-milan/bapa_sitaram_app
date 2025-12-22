@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../services/enums.dart';
 
-
 class SizeConfig {
   factory SizeConfig() => _instance;
   SizeConfig._internal();
@@ -38,15 +37,12 @@ class SizeConfig {
 extension SizeExtension on num {
   double get sw => this * SizeConfig().blockSizeHorizontal;
   double get sh => this * SizeConfig().blockSizeVertical;
- /* double get sp =>
+  /* double get sp =>
       (this * SizeConfig().blockSizeHorizontal) / SizeConfig().textScaleFactor;*/
   double get sp {
     final scale = SizeConfig().textScaleFactor;
-    final shortestSide = SizeConfig().width < SizeConfig().height
-        ? SizeConfig().width
-        : SizeConfig().height;
+    final shortestSide = SizeConfig().width < SizeConfig().height ? SizeConfig().width : SizeConfig().height;
 
     return (this * (shortestSide / 100)) / scale;
   }
-
 }

@@ -22,7 +22,7 @@ class PressMedia extends StatelessWidget {
       await apiInstance.get(url: APIConstant().apiPresMedia).then((data) {
         if (data.isNotEmpty) {
           if (data['httpStatusCode'] == 200) {
-              list=data['data'];
+            list = data['data'];
           }
         }
       });
@@ -44,7 +44,7 @@ class PressMedia extends StatelessWidget {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal:16.0),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: FutureBuilder(
             future: getDetail(),
             builder: (_, snapshot) {
@@ -57,50 +57,38 @@ class PressMedia extends StatelessWidget {
                 return ListView.separated(
                   shrinkWrap: true,
                   itemCount: data.length,
-                  separatorBuilder: (_,index)=>SizedBox(height: 10),
+                  separatorBuilder: (_, index) => SizedBox(height: 10),
                   itemBuilder: (_, index) {
                     return Column(
                       mainAxisSize: .min,
                       children: [
-                        if(index==0)
-                          10.h,
+                        if (index == 0) 10.h,
                         Container(
                           width: SizeConfig().width,
                           decoration: BoxDecoration(
                             color: CustomColors().primaryColorDark,
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(10),
-                              topRight: Radius.circular(10),
-                            ),
+                            borderRadius: const BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
                           ),
                           padding: .all(10),
                           child: Column(
                             crossAxisAlignment: .start,
                             children: [
-                              Text(data[index]['title'],
-                              style: semiBold(fontSize: 20,color: CustomColors().white),
-                              ),
+                              Text(data[index]['title'], style: semiBold(fontSize: 20, color: CustomColors().white)),
                               5.h,
-                              Text(data[index]['date'],
-                                style: medium(fontSize: 14,color: CustomColors().white),
-                              ),
+                              Text(data[index]['date'], style: medium(fontSize: 14, color: CustomColors().white)),
                             ],
                           ),
                         ),
                         Container(
                           padding: .all(10),
                           decoration: BoxDecoration(
-                              borderRadius: const BorderRadius.only(
-                                bottomRight: Radius.circular(10),
-                                bottomLeft: Radius.circular(10),
-                              ),
-                            border:.all(color:CustomColors().grey600,width:1)
+                            borderRadius: const BorderRadius.only(bottomRight: Radius.circular(10), bottomLeft: Radius.circular(10)),
+                            border: .all(color: CustomColors().grey600, width: 1),
                           ),
                           width: SizeConfig().width,
-                          child: ImageWidget(url: data[index]['image'],fit: .cover),
+                          child: ImageWidget(url: data[index]['image'], fit: .cover),
                         ),
-                        if(index==data.length-1)
-                          50.h,
+                        if (index == data.length - 1) 50.h,
                       ],
                     );
                   },

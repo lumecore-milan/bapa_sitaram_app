@@ -19,18 +19,7 @@ sealed class CachedFile {
 }
 
 class ImageWidget extends StatefulWidget {
-  const ImageWidget({
-    required this.url,
-    this.height,
-    this.width,
-    super.key,
-    this.color,
-    this.fit,
-    this.downloadCacheDirectory,
-    this.cached = true,
-    this.loadIndicatorHeight = 24,
-    this.loadIndicatorWidth=24,
-  });
+  const ImageWidget({required this.url, this.height, this.width, super.key, this.color, this.fit, this.downloadCacheDirectory, this.cached = true, this.loadIndicatorHeight = 24, this.loadIndicatorWidth = 24});
 
   final String url;
   final double? height, width;
@@ -45,9 +34,7 @@ class ImageWidget extends StatefulWidget {
 }
 
 class _ImageWidgetState extends State<ImageWidget> {
-  bool get _isUrl =>
-      Uri.tryParse(widget.url) != null &&
-      (Uri.tryParse(widget.url)!.scheme.isNotEmpty);
+  bool get _isUrl => Uri.tryParse(widget.url) != null && (Uri.tryParse(widget.url)!.scheme.isNotEmpty);
 
   bool get _isAssets => widget.url.toLowerCase().startsWith('assets/');
 
@@ -69,6 +56,7 @@ class _ImageWidgetState extends State<ImageWidget> {
     }
     return fileExist;
   }
+
   @override
   void initState() {
     super.initState();
@@ -76,11 +64,8 @@ class _ImageWidgetState extends State<ImageWidget> {
     if (_isUrl) {
       if (kIsWeb) {
       } else if (widget.url.toLowerCase().endsWith('.svg') == false) {
-      } else if (CachedFile.cacheList.indexWhere((t) => t.url == widget.url) >=
-          0) {
-        _existingPath = CachedFile.cacheList
-            .firstWhere((t) => t.url == widget.url)
-            .storedFileName;
+      } else if (CachedFile.cacheList.indexWhere((t) => t.url == widget.url) >= 0) {
+        _existingPath = CachedFile.cacheList.firstWhere((t) => t.url == widget.url).storedFileName;
       }
     }
   }
@@ -99,7 +84,6 @@ class _ImageWidgetState extends State<ImageWidget> {
     } else if (_isUrl) {
       return _networkImage(isSvg: _isSvg);
     } else {
-
       return _localImage(isSvg: _isSvg);
     }
   }
@@ -111,16 +95,13 @@ class _ImageWidgetState extends State<ImageWidget> {
         width: widget.width,
         height: widget.height,
         fit: widget.fit ?? BoxFit.cover,
-        colorFilter: widget.color != null
-            ? ColorFilter.mode(widget.color!, BlendMode.srcIn)
-            : null,
+        colorFilter: widget.color != null ? ColorFilter.mode(widget.color!, BlendMode.srcIn) : null,
         placeholderBuilder: (context) => SizedBox(
           width: widget.width,
           height: widget.height,
           child: const Center(child: CircularProgressIndicator()),
         ),
-        errorBuilder: (context, error, stackTrace) =>
-            Icon(Icons.error, color: Colors.red, size: widget.height),
+        errorBuilder: (context, error, stackTrace) => Icon(Icons.error, color: Colors.red, size: widget.height),
       );
     } else {
       return Image.asset(
@@ -128,8 +109,7 @@ class _ImageWidgetState extends State<ImageWidget> {
         width: widget.width,
         height: widget.height,
         fit: widget.fit ?? BoxFit.cover,
-        errorBuilder: (context, error, stackTrace) =>
-            Icon(Icons.error, color: Colors.red, size: widget.height),
+        errorBuilder: (context, error, stackTrace) => Icon(Icons.error, color: Colors.red, size: widget.height),
       );
     }
   }
@@ -141,16 +121,13 @@ class _ImageWidgetState extends State<ImageWidget> {
         width: widget.width,
         height: widget.height,
         fit: widget.fit ?? BoxFit.cover,
-        colorFilter: widget.color != null
-            ? ColorFilter.mode(widget.color!, BlendMode.srcIn)
-            : null,
+        colorFilter: widget.color != null ? ColorFilter.mode(widget.color!, BlendMode.srcIn) : null,
         placeholderBuilder: (context) => SizedBox(
           width: widget.loadIndicatorWidth,
           height: widget.loadIndicatorHeight,
           child: const Center(child: CircularProgressIndicator()),
         ),
-        errorBuilder: (context, error, stackTrace) =>
-            Icon(Icons.error, color: Colors.red, size: widget.height),
+        errorBuilder: (context, error, stackTrace) => Icon(Icons.error, color: Colors.red, size: widget.height),
       );
     } else {
       return widget.cached
@@ -164,11 +141,7 @@ class _ImageWidgetState extends State<ImageWidget> {
                 height: widget.loadIndicatorHeight,
                 child: const Center(child: CircularProgressIndicator()),
               ),
-              errorWidget: (context, url, error) => Icon(
-                size: widget.height != null ? widget.height! / 2 : 50,
-                Icons.error,
-                color: Colors.red,
-              ),
+              errorWidget: (context, url, error) => Icon(size: widget.height != null ? widget.height! / 2 : 50, Icons.error, color: Colors.red),
             )
           : Image.network(
               widget.url,
@@ -180,8 +153,7 @@ class _ImageWidgetState extends State<ImageWidget> {
                 height: widget.loadIndicatorHeight,
                 child: const Center(child: CircularProgressIndicator()),
               ),
-              errorBuilder: (context, error, stackTrace) =>
-                  Icon(Icons.error, color: Colors.red, size: widget.height),
+              errorBuilder: (context, error, stackTrace) => Icon(Icons.error, color: Colors.red, size: widget.height),
             );
     }
   }
@@ -191,30 +163,12 @@ class _ImageWidgetState extends State<ImageWidget> {
       future: _isLocalPath(),
       builder: (context, AsyncSnapshot snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Icon(
-            Icons.access_time,
-            color: Colors.red,
-            size: widget.height,
-          );
-        } else if (snapshot.connectionState == ConnectionState.done &&
-            snapshot.data == true) {
-
-          if(isSvg==false) {
-            return Image.file(
-
-              File(widget.url),
-              width: widget.width,
-              height: widget.height,
-              fit: widget.fit,
-            );
+          return Icon(Icons.access_time, color: Colors.red, size: widget.height);
+        } else if (snapshot.connectionState == ConnectionState.done && snapshot.data == true) {
+          if (isSvg == false) {
+            return Image.file(File(widget.url), width: widget.width, height: widget.height, fit: widget.fit);
           }
-          return LocalImageFactory.getInstance(
-            isSvg: _isSvg,
-            width: widget.width,
-            height: widget.height,
-            fit: widget.fit ?? BoxFit.cover,
-            url: widget.url,
-          );
+          return LocalImageFactory.getInstance(isSvg: _isSvg, width: widget.width, height: widget.height, fit: widget.fit ?? BoxFit.cover, url: widget.url);
         } else {
           return Icon(Icons.error, color: Colors.red, size: widget.height);
         }

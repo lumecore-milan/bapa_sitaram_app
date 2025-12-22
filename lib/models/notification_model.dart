@@ -33,11 +33,7 @@ class MyNotificationModel {
   String notificationSound;
   List<MyNotificationButtons> buttons = List.empty(growable: true);
 
-  bool autoDismissible,
-      criticalAlert,
-      wakeUpScreen,
-      locked,
-      isTimerNotification = false;
+  bool autoDismissible, criticalAlert, wakeUpScreen, locked, isTimerNotification = false;
 
   /// 📌 JSON for logging
   Map<String, dynamic> toJson() {
@@ -63,20 +59,12 @@ class MyNotificationModel {
 }
 
 class MyNotificationButtons {
-  MyNotificationButtons({
-    required this.key,
-    required this.title,
-    required this.color,
-  });
+  MyNotificationButtons({required this.key, required this.title, required this.color});
 
   final String title, key;
   final Color color;
 
   Map<String, dynamic> toJson() {
-    return {
-      "key": key,
-      "title": title,
-      "color": color.value,
-    };
+    return {"key": key, "title": title, "color": color.value};
   }
 }

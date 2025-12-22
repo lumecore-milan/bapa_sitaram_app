@@ -29,6 +29,7 @@ class HelperService {
       return;
     }
   }
+
   final _methodChannel = 'flutter.myapp.app/myChannel';
   static final Map<String, AudioPlayer> _players = {};
 
@@ -39,6 +40,7 @@ class HelperService {
       _players[file] = player;
     }
   }
+
   Future<void> playSound({required String sound, bool stop = false}) async {
     try {
       final player = _players[sound];

@@ -7,23 +7,16 @@ import '../services/helper_service.dart';
 import '../services/loger_service.dart';
 import 'image_widget.dart';
 
-Future<String?> generateThumbnail({
-  required String videoPath,
-  required int height,
-  required int width,
-}) async {
+Future<String?> generateThumbnail({required String videoPath, required int height, required int width}) async {
   try {
-    late final tempDir;
+    late final Directory tempDir;
     if (Platform.isAndroid) {
       tempDir = Directory.systemTemp;
     } else {
       String t = await HelperService().getApplicationDirectory();
-      tempDir=Directory(t);
+      tempDir = Directory(t);
     }
-    String fileName = videoPath.substring(
-      videoPath.lastIndexOf('/') + 1,
-      videoPath.lastIndexOf('.'),
-    );
+    String fileName = videoPath.substring(videoPath.lastIndexOf('/') + 1, videoPath.lastIndexOf('.'));
     fileName = fileName.trim().replaceAll(' ', '');
     fileName = fileName.trim().replaceAll('-', '_');
     fileName = '${tempDir.path}/$fileName.jpg';
@@ -31,14 +24,7 @@ Future<String?> generateThumbnail({
     if (exist) {
       return fileName;
     }
-    final thumbPath = await VideoThumbnail.thumbnailFile(
-      video: videoPath,
-      imageFormat: ImageFormat.JPEG,
-      quality: 100,
-      maxHeight: height,
-      thumbnailPath: fileName,
-      maxWidth: width,
-    );
+    final thumbPath = await VideoThumbnail.thumbnailFile(video: videoPath, imageFormat: ImageFormat.JPEG, quality: 100, maxHeight: height, thumbnailPath: fileName, maxWidth: width);
     return thumbPath;
   } catch (e) {
     LoggerService().log(message: e.toString());
@@ -46,58 +32,33 @@ Future<String?> generateThumbnail({
   return null;
 }
 
-Widget getThumbNails({
-  required String url,
-  required int height,
-  required int width,
-  required VoidCallback onTap,
-}) {
+Widget getThumbNails({required String url, required int height, required int width, required VoidCallback onTap}) {
   return FutureBuilder(
     future: generateThumbnail(videoPath: url, width: width, height: height),
     builder: (context, snapshot) {
-      if (snapshot.connectionState == ConnectionState.waiting ||
-          snapshot.data == null) {
+      if (snapshot.connectionState == ConnectionState.waiting || snapshot.data == null) {
         return SizedBox(
           height: height.toDouble(),
           width: width.toDouble(),
-          child: Center(
-            child: SizedBox(
-              width: 50,
-              height: 50,
-              child: CircularProgressIndicator(),
-            ),
-          ),
+          child: Center(child: SizedBox(width: 50, height: 50, child: CircularProgressIndicator())),
         );
       } else {
         //   generated(true);
         return InkWell(
-          onTap: (){
+          onTap: () {
             onTap();
           },
           child: Stack(
             children: [
-              Image.file(
-                File(snapshot.data!),
-                height: height.toDouble(),
-                width: width.toDouble(),
-                fit: BoxFit.cover,
-              ),
+              Image.file(File(snapshot.data!), height: height.toDouble(), width: width.toDouble(), fit: BoxFit.cover),
               Positioned(
                 top: (height / 2) - 37,
                 left: (width / 2) - 37,
                 child: IgnorePointer(
                   child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.25),
-                      shape: BoxShape.circle,
-                    ),
+                    decoration: BoxDecoration(color: Colors.black.withOpacity(0.25), shape: BoxShape.circle),
                     padding: EdgeInsets.all(12),
-                    child: ImageWidget(
-                      url: 'assets/images/ic_play.svg',
-                      height: 50,
-                      width: 50,
-                      color: CustomColors().white1000,
-                    ),
+                    child: ImageWidget(url: 'assets/images/ic_play.svg', height: 50, width: 50, color: CustomColors().white1000),
                   ),
                 ),
               ),

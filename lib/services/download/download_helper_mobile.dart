@@ -9,7 +9,6 @@ import '../enums.dart';
 import '../helper_service.dart';
 import '../loger_service.dart';
 
-
 class DownloadMessage {
   DownloadMessage({required this.url, required this.progress, this.filePath});
   final double progress;
@@ -18,35 +17,23 @@ class DownloadMessage {
 }
 
 class DownloadServiceMobile {
-
-  Future<String?> download({
-    required String url
-  }) async {
+  Future<String?> download({required String url}) async {
     final receivePort = ReceivePort();
     String path = '';
     try {
+      String downloadPath = await HelperService().getDownloadDirectory();
 
-      String downloadPath=await HelperService().getDownloadDirectory();
-
-
-      final directory = Directory(
-          '$downloadPath/bapaSitaram');
+      final directory = Directory('$downloadPath/bapaSitaram');
       bool isExist = await directory.exists();
       if (!isExist) {
         await directory.create(recursive: false);
       }
-      Map<String, dynamic> param = {
-        'url': url,
-        'sendPort': receivePort.sendPort,
-        'path': directory.path,
-      };
+      Map<String, dynamic> param = {'url': url, 'sendPort': receivePort.sendPort, 'path': directory.path};
       Isolate isolate = await Isolate.spawn(_isolateEntryPoint, param);
 
       await for (var message in receivePort) {
         if (message is DownloadMessage) {
-          AppEventsStream().addEvent(
-            AppEvent(type: AppEventType.downloadProgress, data: message),
-          );
+          AppEventsStream().addEvent(AppEvent(type: AppEventType.downloadProgress, data: message));
           if (message.filePath != null) {
             path = message.filePath ?? '';
             break;
@@ -56,9 +43,7 @@ class DownloadServiceMobile {
       //path = await receivePort.last;
       isolate.kill(priority: Isolate.immediate);
     } catch (e) {
-      LoggerService().log(
-        message: 'Error in download isolate===>${e.toString()}',
-      );
+      LoggerService().log(message: 'Error in download isolate===>${e.toString()}');
     } finally {
       receivePort.close();
     }
@@ -76,8 +61,7 @@ class DownloadServiceMobile {
       if (response.statusCode == 200) {
         final dir = Directory(param['path']);
         String ext = param['url'].substring(param['url'].lastIndexOf('.') + 1);
-        String newFileName =
-              '${DateFormat('yyyy_mm_dd_hh_mm_ss').format(DateTime.now())}.$ext';
+        String newFileName = '${DateFormat('yyyy_mm_dd_hh_mm_ss').format(DateTime.now())}.$ext';
         final file = File('${dir.path}/$newFileName');
         final sink = file.openWrite();
         final contentLength = response.contentLength ?? 0;
@@ -89,36 +73,18 @@ class DownloadServiceMobile {
                 sink.add(chunk);
 
                 if (contentLength > 0) {
-                  final progress = (downloaded / contentLength * 100)
-                      .toStringAsFixed(2);
-                  sendPort.send(
-                    DownloadMessage(
-                      progress: double.tryParse(progress) ?? 0,
-                      url: param['url'],
-                    ),
-                  );
-                  LoggerService().log(
-                    message: 'Download Progress $progress',
-                    level: LogLevel.info,
-                  );
+                  final progress = (downloaded / contentLength * 100).toStringAsFixed(2);
+                  sendPort.send(DownloadMessage(progress: double.tryParse(progress) ?? 0, url: param['url']));
+                  LoggerService().log(message: 'Download Progress $progress', level: LogLevel.info);
                 }
               },
               onDone: () async {
                 path = file.path;
-                sendPort.send(
-                  DownloadMessage(
-                    progress: 100,
-                    url: param['url'],
-                    filePath: file.path,
-                  ),
-                );
+                sendPort.send(DownloadMessage(progress: 100, url: param['url'], filePath: file.path));
                 await sink.close();
               },
               onError: (e) {
-                LoggerService().log(
-                  message: 'Download error $e',
-                  level: LogLevel.info,
-                );
+                LoggerService().log(message: 'Download error $e', level: LogLevel.info);
               },
               cancelOnError: true,
             )
@@ -130,13 +96,9 @@ class DownloadServiceMobile {
       }
     } catch (ex) {
       sendPort.send(DownloadMessage(progress: 0, url: param['url']));
-      LoggerService().log(
-        message: 'error occurred while downloading file ${ex.toString()}',
-      );
+      LoggerService().log(message: 'error occurred while downloading file ${ex.toString()}');
     }
-    sendPort.send(
-      DownloadMessage(progress: 100, url: param['url'], filePath: path),
-    );
+    sendPort.send(DownloadMessage(progress: 100, url: param['url'], filePath: path));
     //sendPort.send(path);
   }
 
@@ -172,12 +134,7 @@ class DownloadServiceMobile {
             uploadedBytes += chunk.length;
             final progress = (uploadedBytes / totalBytes) * 100;
 
-            sendPort.send({
-              'status': 'progress',
-              'progress': progress,
-              'bytes': uploadedBytes,
-              'total': totalBytes,
-            });
+            sendPort.send({'status': 'progress', 'progress': progress, 'bytes': uploadedBytes, 'total': totalBytes});
             LoggerService().log(message: 'progress====>$progress');
 
             sink.add(chunk); // forward chunk
@@ -185,17 +142,10 @@ class DownloadServiceMobile {
         ),
       );
       LoggerService().log(message: 'preparing upload file request');
-      final multipartFile = http.MultipartFile(
-        'file',
-        stream,
-        totalBytes,
-        filename: Uri.file(param['localPath']).pathSegments.last,
-      );
+      final multipartFile = http.MultipartFile('file', stream, totalBytes, filename: Uri.file(param['localPath']).pathSegments.last);
       request.files.add(multipartFile);
       final response = await request.send();
-      LoggerService().log(
-        message: 'file upload response status===>${response.statusCode}',
-      );
+      LoggerService().log(message: 'file upload response status===>${response.statusCode}');
       if (response.statusCode >= 200 && response.statusCode < 300) {
         sendPort.send(100.0);
       } else {
@@ -207,13 +157,7 @@ class DownloadServiceMobile {
   }
 
   @override
-  Future<void> uploadFile({
-    required String path,
-    required String url,
-    required ApiMethod method,
-    required Function(double) onProgress,
-    required Function(String) onError,
-  }) async {
+  Future<void> uploadFile({required String path, required String url, required ApiMethod method, required Function(double) onProgress, required Function(String) onError}) async {
     try {
       final receivePort = ReceivePort();
       receivePort.listen((message) {
@@ -226,12 +170,7 @@ class DownloadServiceMobile {
           receivePort.close();
         }
       });
-      final param = {
-        'localPath': path,
-        'sendPort': receivePort.sendPort,
-        'url': url,
-        'methods': method,
-      };
+      final param = {'localPath': path, 'sendPort': receivePort.sendPort, 'url': url, 'methods': method};
       LoggerService().log(message: 'calling file upload isolate');
       await Isolate.spawn(_uploadFileIsolate, param);
     } catch (e) {

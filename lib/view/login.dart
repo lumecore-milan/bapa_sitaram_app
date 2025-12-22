@@ -46,7 +46,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void initState() {
-
     FirebaseOtpHelper().otpController.stream.listen((d) {
       if (d.sent == true) {
         _controller.otpSent.value = true;
@@ -58,10 +57,10 @@ class _LoginPageState extends State<LoginPage> {
     });
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-         isUserRegistered.value=PreferenceService().getBoolean(key: AppConstants().prefKeyIsRegistered);
-         if(isUserRegistered.value==true){
-              _mobileController.text=PreferenceService().getString(key: AppConstants().prefKeyMobile);
-         }
+      isUserRegistered.value = PreferenceService().getBoolean(key: AppConstants().prefKeyIsRegistered);
+      if (isUserRegistered.value == true) {
+        _mobileController.text = PreferenceService().getString(key: AppConstants().prefKeyMobile);
+      }
     });
   }
 

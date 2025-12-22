@@ -32,7 +32,7 @@ class MyDonationList extends StatefulWidget {
 class _MyDonationListState extends State<MyDonationList> {
   Rx<double> total = (0.0).obs;
 
-String donationUrl='';
+  String donationUrl = '';
   @override
   void initState() {
     super.initState();
@@ -40,30 +40,20 @@ String donationUrl='';
 
   Future<List<dynamic>> getDetail() async {
     Map<String, dynamic> userDetail = {};
-    String temp = PreferenceService().getString(
-      key: AppConstants().prefKeyUserDetail,
-    );
+    String temp = PreferenceService().getString(key: AppConstants().prefKeyUserDetail);
     if (temp.isNotEmpty) {
       userDetail = json.decode(temp);
     }
     List<dynamic> list = List.empty(growable: true);
     try {
       final apiInstance = NetworkServiceMobile();
-      await apiInstance
-          .post(
-            url: APIConstant().apiMyDonation,
-            isFormData: true,
-            requestBody: {
-              'mobile_no': userDetail['mobile'],
-            },
-          )
-          .then((data) {
-            if (data.isNotEmpty) {
-              if (data['httpStatusCode'] == 200) {
-                list = data['data'];
-              }
-            }
-          });
+      await apiInstance.post(url: APIConstant().apiMyDonation, isFormData: true, requestBody: {'mobile_no': userDetail['mobile']}).then((data) {
+        if (data.isNotEmpty) {
+          if (data['httpStatusCode'] == 200) {
+            list = data['data'];
+          }
+        }
+      });
     } catch (e) {
       LoggerService().log(message: e.toString());
     }
@@ -71,21 +61,13 @@ String donationUrl='';
   }
 
   Future<String> downloadReceipt({required int id}) async {
-    String url='';
+    String url = '';
     try {
       final apiInstance = NetworkServiceMobile();
-      await apiInstance
-          .post(
-        url: APIConstant().apiDownloadInvoice,
-        isFormData: true,
-        requestBody: {
-          'id': id,
-        },
-      )
-          .then((data) {
+      await apiInstance.post(url: APIConstant().apiDownloadInvoice, isFormData: true, requestBody: {'id': id}).then((data) {
         if (data.isNotEmpty) {
           if (data['httpStatusCode'] == 200) {
-            url = data['invoice']??'';
+            url = data['invoice'] ?? '';
           }
         }
       });
@@ -120,42 +102,24 @@ String donationUrl='';
                 return Container(
                   height: SizeConfig().height,
                   width: SizeConfig().width,
-                  margin: .only(bottom:30),
+                  margin: .only(bottom: 30),
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
                         Container(
-                          decoration: BoxDecoration(
-                            color: CustomColors().blue700,
-                            borderRadius: .circular(10),
-                          ),
+                          decoration: BoxDecoration(color: CustomColors().blue700, borderRadius: .circular(10)),
                           padding: .all(10),
                           child: Column(
                             children: [
                               Row(
                                 mainAxisAlignment: .spaceBetween,
                                 children: [
-                                  Text(
-                                    'My Total Donation',
-                                    style: semiBold(
-                                      fontSize: 14,
-                                      color: CustomColors().white,
-                                    ),
-                                  ),
+                                  Text('My Total Donation', style: semiBold(fontSize: 14, color: CustomColors().white)),
                                   InkWell(
                                     onTap: () {
-                                      navigate(
-                                        context: context,
-                                        replace: false,
-                                        path: donationRoute,
-                                        param: true,
-                                      );
+                                      navigate(context: context, replace: false, path: donationRoute, param: true);
                                     },
-                                    child: Icon(
-                                      Icons.add,
-                                      size: 24,
-                                      color: CustomColors().white,
-                                    ),
+                                    child: Icon(Icons.add, size: 24, color: CustomColors().white),
                                   ),
                                 ],
                               ),
@@ -164,23 +128,11 @@ String donationUrl='';
                                 child: Column(
                                   mainAxisSize: .min,
                                   children: [
-                                    Text(
-                                      'Donation',
-                                      style: semiBold(
-                                        fontSize: 16,
-                                        color: CustomColors().white1000,
-                                      ),
-                                    ),
+                                    Text('Donation', style: semiBold(fontSize: 16, color: CustomColors().white1000)),
                                     Obx(
                                       () => Text(
-                                        NumberFormat.currency(
-                                          locale: "en_IN",
-                                          symbol: "₹",
-                                        ).format(total.value),
-                                        style: semiBold(
-                                          fontSize: 22,
-                                          color: CustomColors().white,
-                                        ),
+                                        NumberFormat.currency(locale: "en_IN", symbol: "₹").format(total.value),
+                                        style: semiBold(fontSize: 22, color: CustomColors().white),
                                       ),
                                     ),
                                   ],
@@ -198,21 +150,16 @@ String donationUrl='';
                           separatorBuilder: (_, index) => 10.h,
                           itemBuilder: (_, index) {
                             WidgetsBinding.instance.addPostFrameCallback((_) {
-                              total.value =
-                                  total.value +
-                                  (double.tryParse(
-                                        list[index]['amount'] as String,
-                                      ) ??
-                                      0);
+                              total.value = total.value + (double.tryParse(list[index]['amount'] as String) ?? 0);
                             });
-                    
+
                             return InkWell(
-                              onTap: (){
+                              onTap: () {
                                 Helper.showLoader();
-                                downloadReceipt(id: list[index]['id']).then((url){
-                                      Helper.closeLoader();
-                                  if(url.isNotEmpty){
-                                    downloadReceiptDialog(context: context, detail: list[index],url: url);
+                                downloadReceipt(id: list[index]['id']).then((url) {
+                                  Helper.closeLoader();
+                                  if (url.isNotEmpty) {
+                                    downloadReceiptDialog(context: context, detail: list[index], url: url);
                                   }
                                 });
                               },
@@ -239,49 +186,23 @@ String donationUrl='';
                                       height: 40,
                                       padding: .all(5),
                                       alignment: .center,
-                                      decoration: BoxDecoration(
-                                        borderRadius: .circular(10),
-                                        color: getRandomColor(),
-                                      ),
-                                      child: ImageWidget(
-                                        url: 'assets/images/ic_payment.svg',
-                                        color: CustomColors().white,
-                                        height: 24,
-                                        width: 24,
-                                      ),
+                                      decoration: BoxDecoration(borderRadius: .circular(10), color: getRandomColor()),
+                                      child: ImageWidget(url: 'assets/images/ic_payment.svg', color: CustomColors().white, height: 24, width: 24),
                                     ),
                                     10.w,
                                     Expanded(
                                       child: Column(
                                         crossAxisAlignment: .start,
                                         children: [
-                                          Text(
-                                            'Donation for',
-                                            style: semiBold(fontSize: 14),
-                                          ),
-                              
-                                          Text(
-                                            list[index]['donation_type'] ?? '',
-                                            style: bolder(fontSize: 18),
-                                          ),
-                              
-                                          Text(
-                                            list[index]['payment_date'] ?? '',
-                                            style: medium(
-                                              fontSize: 10,
-                                              color: CustomColors().grey600,
-                                            ),
-                                          ),
+                                          Text('Donation for', style: semiBold(fontSize: 14)),
+
+                                          Text(list[index]['donation_type'] ?? '', style: bolder(fontSize: 18)),
+
+                                          Text(list[index]['payment_date'] ?? '', style: medium(fontSize: 10, color: CustomColors().grey600)),
                                         ],
                                       ),
                                     ),
-                                    Text(
-                                      '₹${list[index]['amount'] ?? ''}',
-                                      style: bolder(
-                                        fontSize: 18,
-                                        color: CustomColors().green600,
-                                      ),
-                                    ),
+                                    Text('₹${list[index]['amount'] ?? ''}', style: bolder(fontSize: 18, color: CustomColors().green600)),
                                   ],
                                 ),
                               ),
@@ -302,11 +223,6 @@ String donationUrl='';
 
   Color getRandomColor() {
     Random random = Random();
-    return Color.fromARGB(
-      255,
-      random.nextInt(256),
-      random.nextInt(256),
-      random.nextInt(256),
-    );
+    return Color.fromARGB(255, random.nextInt(256), random.nextInt(256), random.nextInt(256));
   }
 }

@@ -97,28 +97,32 @@ class ContactUs extends StatefulWidget {
 class _ContactUsState extends State<ContactUs> {
   final GlobalKey<FormState> _formKey = GlobalKey();
 
-   final HomeDetailController controller=Get.find<HomeDetailController>();
+  final HomeDetailController controller = Get.find<HomeDetailController>();
 
-  final TextEditingController type=TextEditingController();
+  final TextEditingController type = TextEditingController();
 
-  final TextEditingController name=TextEditingController();
+  final TextEditingController name = TextEditingController();
 
-  final TextEditingController mobile=TextEditingController();
+  final TextEditingController mobile = TextEditingController();
 
-  final TextEditingController amount=TextEditingController();
+  final TextEditingController amount = TextEditingController();
 
-  final TextEditingController email=TextEditingController();
+  final TextEditingController email = TextEditingController();
 
-  final TextEditingController pinCode=TextEditingController();
+  final TextEditingController pinCode = TextEditingController();
 
-  final TextEditingController message=TextEditingController();
+  final TextEditingController message = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppbar(title: 'Contact Us', showDrawerIcon: false, onBackTap: (){
-        Navigator.pop(context);
-      }),
+      appBar: CustomAppbar(
+        title: 'Contact Us',
+        showDrawerIcon: false,
+        onBackTap: () {
+          Navigator.pop(context);
+        },
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -138,19 +142,18 @@ class _ContactUsState extends State<ContactUs> {
                         BoxShadow(
                           color: CustomColors().green50,
                           blurRadius: 10,
-                          spreadRadius: 2,   // keep this 0 for OUTSIDE only
+                          spreadRadius: 2, // keep this 0 for OUTSIDE only
                           offset: Offset(0, 0),
                         ),
                       ],
-
                     ),
 
                     child: Column(
                       crossAxisAlignment: .start,
                       children: [
-                        _contactDetail(image: 'assets/images/ic_phone.svg', title: 'મોબાઈલ  નંબર',value: controller.aboutUs['about_phone']),
-                        _contactDetail(image: 'assets/images/ic_email.svg', title: 'ઈમેલ',value: controller.aboutUs['about_email']),
-                        _contactDetail(image: 'assets/images/ic_address.svg', title: 'સરનામું',value: controller.aboutUs['address']),
+                        _contactDetail(image: 'assets/images/ic_phone.svg', title: 'મોબાઈલ  નંબર', value: controller.aboutUs['about_phone']),
+                        _contactDetail(image: 'assets/images/ic_email.svg', title: 'ઈમેલ', value: controller.aboutUs['about_email']),
+                        _contactDetail(image: 'assets/images/ic_address.svg', title: 'સરનામું', value: controller.aboutUs['address']),
                       ],
                     ),
                   ),
@@ -160,9 +163,10 @@ class _ContactUsState extends State<ContactUs> {
                   key: _formKey,
                   child: Column(
                     children: [
-                      10.h, CustomTextFormField(
-                        validator: (val){
-                          if((val??'').trim().isEmpty){
+                      10.h,
+                      CustomTextFormField(
+                        validator: (val) {
+                          if ((val ?? '').trim().isEmpty) {
                             return 'નામ દાખલ કરો';
                           }
                           return null;
@@ -177,17 +181,17 @@ class _ContactUsState extends State<ContactUs> {
                       ),
                       10.h,
                       CustomTextFormField(
-                        validator: (val){
-                           if((val??'').trim().length!=10){
-                             return 'મોબાઈલ નંબર દાખલ કરો';
-                           }
-                           return null;
+                        validator: (val) {
+                          if ((val ?? '').trim().length != 10) {
+                            return 'મોબાઈલ નંબર દાખલ કરો';
+                          }
+                          return null;
                         },
                         greyBorder: true,
                         required: true,
                         isMobile: true,
-                        formatter: [formatterDigitsOnly,LengthLimitingTextInputFormatter(10)],
-                        inputType: TextInputType.numberWithOptions(decimal: false,signed: true),
+                        formatter: [formatterDigitsOnly, LengthLimitingTextInputFormatter(10)],
+                        inputType: TextInputType.numberWithOptions(decimal: false, signed: true),
                         controller: mobile,
                         label: 'મોબાઈલ  નંબર*',
                         hint: 'મોબાઈલ  નંબર દાખલ કરો',
@@ -195,8 +199,8 @@ class _ContactUsState extends State<ContactUs> {
                       ),
                       10.h,
                       CustomTextFormField(
-                        validator: (val){
-                          if((val??'').trim().isEmpty || GetUtils.isEmail(val??'')==false){
+                        validator: (val) {
+                          if ((val ?? '').trim().isEmpty || GetUtils.isEmail(val ?? '') == false) {
                             return 'ઈમેલ દાખલ કરો';
                           }
                           return null;
@@ -213,8 +217,8 @@ class _ContactUsState extends State<ContactUs> {
                       ),
                       10.h,
                       CustomTextFormField(
-                        validator: (val){
-                          if((val??'').trim().isEmpty){
+                        validator: (val) {
+                          if ((val ?? '').trim().isEmpty) {
                             return 'સંદેશ દાખલ કરો';
                           }
                           return null;
@@ -234,36 +238,29 @@ class _ContactUsState extends State<ContactUs> {
                       20.h,
                       CommonButton(
                         color: CustomColors().blue700,
-                        onTap: () async{
+                        onTap: () async {
+                          if (_formKey.currentState!.validate()) {
+                            try {
+                              Helper.showLoader();
+                              await NetworkServiceMobile().post(url: APIConstant().apiContactUs, requestBody: {'name': name.text, 'mobile_no': mobile.text, 'email': email.text, 'message': message.text}, isFormData: true).then((data) {
+                                Helper.closeLoader();
+                                Helper.showMessage(title: data['httpStatusCode'] == 200 ? 'Success' : "Error", message: data['message'], isSuccess: data['httpStatusCode'] == 200);
 
-                            if (_formKey.currentState!.validate()) {
-
-                              try{
-                                Helper.showLoader();
-                                await NetworkServiceMobile().post(url: APIConstant().apiContactUs, requestBody: {
-                                  'name':name.text,
-                                  'mobile_no':mobile.text,
-                                  'email':email.text,
-                                  'message':message.text,
-                                }, isFormData: true).then((data) {
-                                    Helper.closeLoader();
-                                    Helper.showMessage(title:data['httpStatusCode']==200 ? 'Success':"Error", message: data['message'], isSuccess: data['httpStatusCode']==200);
-                                    
-                                    if(data['httpStatusCode']==200){
-                                      name.clear();
-                                      mobile.clear();
-                                      email.clear();
-                                      message.clear();
-                                      _formKey.currentState?.reset();
-
-                                    }
-                                  
-                                });
-                              }catch(e){
-                                LoggerService().log(message: e.toString());
-                              }
+                                if (data['httpStatusCode'] == 200) {
+                                  name.clear();
+                                  mobile.clear();
+                                  email.clear();
+                                  message.clear();
+                                  _formKey.currentState?.reset();
+                                }
+                              });
+                            } catch (e) {
+                              LoggerService().log(message: e.toString());
                             }
-                        }, title: 'સંદેશ મોકલો'),
+                          }
+                        },
+                        title: 'સંદેશ મોકલો',
+                      ),
                     ],
                   ),
                 ),
@@ -275,40 +272,27 @@ class _ContactUsState extends State<ContactUs> {
     );
   }
 
-  Widget _contactDetail({required String image,required String title,required String value}){
-
+  Widget _contactDetail({required String image, required String title, required String value}) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: Row(
         crossAxisAlignment: .center,
         mainAxisAlignment: .start,
         children: [
-          ImageWidget(url:image,color: CustomColors().primaryColorDark,height: 24,width: 24,),
+          ImageWidget(url: image, color: CustomColors().primaryColorDark, height: 24, width: 24),
           10.w,
           Expanded(
             child: Column(
               crossAxisAlignment: .start,
               children: [
-                Text(
-                   title,
-                  style: bolder(fontSize: 14, color: CustomColors().black1000),
-                ),
+                Text(title, style: bolder(fontSize: 14, color: CustomColors().black1000)),
 
-                Text(
-                  value,
-                  style: bolder(fontSize: 12, color: CustomColors().grey600),
-                ),
+                Text(value, style: bolder(fontSize: 12, color: CustomColors().grey600)),
               ],
             ),
           ),
-
         ],
       ),
     );
-
   }
 }
-
-
-
-

@@ -60,7 +60,6 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
     return SafeArea(
       child: Material(
         child: PageView.builder(
-
           controller: _pageController,
           scrollDirection: Axis.vertical,
           itemCount: controller.posts.length,
@@ -76,8 +75,8 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
               isVideo = false;
             }
             return SizedBox.expand(
-             // height: SizeConfig().height,
-            //  width: SizeConfig().width,
+              // height: SizeConfig().height,
+              //  width: SizeConfig().width,
               child: Stack(
                 fit: StackFit.expand,
                 children: [
@@ -85,8 +84,9 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
                     () => isVideo == false
                         ? ImageWidget(url: controller.posts[index].postImage, fit: .fitWidth, loadIndicatorHeight: 100, loadIndicatorWidth: 100)
                         : FittedBox(
-                        fit: .cover,
-                        child: CustomPlayer(url: controller.posts[index].postImage)),
+                            fit: .cover,
+                            child: CustomPlayer(url: controller.posts[index].postImage),
+                          ),
                   ),
                   Positioned(
                     top: 10,
@@ -117,7 +117,7 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
                       left: 0,
                       right: 0,
                       child: Container(
-                        padding: .only(left: 16, right: 16, bottom: 10,top:16),
+                        padding: .only(left: 16, right: 16, bottom: 10, top: 16),
                         width: SizeConfig().width,
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
@@ -125,11 +125,11 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
                             end: Alignment.bottomCenter,
                             colors: [
                               Colors.transparent,
-                            //  Colors.transparent,
-                             // CustomColors().black.withAlpha(0),
+                              //  Colors.transparent,
+                              // CustomColors().black.withAlpha(0),
                               CustomColors().black.withAlpha(30),
                               CustomColors().black.withAlpha(127),
-                              CustomColors().black
+                              CustomColors().black,
                             ],
                             /*stops: [
                               0.0,
@@ -143,7 +143,7 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
                           mainAxisSize: .min,
                           crossAxisAlignment: .start,
                           children: [
-                           /* Center(
+                            /* Center(
                               child: Stack(
                                 alignment: .center,
                                 children: [
@@ -177,35 +177,28 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
                               ],
                             ),
 
-                            if(controller.posts[index].postDesc.isNotEmpty)
+                            if (controller.posts[index].postDesc.isNotEmpty)
                               Container(
-                               // height: controller.posts[index].postDesc.isNotEmpty? 40:0,
-                                padding: const .only(right:20),
-                                child: CustomHtmlWidget(
-                                  showHtml: true,
-                                  fontColor: CustomColors().white,
-                                  content:controller.posts[index].postDesc,
-                                  title: '',
-                                  image: '',
-                                ),
+                                // height: controller.posts[index].postDesc.isNotEmpty? 40:0,
+                                padding: const .only(right: 20),
+                                child: CustomHtmlWidget(showHtml: true, fontColor: CustomColors().white, content: controller.posts[index].postDesc, title: '', image: ''),
                               ),
-                           /* CustomHtmlWidget(
+                            /* CustomHtmlWidget(
                               title: '',
                                 image: '',
 
                                 fontWeight: FontWeight.w600,
                                 content: controller.posts[index].postDesc,fontColor: CustomColors().white),*/
-                            if(controller.posts[index].postDesc.isNotEmpty)
-
-                            Row(
-                              children: [
-                                ImageWidget(url: 'assets/images/ic_view.svg', height: 20, width: 20, color: CustomColors().white1000),
-                                10.w,
-                                Obx(() => Text('${controller.posts[index].viewCount}', style: bolder(fontSize: 14, color: CustomColors().white1000))),
-                                10.w,
-                                Text(controller.posts[index].addedDate, style: bolder(fontSize: 14, color: CustomColors().white1000)),
-                              ],
-                            ),
+                            if (controller.posts[index].postDesc.isNotEmpty)
+                              Row(
+                                children: [
+                                  ImageWidget(url: 'assets/images/ic_view.svg', height: 20, width: 20, color: CustomColors().white1000),
+                                  10.w,
+                                  Obx(() => Text('${controller.posts[index].viewCount}', style: bolder(fontSize: 14, color: CustomColors().white1000))),
+                                  10.w,
+                                  Text(controller.posts[index].addedDate, style: bolder(fontSize: 14, color: CustomColors().white1000)),
+                                ],
+                              ),
                             10.h,
                             InkWell(
                               onTap: () async {
@@ -267,14 +260,15 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
                             Obx(() => Text('${controller.posts[index].likeCount}', style: semiBold(fontSize: 12, color: CustomColors().white))),
                             10.h,
                             InkWell(
-                                onTap: ()async{
-                                   Helper.showLoader();
-                                  await HelperService().downloadFile(url: controller.posts[index].postImage).then((r){
-                                    Helper.closeLoader();
-                                  });
-                                },
+                              onTap: () async {
+                                Helper.showLoader();
+                                await HelperService().downloadFile(url: controller.posts[index].postImage).then((r) {
+                                  Helper.closeLoader();
+                                });
+                              },
 
-                                child: ImageWidget(url: 'assets/images/ic_download.svg', height: 24, width: 24,color: CustomColors().white )),
+                              child: ImageWidget(url: 'assets/images/ic_download.svg', height: 24, width: 24, color: CustomColors().white),
+                            ),
                             5.h,
                             Text('Save', style: semiBold(fontSize: 12, color: CustomColors().white)),
                             10.h,
@@ -376,11 +370,10 @@ class _CustomPlayerState extends State<CustomPlayer> {
       _controller = VideoPlayerController.file(File(widget.url), viewType: VideoViewType.platformView);
     } else {
       _controller = VideoPlayerController.networkUrl(Uri.parse(widget.url), viewType: VideoViewType.platformView);
-
     }
     _controller.initialize().then((r) {
       _controller.play();
-      isPlaying.value=true;
+      isPlaying.value = true;
       _controller.setLooping(true);
       if (mounted) {
         setState(() {});
@@ -410,11 +403,11 @@ class _CustomPlayerState extends State<CustomPlayer> {
             child: VideoPlayer(_controller),
           ),
           Obx(
-            () => (isPlaying.value == true || _controller.value.isInitialized==false)
+            () => (isPlaying.value == true || _controller.value.isInitialized == false)
                 ? SizedBox.shrink()
                 : Positioned(
-                    top: (SizeConfig().height / 2)+100,
-                    left: (SizeConfig().width / 2)+100,
+                    top: (SizeConfig().height / 2) + 100,
+                    left: (SizeConfig().width / 2) + 100,
                     child: IgnorePointer(
                       child: Container(
                         decoration: BoxDecoration(color: Colors.black.withOpacity(0.25), shape: BoxShape.circle),

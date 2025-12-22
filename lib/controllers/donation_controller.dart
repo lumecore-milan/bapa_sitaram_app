@@ -28,28 +28,25 @@ class DonationController extends GetxController {
   final _apiInstance = NetworkServiceMobile();
 
   DonationController() {
-
-    final String userDetail=PreferenceService().getString(key: AppConstants().prefKeyUserDetail);
-    if(userDetail.isNotEmpty){
-
-          Map<String,dynamic> detail=json.decode(userDetail);
-          if(detail.isNotEmpty){
-              name.text=detail['name']??'';
-              email.text=detail['email']??'';
-              mobile.text=detail['mobile']??'';
-              pinCode.text=detail['pinCode']??'';
-              address.text=detail['address']??'';
-              panCard.text=detail['panCard']??'';
-          }
+    final String userDetail = PreferenceService().getString(key: AppConstants().prefKeyUserDetail);
+    if (userDetail.isNotEmpty) {
+      Map<String, dynamic> detail = json.decode(userDetail);
+      if (detail.isNotEmpty) {
+        name.text = detail['name'] ?? '';
+        email.text = detail['email'] ?? '';
+        mobile.text = detail['mobile'] ?? '';
+        pinCode.text = detail['pinCode'] ?? '';
+        address.text = detail['address'] ?? '';
+        panCard.text = detail['panCard'] ?? '';
+      }
     }
     RazorPayService().onPaymentSuccess.listen((payment) {
-      if(payment.paymentId!=null) {
-        paymentSuccess(paymentId: payment.paymentId??'');
-
+      if (payment.paymentId != null) {
+        paymentSuccess(paymentId: payment.paymentId ?? '');
       }
     });
   }
-  void clearForm(){
+  void clearForm() {
     type.clear();
     name.clear();
     mobile.clear();
@@ -58,40 +55,27 @@ class DonationController extends GetxController {
     pinCode.clear();
     address.clear();
     panCard.clear();
-
   }
 
   Rx<bool> otpSent = false.obs;
 
   Future<(bool, String)> submit() async {
-
     (bool, String) resp = (false, '');
     try {
       await _apiInstance
           .post(
             url: APIConstant().apiCreateOrder,
             requestBody: {
-              'user_id':Platform.isIOS ?1: PreferenceService().getInt(
-                key: AppConstants().prefKeyUserId,
-              ),
+              'user_id': Platform.isIOS ? 1 : PreferenceService().getInt(key: AppConstants().prefKeyUserId),
               'amount': int.parse(amount.text) * 100,
             },
             isFormData: true,
           )
-          .then((data)async {
+          .then((data) async {
             LoggerService().log(message: data);
             if (data.isNotEmpty) {
               if (data['httpStatusCode'] == 200) {
-                await RazorPayService().makePayment(
-                  data: {
-                    'amount': data['amount'],
-                    'name': name.text.trim(),
-                    'description': 'Sample payment',
-                    'orderId': data['order_id'],
-                    'contact': '+91${mobile.text}',
-                    'email': email.text,
-                  },
-                );
+                await RazorPayService().makePayment(data: {'amount': data['amount'], 'name': name.text.trim(), 'description': 'Sample payment', 'orderId': data['order_id'], 'contact': '+91${mobile.text}', 'email': email.text});
               }
             }
           });
@@ -107,24 +91,15 @@ class DonationController extends GetxController {
       await _apiInstance
           .post(
             url: APIConstant().apiPaymentSuccess,
-            requestBody: {
-              'payment_id': paymentId,
-              'name': name.text,
-              'email': email.text,
-              'mobile_no': mobile.text,
-              'pan_no': panCard.text,
-              'donation_type': type.text,
-              'address': address.text,
-              'pin_code': pinCode.text,
-            },
+            requestBody: {'payment_id': paymentId, 'name': name.text, 'email': email.text, 'mobile_no': mobile.text, 'pan_no': panCard.text, 'donation_type': type.text, 'address': address.text, 'pin_code': pinCode.text},
             isFormData: false,
           )
           .then((data) {
             if (data.isNotEmpty) {
               if (data['httpStatusCode'] == 200) {
-                    clearForm();
-                    AppEventsStream().addEvent( AppEvent(type: AppEventType.paymentSuccess,data: data));
-                    Helper.showMessage(title: 'Success', message: 'Payment successful', isSuccess: true);
+                clearForm();
+                AppEventsStream().addEvent(AppEvent(type: AppEventType.paymentSuccess, data: data));
+                Helper.showMessage(title: 'Success', message: 'Payment successful', isSuccess: true);
               }
             }
           });

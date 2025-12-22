@@ -30,10 +30,7 @@ class PostModel {
     this.userData = const UserData(),
   });
 
-  factory PostModel.fromJson(
-    Map<String, dynamic> json, {
-    bool hidedetail = false,
-  }) {
+  factory PostModel.fromJson(Map<String, dynamic> json, {bool hidedetail = false}) {
     return PostModel(
       postId: json['post_id'] ?? 0,
       hide: hidedetail,
@@ -46,9 +43,7 @@ class PostModel {
       viewCount: json['view_count'] ?? 0,
       isLiked: json['is_liked'] ?? 0,
       addedDate: json['added_date'] ?? '',
-      userData: json['user_data'] != null
-          ? UserData.fromJson(json['user_data'])
-          : UserData(),
+      userData: json['user_data'] != null ? UserData.fromJson(json['user_data']) : UserData(),
     );
   }
 
@@ -72,9 +67,7 @@ class PostModel {
   /// FROM JSON LIST
   static List<PostModel> fromJsonList(dynamic jsonList) {
     if (jsonList == null) return [];
-    return List<PostModel>.from(
-      (jsonList as List).map((item) => PostModel.fromJson(item ?? {})),
-    );
+    return List<PostModel>.from((jsonList as List).map((item) => PostModel.fromJson(item ?? {})));
   }
 }
 
@@ -85,18 +78,10 @@ class UserData {
   const UserData({this.userId = 0, this.userName = '', this.userProfile = ''});
 
   factory UserData.fromJson(Map<String, dynamic> json) {
-    return UserData(
-      userId: json['user_id'] ?? 0,
-      userName: json['user_name'] ?? '',
-      userProfile: json['user_profile'] ?? '',
-    );
+    return UserData(userId: json['user_id'] ?? 0, userName: json['user_name'] ?? '', userProfile: json['user_profile'] ?? '');
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'user_id': userId,
-      'user_name': userName,
-      'user_profile': userProfile,
-    };
+    return {'user_id': userId, 'user_name': userName, 'user_profile': userProfile};
   }
 }

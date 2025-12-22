@@ -22,7 +22,7 @@ class PolicyPage extends StatelessWidget {
       body: SafeArea(
         child: SizedBox(
           height: SizeConfig().height,
-          child: CustomHtmlWidget(content: detail,image: '',title: '',),
+          child: CustomHtmlWidget(content: detail, image: '', title: ''),
         ),
       ),
     );

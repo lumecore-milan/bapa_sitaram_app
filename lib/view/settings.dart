@@ -24,18 +24,17 @@ class SettingPage extends StatefulWidget {
 
 class _SettingPageState extends State<SettingPage> {
   RxBool isSwitchOn = true.obs;
-Rx<String> cacheSize=''.obs;
+  Rx<String> cacheSize = ''.obs;
   @override
   void initState() {
     super.initState();
-    isSwitchOn.value=PreferenceService().getString(key: AppConstants().prefKeyNotificationEnabled)!='false';
+    isSwitchOn.value = PreferenceService().getString(key: AppConstants().prefKeyNotificationEnabled) != 'false';
 
-    WidgetsBinding.instance.addPostFrameCallback((_) async{
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
       await getCacheSize();
     });
-
-
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,10 +52,7 @@ Rx<String> cacheSize=''.obs;
             crossAxisAlignment: .start,
             children: [
               12.h,
-              Text(
-                'Device Settings',
-                style: bolder(fontSize: 16, color: CustomColors().blue700),
-              ),
+              Text('Device Settings', style: bolder(fontSize: 16, color: CustomColors().blue700)),
               10.h,
               Obx(
                 () => detailList(
@@ -71,7 +67,7 @@ Rx<String> cacheSize=''.obs;
                     value: isSwitchOn.value,
                     onChanged: (value) {
                       isSwitchOn.value = value;
-                      PreferenceService().setString(key: AppConstants().prefKeyNotificationEnabled,value: value==false ? 'false':'true');
+                      PreferenceService().setString(key: AppConstants().prefKeyNotificationEnabled, value: value == false ? 'false' : 'true');
                     },
                   ),
                 ),
@@ -80,37 +76,18 @@ Rx<String> cacheSize=''.obs;
               detailList(
                 context: context,
                 title: 'Clear Cache',
-                image: Obx(()=>Text(cacheSize.value,style: semiBold(fontSize: 12),)),
+                image: Obx(() => Text(cacheSize.value, style: semiBold(fontSize: 12))),
               ),
               20.h,
-              Text(
-                'Policy',
-                style: bolder(fontSize: 16, color: CustomColors().blue700),
-              ),
+              Text('Policy', style: bolder(fontSize: 16, color: CustomColors().blue700)),
               10.h,
-              detailList(
-                context: context,
-                title: 'Refund Policy',
-                image: Icon(Icons.arrow_forward_ios, size: 16),
-              ),
+              detailList(context: context, title: 'Refund Policy', image: Icon(Icons.arrow_forward_ios, size: 16)),
               10.h,
-              detailList(
-                context: context,
-                title: 'Privacy Policy',
-                image: Icon(Icons.arrow_forward_ios, size: 16),
-              ),
+              detailList(context: context, title: 'Privacy Policy', image: Icon(Icons.arrow_forward_ios, size: 16)),
               10.h,
-              detailList(
-                context: context,
-                title: 'Terms & Condition',
-                image: Icon(Icons.arrow_forward_ios, size: 16),
-              ),
+              detailList(context: context, title: 'Terms & Condition', image: Icon(Icons.arrow_forward_ios, size: 16)),
               10.h,
-              detailList(
-                context: context,
-                title: 'version:8',
-                image: Icon(Icons.mobile_friendly_sharp, size: 16),
-              ),
+              detailList(context: context, title: 'version:8', image: Icon(Icons.mobile_friendly_sharp, size: 16)),
               10.h,
             ],
           ),
@@ -119,18 +96,13 @@ Rx<String> cacheSize=''.obs;
     );
   }
 
-  Widget detailList({
-    required String title,
-    required Widget image,
-    required BuildContext context,
-  }) {
+  Widget detailList({required String title, required Widget image, required BuildContext context}) {
     return Material(
       elevation: 5,
       borderRadius: BorderRadius.circular(4),
       child: GestureDetector(
         onTap: () {
-
-          if( ['Privacy Policy','Refund Policy','Terms & Condition'].indexOf(title)>=0 ){
+          if (['Privacy Policy', 'Refund Policy', 'Terms & Condition'].indexOf(title) >= 0) {
             final cnt = Get.find<HomeDetailController>();
 
             navigate(
@@ -139,20 +111,12 @@ Rx<String> cacheSize=''.obs;
               path: policyRoute,
               param: {
                 'title': 'Privacy Policy',
-                if (title == 'Privacy Policy')
-                  'data': cnt.aboutUs['privacypolicy']
-                else if (title == 'Refund Policy')
-                  'data': cnt.aboutUs['refundpolicy']
-                else if (title == 'Terms & Condition')
-                    'data': cnt.aboutUs['term_condition'],
+                if (title == 'Privacy Policy') 'data': cnt.aboutUs['privacypolicy'] else if (title == 'Refund Policy') 'data': cnt.aboutUs['refundpolicy'] else if (title == 'Terms & Condition') 'data': cnt.aboutUs['term_condition'],
               },
             );
-          }else if(title=='Clear Cache'){
-                clearCache();
+          } else if (title == 'Clear Cache') {
+            clearCache();
           }
-
-
-
         },
         child: Container(
           height: 50,
@@ -174,10 +138,7 @@ Rx<String> cacheSize=''.obs;
           child: Row(
             mainAxisAlignment: .spaceBetween,
             children: [
-              Text(
-                title,
-                style: semiBold(fontSize: 14, color: CustomColors().black),
-              ),
+              Text(title, style: semiBold(fontSize: 14, color: CustomColors().black)),
               image,
             ],
           ),
@@ -185,9 +146,9 @@ Rx<String> cacheSize=''.obs;
       ),
     );
   }
+
   Future<void> clearCache() async {
     try {
-
       Helper.showLoader();
       Directory tempDir = await getTemporaryDirectory();
       Directory appCacheDir = await getApplicationSupportDirectory();
@@ -199,13 +160,10 @@ Rx<String> cacheSize=''.obs;
       if (appCacheDir.existsSync()) {
         await appCacheDir.delete(recursive: true);
       }
-    }catch(e){
-
-    }
+    } catch (e) {}
     await getCacheSize();
     Helper.closeLoader();
   }
-
 
   Future<void> getCacheSize() async {
     Directory tempDir = await getTemporaryDirectory();
@@ -214,7 +172,7 @@ Rx<String> cacheSize=''.obs;
     int totalBytes = await _getDirectorySize(tempDir);
     totalBytes += await _getDirectorySize(appCacheDir);
 
-    cacheSize.value= _formatBytes(totalBytes);
+    cacheSize.value = _formatBytes(totalBytes);
     cacheSize.refresh();
   }
 
@@ -241,8 +199,3 @@ Rx<String> cacheSize=''.obs;
     return "${(bytes / mb).toStringAsFixed(2)} MB";
   }
 }
-
-
-
-
-

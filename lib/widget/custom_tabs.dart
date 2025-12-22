@@ -3,13 +3,7 @@ import 'package:bapa_sitaram/utils/font_styles.dart';
 import 'package:flutter/material.dart';
 
 class CustomTabs extends StatelessWidget {
-   const CustomTabs({
-    super.key,
-    required this.tabs,
-    required this.currentIndex,
-    required this.onTap,
-     required this.scrollController
-  });
+  const CustomTabs({super.key, required this.tabs, required this.currentIndex, required this.onTap, required this.scrollController});
 
   final List<String> tabs;
   final int currentIndex;
@@ -33,33 +27,16 @@ class CustomTabs extends StatelessWidget {
           return InkWell(
             onTap: () {
               onTap(index);
-
             },
             child: AnimatedContainer(
               alignment: .center,
-              padding: .symmetric(vertical:5,horizontal:10),
-              decoration: BoxDecoration(
-                color: index == currentIndex ? CustomColors().black : null,
-                borderRadius: BorderRadius.circular(30),
-              ),
+              padding: .symmetric(vertical: 5, horizontal: 10),
+              decoration: BoxDecoration(color: index == currentIndex ? CustomColors().black : null, borderRadius: BorderRadius.circular(30)),
               duration: const Duration(milliseconds: 300),
               child: AnimatedDefaultTextStyle(
-                style: bolder(
-                  fontSize: 14,
-                  color: index == currentIndex
-                      ? CustomColors().white
-                      : CustomColors().grey600,
-                ),
+                style: bolder(fontSize: 14, color: index == currentIndex ? CustomColors().white : CustomColors().grey600),
                 duration: const Duration(milliseconds: 300),
-                child: Text(
-                  tabs[index],
-                  style: bolder(
-                    fontSize: 14,
-                    color: index == currentIndex
-                        ? CustomColors().white
-                        : CustomColors().grey600,
-                  ),
-                ),
+                child: Text(tabs[index], style: bolder(fontSize: 14, color: index == currentIndex ? CustomColors().white : CustomColors().grey600)),
               ),
             ),
           );

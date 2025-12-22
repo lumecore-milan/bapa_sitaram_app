@@ -9,7 +9,7 @@ import 'custom_text_field.dart';
 import 'image_widget.dart';
 
 class LikeCommentPostBottomSheet extends StatefulWidget {
-  const LikeCommentPostBottomSheet({super.key,required this.onSend, required this.message});
+  const LikeCommentPostBottomSheet({super.key, required this.onSend, required this.message});
 
   final TextEditingController message;
   final Function(String) onSend;
@@ -19,7 +19,7 @@ class LikeCommentPostBottomSheet extends StatefulWidget {
 }
 
 class _LikeCommentPostBottomSheetState extends State<LikeCommentPostBottomSheet> {
-  final controller=Get.find<FeedController>();
+  final controller = Get.find<FeedController>();
 
   @override
   Widget build(BuildContext context) {
@@ -35,9 +35,9 @@ class _LikeCommentPostBottomSheetState extends State<LikeCommentPostBottomSheet>
               SingleChildScrollView(
                 physics: BouncingScrollPhysics(),
                 child: Padding(
-                  padding: .only(top: 60, left: 16, right: 16,bottom:80),
-                  child: Obx(()=>
-                     ListView.separated(
+                  padding: .only(top: 60, left: 16, right: 16, bottom: 80),
+                  child: Obx(
+                    () => ListView.separated(
                       itemCount: controller.currentPostDetail.length,
                       shrinkWrap: true,
                       separatorBuilder: (_, index) => SizedBox(height: 10),
@@ -45,19 +45,12 @@ class _LikeCommentPostBottomSheetState extends State<LikeCommentPostBottomSheet>
                       itemBuilder: (_, index) {
                         return Container(
                           padding: .all(10),
-                          decoration: BoxDecoration(
-                            color: CustomColors().layoutPrimaryBackground,
-                            borderRadius: .circular(5),
-                          ),
+                          decoration: BoxDecoration(color: CustomColors().layoutPrimaryBackground, borderRadius: .circular(5)),
                           child: Row(
                             children: [
                               ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
-                                child: ImageWidget(
-                                  url: controller.currentPostDetail[index]['user_image']??'',
-                                  height: 40,
-                                  width: 40,
-                                ),
+                                child: ImageWidget(url: controller.currentPostDetail[index]['user_image'] ?? '', height: 40, width: 40),
                               ),
                               10.w,
                               Expanded(
@@ -70,30 +63,12 @@ class _LikeCommentPostBottomSheetState extends State<LikeCommentPostBottomSheet>
                                       mainAxisSize: .max,
                                       children: [
                                         Expanded(
-                                          child: Text(
-                                            controller.currentPostDetail[index]['user_name']??'',
-                                            style: bolder(
-                                              fontSize: 16,
-                                              color: CustomColors().blue700,
-                                            ),
-                                          ),
+                                          child: Text(controller.currentPostDetail[index]['user_name'] ?? '', style: bolder(fontSize: 16, color: CustomColors().blue700)),
                                         ),
-                                        Text(
-                                          controller.currentPostDetail[index]['comment_time']??'',
-                                          style: semiBold(
-                                            fontSize: 12,
-                                            color: CustomColors().grey600,
-                                          ),
-                                        ),
+                                        Text(controller.currentPostDetail[index]['comment_time'] ?? '', style: semiBold(fontSize: 12, color: CustomColors().grey600)),
                                       ],
                                     ),
-                                    Text(
-                                      controller.currentPostDetail[index]['comment_description']??'',
-                                      style: semiBold(
-                                        fontSize: 14,
-                                        color: CustomColors().grey600,
-                                      ),
-                                    ),
+                                    Text(controller.currentPostDetail[index]['comment_description'] ?? '', style: semiBold(fontSize: 14, color: CustomColors().grey600)),
                                   ],
                                 ),
                               ),
@@ -121,11 +96,7 @@ class _LikeCommentPostBottomSheetState extends State<LikeCommentPostBottomSheet>
                         onTap: () {
                           Navigator.pop(context);
                         },
-                        child: Icon(
-                          Icons.close,
-                          size: 24,
-                          color: CustomColors().black1000,
-                        ),
+                        child: Icon(Icons.close, size: 24, color: CustomColors().black1000),
                       ),
                     ],
                   ),
@@ -139,12 +110,9 @@ class _LikeCommentPostBottomSheetState extends State<LikeCommentPostBottomSheet>
                   color: CustomColors().white1000,
                   padding: EdgeInsets.all(5),
                   child: Container(
-                    padding: .symmetric(horizontal:10),
+                    padding: .symmetric(horizontal: 10),
                     decoration: BoxDecoration(
-                      border: Border.all(
-                          width: 1,
-                          color: CustomColors().grey600
-                      ),
+                      border: Border.all(width: 1, color: CustomColors().grey600),
                       borderRadius: .circular(30),
                     ),
                     width: SizeConfig().width,
@@ -156,8 +124,8 @@ class _LikeCommentPostBottomSheetState extends State<LikeCommentPostBottomSheet>
                         Expanded(
                           child: CustomTextFormField(
                             autoValidateMode: AutovalidateMode.disabled,
-                            validator: (val){
-                              if((val??'').trim().isEmpty){
+                            validator: (val) {
+                              if ((val ?? '').trim().isEmpty) {
                                 return 'Add Comment';
                               }
                               return null;
@@ -174,13 +142,14 @@ class _LikeCommentPostBottomSheetState extends State<LikeCommentPostBottomSheet>
                         ),
                         5.w,
                         InkWell(
-                            onTap: (){
-                              if(widget.message.text.trim().isNotEmpty){
-                                widget.onSend(widget.message.text.trim());
-                              }
-                            },
+                          onTap: () {
+                            if (widget.message.text.trim().isNotEmpty) {
+                              widget.onSend(widget.message.text.trim());
+                            }
+                          },
 
-                            child: Text('Send',style: bolder(fontSize: 18,color: CustomColors().primaryColorDark)))
+                          child: Text('Send', style: bolder(fontSize: 18, color: CustomColors().primaryColorDark)),
+                        ),
                       ],
                     ),
                   ),

@@ -1,4 +1,5 @@
 import 'dart:ui' show FontWeight;
+
 extension FontWeightExtension on int {
   FontWeight get fw {
     switch (this) {

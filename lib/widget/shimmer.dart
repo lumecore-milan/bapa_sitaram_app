@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 
 class ShimmerDemo extends StatelessWidget {
-  const ShimmerDemo({super.key, this.count=20});
+  const ShimmerDemo({super.key, this.count = 20});
   final int count;
   @override
   Widget build(BuildContext context) {
@@ -12,10 +12,7 @@ class ShimmerDemo extends StatelessWidget {
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
       itemBuilder: (_, index) {
-        return const Padding(
-          padding: EdgeInsets.only(bottom: 20),
-          child: ShimmerWidget.rectangular(height: 70),
-        );
+        return const Padding(padding: EdgeInsets.only(bottom: 20), child: ShimmerWidget.rectangular(height: 70));
       },
     );
   }
@@ -26,28 +23,19 @@ class ShimmerWidget extends StatefulWidget {
   final double height;
   final double borderRadius;
 
-  const ShimmerWidget.rectangular({
-    super.key,
-    this.width = double.infinity,
-    required this.height,
-    this.borderRadius = 12,
-  });
+  const ShimmerWidget.rectangular({super.key, this.width = double.infinity, required this.height, this.borderRadius = 12});
 
   @override
   State<ShimmerWidget> createState() => _ShimmerWidgetState();
 }
 
-class _ShimmerWidgetState extends State<ShimmerWidget>
-    with SingleTickerProviderStateMixin {
+class _ShimmerWidgetState extends State<ShimmerWidget> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 2),
-    )..repeat();
+    _controller = AnimationController(vsync: this, duration: const Duration(seconds: 2))..repeat();
   }
 
   @override
@@ -69,16 +57,8 @@ class _ShimmerWidgetState extends State<ShimmerWidget>
             gradient: LinearGradient(
               begin: Alignment(-1, -0.3),
               end: Alignment(1, 0.3),
-              colors: [
-                Colors.grey.shade300,
-                Colors.grey.shade100,
-                Colors.grey.shade300,
-              ],
-              stops: [
-                max(_controller.value - 0.3, 0),
-                _controller.value,
-                min(_controller.value + 0.3, 1),
-              ],
+              colors: [Colors.grey.shade300, Colors.grey.shade100, Colors.grey.shade300],
+              stops: [max(_controller.value - 0.3, 0), _controller.value, min(_controller.value + 0.3, 1)],
             ),
           ),
         );

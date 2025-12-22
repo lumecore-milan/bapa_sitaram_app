@@ -5,20 +5,15 @@ import 'package:bapa_sitaram/services/helper_service.dart';
 import 'package:bapa_sitaram/services/loger_service.dart';
 import 'package:bapa_sitaram/utils/route_generate.dart';
 import 'package:bapa_sitaram/utils/size_config.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'constants/app_constant.dart';
 import 'constants/routes.dart';
-
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
-
   @override
   State<MyApp> createState() => _MyAppState();
 }
-
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {

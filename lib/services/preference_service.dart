@@ -5,8 +5,6 @@ import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 
-
-
 import 'encryption_service.dart';
 import 'loger_service.dart';
 
@@ -48,16 +46,16 @@ class PreferenceService {
 
   void setInt({required String key, required int value}) {
     if (isEncryptionEnabled) {
-      setString(key:key, value:value.toString());
+      setString(key: key, value: value.toString());
     } else {
       _box.put(key, value);
     }
   }
 
-  int getInt({required String key,int defaultValue = 0}) {
+  int getInt({required String key, int defaultValue = 0}) {
     if (isEncryptionEnabled) {
       try {
-        String temp = getString(key:key);
+        String temp = getString(key: key);
         return int.parse(temp);
       } catch (e) {
         LoggerService().log(message: e);
@@ -86,7 +84,7 @@ class PreferenceService {
     }
   }
 
-  String getString({required String key,String defaultValue = ''}) {
+  String getString({required String key, String defaultValue = ''}) {
     try {
       String value = _box.get(key, defaultValue: defaultValue);
       if (isEncryptionEnabled) {
@@ -102,15 +100,15 @@ class PreferenceService {
 
   void setBoolean({required String key, required bool value}) {
     if (isEncryptionEnabled) {
-      setString(key:key, value:value.toString());
+      setString(key: key, value: value.toString());
     } else {
       _box.put(key, value);
     }
   }
 
-  bool getBoolean({required String key,bool defaultValue = false}) {
+  bool getBoolean({required String key, bool defaultValue = false}) {
     if (isEncryptionEnabled) {
-      String temp = getString(key:key);
+      String temp = getString(key: key);
       return temp == 'true';
     } else {
       return _box.get(key, defaultValue: defaultValue) ?? defaultValue;
@@ -119,7 +117,7 @@ class PreferenceService {
 
   void setDouble({required String key, required double value}) {
     if (isEncryptionEnabled) {
-      setString(key:key, value:value.toString());
+      setString(key: key, value: value.toString());
     } else {
       _box.put(key, value);
     }
@@ -127,7 +125,7 @@ class PreferenceService {
 
   double getDouble({required String key}) {
     if (isEncryptionEnabled) {
-      String temp = getString(key:key);
+      String temp = getString(key: key);
       return double.tryParse(temp) ?? 0.0;
     } else {
       return _box.get(key, defaultValue: 0.0) ?? 0.0;
@@ -151,9 +149,7 @@ class PreferenceService {
   }
 
   List<String> getStringList({required String key}) {
-    List<String> temp =
-        (_box.get(key, defaultValue: <String>[]) as List?)?.cast<String>() ??
-            [];
+    List<String> temp = (_box.get(key, defaultValue: <String>[]) as List?)?.cast<String>() ?? [];
     if (isEncryptionEnabled) {
       for (int i = 0; i < temp.length; i++) {
         if (temp[i].isNotEmpty) {

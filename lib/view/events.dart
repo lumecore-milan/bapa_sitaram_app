@@ -30,23 +30,13 @@ class EventsPage extends StatelessWidget {
           separatorBuilder: (_, index) => SizedBox(height: 10),
           itemCount: _controller.homeDetail.value.events.length,
           itemBuilder: (_, index) {
-            print(_controller.homeDetail.value.events[index].eventId);
             return Stack(
               children: [
                 InkWell(
                   onTap: () {
-                    navigate(
-                      context: context,
-                      replace: false,
-                      path: detailRoute,
-                      param: {'showAppbar': false, 'index': index},
-                    );
+                    navigate(context: context, replace: false, path: detailRoute, param: {'showAppbar': false, 'index': index});
                   },
-                  child: RoundedImage(
-                    url: _controller.homeDetail.value.events[index].eventImage,
-                    height: 200,
-                    width: SizeConfig().width,
-                  ),
+                  child: RoundedImage(url: _controller.homeDetail.value.events[index].eventImage, height: 200, width: SizeConfig().width),
                 ),
                 Positioned(
                   bottom: 0,
@@ -54,13 +44,7 @@ class EventsPage extends StatelessWidget {
                   right: 0,
                   child: Padding(
                     padding: const EdgeInsets.all(10),
-                    child: Text(
-                      _controller.homeDetail.value.events[index].eventTitle,
-                      style: semiBold(
-                        fontSize: 13,
-                        color: CustomColors().white,
-                      ),
-                    ),
+                    child: Text(_controller.homeDetail.value.events[index].eventTitle, style: semiBold(fontSize: 13, color: CustomColors().white)),
                   ),
                 ),
               ],

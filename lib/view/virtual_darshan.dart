@@ -192,7 +192,7 @@ class _VirtualDarshanState extends State<VirtualDarshan> with TickerProviderStat
                                   return SizedBox(
                                     child: InkWell(
                                       onTap: () {
-                                        print('tapped');
+                                       
                                         HelperService().playSound(sound: 'assets/sound/bell_audio.mp3');
                                       },
                                       child: LottieBuilder.asset('assets/animation/leftBell.json', height: 170, fit: .fitHeight),
@@ -394,7 +394,7 @@ class _VirtualDarshanState extends State<VirtualDarshan> with TickerProviderStat
                                   return SizedBox(
                                     child: InkWell(
                                       onTap: () {
-                                        print('tapped');
+                                       
                                         HelperService().playSound(sound: 'assets/sound/bell_audio.mp3');
                                       },
                                       child: LottieBuilder.asset('assets/animation/leftBell.json', height: 170, fit: .fitHeight),
@@ -467,14 +467,7 @@ class _VirtualDarshanState extends State<VirtualDarshan> with TickerProviderStat
                           Positioned(
                             top: 100,
                             left: 50,
-                            child: LottieBuilder.asset(
-                              fit: .cover,
-                              controller: _pushpaController,
-                              'assets/animation/flower_rw.json',
-                              height: SizeConfig().height - 100,
-                              width: 100,
-                              onLoaded: (composition) {},
-                            ),
+                            child: LottieBuilder.asset(fit: .cover, controller: _pushpaController, 'assets/animation/flower_rw.json', height: SizeConfig().height - 100, width: 100, onLoaded: (composition) {}),
                           ),
 
                           Positioned(

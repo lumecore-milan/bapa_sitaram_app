@@ -6,11 +6,7 @@ import '../utils/size_config.dart';
 import '../widget/rounded_image.dart';
 
 class SocialActivityDetail extends StatefulWidget {
-  const SocialActivityDetail({
-    super.key,
-    required this.title,
-    required this.detail,
-  });
+  const SocialActivityDetail({super.key, required this.title, required this.detail});
 
   final String title;
   final dynamic detail;
@@ -45,16 +41,9 @@ class _SocialActivityDetailState extends State<SocialActivityDetail> {
           children: [
             20.h,
             Column(
-              children: [
-                RoundedImage(
-                  height: 180,
-                  width: SizeConfig().width,
-                  fit: .cover,
-                  url: widget.detail['event_image'],
-                ),
-              ],
+              children: [RoundedImage(height: 180, width: SizeConfig().width, fit: .cover, url: widget.detail['event_image'])],
             ),
-            CustomHtmlWidget(content: widget.detail['event_desc'], title: widget.title, image: '',),
+            CustomHtmlWidget(content: widget.detail['event_desc'], title: widget.title, image: ''),
           ],
         ),
       ),

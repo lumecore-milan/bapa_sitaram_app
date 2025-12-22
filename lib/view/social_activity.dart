@@ -20,19 +20,17 @@ class SocialActivities extends StatelessWidget {
     List<dynamic> list = List.empty(growable: true);
     try {
       final apiInstance = NetworkServiceMobile();
-      await apiInstance.post(url: APIConstant().apiSocialActivity,requestBody: {
-        'social_activities':true
-      },isFormData: true).then((data) {
+      await apiInstance.post(url: APIConstant().apiSocialActivity, requestBody: {'social_activities': true}, isFormData: true).then((data) {
         if (data.isNotEmpty) {
           if (data['httpStatusCode'] == 200) {
-            list=data['data'];
+            list = data['data'];
           }
         }
       });
     } catch (e) {
       LoggerService().log(message: e.toString());
     }
-    list=(list.reversed??[]).toList();
+    list = (list.reversed ?? []).toList();
     return list;
   }
 
@@ -48,7 +46,7 @@ class SocialActivities extends StatelessWidget {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.only(left:16,right:16,top:20),
+          padding: const EdgeInsets.only(left: 16, right: 16, top: 20),
           child: FutureBuilder(
             future: getDetail(),
             builder: (_, snapshot) {
@@ -62,50 +60,30 @@ class SocialActivities extends StatelessWidget {
                   shrinkWrap: true,
                   padding: .zero,
                   itemCount: data.length,
-                  separatorBuilder: (_,index)=>SizedBox(height: 10),
+                  separatorBuilder: (_, index) => SizedBox(height: 10),
                   itemBuilder: (_, index) {
-                    return
-                        Stack(
-                          children: [
-                            InkWell(
-                                onTap: (){
-                                  navigate(context: context, replace: false, path: socialActivityDetailRoute,param: {
-                                    'title':data[index]['event_title'],
-                                    'data':data[index]
-                                  });
-                                },
-                                  child: RoundedImage(
-                                    height: 180,
-                                      width:SizeConfig().width,
-                                      url: data[index]['event_image'],fit: .cover),
-
+                    return Stack(
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            navigate(context: context, replace: false, path: socialActivityDetailRoute, param: {'title': data[index]['event_title'], 'data': data[index]});
+                          },
+                          child: RoundedImage(height: 180, width: SizeConfig().width, url: data[index]['event_image'], fit: .cover),
+                        ),
+                        Positioned.fill(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [Colors.transparent, Colors.transparent, CustomColors().black1000.withOpacity(0.7)], stops: [0.0, 0.6, 1.0]),
                             ),
-                            Positioned.fill(child: Container(
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                  colors: [
-                                    Colors.transparent,
-                                    Colors.transparent,
-                                    CustomColors().black1000.withOpacity(0.7)
-                                  ],
-                                  stops: [
-                                    0.0,
-                                    0.6,
-                                    1.0,
-                                  ],
-                                ),
-                              ),
-                            )),
-                            Positioned(
-                                bottom: 10,
-                                left: 20,
-                                child: Text(data[index]['event_title'],
-                                  style: semiBold(fontSize: 14,color: CustomColors().white),
-                                ),)
-                          ],
-                        );
+                          ),
+                        ),
+                        Positioned(
+                          bottom: 10,
+                          left: 20,
+                          child: Text(data[index]['event_title'], style: semiBold(fontSize: 14, color: CustomColors().white)),
+                        ),
+                      ],
+                    );
                   },
                 );
               }
@@ -116,4 +94,3 @@ class SocialActivities extends StatelessWidget {
     );
   }
 }
-

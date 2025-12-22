@@ -21,18 +21,13 @@ class HomeDetailController extends GetxController {
   Future<void> getHomeDetail() async {
     try {
       isLoading.value = true;
-      await Future.wait([
-        _apiInstance.get(url: APIConstant().apiHomePage),
-        _apiInstance.get(url: APIConstant().apiAboutUs),
-      ]).then((responses) {
+      await Future.wait([_apiInstance.get(url: APIConstant().apiHomePage), _apiInstance.get(url: APIConstant().apiAboutUs)]).then((responses) {
         isLoading.value = false;
         if (responses[0].isNotEmpty) {
           if (responses[0]['httpStatusCode'] == 200) {
             homeDetail.value = HomeDetailModel.fromJson(responses[0]);
 
-            homeDetail.value.events.sort(
-              (a, b) => b.eventDate.compareTo(a.eventDate),
-            );
+            homeDetail.value.events.sort((a, b) => b.eventDate.compareTo(a.eventDate));
             homeDetail.refresh();
           }
         }
@@ -50,21 +45,15 @@ class HomeDetailController extends GetxController {
 
   Future<void> getEventById({required String eventId}) async {
     try {
-      await _apiInstance
-          .post(
-            url: APIConstant().apiEventById,
-            requestBody: {'event_id': eventId},
-            isFormData: true,
-          )
-          .then((responses) {
-            isLoading.value = false;
-            if (responses.isNotEmpty) {
-              if (responses['httpStatusCode'] == 200) {
-                final temp = EventItem.fromJson(responses['data']);
-                homeDetail.value.events.add(temp);
-              }
-            }
-          });
+      await _apiInstance.post(url: APIConstant().apiEventById, requestBody: {'event_id': eventId}, isFormData: true).then((responses) {
+        isLoading.value = false;
+        if (responses.isNotEmpty) {
+          if (responses['httpStatusCode'] == 200) {
+            final temp = EventItem.fromJson(responses['data']);
+            homeDetail.value.events.add(temp);
+          }
+        }
+      });
     } catch (e) {
       LoggerService().log(message: e.toString());
     }
@@ -73,20 +62,14 @@ class HomeDetailController extends GetxController {
   Future<List<dynamic>> getMenuDetail({required String menu}) async {
     List<dynamic> data = [];
     try {
-      await _apiInstance
-          .post(
-            url: APIConstant().apiMenu,
-            isFormData: false,
-            requestBody: {'main_menu_name': menu},
-          )
-          .then((resp) {
-            LoggerService().log(message: json.encode(resp));
-            if (resp.isNotEmpty) {
-              if (resp['httpStatusCode'] == 200) {
-                data = resp['data'];
-              }
-            }
-          });
+      await _apiInstance.post(url: APIConstant().apiMenu, isFormData: false, requestBody: {'main_menu_name': menu}).then((resp) {
+        LoggerService().log(message: json.encode(resp));
+        if (resp.isNotEmpty) {
+          if (resp['httpStatusCode'] == 200) {
+            data = resp['data'];
+          }
+        }
+      });
     } catch (e) {
       LoggerService().log(message: e.toString());
     }

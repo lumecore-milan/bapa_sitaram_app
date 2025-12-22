@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-extension CustomString on String {
 
+extension CustomString on String {
   Color hx({Color defaultColor = Colors.white}) {
     try {
       final hex = replaceAll('#', '').trim();
@@ -14,7 +14,4 @@ extension CustomString on String {
     }
     return defaultColor;
   }
-
 }
-
-
