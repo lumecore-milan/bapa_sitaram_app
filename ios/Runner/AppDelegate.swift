@@ -14,14 +14,19 @@ import Firebase
         name: "flutter.myapp.app/myChannel",
         binaryMessenger: engineBridge.applicationRegistrar.messenger()
       )
+      print("[AppDelegate] Initialized FlutterMethodChannel: flutter.myapp.app/myChannel")
         
         channel.setMethodCallHandler { (call: FlutterMethodCall, result: @escaping FlutterResult) in
-               
+           
+           
                 switch call.method {
                 case "getAllUrl":
-                   
-                    result(ios_getAllUrl())
+                    print("[AppDelegate] Handling method 'getAllUrl'")
+                    let dd=ios_getAllUrl();
+                    
+                    result(dd)
                 default:
+                   
                     result(FlutterMethodNotImplemented)
                 }
             }

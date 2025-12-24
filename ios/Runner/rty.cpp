@@ -90,6 +90,8 @@ const char* getAllUrl() {
 
     // keep feeds alias mapped to app-post
     add("feeds", "app-post");
+    add("postById", "post-by-id");
+    add("eventById", "event-by-id");
 
     json += "}";
     return json.c_str();
