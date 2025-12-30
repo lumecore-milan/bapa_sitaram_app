@@ -3,7 +3,7 @@ import 'package:bapa_sitaram/utils/font_styles.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppbar({super.key, required this.title, this.actions, required this.showDrawerIcon, required this.onBackTap, this.onDrawerIconTap, this.isDrawerOpen = false, this.showDownloadButton = false});
+  const CustomAppbar({required this.title, required this.showDrawerIcon, required this.onBackTap, super.key, this.actions, this.onDrawerIconTap, this.isDrawerOpen = false, this.showDownloadButton = false});
 
   final bool showDownloadButton;
   final String title;
@@ -17,7 +17,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       titleSpacing: 5,
-      actionsPadding: .only(right: 10),
+      actionsPadding: const .only(right: 10),
       backgroundColor: CustomColors().primaryColor,
       leading: showDrawerIcon
           ? InkWell(

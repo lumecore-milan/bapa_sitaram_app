@@ -4,10 +4,10 @@ import 'dart:isolate';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
-import '../app_events.dart';
-import '../enums.dart';
-import '../helper_service.dart';
-import '../loger_service.dart';
+import 'package:bapa_sitaram/services/app_events.dart';
+import 'package:bapa_sitaram/services/enums.dart';
+import 'package:bapa_sitaram/services/helper_service.dart';
+import 'package:bapa_sitaram/services/loger_service.dart';
 
 class DownloadMessage {
   DownloadMessage({required this.url, required this.progress, this.filePath});
@@ -17,7 +17,7 @@ class DownloadMessage {
 }
 
 class DownloadServiceMobile {
-  Future<String?> download({required String url}) async {
+  Future<String?> download({required String url, bool keepOriginalName = false}) async {
     final receivePort = ReceivePort();
     String path = '';
     try {
@@ -28,7 +28,7 @@ class DownloadServiceMobile {
       if (!isExist) {
         await directory.create(recursive: false);
       }
-      Map<String, dynamic> param = {'url': url, 'sendPort': receivePort.sendPort, 'path': directory.path};
+      Map<String, dynamic> param = {'url': url, 'sendPort': receivePort.sendPort, 'path': directory.path, 'keepOriginalName': keepOriginalName};
       Isolate isolate = await Isolate.spawn(_isolateEntryPoint, param);
 
       await for (var message in receivePort) {
@@ -61,7 +61,11 @@ class DownloadServiceMobile {
       if (response.statusCode == 200) {
         final dir = Directory(param['path']);
         String ext = param['url'].substring(param['url'].lastIndexOf('.') + 1);
-        String newFileName = '${DateFormat('yyyy_mm_dd_hh_mm_ss').format(DateTime.now())}.$ext';
+
+        String originalName = param['url'].substring(param['url'].lastIndexOf('/') + 1);
+        originalName = originalName.substring(0, originalName.lastIndexOf('.'));
+
+        String newFileName = param['keepOriginalName'] == true ? '$originalName.$ext' : '${DateFormat('yyyy_mm_dd_hh_mm_ss').format(DateTime.now())}.$ext';
         final file = File('${dir.path}/$newFileName');
         final sink = file.openWrite();
         final contentLength = response.contentLength ?? 0;
@@ -69,19 +73,18 @@ class DownloadServiceMobile {
         await response.stream
             .listen(
               (chunk) {
-                downloaded += chunk.length;
                 sink.add(chunk);
-
+                downloaded += chunk.length;
                 if (contentLength > 0) {
                   final progress = (downloaded / contentLength * 100).toStringAsFixed(2);
                   sendPort.send(DownloadMessage(progress: double.tryParse(progress) ?? 0, url: param['url']));
                   LoggerService().log(message: 'Download Progress $progress', level: LogLevel.info);
                 }
               },
-              onDone: () async {
+              onDone: () {
+                sink.close();
                 path = file.path;
                 sendPort.send(DownloadMessage(progress: 100, url: param['url'], filePath: file.path));
-                await sink.close();
               },
               onError: (e) {
                 LoggerService().log(message: 'Download error $e', level: LogLevel.info);
@@ -92,7 +95,7 @@ class DownloadServiceMobile {
 
         path = file.path;
       } else {
-        LoggerService().log(message: 'error occurred while downloading file');
+        LoggerService().log(message: 'error occurred while downloading file ${param['url']} ===>${response.statusCode}');
       }
     } catch (ex) {
       sendPort.send(DownloadMessage(progress: 0, url: param['url']));
@@ -156,7 +159,6 @@ class DownloadServiceMobile {
     }
   }
 
-  @override
   Future<void> uploadFile({required String path, required String url, required ApiMethod method, required Function(double) onProgress, required Function(String) onError}) async {
     try {
       final receivePort = ReceivePort();

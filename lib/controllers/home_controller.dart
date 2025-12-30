@@ -3,21 +3,21 @@ import 'dart:convert';
 import 'package:bapa_sitaram/constants/api_constant.dart';
 import 'package:bapa_sitaram/models/app_loading.dart';
 import 'package:bapa_sitaram/services/network/api_mobile.dart';
-import 'package:bapa_sitaram/utils/razor_pay.dart';
+
 
 import 'package:get/get.dart';
-import '../models/home_detail.dart';
-import '../services/loger_service.dart';
+import 'package:bapa_sitaram/models/home_detail.dart';
+import 'package:bapa_sitaram/services/loger_service.dart';
 
 class HomeDetailController extends GetxController {
+  HomeDetailController() {
+    getHomeDetail();
+  }
   final _apiInstance = NetworkServiceMobile();
   Rx<HomeDetailModel> homeDetail = HomeDetailModel().obs;
   late AppSettingModel appSetting;
   Rx<bool> isLoading = false.obs;
   Map<String, dynamic> aboutUs = {};
-  HomeDetailController() {
-    getHomeDetail();
-  }
   Future<void> getHomeDetail() async {
     try {
       isLoading.value = true;
@@ -34,7 +34,7 @@ class HomeDetailController extends GetxController {
         if (responses[1].isNotEmpty) {
           if (responses[1]['httpStatusCode'] == 200) {
             aboutUs = responses[1];
-            RazorPayService().setKey(key: aboutUs['razorpay_key'] ?? '');
+           // RazorPayService().setKey(key: aboutUs['razorpay_key'] ?? '');
           }
         }
       });

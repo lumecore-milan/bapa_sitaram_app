@@ -11,13 +11,13 @@ import 'package:get/get.dart';
 
 import 'package:lottie/lottie.dart';
 
-import '../controllers/home_controller.dart';
-import '../extensions/size_box_extension.dart';
-import '../utils/helper.dart';
-import '../utils/size_config.dart';
-import '../widget/image_widget.dart';
-import '../widget/marquee_text.dart';
-import '../widget/rounded_image.dart';
+import 'package:bapa_sitaram/controllers/home_controller.dart';
+import 'package:bapa_sitaram/extensions/size_box_extension.dart';
+import 'package:bapa_sitaram/utils/helper.dart';
+import 'package:bapa_sitaram/utils/size_config.dart';
+import 'package:bapa_sitaram/widget/image_widget.dart';
+import 'package:bapa_sitaram/widget/marquee_text.dart';
+import 'package:bapa_sitaram/widget/rounded_image.dart';
 
 class HomeDetailPage extends StatefulWidget {
   const HomeDetailPage({super.key});
@@ -53,9 +53,9 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                 width: SizeConfig().width,
                 child: Obx(
                   () => _controller.isLoading.value
-                      ? SizedBox.shrink()
+                      ? const SizedBox.shrink()
                       : ListView.separated(
-                          separatorBuilder: (_, index) => SizedBox(width: 5),
+                          separatorBuilder: (_, index) => const SizedBox(width: 5),
                           scrollDirection: Axis.horizontal,
                           itemCount: _controller.homeDetail.value.slider.length,
                           shrinkWrap: true,
@@ -94,7 +94,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                     return Container(
                       height: 8,
                       width: 8,
-                      margin: .only(right: 5),
+                      margin: const .only(right: 5),
                       decoration: BoxDecoration(color: CustomColors().grey500, shape: .circle),
                     );
                   }).toList(),
@@ -103,13 +103,13 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
               10.h,
               Obx(
                 () => _controller.isLoading.value == true
-                    ? SizedBox.shrink()
+                    ? const SizedBox.shrink()
                     : Container(
                         decoration: BoxDecoration(color: CustomColors().primaryColorDark),
                         width: SizeConfig().width,
                         height: 30,
                         alignment: .center,
-                        padding: .symmetric(vertical: 4),
+                        padding: const .symmetric(vertical: 4),
                         child: MarqueeText(
                           widget: Text(maxLines: 1, _controller.homeDetail.value.impMsg, style: semiBold(fontSize: 14, color: CustomColors().white)),
                         ),
@@ -131,14 +131,14 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
 
   Widget _features() {
     final List<Map<String, dynamic>> list = [
-      {"title": "બગદાણા ધામ", 'image': "assets/images/ic_bagdana.svg", 'navigate': menuDetailRoute, 'color': CustomColors().deepPurple50},
-      {"title": "મંદિર", 'image': "assets/images/ic_temple_clr.svg", 'navigate': menuDetailRoute, 'color': CustomColors().pink50},
-      {"title": "સુવિધા", 'image': "assets/images/ic_service_clr.svg", 'navigate': menuDetailRoute, 'color': CustomColors().orange50},
-      {"title": "પ્રસંગ", 'image': "assets/images/ic_event_clr.svg", 'navigate': eventsRoute, 'color': CustomColors().red50},
-      {"title": "પૂનમ લિસ્ટ", 'image': "assets/images/ic_poonam_clr.svg", 'navigate': punamListRoute, 'color': CustomColors().teal50},
-      {"title": "ગેલેરી", 'image': "assets/images/ic_gallery_clr.svg", 'navigate': galleryRoute, 'color': CustomColors().brown50},
-      {"title": "ડોનેશન", 'image': "assets/images/ic_donation_clr.svg", 'navigate': donationRoute, 'color': CustomColors().blue50},
-      {"title": "આરતી", 'image': "assets/images/ic_aarti_clr.svg", 'navigate': aartiRoute, 'color': CustomColors().yellow50},
+      {'title': 'બગદાણા ધામ', 'image': 'assets/images/ic_bagdana.svg', 'navigate': menuDetailRoute, 'color': CustomColors().deepPurple50},
+      {'title': 'મંદિર', 'image': 'assets/images/ic_temple_clr.svg', 'navigate': menuDetailRoute, 'color': CustomColors().pink50},
+      {'title': 'સુવિધા', 'image': 'assets/images/ic_service_clr.svg', 'navigate': menuDetailRoute, 'color': CustomColors().orange50},
+      {'title': 'પ્રસંગ', 'image': 'assets/images/ic_event_clr.svg', 'navigate': eventsRoute, 'color': CustomColors().red50},
+      {'title': 'પૂનમ લિસ્ટ', 'image': 'assets/images/ic_poonam_clr.svg', 'navigate': punamListRoute, 'color': CustomColors().teal50},
+      {'title': 'ગેલેરી', 'image': 'assets/images/ic_gallery_clr.svg', 'navigate': galleryRoute, 'color': CustomColors().brown50},
+    //  {"title": "ડોનેશન", 'image': "assets/images/ic_donation_clr.svg", 'navigate': donationRoute, 'color': CustomColors().blue50},
+      {'title': 'આરતી', 'image': 'assets/images/ic_aarti_clr.svg', 'navigate': aartiRoute, 'color': CustomColors().yellow50},
     ];
 
     return Column(
@@ -171,7 +171,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                 }
               },
               child: Container(
-                padding: .all(10),
+                padding: const .all(10),
                 alignment: .center,
                 width: (SizeConfig().width / 4) - 10,
                 decoration: BoxDecoration(color: e['color'], borderRadius: .circular(10)),
@@ -259,7 +259,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                 scrollDirection: .horizontal,
                 itemCount: _controller.homeDetail.value.events.length,
                 shrinkWrap: true,
-                separatorBuilder: (_, index) => SizedBox(width: 10),
+                separatorBuilder: (_, index) => const SizedBox(width: 10),
                 itemBuilder: (_, index) {
                   return Stack(
                     children: [

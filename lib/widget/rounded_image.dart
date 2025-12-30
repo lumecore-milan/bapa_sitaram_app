@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'image_widget.dart';
+import 'package:bapa_sitaram/widget/image_widget.dart';
 
 class RoundedImage extends StatelessWidget {
-  const RoundedImage({super.key, required this.url, this.height, this.width, this.fit});
+  const RoundedImage({required this.url, super.key, this.height, this.width, this.fit});
   final String url;
   final double? height, width;
   final BoxFit? fit;

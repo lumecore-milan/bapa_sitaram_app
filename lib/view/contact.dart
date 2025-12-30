@@ -76,16 +76,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
-import '../constants/api_constant.dart';
-import '../controllers/home_controller.dart';
-import '../extensions/size_box_extension.dart';
-import '../services/loger_service.dart';
+import 'package:bapa_sitaram/constants/api_constant.dart';
+import 'package:bapa_sitaram/controllers/home_controller.dart';
+import 'package:bapa_sitaram/extensions/size_box_extension.dart';
+import 'package:bapa_sitaram/services/loger_service.dart';
 
-import '../services/network/api_mobile.dart';
-import '../utils/helper.dart';
-import '../widget/custom_button.dart';
-import '../widget/custom_text_field.dart';
-import '../widget/image_widget.dart';
+import 'package:bapa_sitaram/services/network/api_mobile.dart';
+import 'package:bapa_sitaram/utils/helper.dart';
+import 'package:bapa_sitaram/widget/custom_button.dart';
+import 'package:bapa_sitaram/widget/custom_text_field.dart';
+import 'package:bapa_sitaram/widget/image_widget.dart';
 
 class ContactUs extends StatefulWidget {
   const ContactUs({super.key});
@@ -134,7 +134,7 @@ class _ContactUsState extends State<ContactUs> {
                   elevation: 8,
                   borderRadius: BorderRadius.circular(10),
                   child: Container(
-                    padding: .all(10),
+                    padding: const .all(10),
                     decoration: BoxDecoration(
                       borderRadius: .circular(10),
                       color: CustomColors().white,
@@ -143,7 +143,7 @@ class _ContactUsState extends State<ContactUs> {
                           color: CustomColors().green50,
                           blurRadius: 10,
                           spreadRadius: 2, // keep this 0 for OUTSIDE only
-                          offset: Offset(0, 0),
+                          offset: Offset.zero,
                         ),
                       ],
                     ),
@@ -191,7 +191,7 @@ class _ContactUsState extends State<ContactUs> {
                         required: true,
                         isMobile: true,
                         formatter: [formatterDigitsOnly, LengthLimitingTextInputFormatter(10)],
-                        inputType: TextInputType.numberWithOptions(decimal: false, signed: true),
+                        inputType: const TextInputType.numberWithOptions(decimal: false, signed: true),
                         controller: mobile,
                         label: 'મોબાઈલ  નંબર*',
                         hint: 'મોબાઈલ  નંબર દાખલ કરો',
@@ -244,7 +244,7 @@ class _ContactUsState extends State<ContactUs> {
                               Helper.showLoader();
                               await NetworkServiceMobile().post(url: APIConstant().apiContactUs, requestBody: {'name': name.text, 'mobile_no': mobile.text, 'email': email.text, 'message': message.text}, isFormData: true).then((data) {
                                 Helper.closeLoader();
-                                Helper.showMessage(title: data['httpStatusCode'] == 200 ? 'Success' : "Error", message: data['message'], isSuccess: data['httpStatusCode'] == 200);
+                                Helper.showMessage(title: data['httpStatusCode'] == 200 ? 'Success' : 'Error', message: data['message'], isSuccess: data['httpStatusCode'] == 200);
 
                                 if (data['httpStatusCode'] == 200) {
                                   name.clear();

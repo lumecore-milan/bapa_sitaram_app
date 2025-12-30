@@ -2,29 +2,30 @@ import 'dart:async';
 import 'dart:io';
 import 'package:bapa_sitaram/constants/app_colors.dart';
 import 'package:bapa_sitaram/constants/routes.dart';
+import 'package:bapa_sitaram/services/loger_service.dart';
 import 'package:bapa_sitaram/services/preference_service.dart';
 import 'package:bapa_sitaram/view/donation.dart';
 import 'package:bapa_sitaram/view/punam_list.dart';
 import 'package:bapa_sitaram/widget/custom_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../constants/app_constant.dart';
-import '../controllers/home_controller.dart';
-import '../models/app_loading.dart';
-import '../utils/custom_dialogs.dart';
-import '../utils/events.dart';
-import '../utils/helper.dart';
-import '../utils/route_generate.dart';
-import '../utils/size_config.dart';
-import '../widget/app_bar.dart';
-import '../widget/bottom_bar.dart';
-import '../widget/image_widget.dart';
-import 'feeds.dart';
-import 'home_detail.dart';
-import 'mandir.dart';
+import 'package:bapa_sitaram/constants/app_constant.dart';
+import 'package:bapa_sitaram/controllers/home_controller.dart';
+import 'package:bapa_sitaram/models/app_loading.dart';
+import 'package:bapa_sitaram/utils/custom_dialogs.dart';
+import 'package:bapa_sitaram/utils/events.dart';
+import 'package:bapa_sitaram/utils/helper.dart';
+import 'package:bapa_sitaram/utils/route_generate.dart';
+import 'package:bapa_sitaram/utils/size_config.dart';
+import 'package:bapa_sitaram/widget/app_bar.dart';
+import 'package:bapa_sitaram/widget/bottom_bar.dart';
+import 'package:bapa_sitaram/widget/image_widget.dart';
+import 'package:bapa_sitaram/view/feeds.dart';
+import 'package:bapa_sitaram/view/home_detail.dart';
+import 'package:bapa_sitaram/view/mandir.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key, required this.detail});
+  const HomePage({required this.detail, super.key});
 
   final AppSettingModel detail;
 
@@ -95,7 +96,7 @@ class _HomePageState extends State<HomePage> {
         _handleClick(data: pendingDetail, homeController: cnt);
       }
 
-      Future.delayed(Duration(seconds: 10)).then((t) async {
+      Future.delayed(const Duration(seconds: 10)).then((t) async {
         String appVersion = Platform.isAndroid ? AppConstants().androidAppVersion : AppConstants().iOSAppVersion;
         if (widget.detail.version.versionNo.isNotEmpty && appVersion != widget.detail.version.versionNo) {
           appUpdateDialog(context: context, title: widget.detail.version.versionTitle, message: widget.detail.version.versionMessage, forceUpdate: widget.detail.version.versionForceUpdate == '1');
@@ -108,6 +109,8 @@ class _HomePageState extends State<HomePage> {
             }
           }*/
       });
+
+      Helper.downloadAllAssets();
     });
   }
 
@@ -116,7 +119,7 @@ class _HomePageState extends State<HomePage> {
       if (data.type == 'post') {
         jumpPage.sink.add(PageJumpDetail(page: feedRoute, additionalData: data.id));
       } else if (data.type == 'event') {
-        Future.delayed(Duration(milliseconds: 500)).then((t) {
+        Future.delayed(const Duration(milliseconds: 500)).then((t) {
           int ind = homeController.homeDetail.value.events.indexWhere((e) => e.eventId == int.parse(data.id));
           if (ind >= 0) {
             navigate(context: context, replace: false, path: detailRoute, param: {'showAppbar': false, 'index': ind});
@@ -138,10 +141,12 @@ class _HomePageState extends State<HomePage> {
         }
       }
       pendingDetail = NotificationCLickDetail();
-    } catch (e) {}
+    } catch (e) {
+      LoggerService().log(message: e.toString());
+    }
   }
 
-  RxString appBarTitle = "બાપા સીતારામ".obs;
+  RxString appBarTitle = 'બાપા સીતારામ'.obs;
 
   @override
   Widget build(BuildContext context) {
@@ -194,7 +199,7 @@ class _HomePageState extends State<HomePage> {
                         jumpPage.sink.add(PageJumpDetail(page: punamListRoute, additionalData: ''));
                       } else if (path == donationRoute) {
                         Helper.launch(url: 'https://bapasitaramtemple.org/donate');
-                       /* if (ModalRoute.of(context)?.settings.name != null && ModalRoute.of(context)?.settings.name != homeRoute) {
+                        /* if (ModalRoute.of(context)?.settings.name != null && ModalRoute.of(context)?.settings.name != homeRoute) {
                           Navigator.popUntil(context, (route) {
                             return route.settings.name == homeRoute;
                           });
@@ -244,7 +249,7 @@ class _HomePageState extends State<HomePage> {
               drawerOpen.value = true;
             },
             actions: drawerOpen.value == true
-                ? [SizedBox.shrink()]
+                ? [const SizedBox.shrink()]
                 : [
                     InkWell(
                       onTap: () {
@@ -283,21 +288,21 @@ class _HomePageState extends State<HomePage> {
         child: PageView.builder(
           controller: _pageController,
           itemCount: 5,
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           onPageChanged: (index) {},
           itemBuilder: (BuildContext context, int index) {
             if (index == 0) {
-              return HomeDetailPage();
+              return const HomeDetailPage();
             } else if (index == 1) {
-              return TempleDetail();
+              return const TempleDetail();
             } else if (index == 2) {
               return FeedsPage(detailId: detailId);
             } else if (index == 3) {
               return PunamListPage();
             } else if (index == 4) {
-              return DonationPage();
+              return const DonationPage();
             } else {
-              return SizedBox();
+              return const SizedBox();
             }
           },
         ),

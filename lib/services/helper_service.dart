@@ -11,8 +11,8 @@ import 'package:flutter/services.dart' show MethodChannel, SystemChannels;
 import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'enums.dart';
-import 'loger_service.dart';
+import 'package:bapa_sitaram/services/enums.dart';
+import 'package:bapa_sitaram/services/loger_service.dart';
 
 class HelperService {
   factory HelperService() => _instance;
@@ -50,10 +50,12 @@ class HelperService {
       }
       player.seek(Duration.zero); // restart
       player.play();
-    } catch (e) {}
+    } catch (e) {
+      LoggerService().log(message: e.toString());
+    }
   }
 
-  Future<String?> pickFile({int defaultFileSizeINKB = 4096, String dialogTitle = 'Select file', required AllowedFileType fileType}) async {
+  Future<String?> pickFile({required AllowedFileType fileType, int defaultFileSizeINKB = 4096, String dialogTitle = 'Select file'}) async {
     try {
       List<String> allowedFileType = ['jpg', 'jpeg', 'png', 'pdf', 'heic'];
       if (fileType == AllowedFileType.image) {

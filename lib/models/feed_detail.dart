@@ -1,19 +1,6 @@
 import 'package:get/get.dart';
 
 class PostModel {
-  int postId;
-  String postDesc;
-  String postImage;
-  String postType;
-  int likeCount;
-  int commentCount;
-  int shareCount;
-  int viewCount;
-  int isLiked;
-  String addedDate;
-  UserData userData;
-  bool hide = false;
-  Rx<bool> thumbGenerated = false.obs;
 
   PostModel({
     this.postId = 0,
@@ -43,9 +30,22 @@ class PostModel {
       viewCount: json['view_count'] ?? 0,
       isLiked: json['is_liked'] ?? 0,
       addedDate: json['added_date'] ?? '',
-      userData: json['user_data'] != null ? UserData.fromJson(json['user_data']) : UserData(),
+      userData: json['user_data'] != null ? UserData.fromJson(json['user_data']) : const UserData(),
     );
   }
+  int postId;
+  String postDesc;
+  String postImage;
+  String postType;
+  int likeCount;
+  int commentCount;
+  int shareCount;
+  int viewCount;
+  int isLiked;
+  String addedDate;
+  UserData userData;
+  bool hide = false;
+  Rx<bool> thumbGenerated = false.obs;
 
   /// TO JSON
   Map<String, dynamic> toJson() {
@@ -72,14 +72,14 @@ class PostModel {
 }
 
 class UserData {
-  final int userId;
-  final String userName;
-  final String userProfile;
   const UserData({this.userId = 0, this.userName = '', this.userProfile = ''});
 
   factory UserData.fromJson(Map<String, dynamic> json) {
     return UserData(userId: json['user_id'] ?? 0, userName: json['user_name'] ?? '', userProfile: json['user_profile'] ?? '');
   }
+  final int userId;
+  final String userName;
+  final String userProfile;
 
   Map<String, dynamic> toJson() {
     return {'user_id': userId, 'user_name': userName, 'user_profile': userProfile};

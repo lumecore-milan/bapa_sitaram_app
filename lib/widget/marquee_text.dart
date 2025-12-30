@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../services/loger_service.dart';
+import 'package:bapa_sitaram/services/loger_service.dart';
 
 enum MarqueeDirection { ltr, rtl }
 
 class MarqueeText extends StatefulWidget {
-  const MarqueeText({super.key, required this.widget, this.direction = MarqueeDirection.rtl});
+  const MarqueeText({required this.widget, super.key, this.direction = MarqueeDirection.rtl});
 
   final Text widget;
   final MarqueeDirection direction;

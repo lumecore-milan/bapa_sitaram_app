@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class CustomHtmlWidget extends StatefulWidget {
-  const CustomHtmlWidget({super.key, this.showHtml = false, required this.content, required this.title, required this.image, this.fontColor, this.fontWeight = FontWeight.bold});
+  const CustomHtmlWidget({required this.content, required this.title, required this.image, super.key, this.showHtml = false, this.fontColor, this.fontWeight = FontWeight.bold});
 
   final String content, title, image;
   final Color? fontColor;
@@ -104,7 +104,7 @@ class _CustomHtmlWidgetState extends State<CustomHtmlWidget> {
   */
 
     String fullHtml =
-        """
+        '''
 <!DOCTYPE html>
 <html>
   <head>
@@ -113,44 +113,44 @@ class _CustomHtmlWidgetState extends State<CustomHtmlWidget> {
     $responsiveStyle
   </head>
   <body>
-""";
+''';
 
     // Add image only if URL is not empty
     if (imageUrl.isNotEmpty) {
       fullHtml +=
-          """
+          '''
     <div>
       <img src="$imageUrl" alt="Cover Image" class="image-title"/>
     </div>
-  """;
+  ''';
     }
 
     // Add title only if not empty
     if (titleText.trim().isNotEmpty) {
       fullHtml +=
-          """
+          '''
     <div class="header-title">
       $titleText
     </div>
-  """;
+  ''';
     }
 
     // Always add content
     fullHtml +=
-        """
+        '''
     <div class="content-body">
       ${widget.content}
     </div>
   </body>
 </html>
-""";
+''';
 
     controller = WebViewController()
       ..loadHtmlString(fullHtml)
       ..setJavaScriptMode(JavaScriptMode.unrestricted);
 
     if (widget.image.isNotEmpty) {
-      Future.delayed(Duration(seconds: 1)).then((t) {
+      Future.delayed(const Duration(seconds: 1)).then((t) {
         showPage.value = true;
       });
     } else {
@@ -162,23 +162,23 @@ class _CustomHtmlWidgetState extends State<CustomHtmlWidget> {
   @override
   Widget build(BuildContext context) {
     return widget.showHtml == false
-        ? Obx(() => showPage.value == false ? ShimmerDemo(count: 10) : WebViewWidget(controller: controller))
+        ? Obx(() => showPage.value == false ? const ShimmerDemo(count: 10) : WebViewWidget(controller: controller))
         : Html(
             data: widget.content,
             style: {
-              "p": Style(
+              'p': Style(
                 fontSize: FontSize(18),
                 color: widget.fontColor ?? CustomColors().black,
                 fontWeight: widget.fontWeight,
                 textAlign: TextAlign.left,
-                lineHeight: LineHeight(1),
-                fontFamily: "Hind Vadodara",
+                lineHeight: const LineHeight(1),
+                fontFamily: 'Hind Vadodara',
                 padding: HtmlPaddings.zero,
                 margin: Margins.zero,
               ),
-              "h4": Style(fontFamily: "Hind Vadodara", fontSize: FontSize(18), fontWeight: widget.fontWeight, textAlign: TextAlign.left, padding: HtmlPaddings.zero, margin: Margins.zero, color: widget.fontColor ?? CustomColors().black),
-              "div": Style(padding: HtmlPaddings.zero, margin: Margins.zero, fontWeight: widget.fontWeight, textAlign: TextAlign.left, fontFamily: "Hind Vadodara", color: widget.fontColor ?? CustomColors().black),
-              "span": Style(padding: HtmlPaddings.zero, margin: Margins.zero, fontWeight: widget.fontWeight, fontSize: FontSize(18), fontFamily: "Hind Vadodara", color: widget.fontColor ?? CustomColors().black),
+              'h4': Style(fontFamily: 'Hind Vadodara', fontSize: FontSize(18), fontWeight: widget.fontWeight, textAlign: TextAlign.left, padding: HtmlPaddings.zero, margin: Margins.zero, color: widget.fontColor ?? CustomColors().black),
+              'div': Style(padding: HtmlPaddings.zero, margin: Margins.zero, fontWeight: widget.fontWeight, textAlign: TextAlign.left, fontFamily: 'Hind Vadodara', color: widget.fontColor ?? CustomColors().black),
+              'span': Style(padding: HtmlPaddings.zero, margin: Margins.zero, fontWeight: widget.fontWeight, fontSize: FontSize(18), fontFamily: 'Hind Vadodara', color: widget.fontColor ?? CustomColors().black),
             },
           );
   }

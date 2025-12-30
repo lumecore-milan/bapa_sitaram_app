@@ -9,9 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
-import '../extensions/size_box_extension.dart';
-import '../utils/size_config.dart';
-import '../widget/image_widget.dart';
+import 'package:bapa_sitaram/extensions/size_box_extension.dart';
+import 'package:bapa_sitaram/utils/size_config.dart';
+import 'package:bapa_sitaram/widget/image_widget.dart';
 
 class VirtualDarshan extends StatefulWidget {
   const VirtualDarshan({super.key});
@@ -63,7 +63,7 @@ class _VirtualDarshanState extends State<VirtualDarshan> with TickerProviderStat
 
     _aartiController = AnimationController(vsync: this, duration: const Duration(seconds: 4));
 
-    _curtainController = AnimationController(vsync: this, duration: Duration(seconds: 1));
+    _curtainController = AnimationController(vsync: this, duration: const Duration(seconds: 1));
     _leftCurtainAnim = Tween<double>(begin: 0, end: -1).animate(CurvedAnimation(parent: _curtainController, curve: Curves.easeInOut));
 
     // Right curtain moves to right (+width)
@@ -79,11 +79,11 @@ class _VirtualDarshanState extends State<VirtualDarshan> with TickerProviderStat
 
     super.initState();
 
-    _thalController = AnimationController(vsync: this, duration: Duration(milliseconds: 800));
+    _thalController = AnimationController(vsync: this, duration: const Duration(milliseconds: 800));
 
     _moveAnimation = Tween<Offset>(
-      begin: Offset(0, 1.5), // Bottom outside screen
-      end: Offset(0, 0), // Middle (stay here)
+      begin: const Offset(0, 1.5), // Bottom outside screen
+      end: Offset.zero, // Middle (stay here)
     ).animate(CurvedAnimation(parent: _thalController, curve: Curves.easeOutBack));
   }
 
@@ -111,7 +111,7 @@ class _VirtualDarshanState extends State<VirtualDarshan> with TickerProviderStat
                           Column(
                             mainAxisSize: .max,
                             children: [
-                              Expanded(flex: 1, child: SizedBox()),
+                              const Expanded(flex: 1, child: SizedBox()),
                               Obx(
                                 () => Expanded(
                                   flex: 5,
@@ -164,7 +164,7 @@ class _VirtualDarshanState extends State<VirtualDarshan> with TickerProviderStat
                           Positioned(
                             top: 260,
                             left: 0,
-                            child: Container(
+                            child: SizedBox(
                               // color: Colors.red,
                               width: width,
                               child: Row(
@@ -172,9 +172,9 @@ class _VirtualDarshanState extends State<VirtualDarshan> with TickerProviderStat
                                 mainAxisSize: .max,
                                 children: [
                                   SizedBox(width: width * 0.08),
-                                  ImageWidget(url: 'assets/images/flower_deco2.png', fit: .fitHeight, height: 150),
-                                  Expanded(child: SizedBox()),
-                                  ImageWidget(url: 'assets/images/flower_deco2.png', fit: .fitHeight, height: 150),
+                                  const ImageWidget(url: 'assets/images/flower_deco2.png', fit: .fitHeight, height: 150),
+                                  const Expanded(child: SizedBox()),
+                                  const ImageWidget(url: 'assets/images/flower_deco2.png', fit: .fitHeight, height: 150),
                                   SizedBox(width: width * 0.08),
                                 ],
                               ),
@@ -192,7 +192,6 @@ class _VirtualDarshanState extends State<VirtualDarshan> with TickerProviderStat
                                   return SizedBox(
                                     child: InkWell(
                                       onTap: () {
-                                       
                                         HelperService().playSound(sound: 'assets/sound/bell_audio.mp3');
                                       },
                                       child: LottieBuilder.asset('assets/animation/leftBell.json', height: 170, fit: .fitHeight),
@@ -226,7 +225,7 @@ class _VirtualDarshanState extends State<VirtualDarshan> with TickerProviderStat
                                                   ..reset()
                                                   ..forward();
                                               },
-                                              child: ImageWidget(url: 'assets/images/btn_sankh.png', height: 60, width: 60),
+                                              child: const ImageWidget(url: 'assets/images/btn_sankh.png', height: 60, width: 60),
                                             ),
                                             5.h,
                                             Text('શંખનાદ', style: semiBold(fontSize: 14, color: CustomColors().white)),
@@ -240,7 +239,7 @@ class _VirtualDarshanState extends State<VirtualDarshan> with TickerProviderStat
                                                   ..reset()
                                                   ..forward();
                                               },
-                                              child: ImageWidget(url: 'assets/images/btn_flower.png', height: 60, width: 60),
+                                              child: const ImageWidget(url: 'assets/images/btn_flower.png', height: 60, width: 60),
                                             ),
                                             5.h,
                                             Text('પુષ્પ', style: semiBold(fontSize: 14, color: CustomColors().white)),
@@ -268,7 +267,7 @@ class _VirtualDarshanState extends State<VirtualDarshan> with TickerProviderStat
                                                   _pushpaController.stop();
                                                 }
                                               },
-                                              child: RoundedImage(url: 'assets/images/arti_dish_1.png', height: 60, width: 60, fit: .fill),
+                                              child: const RoundedImage(url: 'assets/images/arti_dish_1.png', height: 60, width: 60, fit: .fill),
                                             ),
                                             5.h,
                                             Text('આરતી', style: semiBold(fontSize: 14, color: CustomColors().white)),
@@ -288,13 +287,13 @@ class _VirtualDarshanState extends State<VirtualDarshan> with TickerProviderStat
                                                 _diyaController.forward();
                                                 _diyaController.repeat();
                                                 isThalRunning.value = true;
-                                                Future.delayed(Duration(seconds: 6)).then((t) {
+                                                Future.delayed(const Duration(seconds: 6)).then((t) {
                                                   _thalController.reverse().then((t) {
                                                     isThalRunning.value = false;
                                                   });
                                                 });
                                               },
-                                              child: ImageWidget(url: 'assets/images/btn_thal.png', height: 60, width: 60),
+                                              child: const ImageWidget(url: 'assets/images/btn_thal.png', height: 60, width: 60),
                                             ),
                                             5.h,
                                             Text('થાળ', style: semiBold(fontSize: 14, color: CustomColors().white)),
@@ -307,7 +306,7 @@ class _VirtualDarshanState extends State<VirtualDarshan> with TickerProviderStat
                                                 isTempleToggle.toggle();
                                               },
 
-                                              child: ImageWidget(url: 'assets/images/btntemple.png', height: 60, width: 60),
+                                              child: const ImageWidget(url: 'assets/images/btntemple.png', height: 60, width: 60),
                                             ),
                                             5.h,
                                             Text('મંદિર', style: semiBold(fontSize: 14, color: CustomColors().white)),
@@ -323,7 +322,7 @@ class _VirtualDarshanState extends State<VirtualDarshan> with TickerProviderStat
                           //thal
                           Obx(
                             () => isThalRunning.value == false
-                                ? SizedBox.shrink()
+                                ? const SizedBox.shrink()
                                 : Positioned(
                                     bottom: height * 0.15,
                                     left: (width / 2) - 100,
@@ -332,7 +331,7 @@ class _VirtualDarshanState extends State<VirtualDarshan> with TickerProviderStat
                                       child: Stack(
                                         children: [
                                           LottieBuilder.asset(fit: .cover, controller: _diyaController, 'assets/animation/diya.json', height: 200, width: 200, onLoaded: (composition) {}),
-                                          Positioned(
+                                          const Positioned(
                                             top: 50,
                                             left: 50,
                                             child: RoundedImage(url: 'assets/images/thal_dish.png', height: 100, width: 100, fit: .fill),
@@ -346,7 +345,7 @@ class _VirtualDarshanState extends State<VirtualDarshan> with TickerProviderStat
                           //arti dish
                           Obx(
                             () => isArtiRunning.value == false
-                                ? SizedBox.shrink()
+                                ? const SizedBox.shrink()
                                 : Positioned(
                                     top: (height / 2) - 50,
                                     left: (width / 2) - 60,
@@ -357,7 +356,7 @@ class _VirtualDarshanState extends State<VirtualDarshan> with TickerProviderStat
                                         double radius = 60;
                                         return Transform.translate(offset: Offset(radius * cos(angle), radius * sin(angle)), child: child);
                                       },
-                                      child: ClipOval(
+                                      child: const ClipOval(
                                         child: ImageWidget(url: 'assets/images/arti_dish_1.png', height: 100, width: 100, fit: .fill),
                                       ),
                                     ),
@@ -371,12 +370,12 @@ class _VirtualDarshanState extends State<VirtualDarshan> with TickerProviderStat
                             left: 0,
                             child: ImageWidget(url: 'assets/images/top1.png', fit: .fill, height: 180, width: SizeConfig().width),
                           ),
-                          Positioned(
+                          const Positioned(
                             top: 160,
                             left: 20,
                             child: ImageWidget(url: 'assets/images/flower_deco2.png', fit: .fitHeight, height: 150, width: 30),
                           ),
-                          Positioned(
+                          const Positioned(
                             top: 160,
                             right: 20,
                             child: ImageWidget(url: 'assets/images/flower_deco2.png', fit: .fitHeight, height: 150, width: 30),
@@ -394,7 +393,6 @@ class _VirtualDarshanState extends State<VirtualDarshan> with TickerProviderStat
                                   return SizedBox(
                                     child: InkWell(
                                       onTap: () {
-                                       
                                         HelperService().playSound(sound: 'assets/sound/bell_audio.mp3');
                                       },
                                       child: LottieBuilder.asset('assets/animation/leftBell.json', height: 170, fit: .fitHeight),
@@ -423,7 +421,7 @@ class _VirtualDarshanState extends State<VirtualDarshan> with TickerProviderStat
 
                           Obx(
                             () => isArtiRunning.value == false
-                                ? SizedBox.shrink()
+                                ? const SizedBox.shrink()
                                 : Positioned(
                                     top: (SizeConfig().height / 2) - 50,
                                     left: (SizeConfig().width / 2) - 30,
@@ -435,7 +433,7 @@ class _VirtualDarshanState extends State<VirtualDarshan> with TickerProviderStat
                                         return Transform.translate(offset: Offset(radius * cos(angle), radius * sin(angle)), child: child);
                                       },
 
-                                      child: ClipOval(
+                                      child: const ClipOval(
                                         child: ImageWidget(url: 'assets/images/arti_dish_1.png', height: 100, width: 100, fit: .fill),
                                       ),
                                     ),
@@ -444,7 +442,7 @@ class _VirtualDarshanState extends State<VirtualDarshan> with TickerProviderStat
 
                           Obx(
                             () => isThalRunning.value == false
-                                ? SizedBox.shrink()
+                                ? const SizedBox.shrink()
                                 : Positioned(
                                     bottom: SizeConfig().height * 0.25,
                                     left: (SizeConfig().width / 2) - 100,
@@ -453,7 +451,7 @@ class _VirtualDarshanState extends State<VirtualDarshan> with TickerProviderStat
                                       child: Stack(
                                         children: [
                                           LottieBuilder.asset(fit: .cover, controller: _diyaController, 'assets/animation/diya.json', height: 200, width: 200, onLoaded: (composition) {}),
-                                          Positioned(
+                                          const Positioned(
                                             top: 50,
                                             left: 50,
                                             child: RoundedImage(url: 'assets/images/thal_dish.png', height: 100, width: 100, fit: .fill),
@@ -503,7 +501,7 @@ class _VirtualDarshanState extends State<VirtualDarshan> with TickerProviderStat
                       ..reset()
                       ..forward();
                   },
-                  child: ImageWidget(url: 'assets/images/btn_sankh.png', height: 60, width: 60),
+                  child: const ImageWidget(url: 'assets/images/btn_sankh.png', height: 60, width: 60),
                 ),
                 5.h,
                 Text('શંખનાદ', style: semiBold(fontSize: 14, color: CustomColors().white)),
@@ -517,7 +515,7 @@ class _VirtualDarshanState extends State<VirtualDarshan> with TickerProviderStat
                       ..reset()
                       ..forward();
                   },
-                  child: ImageWidget(url: 'assets/images/btn_flower.png', height: 60, width: 60),
+                  child: const ImageWidget(url: 'assets/images/btn_flower.png', height: 60, width: 60),
                 ),
                 5.h,
                 Text('પુષ્પ', style: semiBold(fontSize: 14, color: CustomColors().white)),
@@ -545,7 +543,7 @@ class _VirtualDarshanState extends State<VirtualDarshan> with TickerProviderStat
                       _pushpaController.stop();
                     }
                   },
-                  child: RoundedImage(url: 'assets/images/arti_dish_1.png', height: 60, width: 60, fit: .fill),
+                  child: const RoundedImage(url: 'assets/images/arti_dish_1.png', height: 60, width: 60, fit: .fill),
                 ),
                 5.h,
                 Text('આરતી', style: semiBold(fontSize: 14, color: CustomColors().white)),
@@ -565,13 +563,13 @@ class _VirtualDarshanState extends State<VirtualDarshan> with TickerProviderStat
                     _diyaController.forward();
                     _diyaController.repeat();
                     isThalRunning.value = true;
-                    Future.delayed(Duration(seconds: 6)).then((t) {
+                    Future.delayed(const Duration(seconds: 6)).then((t) {
                       _thalController.reverse().then((t) {
                         isThalRunning.value = false;
                       });
                     });
                   },
-                  child: ImageWidget(url: 'assets/images/btn_thal.png', height: 60, width: 60),
+                  child: const ImageWidget(url: 'assets/images/btn_thal.png', height: 60, width: 60),
                 ),
                 5.h,
                 Text('થાળ', style: semiBold(fontSize: 14, color: CustomColors().white)),
@@ -584,7 +582,7 @@ class _VirtualDarshanState extends State<VirtualDarshan> with TickerProviderStat
                     isTempleToggle.toggle();
                   },
 
-                  child: ImageWidget(url: 'assets/images/btntemple.png', height: 60, width: 60),
+                  child: const ImageWidget(url: 'assets/images/btntemple.png', height: 60, width: 60),
                 ),
                 5.h,
                 Text('મંદિર', style: semiBold(fontSize: 14, color: CustomColors().white)),
@@ -638,7 +636,7 @@ class _VirtualDarshanState extends State<VirtualDarshan> with TickerProviderStat
                   });
                 }
               },
-              child: ImageWidget(url: 'assets/images/opne_curtain.png', height: 80),
+              child: const ImageWidget(url: 'assets/images/opne_curtain.png', height: 80),
             ),
           ),
         ],

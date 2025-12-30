@@ -9,14 +9,14 @@ import 'package:bapa_sitaram/widget/app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import '../controllers/donation_controller.dart';
-import '../extensions/size_box_extension.dart';
-import '../services/app_events.dart';
-import '../services/preference_service.dart';
-import '../utils/custom_dialogs.dart';
-import '../utils/helper.dart';
-import '../widget/custom_button.dart';
-import '../widget/custom_text_field.dart';
+import 'package:bapa_sitaram/controllers/donation_controller.dart';
+import 'package:bapa_sitaram/extensions/size_box_extension.dart';
+import 'package:bapa_sitaram/services/app_events.dart';
+import 'package:bapa_sitaram/services/preference_service.dart';
+import 'package:bapa_sitaram/utils/custom_dialogs.dart';
+import 'package:bapa_sitaram/utils/helper.dart';
+import 'package:bapa_sitaram/widget/custom_button.dart';
+import 'package:bapa_sitaram/widget/custom_text_field.dart';
 
 class DonationPage extends StatefulWidget {
   const DonationPage({super.key, this.showAppBar = false});
@@ -29,7 +29,7 @@ class _DonationPageState extends State<DonationPage> {
   final GlobalKey<FormState> _formKey = GlobalKey();
 
   final DonationController _controller = Get.put(DonationController());
-  final items = ["અન્નક્ષેત્ર", "કેપવાણી", "ચિકિત્સા સેવા", "ખાદ્યદાન", "વૃક્ષારોપણ/પર્યાવરણ", "ગૌસેવા", "કૂટિર ઉદ્યોગ સહાય", "સામાજિક સેવા", "માનવ સેવા"];
+  final items = ['અન્નક્ષેત્ર', 'કેપવાણી', 'ચિકિત્સા સેવા', 'ખાદ્યદાન', 'વૃક્ષારોપણ/પર્યાવરણ', 'ગૌસેવા', 'કૂટિર ઉદ્યોગ સહાય', 'સામાજિક સેવા', 'માનવ સેવા'];
 
   @override
   void initState() {
@@ -129,7 +129,7 @@ class _DonationPageState extends State<DonationPage> {
                               required: true,
                               isMobile: true,
                               formatter: [LengthLimitingTextInputFormatter(10), formatterDigitsOnly],
-                              inputType: TextInputType.numberWithOptions(decimal: false, signed: true),
+                              inputType: const TextInputType.numberWithOptions(decimal: false, signed: true),
                               controller: _controller.mobile,
                               label: 'મોબાઈલ  નંબર*',
                               hint: 'મોબાઈલ  નંબર દાખલ કરો',
@@ -148,7 +148,7 @@ class _DonationPageState extends State<DonationPage> {
                               greyBorder: false,
                               required: true,
                               formatter: [LengthLimitingTextInputFormatter(10), formatterDigitsOnly],
-                              inputType: TextInputType.numberWithOptions(decimal: false, signed: true),
+                              inputType: const TextInputType.numberWithOptions(decimal: false, signed: true),
                               controller: _controller.amount,
                               label: 'રકમ',
                               hint: 'રકમ',
@@ -193,7 +193,7 @@ class _DonationPageState extends State<DonationPage> {
                               isMobile: true,
                               required: true,
                               formatter: [formatterPostalCodeLength, formatterDigitsOnly],
-                              inputType: TextInputType.numberWithOptions(decimal: false, signed: true),
+                              inputType: const TextInputType.numberWithOptions(decimal: false, signed: true),
                               controller: _controller.pinCode,
                               label: 'પીનકોડ*',
                               hint: 'પીનકોડ દાખલ કરો',
@@ -255,7 +255,7 @@ class _DonationPageState extends State<DonationPage> {
                                 height: 18,
                                 width: 18,
 
-                                child: _controller.isPrivacyAccepted.value == true ? Icon(Icons.check, color: CustomColors().white, size: 12) : SizedBox.shrink(),
+                                child: _controller.isPrivacyAccepted.value == true ? Icon(Icons.check, color: CustomColors().white, size: 12) : const SizedBox.shrink(),
                               ),
                             ),
                           ),

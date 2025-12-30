@@ -4,13 +4,13 @@ import 'package:bapa_sitaram/widget/app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../constants/routes.dart';
-import '../services/download/download_helper_mobile.dart';
-import '../utils/route_generate.dart';
-import '../widget/image_widget.dart';
+import 'package:bapa_sitaram/constants/routes.dart';
+import 'package:bapa_sitaram/services/download/download_helper_mobile.dart';
+import 'package:bapa_sitaram/utils/route_generate.dart';
+import 'package:bapa_sitaram/widget/image_widget.dart';
 
 class ImageView extends StatelessWidget {
-  const ImageView({super.key, required this.url, required this.showDownloadIcon});
+  const ImageView({required this.url, required this.showDownloadIcon, super.key});
   final String url;
   final bool showDownloadIcon;
   @override

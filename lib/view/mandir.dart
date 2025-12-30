@@ -5,9 +5,9 @@ import 'package:bapa_sitaram/widget/shimmer.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import '../constants/api_constant.dart';
-import '../services/loger_service.dart';
-import '../utils/size_config.dart';
+import 'package:bapa_sitaram/constants/api_constant.dart';
+import 'package:bapa_sitaram/services/loger_service.dart';
+import 'package:bapa_sitaram/utils/size_config.dart';
 
 class TempleDetail extends StatefulWidget {
   const TempleDetail({super.key});
@@ -56,14 +56,14 @@ class _TempleDetailState extends State<TempleDetail> {
     return Container(
       height: SizeConfig().height,
       width: SizeConfig().width,
-      padding: .symmetric(horizontal: 10),
+      padding: const .symmetric(horizontal: 10),
       child: FutureBuilder(
         future: getMenuDetail(menu: 'મંદિર'),
         builder: (_, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const ShimmerDemo();
           } else if (snapshot.hasError) {
-            return Center(child: Text("Error: ${snapshot.error}"));
+            return Center(child: Text('Error: ${snapshot.error}'));
           } else {
             final list = snapshot.data ?? [];
             return Stack(
@@ -71,14 +71,14 @@ class _TempleDetailState extends State<TempleDetail> {
                 PageView.builder(
                   itemCount: list.length,
                   reverse: false,
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   scrollDirection: Axis.horizontal,
                   controller: _pageController,
                   itemBuilder: (_, index) {
                     return Container(
                       height: SizeConfig().height,
                       width: SizeConfig().width,
-                      padding: .only(top: 60),
+                      padding: const .only(top: 60),
                       child: Column(
                         children: [
                           Expanded(

@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' show AppLifecycleListener, WidgetsBinding;
 
-import 'connectivity_service.dart';
-import 'enums.dart';
+import 'package:bapa_sitaram/services/connectivity_service.dart';
+import 'package:bapa_sitaram/services/enums.dart';
 
 class AppEvent {
   AppEvent({required this.type, this.data});

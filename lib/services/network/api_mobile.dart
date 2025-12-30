@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
-import '../connectivity_service.dart';
-import '../enums.dart';
-import '../loger_service.dart';
+import 'package:bapa_sitaram/services/connectivity_service.dart';
+import 'package:bapa_sitaram/services/enums.dart';
+import 'package:bapa_sitaram/services/loger_service.dart';
 
 class NetworkServiceMobile {
   factory NetworkServiceMobile() => _instance;

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
 import 'dart:io';
 
-import '../constants/app_colors.dart';
-import '../services/helper_service.dart';
-import '../services/loger_service.dart';
-import 'image_widget.dart';
+import 'package:bapa_sitaram/constants/app_colors.dart';
+import 'package:bapa_sitaram/services/helper_service.dart';
+import 'package:bapa_sitaram/services/loger_service.dart';
+import 'package:bapa_sitaram/widget/image_widget.dart';
 
 Future<String?> generateThumbnail({required String videoPath, required int height, required int width}) async {
   try {
@@ -40,7 +40,7 @@ Widget getThumbNails({required String url, required int height, required int wid
         return SizedBox(
           height: height.toDouble(),
           width: width.toDouble(),
-          child: Center(child: SizedBox(width: 50, height: 50, child: CircularProgressIndicator())),
+          child: const Center(child: SizedBox(width: 50, height: 50, child: CircularProgressIndicator())),
         );
       } else {
         //   generated(true);
@@ -57,7 +57,7 @@ Widget getThumbNails({required String url, required int height, required int wid
                 child: IgnorePointer(
                   child: Container(
                     decoration: BoxDecoration(color: Colors.black.withOpacity(0.25), shape: BoxShape.circle),
-                    padding: EdgeInsets.all(12),
+                    padding: const EdgeInsets.all(12),
                     child: ImageWidget(url: 'assets/images/ic_play.svg', height: 50, width: 50, color: CustomColors().white1000),
                   ),
                 ),

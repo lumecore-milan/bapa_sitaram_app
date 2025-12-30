@@ -3,20 +3,20 @@ import 'package:bapa_sitaram/constants/routes.dart';
 import 'package:bapa_sitaram/services/preference_service.dart';
 import 'package:bapa_sitaram/utils/font_styles.dart';
 import 'package:flutter/material.dart';
-import '../constants/app_colors.dart';
-import '../extensions/size_box_extension.dart';
-import '../utils/size_config.dart';
-import 'image_widget.dart';
+import 'package:bapa_sitaram/constants/app_colors.dart';
+import 'package:bapa_sitaram/extensions/size_box_extension.dart';
+import 'package:bapa_sitaram/utils/size_config.dart';
+import 'package:bapa_sitaram/widget/image_widget.dart';
 
 final class DrawerItem {
-  final String mainTitle;
-  final List<Map<String, dynamic>> subItems;
 
   DrawerItem({required this.mainTitle, required this.subItems});
+  final String mainTitle;
+  final List<Map<String, dynamic>> subItems;
 }
 
 class CustomDrawer extends StatefulWidget {
-  const CustomDrawer({super.key, required this.currentIndex, required this.onTap});
+  const CustomDrawer({required this.currentIndex, required this.onTap, super.key});
 
   final Function(String) onTap;
   final int currentIndex;
@@ -35,7 +35,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
         child: Stack(
           children: [
             Padding(
-              padding: .only(left: 10, right: 10, top: 240),
+              padding: const .only(left: 10, right: 10, top: 240),
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: .start,
@@ -44,10 +44,10 @@ class _CustomDrawerState extends State<CustomDrawer> {
                       menu: DrawerItem(
                         mainTitle: 'Main',
                         subItems: [
-                          {'image': "assets/images/ic_home.svg", 'title': "હોમ", 'navigate': homeRoute},
-                          {'image': "assets/images/ic_poonam_clr.svg", 'title': "પૂનમ લિસ્ટ", 'navigate': punamListRoute},
-                          {'image': "assets/images/ic_aarti_clr.svg", 'title': "આરતી", 'navigate': aartiRoute},
-                          {'image': "assets/images/ic_donation_clr.svg", 'title': "ડોનેશન", 'navigate': donationRoute},
+                          {'image': 'assets/images/ic_home.svg', 'title': 'હોમ', 'navigate': homeRoute},
+                          {'image': 'assets/images/ic_poonam_clr.svg', 'title': 'પૂનમ લિસ્ટ', 'navigate': punamListRoute},
+                          {'image': 'assets/images/ic_aarti_clr.svg', 'title': 'આરતી', 'navigate': aartiRoute},
+                        //  {'image': "assets/images/ic_donation_clr.svg", 'title': "ડોનેશન", 'navigate': donationRoute},
                         ],
                       ),
                     ),
@@ -56,10 +56,10 @@ class _CustomDrawerState extends State<CustomDrawer> {
                       menu: DrawerItem(
                         mainTitle: 'Quick Link',
                         subItems: [
-                          {'image': "assets/images/ic_press.svg", 'title': "પ્રેસ મીડિયા", 'navigate': pressRoute},
-                          {'image': "assets/images/ic_social_act.svg", 'title': "સામાજિક પ્રવૃત્તિ", 'navigate': socialActivityRoute},
-                          if (PreferenceService().getBoolean(key: AppConstants().prefKeyIsLoggedIn) == true) {'image': "assets/images/ic_comment.svg", 'title': "My Donation", 'navigate': myDonationRoute},
-                          {'image': "assets/images/ic_contact.svg", 'title': "સંપર્ક કરો", 'navigate': contactRoute},
+                          {'image': 'assets/images/ic_press.svg', 'title': 'પ્રેસ મીડિયા', 'navigate': pressRoute},
+                          {'image': 'assets/images/ic_social_act.svg', 'title': 'સામાજિક પ્રવૃત્તિ', 'navigate': socialActivityRoute},
+                          if (PreferenceService().getBoolean(key: AppConstants().prefKeyIsLoggedIn) == true) {'image': 'assets/images/ic_comment.svg', 'title': 'My Donation', 'navigate': myDonationRoute},
+                          {'image': 'assets/images/ic_contact.svg', 'title': 'સંપર્ક કરો', 'navigate': contactRoute},
                         ],
                       ),
                     ),
@@ -67,10 +67,10 @@ class _CustomDrawerState extends State<CustomDrawer> {
                       menu: DrawerItem(
                         mainTitle: 'User Info',
                         subItems: [
-                          if (PreferenceService().getBoolean(key: AppConstants().prefKeyIsLoggedIn) == true) {'image': "assets/images/profile.png", 'title': "પ્રોફાઈલ", 'navigate': userRegistrationRoute},
-                          {'image': "assets/images/ic_download.svg", 'title': "ડાઉનલોડ પોસ્ટ", 'navigate': downloadPostRoute},
-                          if (PreferenceService().getBoolean(key: AppConstants().prefKeyIsLoggedIn) == false) {'image': "assets/images/logout.png", 'title': "Login Now", 'navigate': loginRoute},
-                          if (PreferenceService().getBoolean(key: AppConstants().prefKeyIsLoggedIn) == true) {'image': "assets/images/logout.png", 'title': "Logout", 'navigate': loginRoute},
+                          if (PreferenceService().getBoolean(key: AppConstants().prefKeyIsLoggedIn) == true) {'image': 'assets/images/profile.png', 'title': 'પ્રોફાઈલ', 'navigate': userRegistrationRoute},
+                          {'image': 'assets/images/ic_download.svg', 'title': 'ડાઉનલોડ પોસ્ટ', 'navigate': downloadPostRoute},
+                          if (PreferenceService().getBoolean(key: AppConstants().prefKeyIsLoggedIn) == false) {'image': 'assets/images/logout.png', 'title': 'Login Now', 'navigate': loginRoute},
+                          if (PreferenceService().getBoolean(key: AppConstants().prefKeyIsLoggedIn) == true) {'image': 'assets/images/logout.png', 'title': 'Logout', 'navigate': loginRoute},
                         ],
                       ),
                     ),
@@ -78,8 +78,8 @@ class _CustomDrawerState extends State<CustomDrawer> {
                       menu: DrawerItem(
                         mainTitle: 'Application',
                         subItems: [
-                          {'image': "assets/images/ic_setting.svg", 'title': "સેટિંગ્સ", 'navigate': settingRoute},
-                          {'image': "assets/images/info.png", 'title': "અમારા વિશે", 'navigate': aboutRoute},
+                          {'image': 'assets/images/ic_setting.svg', 'title': 'સેટિંગ્સ', 'navigate': settingRoute},
+                          {'image': 'assets/images/info.png', 'title': 'અમારા વિશે', 'navigate': aboutRoute},
                         ],
                       ),
                     ),
@@ -101,7 +101,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                         width: SizeConfig().width * 0.70,
                         decoration: BoxDecoration(
                           color: CustomColors().white,
-                          borderRadius: BorderRadius.only(bottomLeft: Radius.circular(30), bottomRight: Radius.circular(30)),
+                          borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(30), bottomRight: Radius.circular(30)),
                         ),
                         child: Image.asset('assets/images/bg_image.jpeg', fit: BoxFit.cover, color: CustomColors().primaryColorDark..withOpacity(0.7), colorBlendMode: BlendMode.multiply),
                       ),
@@ -120,7 +120,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                       height: 80,
                       width: 80,
                       decoration: BoxDecoration(color: CustomColors().white, shape: BoxShape.circle),
-                      child: ImageWidget(url: 'assets/images/asram_logo.png'),
+                      child: const ImageWidget(url: 'assets/images/asram_logo.png'),
                     ),
                   ),
                 ],
@@ -141,7 +141,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
         ListView.separated(
           shrinkWrap: true,
           padding: .zero,
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           separatorBuilder: (_, index) => 5.h,
           itemCount: menu.subItems.length,
           itemBuilder: (_, index) {

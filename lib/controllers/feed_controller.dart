@@ -4,11 +4,11 @@ import 'package:bapa_sitaram/constants/api_constant.dart';
 import 'package:bapa_sitaram/constants/app_constant.dart';
 
 import 'package:get/get.dart';
-import '../models/feed_detail.dart';
-import '../services/loger_service.dart';
+import 'package:bapa_sitaram/models/feed_detail.dart';
+import 'package:bapa_sitaram/services/loger_service.dart';
 
-import '../services/network/api_mobile.dart';
-import '../services/preference_service.dart';
+import 'package:bapa_sitaram/services/network/api_mobile.dart';
+import 'package:bapa_sitaram/services/preference_service.dart';
 
 class FeedController extends GetxController {
   int shareIndex = -1;
@@ -234,7 +234,7 @@ class FeedController extends GetxController {
     try {
       currentPostDetail.clear();
       await _apiInstance
-          .get(url: "${APIConstant().apiGetCommentByPost}/$postId")
+          .get(url: '${APIConstant().apiGetCommentByPost}/$postId')
           .then((resp) {
             if (resp.isNotEmpty) {
               if (resp['httpStatusCode'] == 200) {

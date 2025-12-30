@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class CustomColors {
-  // Singleton pattern
-  static final CustomColors _instance = CustomColors._internal();
   factory CustomColors() => _instance;
   CustomColors._internal();
+  // Singleton pattern
+  static final CustomColors _instance = CustomColors._internal();
 
   final Color primaryColor = const Color(0xFF8F0909);
   final Color primaryColorDark = const Color(0xFF660808);

@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
-import '../extensions/size_box_extension.dart';
-import '../services/loger_service.dart';
+import 'package:bapa_sitaram/extensions/size_box_extension.dart';
+import 'package:bapa_sitaram/services/loger_service.dart';
 
 class PunamListPage extends StatelessWidget {
   PunamListPage({super.key});
@@ -21,7 +21,7 @@ class PunamListPage extends StatelessWidget {
       DateTime? currentDate = DateTime.now();
       String temp = _controller.list.value.poonamList[index].date.substring(_controller.list.value.poonamList[index].date.lastIndexOf(':') + 1);
       List<String> f = temp.split('/');
-      temp = "${f[2]}-${f[1]}-${f[0]}";
+      temp = '${f[2]}-${f[1]}-${f[0]}';
       if (temp.isNotEmpty) {
         DateTime d = DateTime.parse(temp);
         if (currentDate.isBefore(d) || DateUtils.isSameDay(currentDate, d)) {
@@ -40,7 +40,7 @@ class PunamListPage extends StatelessWidget {
       try {
         String temp = _controller.list.value.poonamList[i].date.substring(_controller.list.value.poonamList[i].date.lastIndexOf(':') + 1);
         List<String> f = temp.split('/');
-        temp = "${f[2]}-${f[1]}-${f[0]}";
+        temp = '${f[2]}-${f[1]}-${f[0]}';
         if (temp.isNotEmpty) {
           DateTime d = DateTime.parse(temp);
           if (d.isAfter(currentDate) || DateUtils.isSameDay(currentDate, d)) {
@@ -117,8 +117,8 @@ class PunamListPage extends StatelessWidget {
                       ),
                       Expanded(
                         child: Container(
-                          margin: EdgeInsets.only(left: 16, bottom: 20),
-                          padding: .symmetric(horizontal: 10, vertical: 10),
+                          margin: const EdgeInsets.only(left: 16, bottom: 20),
+                          padding: const .symmetric(horizontal: 10, vertical: 10),
                           alignment: .centerLeft,
                           decoration: BoxDecoration(color: _controller.list.value.poonamList[index].spacial ? randomBgForYellow() : CustomColors().white, borderRadius: BorderRadius.circular(5)),
                           child: Column(

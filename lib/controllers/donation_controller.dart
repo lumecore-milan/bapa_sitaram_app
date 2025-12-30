@@ -7,25 +7,15 @@ import 'package:bapa_sitaram/services/enums.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-import '../constants/api_constant.dart';
-import '../services/loger_service.dart';
+import 'package:bapa_sitaram/constants/api_constant.dart';
+import 'package:bapa_sitaram/services/loger_service.dart';
 
-import '../services/network/api_mobile.dart';
-import '../services/preference_service.dart';
-import '../utils/helper.dart';
-import '../utils/razor_pay.dart';
+import 'package:bapa_sitaram/services/network/api_mobile.dart';
+import 'package:bapa_sitaram/services/preference_service.dart';
+import 'package:bapa_sitaram/utils/helper.dart';
+
 
 class DonationController extends GetxController {
-  Rx<bool> isPrivacyAccepted = false.obs;
-  final TextEditingController type = TextEditingController();
-  final TextEditingController name = TextEditingController();
-  final TextEditingController mobile = TextEditingController();
-  final TextEditingController amount = TextEditingController();
-  final TextEditingController email = TextEditingController();
-  final TextEditingController pinCode = TextEditingController();
-  final TextEditingController address = TextEditingController();
-  final TextEditingController panCard = TextEditingController();
-  final _apiInstance = NetworkServiceMobile();
 
   DonationController() {
     final String userDetail = PreferenceService().getString(key: AppConstants().prefKeyUserDetail);
@@ -40,12 +30,22 @@ class DonationController extends GetxController {
         panCard.text = detail['panCard'] ?? '';
       }
     }
-    RazorPayService().onPaymentSuccess.listen((payment) {
+   /* RazorPayService().onPaymentSuccess.listen((payment) {
       if (payment.paymentId != null) {
         paymentSuccess(paymentId: payment.paymentId ?? '');
       }
-    });
+    });*/
   }
+  Rx<bool> isPrivacyAccepted = false.obs;
+  final TextEditingController type = TextEditingController();
+  final TextEditingController name = TextEditingController();
+  final TextEditingController mobile = TextEditingController();
+  final TextEditingController amount = TextEditingController();
+  final TextEditingController email = TextEditingController();
+  final TextEditingController pinCode = TextEditingController();
+  final TextEditingController address = TextEditingController();
+  final TextEditingController panCard = TextEditingController();
+  final _apiInstance = NetworkServiceMobile();
   void clearForm() {
     type.clear();
     name.clear();
@@ -75,7 +75,7 @@ class DonationController extends GetxController {
             LoggerService().log(message: data);
             if (data.isNotEmpty) {
               if (data['httpStatusCode'] == 200) {
-                await RazorPayService().makePayment(data: {'amount': data['amount'], 'name': name.text.trim(), 'description': 'Sample payment', 'orderId': data['order_id'], 'contact': '+91${mobile.text}', 'email': email.text});
+               // await RazorPayService().makePayment(data: {'amount': data['amount'], 'name': name.text.trim(), 'description': 'Sample payment', 'orderId': data['order_id'], 'contact': '+91${mobile.text}', 'email': email.text});
               }
             }
           });

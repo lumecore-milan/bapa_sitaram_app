@@ -3,7 +3,7 @@ import 'package:bapa_sitaram/utils/font_styles.dart';
 import 'package:flutter/material.dart';
 
 class CustomTabs extends StatelessWidget {
-  const CustomTabs({super.key, required this.tabs, required this.currentIndex, required this.onTap, required this.scrollController});
+  const CustomTabs({required this.tabs, required this.currentIndex, required this.onTap, required this.scrollController, super.key});
 
   final List<String> tabs;
   final int currentIndex;
@@ -13,7 +13,7 @@ class CustomTabs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: .symmetric(vertical: 5),
+      padding: const .symmetric(vertical: 5),
       color: CustomColors().white1000,
       alignment: .centerLeft,
       height: 50,
@@ -22,7 +22,7 @@ class CustomTabs extends StatelessWidget {
         itemCount: tabs.length,
         scrollDirection: .horizontal,
         shrinkWrap: true,
-        separatorBuilder: (_, index) => SizedBox(width: 10),
+        separatorBuilder: (_, index) => const SizedBox(width: 10),
         itemBuilder: (_, index) {
           return InkWell(
             onTap: () {
@@ -30,7 +30,7 @@ class CustomTabs extends StatelessWidget {
             },
             child: AnimatedContainer(
               alignment: .center,
-              padding: .symmetric(vertical: 5, horizontal: 10),
+              padding: const .symmetric(vertical: 5, horizontal: 10),
               decoration: BoxDecoration(color: index == currentIndex ? CustomColors().black : null, borderRadius: BorderRadius.circular(30)),
               duration: const Duration(milliseconds: 300),
               child: AnimatedDefaultTextStyle(

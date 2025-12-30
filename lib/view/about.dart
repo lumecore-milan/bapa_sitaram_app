@@ -5,9 +5,9 @@ import 'package:bapa_sitaram/utils/helper.dart';
 import 'package:bapa_sitaram/widget/app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../extensions/size_box_extension.dart';
-import '../utils/size_config.dart';
-import '../widget/image_widget.dart';
+import 'package:bapa_sitaram/extensions/size_box_extension.dart';
+import 'package:bapa_sitaram/utils/size_config.dart';
+import 'package:bapa_sitaram/widget/image_widget.dart';
 
 class AboutUs extends StatelessWidget {
   AboutUs({super.key});
@@ -44,7 +44,7 @@ class AboutUs extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        ImageWidget(height: 24, width: 24, url: 'assets/images/ic_email.svg'),
+                        const ImageWidget(height: 24, width: 24, url: 'assets/images/ic_email.svg'),
                         5.w,
                         Text(controller.aboutUs['about_email'], style: bolder(fontSize: 14, color: CustomColors().grey500)),
                       ],
@@ -58,7 +58,7 @@ class AboutUs extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        ImageWidget(height: 24, width: 24, url: 'assets/images/ic_phone.svg'),
+                        const ImageWidget(height: 24, width: 24, url: 'assets/images/ic_phone.svg'),
                         5.w,
                         Text(controller.aboutUs['about_phone'], style: bolder(fontSize: 14, color: CustomColors().grey500)),
                       ],
@@ -72,7 +72,7 @@ class AboutUs extends StatelessWidget {
                         onTap: () {
                           Helper.launch(url: controller.appSetting.aboutUs.facebook);
                         },
-                        child: ImageWidget(height: 30, width: 30, url: 'assets/images/facebook.png'),
+                        child: const ImageWidget(height: 30, width: 30, url: 'assets/images/facebook.png'),
                       ),
                       20.w,
                       InkWell(
@@ -80,7 +80,7 @@ class AboutUs extends StatelessWidget {
                           Helper.launch(url: controller.appSetting.aboutUs.instagram);
                         },
 
-                        child: ImageWidget(height: 40, width: 40, url: 'assets/images/instagram.jpg'),
+                        child: const ImageWidget(height: 40, width: 40, url: 'assets/images/instagram.jpg'),
                       ),
                       20.w,
                       InkWell(
@@ -88,21 +88,21 @@ class AboutUs extends StatelessWidget {
                           Helper.launch(url: controller.appSetting.aboutUs.twitter);
                         },
 
-                        child: ImageWidget(height: 30, width: 30, url: 'assets/images/twitter.png'),
+                        child: const ImageWidget(height: 30, width: 30, url: 'assets/images/twitter.png'),
                       ),
                       20.w,
                       InkWell(
                         onTap: () {
                           Helper.launch(url: controller.appSetting.aboutUs.youtube);
                         },
-                        child: ImageWidget(height: 30, width: 30, url: 'assets/images/social.png'),
+                        child: const ImageWidget(height: 30, width: 30, url: 'assets/images/social.png'),
                       ),
                       20.w,
                       InkWell(
                         onTap: () {
                           Helper.launch(url: controller.appSetting.aboutUs.aboutWebsite);
                         },
-                        child: ImageWidget(height: 24, width: 24, url: 'assets/images/globe.png'),
+                        child: const ImageWidget(height: 24, width: 24, url: 'assets/images/globe.png'),
                       ),
                     ],
                   ),

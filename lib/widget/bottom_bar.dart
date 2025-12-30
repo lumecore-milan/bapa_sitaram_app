@@ -2,8 +2,8 @@ import 'package:bapa_sitaram/constants/app_colors.dart';
 import 'package:bapa_sitaram/utils/font_styles.dart';
 import 'package:flutter/material.dart';
 
-import '../utils/size_config.dart';
-import 'image_widget.dart';
+import 'package:bapa_sitaram/utils/size_config.dart';
+import 'package:bapa_sitaram/widget/image_widget.dart';
 
 final class BottomList {
   BottomList({required this.image, required this.title});
@@ -12,7 +12,7 @@ final class BottomList {
 }
 
 class BottomBar extends StatelessWidget {
-  BottomBar({super.key, required this.onTap, required this.currentIndex});
+  BottomBar({required this.onTap, required this.currentIndex, super.key});
 
   final Function(int) onTap;
   final int currentIndex;
@@ -30,9 +30,9 @@ class BottomBar extends StatelessWidget {
       height: 66,
       width: SizeConfig().width,
       decoration: BoxDecoration(color: CustomColors().alWhite),
-      padding: .symmetric(horizontal: 10, vertical: 5),
+      padding: const .symmetric(horizontal: 10, vertical: 5),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: _bottomList.map((e) {
           return Container(
             width: (SizeConfig().width / _bottomList.length) - 10,
@@ -46,13 +46,13 @@ class BottomBar extends StatelessWidget {
                 children: [
                   Container(
                     width: 60,
-                    padding: .only(top: 3, bottom: 3),
+                    padding: const .only(top: 3, bottom: 3),
                     alignment: .center,
                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: _bottomList.indexOf(e) == currentIndex ? CustomColors().deepPurple200 : null),
                     child: ImageWidget(url: e.image, width: 24, height: 24),
                   ),
 
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
                   Text(e.title, style: medium(fontSize: 10, color: _bottomList.indexOf(e) == currentIndex ? CustomColors().primaryColorDark : null)),
                 ],
               ),

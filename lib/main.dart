@@ -10,8 +10,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 
-import 'constants/app_constant.dart';
-import 'my_app.dart';
+import 'package:bapa_sitaram/constants/app_constant.dart';
+import 'package:bapa_sitaram/my_app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,7 +27,7 @@ Future<void> runMicrotask() async {
   try {
     OneSignal.Debug.setAlertLevel(OSLogLevel.none);
     OneSignal.consentRequired(false);
-    OneSignal.initialize("302d18f7-d9fa-45e3-989f-0c7221f32a20");
+    OneSignal.initialize('302d18f7-d9fa-45e3-989f-0c7221f32a20');
     await OneSignal.Notifications.requestPermission(true);
     OneSignal.LiveActivities.setupDefault();
     OneSignal.Notifications.addClickListener((event) {
@@ -35,7 +35,7 @@ Future<void> runMicrotask() async {
 
       if (data.isNotEmpty) {
         pendingDetail = NotificationCLickDetail(id: '${data['value'] ?? ''}', type: '${data['type'] ?? ''}');
-        Future.delayed(Duration(milliseconds: 700)).then((time) {
+        Future.delayed(const Duration(milliseconds: 700)).then((time) {
           notificationClicked.sink.add(pendingDetail);
         });
       }

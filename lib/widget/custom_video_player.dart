@@ -5,24 +5,24 @@ import 'package:bapa_sitaram/widget/custom_html_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
-import '../constants/app_constant.dart';
-import '../controllers/feed_controller.dart';
-import '../extensions/size_box_extension.dart';
-import '../services/download/download_helper_mobile.dart';
-import '../services/loger_service.dart';
-import '../services/permission_service.dart';
-import '../services/preference_service.dart';
-import '../utils/custom_dialogs.dart';
-import '../utils/font_styles.dart';
-import '../utils/helper.dart';
-import '../utils/size_config.dart';
-import 'image_widget.dart';
-import 'like_comment_post_bottom_sheet.dart';
+import 'package:bapa_sitaram/constants/app_constant.dart';
+import 'package:bapa_sitaram/controllers/feed_controller.dart';
+import 'package:bapa_sitaram/extensions/size_box_extension.dart';
+import 'package:bapa_sitaram/services/download/download_helper_mobile.dart';
+import 'package:bapa_sitaram/services/loger_service.dart';
+import 'package:bapa_sitaram/services/permission_service.dart';
+import 'package:bapa_sitaram/services/preference_service.dart';
+import 'package:bapa_sitaram/utils/custom_dialogs.dart';
+import 'package:bapa_sitaram/utils/font_styles.dart';
+import 'package:bapa_sitaram/utils/helper.dart';
+import 'package:bapa_sitaram/utils/size_config.dart';
+import 'package:bapa_sitaram/widget/image_widget.dart';
+import 'package:bapa_sitaram/widget/like_comment_post_bottom_sheet.dart';
 
 final List<String> videoExtensions = ['mp4', 'mov', 'avi', 'mkv', 'flv', 'wmv', 'webm', 'm4v', '3gp', 'ts', 'mpeg', 'mpg'];
 
 class CustomVideoPlayer extends StatefulWidget {
-  const CustomVideoPlayer({super.key, required this.path});
+  const CustomVideoPlayer({required this.path, super.key});
 
   final String path;
 
@@ -93,10 +93,10 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
                     left: 0,
                     right: 0,
                     child: Container(
-                      padding: .symmetric(horizontal: 16),
+                      padding: const .symmetric(horizontal: 16),
                       height: 60,
                       width: SizeConfig().width,
-                      decoration: BoxDecoration(color: Colors.transparent),
+                      decoration: const BoxDecoration(color: Colors.transparent),
                       child: Row(
                         mainAxisAlignment: .spaceBetween,
                         children: [
@@ -117,7 +117,7 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
                       left: 0,
                       right: 0,
                       child: Container(
-                        padding: .only(left: 16, right: 16, bottom: 10, top: 16),
+                        padding: const .only(left: 16, right: 16, bottom: 10, top: 16),
                         width: SizeConfig().width,
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
@@ -168,12 +168,12 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
                                   height: 50,
                                   width: 50,
                                   decoration: BoxDecoration(color: CustomColors().white, shape: BoxShape.circle),
-                                  child: ImageWidget(url: 'assets/images/asram_logo.png'),
+                                  child: const ImageWidget(url: 'assets/images/asram_logo.png'),
                                 ),
                                 20.w,
-                                Text("Bapa Sitaram Temple", style: bolder(fontSize: 16, color: CustomColors().white1000)),
+                                Text('Bapa Sitaram Temple', style: bolder(fontSize: 16, color: CustomColors().white1000)),
                                 8.w,
-                                ImageWidget(url: 'assets/images/check.svg', height: 16, width: 16),
+                                const ImageWidget(url: 'assets/images/check.svg', height: 16, width: 16),
                               ],
                             ),
 
@@ -214,12 +214,12 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
                               },
                               child: Container(
                                 width: SizeConfig().width,
-                                padding: .all(10),
+                                padding: const .all(10),
                                 decoration: BoxDecoration(
                                   border: Border.all(color: CustomColors().white1000, width: 1),
                                   borderRadius: .circular(30),
                                 ),
-                                child: Text("Add Comment", style: bolder(fontSize: 16, color: CustomColors().white1000)),
+                                child: Text('Add Comment', style: bolder(fontSize: 16, color: CustomColors().white1000)),
                               ),
                             ),
                           ],
@@ -325,7 +325,7 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
       backgroundColor: CustomColors().layoutPrimaryBackground,
       enableDrag: true,
       useSafeArea: true,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
       constraints: BoxConstraints(minHeight: SizeConfig().height, maxHeight: SizeConfig().height),
       context: context,
       builder: (context) => LikeCommentPostBottomSheet(
@@ -346,7 +346,7 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
 }
 
 class CustomPlayer extends StatefulWidget {
-  const CustomPlayer({super.key, required this.url});
+  const CustomPlayer({required this.url, super.key});
 
   final String url;
 
@@ -404,14 +404,14 @@ class _CustomPlayerState extends State<CustomPlayer> {
           ),
           Obx(
             () => (isPlaying.value == true || _controller.value.isInitialized == false)
-                ? SizedBox.shrink()
+                ? const SizedBox.shrink()
                 : Positioned(
                     top: (SizeConfig().height / 2) + 100,
                     left: (SizeConfig().width / 2) + 100,
                     child: IgnorePointer(
                       child: Container(
                         decoration: BoxDecoration(color: Colors.black.withOpacity(0.25), shape: BoxShape.circle),
-                        padding: EdgeInsets.all(12),
+                        padding: const EdgeInsets.all(12),
                         child: ImageWidget(url: 'assets/images/ic_play.svg', height: 50, width: 50, color: CustomColors().white1000),
                       ),
                     ),

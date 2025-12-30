@@ -15,21 +15,21 @@ import 'package:bapa_sitaram/widget/custom_video_player.dart';
 import 'package:bapa_sitaram/widget/custom_youtube_video_lpayer.dart';
 import 'package:flutter/material.dart';
 
-import '../constants/routes.dart';
-import '../models/app_loading.dart';
-import '../models/home_detail.dart';
-import '../services/loger_service.dart';
-import '../view/download_posts.dart';
-import '../view/events.dart';
-import '../view/galary.dart';
-import '../view/home.dart';
-import '../view/image_view.dart';
-import '../view/login.dart';
-import '../view/menu_detail.dart';
-import '../view/policy.dart';
-import '../view/social_activity_detail.dart';
-import '../view/splash.dart';
-import '../view/virtual_darshan.dart';
+import 'package:bapa_sitaram/constants/routes.dart';
+import 'package:bapa_sitaram/models/app_loading.dart';
+import 'package:bapa_sitaram/models/home_detail.dart';
+import 'package:bapa_sitaram/services/loger_service.dart';
+import 'package:bapa_sitaram/view/download_posts.dart';
+import 'package:bapa_sitaram/view/events.dart';
+import 'package:bapa_sitaram/view/galary.dart';
+import 'package:bapa_sitaram/view/home.dart';
+import 'package:bapa_sitaram/view/image_view.dart';
+import 'package:bapa_sitaram/view/login.dart';
+import 'package:bapa_sitaram/view/menu_detail.dart';
+import 'package:bapa_sitaram/view/policy.dart';
+import 'package:bapa_sitaram/view/social_activity_detail.dart';
+import 'package:bapa_sitaram/view/splash.dart';
+import 'package:bapa_sitaram/view/virtual_darshan.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   try {
@@ -37,7 +37,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       case splashRoute:
         return MaterialPageRoute(builder: (context) => const SplashScreen());
       case myDonationRoute:
-        return MaterialPageRoute(builder: (context) => MyDonationList());
+        return MaterialPageRoute(builder: (context) => const MyDonationList());
 
       /*  case singleDetailRoute:
           String image='';
@@ -84,19 +84,19 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       case socialActivityRoute:
         return MaterialPageRoute(builder: (context) => const SocialActivities());
       case contactRoute:
-        return MaterialPageRoute(builder: (context) => ContactUs());
+        return MaterialPageRoute(builder: (context) => const ContactUs());
       case downloadPostRoute:
         return MaterialPageRoute(builder: (context) => const DownloadedPosts());
       case settingRoute:
-        return MaterialPageRoute(builder: (context) => SettingPage());
+        return MaterialPageRoute(builder: (context) => const SettingPage());
       case galleryRoute:
-        return MaterialPageRoute(builder: (context) => GalleryList());
+        return MaterialPageRoute(builder: (context) => const GalleryList());
       case aboutRoute:
         return MaterialPageRoute(builder: (context) => AboutUs());
       case eventsRoute:
         return MaterialPageRoute(builder: (context) => EventsPage());
       case virtualDarshanRoute:
-        return MaterialPageRoute(builder: (context) => VirtualDarshan());
+        return MaterialPageRoute(builder: (context) => const VirtualDarshan());
 
       case imageRoute:
         String url = '';

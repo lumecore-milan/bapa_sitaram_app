@@ -5,12 +5,12 @@ import 'package:bapa_sitaram/widget/app_bar.dart';
 import 'package:bapa_sitaram/widget/shimmer.dart';
 import 'package:flutter/material.dart';
 
-import '../constants/api_constant.dart';
-import '../extensions/size_box_extension.dart';
-import '../services/loger_service.dart';
+import 'package:bapa_sitaram/constants/api_constant.dart';
+import 'package:bapa_sitaram/extensions/size_box_extension.dart';
+import 'package:bapa_sitaram/services/loger_service.dart';
 
-import '../utils/size_config.dart';
-import '../widget/image_widget.dart';
+import 'package:bapa_sitaram/utils/size_config.dart';
+import 'package:bapa_sitaram/widget/image_widget.dart';
 
 class PressMedia extends StatelessWidget {
   const PressMedia({super.key});
@@ -51,13 +51,13 @@ class PressMedia extends StatelessWidget {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const ShimmerDemo();
               } else if (snapshot.hasError) {
-                return Center(child: Text("Error: ${snapshot.error}"));
+                return Center(child: Text('Error: ${snapshot.error}'));
               } else {
                 final List<dynamic> data = snapshot.data ?? [];
                 return ListView.separated(
                   shrinkWrap: true,
                   itemCount: data.length,
-                  separatorBuilder: (_, index) => SizedBox(height: 10),
+                  separatorBuilder: (_, index) => const SizedBox(height: 10),
                   itemBuilder: (_, index) {
                     return Column(
                       mainAxisSize: .min,
@@ -69,7 +69,7 @@ class PressMedia extends StatelessWidget {
                             color: CustomColors().primaryColorDark,
                             borderRadius: const BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
                           ),
-                          padding: .all(10),
+                          padding: const .all(10),
                           child: Column(
                             crossAxisAlignment: .start,
                             children: [
@@ -80,7 +80,7 @@ class PressMedia extends StatelessWidget {
                           ),
                         ),
                         Container(
-                          padding: .all(10),
+                          padding: const .all(10),
                           decoration: BoxDecoration(
                             borderRadius: const BorderRadius.only(bottomRight: Radius.circular(10), bottomLeft: Radius.circular(10)),
                             border: .all(color: CustomColors().grey600, width: 1),

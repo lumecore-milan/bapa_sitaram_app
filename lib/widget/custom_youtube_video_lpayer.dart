@@ -4,9 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class CustomYoutubeVideoPlayer extends StatefulWidget {
+  const CustomYoutubeVideoPlayer({required this.url, super.key});
   final String url;
-
-  const CustomYoutubeVideoPlayer({super.key, required this.url});
 
   @override
   State<CustomYoutubeVideoPlayer> createState() => _CustomYoutubeVideoPlayerState();
@@ -21,7 +20,7 @@ class _CustomYoutubeVideoPlayerState extends State<CustomYoutubeVideoPlayer> {
     super.initState();
 
     _controller = YoutubePlayerController(
-      initialVideoId: YoutubePlayer.convertUrlToId(widget.url) ?? "",
+      initialVideoId: YoutubePlayer.convertUrlToId(widget.url) ?? '',
       flags: const YoutubePlayerFlags(autoPlay: true, mute: false, controlsVisibleAtStart: true, hideControls: false, disableDragSeek: false, loop: false, enableCaption: true),
     );
   }
@@ -41,7 +40,7 @@ class _CustomYoutubeVideoPlayerState extends State<CustomYoutubeVideoPlayer> {
       builder: (context, player) {
         return Scaffold(
           appBar: CustomAppbar(
-            title: "Live Aarti",
+            title: 'Live Aarti',
             showDrawerIcon: false,
             onBackTap: () {
               Navigator.pop(context);

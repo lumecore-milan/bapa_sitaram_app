@@ -4,6 +4,7 @@ import 'package:bapa_sitaram/constants/app_colors.dart';
 import 'package:bapa_sitaram/constants/app_constant.dart';
 import 'package:bapa_sitaram/constants/routes.dart';
 import 'package:bapa_sitaram/controllers/home_controller.dart';
+import 'package:bapa_sitaram/services/loger_service.dart';
 import 'package:bapa_sitaram/utils/font_styles.dart';
 import 'package:bapa_sitaram/utils/helper.dart';
 import 'package:bapa_sitaram/utils/route_generate.dart';
@@ -12,8 +13,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 
-import '../extensions/size_box_extension.dart';
-import '../services/preference_service.dart';
+import 'package:bapa_sitaram/extensions/size_box_extension.dart';
+import 'package:bapa_sitaram/services/preference_service.dart';
 
 class SettingPage extends StatefulWidget {
   const SettingPage({super.key});
@@ -81,13 +82,13 @@ class _SettingPageState extends State<SettingPage> {
               20.h,
               Text('Policy', style: bolder(fontSize: 16, color: CustomColors().blue700)),
               10.h,
-              detailList(context: context, title: 'Refund Policy', image: Icon(Icons.arrow_forward_ios, size: 16)),
+              detailList(context: context, title: 'Refund Policy', image: const Icon(Icons.arrow_forward_ios, size: 16)),
               10.h,
-              detailList(context: context, title: 'Privacy Policy', image: Icon(Icons.arrow_forward_ios, size: 16)),
+              detailList(context: context, title: 'Privacy Policy', image: const Icon(Icons.arrow_forward_ios, size: 16)),
               10.h,
-              detailList(context: context, title: 'Terms & Condition', image: Icon(Icons.arrow_forward_ios, size: 16)),
+              detailList(context: context, title: 'Terms & Condition', image: const Icon(Icons.arrow_forward_ios, size: 16)),
               10.h,
-              detailList(context: context, title: 'version:8', image: Icon(Icons.mobile_friendly_sharp, size: 16)),
+              detailList(context: context, title: 'version:8', image: const Icon(Icons.mobile_friendly_sharp, size: 16)),
               10.h,
             ],
           ),
@@ -121,7 +122,7 @@ class _SettingPageState extends State<SettingPage> {
         child: Container(
           height: 50,
           alignment: .centerLeft,
-          padding: .all(10),
+          padding: const .all(10),
           decoration: BoxDecoration(
             borderRadius: .circular(4),
             color: CustomColors().white,
@@ -130,7 +131,7 @@ class _SettingPageState extends State<SettingPage> {
                 color: CustomColors().grey50,
                 blurRadius: 4,
                 spreadRadius: 2, // keep this 0 for OUTSIDE only
-                offset: Offset(0, 0),
+                offset: Offset.zero,
               ),
             ],
           ),
@@ -160,7 +161,9 @@ class _SettingPageState extends State<SettingPage> {
       if (appCacheDir.existsSync()) {
         await appCacheDir.delete(recursive: true);
       }
-    } catch (e) {}
+    } catch (e) {
+      LoggerService().log(message: e.toString());
+    }
     await getCacheSize();
     Helper.closeLoader();
   }
@@ -191,11 +194,11 @@ class _SettingPageState extends State<SettingPage> {
   }
 
   String _formatBytes(int bytes) {
-    if (bytes <= 0) return "0 KB";
+    if (bytes <= 0) return '0 KB';
     const kb = 1024;
     const mb = kb * 1024;
 
-    if (bytes < mb) return "${(bytes / kb).toStringAsFixed(2)} KB";
-    return "${(bytes / mb).toStringAsFixed(2)} MB";
+    if (bytes < mb) return '${(bytes / kb).toStringAsFixed(2)} KB';
+    return '${(bytes / mb).toStringAsFixed(2)} MB';
   }
 }

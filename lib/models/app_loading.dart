@@ -1,10 +1,6 @@
 import 'dart:io';
 
 class AppSettingModel {
-  VersionModel version;
-  UserInfoModel userInfo;
-  AboutUsModel aboutUs;
-  NoticeModel notice;
 
   AppSettingModel({this.version = const VersionModel(), this.userInfo = const UserInfoModel(), this.aboutUs = const AboutUsModel(), this.notice = const NoticeModel()});
 
@@ -17,18 +13,17 @@ class AppSettingModel {
       notice: NoticeModel.fromJson(json['notice'] ?? {}),
     );
   }
+  VersionModel version;
+  UserInfoModel userInfo;
+  AboutUsModel aboutUs;
+  NoticeModel notice;
 
   Map<String, dynamic> toJson() {
-    return {"version": version.toJson(), "user_info": userInfo.toJson(), "aboutUs": aboutUs.toJson(), "notice": notice.toJson()};
+    return {'version': version.toJson(), 'user_info': userInfo.toJson(), 'aboutUs': aboutUs.toJson(), 'notice': notice.toJson()};
   }
 }
 
 class VersionModel {
-  final String versionNo;
-  final String versionForceUpdate;
-  final String versionTitle;
-  final String versionMessage;
-  final String versionNeedClearData;
 
   const VersionModel({this.versionNo = '', this.versionForceUpdate = '', this.versionTitle = '', this.versionMessage = '', this.versionNeedClearData = ''});
 
@@ -43,46 +38,32 @@ class VersionModel {
       versionNeedClearData: isAndroid ? (json['version_need_clear_data'] ?? '') : json['ios_version_need_clear_data'] ?? '',
     );
   }
+  final String versionNo;
+  final String versionForceUpdate;
+  final String versionTitle;
+  final String versionMessage;
+  final String versionNeedClearData;
 
   Map<String, dynamic> toJson() {
-    return {"version_no": versionNo, "version_force_update": versionForceUpdate, "version_title": versionTitle, "version_message": versionMessage, "version_need_clear_data": versionNeedClearData};
+    return {'version_no': versionNo, 'version_force_update': versionForceUpdate, 'version_title': versionTitle, 'version_message': versionMessage, 'version_need_clear_data': versionNeedClearData};
   }
 }
 
 class UserInfoModel {
-  final String userStatus;
 
   const UserInfoModel({this.userStatus = ''});
 
   factory UserInfoModel.fromJson(Map<String, dynamic> json) {
     return UserInfoModel(userStatus: json['user_status'] ?? '');
   }
+  final String userStatus;
 
   Map<String, dynamic> toJson() {
-    return {"user_status": userStatus};
+    return {'user_status': userStatus};
   }
 }
 
 class AboutUsModel {
-  final String aboutTitle;
-  final String aboutImage;
-  final String aboutEmail;
-  final String aboutPhone;
-  final String aboutWebsite;
-  final String facebook;
-  final String instagram;
-  final String youtube;
-  final String twitter;
-  final String developBy;
-  final String address;
-  final String privacyPolicy;
-  final String refundPolicy;
-  final String termCondition;
-  final String razorpayKey;
-  final String razorpaySecret;
-  final String otpAppId;
-  final String otplessOn;
-  final String treePlantationShow;
 
   const AboutUsModel({
     this.aboutTitle = '',
@@ -129,44 +110,63 @@ class AboutUsModel {
       treePlantationShow: json['tree_plantation_show'] ?? '',
     );
   }
+  final String aboutTitle;
+  final String aboutImage;
+  final String aboutEmail;
+  final String aboutPhone;
+  final String aboutWebsite;
+  final String facebook;
+  final String instagram;
+  final String youtube;
+  final String twitter;
+  final String developBy;
+  final String address;
+  final String privacyPolicy;
+  final String refundPolicy;
+  final String termCondition;
+  final String razorpayKey;
+  final String razorpaySecret;
+  final String otpAppId;
+  final String otplessOn;
+  final String treePlantationShow;
 
   Map<String, dynamic> toJson() {
     return {
-      "about_title": aboutTitle,
-      "about_image": aboutImage,
-      "about_email": aboutEmail,
-      "about_phone": aboutPhone,
-      "about_website": aboutWebsite,
-      "facebook": facebook,
-      "instagram": instagram,
-      "youtube": youtube,
-      "twitter": twitter,
-      "develop_by": developBy,
-      "address": address,
-      "privacypolicy": privacyPolicy,
-      "refundpolicy": refundPolicy,
-      "term_condition": termCondition,
-      "razorpay_key": razorpayKey,
-      "razorpay_secret": razorpaySecret,
-      "otp_app_id": otpAppId,
-      "otpless_on": otplessOn,
-      "tree_plantation_show": treePlantationShow,
+      'about_title': aboutTitle,
+      'about_image': aboutImage,
+      'about_email': aboutEmail,
+      'about_phone': aboutPhone,
+      'about_website': aboutWebsite,
+      'facebook': facebook,
+      'instagram': instagram,
+      'youtube': youtube,
+      'twitter': twitter,
+      'develop_by': developBy,
+      'address': address,
+      'privacypolicy': privacyPolicy,
+      'refundpolicy': refundPolicy,
+      'term_condition': termCondition,
+      'razorpay_key': razorpayKey,
+      'razorpay_secret': razorpaySecret,
+      'otp_app_id': otpAppId,
+      'otpless_on': otplessOn,
+      'tree_plantation_show': treePlantationShow,
     };
   }
 }
 
 class NoticeModel {
-  final String noticeTitle;
-  final String noticeImage;
-  final String noticeShow;
 
   const NoticeModel({this.noticeTitle = '', this.noticeImage = '', this.noticeShow = ''});
 
   factory NoticeModel.fromJson(Map<String, dynamic> json) {
     return NoticeModel(noticeTitle: json['notice_title'] ?? '', noticeImage: json['notice_image'] ?? '', noticeShow: json['notice_show'] ?? '');
   }
+  final String noticeTitle;
+  final String noticeImage;
+  final String noticeShow;
 
   Map<String, dynamic> toJson() {
-    return {"notice_title": noticeTitle, "notice_image": noticeImage, "notice_show": noticeShow};
+    return {'notice_title': noticeTitle, 'notice_image': noticeImage, 'notice_show': noticeShow};
   }
 }

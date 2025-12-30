@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:bapa_sitaram/services/network/api_mobile.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'app_events.dart';
-import 'enums.dart';
+import 'package:bapa_sitaram/services/app_events.dart';
+import 'package:bapa_sitaram/services/enums.dart';
 
 class ConnectivityService {
   factory ConnectivityService() => _instance;

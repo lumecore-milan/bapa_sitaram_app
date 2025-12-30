@@ -3,12 +3,12 @@ import 'package:bapa_sitaram/utils/font_styles.dart';
 import 'package:bapa_sitaram/widget/app_bar.dart';
 import 'package:flutter/material.dart';
 
-import '../extensions/size_box_extension.dart';
-import '../models/home_detail.dart';
-import '../utils/size_config.dart';
+import 'package:bapa_sitaram/extensions/size_box_extension.dart';
+import 'package:bapa_sitaram/models/home_detail.dart';
+import 'package:bapa_sitaram/utils/size_config.dart';
 
 class AartiPage extends StatelessWidget {
-  const AartiPage({super.key, required this.detail});
+  const AartiPage({required this.detail, super.key});
 
   final Arti detail;
 
@@ -32,10 +32,10 @@ class AartiPage extends StatelessWidget {
                 Text(detail.description, style: bolder(fontSize: 16, color: CustomColors().black)),
                 50.h,
                 ListView.separated(
-                  separatorBuilder: (_, index) => SizedBox(height: 50),
+                  separatorBuilder: (_, index) => const SizedBox(height: 50),
                   itemCount: detail.data.length,
                   shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (_, index) {
                     return Stack(
                       clipBehavior: Clip.none,
@@ -57,8 +57,8 @@ class AartiPage extends StatelessWidget {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Text(detail.data[index].title, style: semiBold(fontSize: 18, color: CustomColors().primaryColorDark)),
-                              SizedBox(height: 12),
-                              Text(detail.data[index].descp, textAlign: TextAlign.center, style: TextStyle(fontSize: 15, height: 1.4)),
+                              const SizedBox(height: 12),
+                              Text(detail.data[index].descp, textAlign: TextAlign.center, style: const TextStyle(fontSize: 15, height: 1.4)),
                             ],
                           ),
                         ),
@@ -73,7 +73,7 @@ class AartiPage extends StatelessWidget {
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 border: Border.all(color: Colors.red, width: 1),
-                                image: DecorationImage(image: AssetImage("assets/images/aarti_${index + 1}.png"), fit: BoxFit.cover),
+                                image: DecorationImage(image: AssetImage('assets/images/aarti_${index + 1}.png'), fit: BoxFit.cover),
                               ),
                             ),
                           ),

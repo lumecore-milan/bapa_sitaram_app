@@ -1,10 +1,10 @@
-import 'dart:async';
-import 'package:razorpay_flutter/razorpay_flutter.dart';
 
-import '../services/loger_service.dart';
+//import 'package:razorpay_flutter/razorpay_flutter.dart';
+
+
 
 class RazorPayService {
-  final StreamController<PaymentSuccessResponse> _paymentSuccessController = StreamController<PaymentSuccessResponse>.broadcast();
+  /*final StreamController<PaymentSuccessResponse> _paymentSuccessController = StreamController<PaymentSuccessResponse>.broadcast();
   Stream<PaymentSuccessResponse> get onPaymentSuccess => _paymentSuccessController.stream;
   factory RazorPayService() => _instance;
   RazorPayService._internal() {
@@ -53,4 +53,5 @@ class RazorPayService {
       LoggerService().log(message: e.toString());
     }
   }
+  */
 }

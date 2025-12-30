@@ -4,8 +4,8 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
 
-import 'enums.dart';
-import 'helper_service.dart';
+import 'package:bapa_sitaram/services/enums.dart';
+import 'package:bapa_sitaram/services/helper_service.dart';
 
 class LoggerService {
   factory LoggerService() => _instance;

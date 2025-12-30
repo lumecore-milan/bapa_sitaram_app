@@ -7,13 +7,13 @@ import 'package:bapa_sitaram/widget/image_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import '../constants/routes.dart';
-import '../extensions/size_box_extension.dart';
-import '../utils/helper.dart';
-import '../utils/route_generate.dart';
-import '../utils/size_config.dart';
-import '../widget/custom_button.dart';
-import '../widget/custom_text_field.dart';
+import 'package:bapa_sitaram/constants/routes.dart';
+import 'package:bapa_sitaram/extensions/size_box_extension.dart';
+import 'package:bapa_sitaram/utils/helper.dart';
+import 'package:bapa_sitaram/utils/route_generate.dart';
+import 'package:bapa_sitaram/utils/size_config.dart';
+import 'package:bapa_sitaram/widget/custom_button.dart';
+import 'package:bapa_sitaram/widget/custom_text_field.dart';
 
 class UserRegistrationPage extends StatefulWidget {
   const UserRegistrationPage({super.key});
@@ -55,7 +55,7 @@ class _UserRegistrationPageState extends State<UserRegistrationPage> {
                   Container(
                     decoration: BoxDecoration(color: CustomColors().layoutPrimaryBackground),
                     child: Padding(
-                      padding: .only(top: 16, left: 16, right: 16),
+                      padding: const .only(top: 16, left: 16, right: 16),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
@@ -90,7 +90,7 @@ class _UserRegistrationPageState extends State<UserRegistrationPage> {
                                   enabled: false,
                                   showMainTitle: true,
                                   formatter: [LengthLimitingTextInputFormatter(10), FilteringTextInputFormatter.digitsOnly],
-                                  inputType: TextInputType.numberWithOptions(decimal: false, signed: true),
+                                  inputType: const TextInputType.numberWithOptions(decimal: false, signed: true),
                                   controller: _controller.mobile,
                                   label: 'મોબાઇલ',
                                   hint: '',
@@ -142,7 +142,7 @@ class _UserRegistrationPageState extends State<UserRegistrationPage> {
                                   isMobile: false,
                                   required: false,
                                   formatter: [formatterPostalCodeLength, formatterDigitsOnly],
-                                  inputType: TextInputType.numberWithOptions(decimal: false, signed: true),
+                                  inputType: const TextInputType.numberWithOptions(decimal: false, signed: true),
                                   controller: _controller.pinCode,
                                   label: 'પીનકોડ',
                                   hint: 'પીનકોડ દાખલ કરો',
@@ -240,7 +240,7 @@ class _UserRegistrationPageState extends State<UserRegistrationPage> {
                               height: 24,
                               width: 24,
                               decoration: BoxDecoration(color: CustomColors().white, shape: BoxShape.circle),
-                              child: Icon(Icons.edit, size: 10),
+                              child: const Icon(Icons.edit, size: 10),
                             ),
                           ),
                         ),

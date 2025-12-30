@@ -7,11 +7,11 @@ import 'package:bapa_sitaram/widget/app_bar.dart';
 import 'package:bapa_sitaram/widget/rounded_image.dart';
 import 'package:flutter/material.dart';
 
-import '../constants/api_constant.dart';
-import '../services/loger_service.dart';
+import 'package:bapa_sitaram/constants/api_constant.dart';
+import 'package:bapa_sitaram/services/loger_service.dart';
 
-import '../utils/size_config.dart';
-import '../widget/shimmer.dart';
+import 'package:bapa_sitaram/utils/size_config.dart';
+import 'package:bapa_sitaram/widget/shimmer.dart';
 
 class SocialActivities extends StatelessWidget {
   const SocialActivities({super.key});
@@ -30,7 +30,7 @@ class SocialActivities extends StatelessWidget {
     } catch (e) {
       LoggerService().log(message: e.toString());
     }
-    list = (list.reversed ?? []).toList();
+    list = (list.reversed).toList();
     return list;
   }
 
@@ -53,14 +53,14 @@ class SocialActivities extends StatelessWidget {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const ShimmerDemo();
               } else if (snapshot.hasError) {
-                return Center(child: Text("Error: ${snapshot.error}"));
+                return Center(child: Text('Error: ${snapshot.error}'));
               } else {
                 final List<dynamic> data = snapshot.data ?? [];
                 return ListView.separated(
                   shrinkWrap: true,
                   padding: .zero,
                   itemCount: data.length,
-                  separatorBuilder: (_, index) => SizedBox(height: 10),
+                  separatorBuilder: (_, index) => const SizedBox(height: 10),
                   itemBuilder: (_, index) {
                     return Stack(
                       children: [

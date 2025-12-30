@@ -11,18 +11,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:pinput/pinput.dart';
-import '../constants/app_constant.dart';
-import '../constants/routes.dart';
-import '../extensions/size_box_extension.dart';
-import '../models/app_loading.dart';
-import '../services/preference_service.dart';
-import '../utils/firebase_otp.dart';
-import '../utils/size_config.dart';
-import '../widget/custom_button.dart';
-import '../widget/image_widget.dart';
+import 'package:bapa_sitaram/constants/app_constant.dart';
+import 'package:bapa_sitaram/constants/routes.dart';
+import 'package:bapa_sitaram/extensions/size_box_extension.dart';
+import 'package:bapa_sitaram/models/app_loading.dart';
+import 'package:bapa_sitaram/services/preference_service.dart';
+import 'package:bapa_sitaram/utils/firebase_otp.dart';
+import 'package:bapa_sitaram/utils/size_config.dart';
+import 'package:bapa_sitaram/widget/custom_button.dart';
+import 'package:bapa_sitaram/widget/image_widget.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key, required this.detail});
+  const LoginPage({required this.detail, super.key});
 
   final AppSettingModel detail;
 
@@ -89,10 +89,10 @@ class _LoginPageState extends State<LoginPage> {
                         width: SizeConfig().width,
                         decoration: BoxDecoration(
                           color: CustomColors().white,
-                          borderRadius: BorderRadius.only(bottomLeft: Radius.circular(30), bottomRight: Radius.circular(30)),
+                          borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(30), bottomRight: Radius.circular(30)),
                         ),
                         child: ClipRRect(
-                          borderRadius: BorderRadius.only(bottomLeft: Radius.circular(30), bottomRight: Radius.circular(30)),
+                          borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(30), bottomRight: Radius.circular(30)),
                           child: Image.asset('assets/images/bg_image.jpeg', fit: BoxFit.cover, color: CustomColors().primaryColorDark.withOpacity(0.7), colorBlendMode: BlendMode.multiply),
                         ),
                       ),
@@ -103,7 +103,7 @@ class _LoginPageState extends State<LoginPage> {
                           height: 80,
                           width: 80,
                           decoration: BoxDecoration(color: CustomColors().white, shape: BoxShape.circle),
-                          child: ImageWidget(url: 'assets/images/asram_logo.png'),
+                          child: const ImageWidget(url: 'assets/images/asram_logo.png'),
                         ),
                       ),
                     ],
@@ -113,13 +113,13 @@ class _LoginPageState extends State<LoginPage> {
                   child: Container(
                     decoration: BoxDecoration(color: CustomColors().layoutPrimaryBackground),
                     child: Padding(
-                      padding: .only(top: 50, left: 16, right: 16),
+                      padding: const .only(top: 50, left: 16, right: 16),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Container(
                             color: CustomColors().yellow600,
-                            padding: .symmetric(horizontal: 5),
+                            padding: const .symmetric(horizontal: 5),
                             child: Text('Login Your Account', style: bolder(fontSize: 16)),
                           ),
                           16.h,
@@ -145,7 +145,7 @@ class _LoginPageState extends State<LoginPage> {
                                           isMobile: true,
                                           showMainTitle: false,
                                           formatter: [LengthLimitingTextInputFormatter(10), FilteringTextInputFormatter.digitsOnly],
-                                          inputType: TextInputType.numberWithOptions(decimal: false, signed: true),
+                                          inputType: const TextInputType.numberWithOptions(decimal: false, signed: true),
                                           controller: _mobileController,
                                           label: 'મોબાઇલ',
                                           hint: 'મોબાઇલ નંબર દાખલ કરો',
@@ -173,7 +173,7 @@ class _LoginPageState extends State<LoginPage> {
                                                 height: 18,
                                                 width: 18,
 
-                                                child: isPrivacyAccepted.value == true ? Icon(Icons.check, color: CustomColors().white, size: 12) : SizedBox.shrink(),
+                                                child: isPrivacyAccepted.value == true ? Icon(Icons.check, color: CustomColors().white, size: 12) : const SizedBox.shrink(),
                                               ),
                                             ),
                                           ),
@@ -184,7 +184,7 @@ class _LoginPageState extends State<LoginPage> {
                                       10.h,
                                       Obx(
                                         () => _controller.otpSent.value == false
-                                            ? SizedBox.shrink()
+                                            ? const SizedBox.shrink()
                                             : Column(
                                                 children: [
                                                   Text('OTP has been sent to your', style: semiBold(fontSize: 12, color: CustomColors().grey600)),
@@ -328,7 +328,7 @@ class _LoginPageState extends State<LoginPage> {
             enabled: false,
             showMainTitle: false,
             formatter: [LengthLimitingTextInputFormatter(10), FilteringTextInputFormatter.digitsOnly],
-            inputType: TextInputType.numberWithOptions(decimal: false, signed: true),
+            inputType: const TextInputType.numberWithOptions(decimal: false, signed: true),
             controller: _mobileController,
             label: '',
             hint: '',
@@ -389,7 +389,7 @@ class _LoginPageState extends State<LoginPage> {
                     height: 18,
                     width: 18,
 
-                    child: isPrivacyAccepted.value == true ? Icon(Icons.check, color: CustomColors().white, size: 12) : SizedBox.shrink(),
+                    child: isPrivacyAccepted.value == true ? Icon(Icons.check, color: CustomColors().white, size: 12) : const SizedBox.shrink(),
                   ),
                 ),
               ),

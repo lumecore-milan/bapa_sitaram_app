@@ -2,17 +2,17 @@ import 'package:bapa_sitaram/services/helper_service.dart';
 import 'package:bapa_sitaram/widget/app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../constants/app_colors.dart';
-import '../controllers/home_controller.dart';
-import '../extensions/size_box_extension.dart';
-import '../utils/font_styles.dart';
-import '../utils/size_config.dart';
-import '../widget/custom_html_widget.dart';
-import '../widget/image_widget.dart';
-import '../widget/rounded_image.dart';
+import 'package:bapa_sitaram/constants/app_colors.dart';
+import 'package:bapa_sitaram/controllers/home_controller.dart';
+import 'package:bapa_sitaram/extensions/size_box_extension.dart';
+import 'package:bapa_sitaram/utils/font_styles.dart';
+import 'package:bapa_sitaram/utils/size_config.dart';
+import 'package:bapa_sitaram/widget/custom_html_widget.dart';
+import 'package:bapa_sitaram/widget/image_widget.dart';
+import 'package:bapa_sitaram/widget/rounded_image.dart';
 
 class DetailPage extends StatelessWidget {
-  DetailPage({super.key, required this.showAppbar, required this.eventIndex});
+  DetailPage({required this.showAppbar, required this.eventIndex, super.key});
   final bool showAppbar;
   final int eventIndex;
   final _controller = Get.find<HomeDetailController>();
@@ -33,7 +33,7 @@ class DetailPage extends StatelessWidget {
   }
 
   Widget _getBody() {
-    return Container(
+    return SizedBox(
       height: SizeConfig().height,
       width: SizeConfig().width,
       child: 1 > 0
@@ -68,7 +68,7 @@ class DetailPage extends StatelessWidget {
                   ),
                   Obx(
                     () => Padding(
-                      padding: .symmetric(horizontal: 6),
+                      padding: const .symmetric(horizontal: 6),
                       child: CustomHtmlWidget(content: _controller.homeDetail.value.events[eventIndex].eventDesc, title: _controller.homeDetail.value.events[eventIndex].eventTitle, image: _controller.homeDetail.value.events[eventIndex].eventImage),
                     ),
                   ),

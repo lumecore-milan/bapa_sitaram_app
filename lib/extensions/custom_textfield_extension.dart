@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' show TextFormField, TextEditingController, Key, InputDecoration, AutovalidateMode, TextAlignVertical;
 import 'package:flutter/services.dart';
-import '../services/enums.dart';
+import 'package:bapa_sitaram/services/enums.dart';
 
 extension InputTypeField on InputType {
   List<TextInputFormatter> get _formatters {

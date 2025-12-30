@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-import '../constants/app_colors.dart';
-import '../constants/routes.dart';
-import '../controllers/home_controller.dart';
-import '../utils/font_styles.dart';
-import '../utils/size_config.dart';
+import 'package:bapa_sitaram/constants/app_colors.dart';
+import 'package:bapa_sitaram/constants/routes.dart';
+import 'package:bapa_sitaram/controllers/home_controller.dart';
+import 'package:bapa_sitaram/utils/font_styles.dart';
+import 'package:bapa_sitaram/utils/size_config.dart';
 
 class EventsPage extends StatelessWidget {
   EventsPage({super.key});
@@ -26,8 +26,8 @@ class EventsPage extends StatelessWidget {
       ),
       body: SafeArea(
         child: ListView.separated(
-          padding: EdgeInsets.all(16),
-          separatorBuilder: (_, index) => SizedBox(height: 10),
+          padding: const EdgeInsets.all(16),
+          separatorBuilder: (_, index) => const SizedBox(height: 10),
           itemCount: _controller.homeDetail.value.events.length,
           itemBuilder: (_, index) {
             return Stack(

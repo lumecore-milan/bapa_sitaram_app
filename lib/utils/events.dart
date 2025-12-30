@@ -1,15 +1,15 @@
 import 'dart:async';
 
 class NotificationCLickDetail {
-  final String id, type;
   NotificationCLickDetail({this.id = '', this.type = ''});
+  final String id, type;
 }
 
 NotificationCLickDetail pendingDetail = NotificationCLickDetail();
 
 class PageJumpDetail {
-  final String page, additionalData;
   PageJumpDetail({this.page = '', this.additionalData = ''});
+  final String page, additionalData;
 }
 
 final StreamController<PageJumpDetail> jumpPage = StreamController.broadcast();

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../services/enums.dart';
+import 'package:bapa_sitaram/services/enums.dart';
 
 class SizeConfig {
   factory SizeConfig() => _instance;

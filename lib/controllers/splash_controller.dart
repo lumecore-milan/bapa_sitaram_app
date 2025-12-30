@@ -2,12 +2,12 @@ import 'package:bapa_sitaram/constants/app_constant.dart';
 
 import 'package:get/get.dart';
 
-import '../constants/api_constant.dart';
-import '../models/app_loading.dart';
-import '../services/loger_service.dart';
+import 'package:bapa_sitaram/constants/api_constant.dart';
+import 'package:bapa_sitaram/models/app_loading.dart';
+import 'package:bapa_sitaram/services/loger_service.dart';
 
-import '../services/network/api_mobile.dart';
-import '../services/preference_service.dart';
+import 'package:bapa_sitaram/services/network/api_mobile.dart';
+import 'package:bapa_sitaram/services/preference_service.dart';
 
 class SplashController extends GetxController {
   final _apiInstance = NetworkServiceMobile();

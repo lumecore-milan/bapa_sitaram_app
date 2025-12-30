@@ -3,7 +3,7 @@ import 'package:bapa_sitaram/utils/font_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../extensions/size_box_extension.dart';
+import 'package:bapa_sitaram/extensions/size_box_extension.dart';
 
 final class CustomDropDownItem {
   CustomDropDownItem({required this.title});
@@ -191,7 +191,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       suffixIcon: widget.suffix,
       hintText: widget.hint,
       isDense: widget.removeBorder == true,
-      contentPadding: widget.removeBorder ? EdgeInsets.only(top: 10) : EdgeInsets.all(10),
+      contentPadding: widget.removeBorder ? const EdgeInsets.only(top: 10) : const EdgeInsets.all(10),
       fillColor: widget.fillColor ?? CustomColors().layoutPrimaryBackground,
       filled: widget.isFilled,
       labelStyle: semiBold(fontSize: 14, color: CustomColors().primaryColorDark),

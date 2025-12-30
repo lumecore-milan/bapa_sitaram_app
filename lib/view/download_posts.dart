@@ -3,15 +3,15 @@ import 'dart:io';
 import 'package:bapa_sitaram/widget/video_thumbnail.dart';
 import 'package:flutter/material.dart';
 
-import '../constants/routes.dart';
-import '../services/helper_service.dart';
-import '../services/loger_service.dart';
-import '../services/permission_service.dart';
-import '../utils/helper.dart';
-import '../utils/route_generate.dart';
-import '../utils/size_config.dart';
-import '../widget/app_bar.dart';
-import '../widget/rounded_image.dart';
+import 'package:bapa_sitaram/constants/routes.dart';
+import 'package:bapa_sitaram/services/helper_service.dart';
+import 'package:bapa_sitaram/services/loger_service.dart';
+import 'package:bapa_sitaram/services/permission_service.dart';
+import 'package:bapa_sitaram/utils/helper.dart';
+import 'package:bapa_sitaram/utils/route_generate.dart';
+import 'package:bapa_sitaram/utils/size_config.dart';
+import 'package:bapa_sitaram/widget/app_bar.dart';
+import 'package:bapa_sitaram/widget/rounded_image.dart';
 
 class DownloadedPosts extends StatelessWidget {
   const DownloadedPosts({super.key});
@@ -24,9 +24,9 @@ class DownloadedPosts extends StatelessWidget {
         String temp = await HelperService().getDownloadDirectory();
         if (temp.isNotEmpty) {
           final dir = Directory('$temp/bapaSitaram');
-          if (dir.existsSync()) {
-            final files = await dir.list();
-            await for (var file in files) {
+          if (await dir.exists()) {
+            final files = await dir.list().toList();
+            for (final file in files) {
               list.add(file.path);
             }
           }
@@ -57,6 +57,7 @@ class DownloadedPosts extends StatelessWidget {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(child: CircularProgressIndicator());
               } else if (snapshot.hasError) {
+                // ignore: prefer_single_quotes
                 return Center(child: Text("Error: ${snapshot.error}"));
               } else {
                 final List<String> data = snapshot.data ?? [];
@@ -81,7 +82,7 @@ class DownloadedPosts extends StatelessWidget {
 
                             child: getThumbNails(url: data[index], height: 150, width: ((SizeConfig().width / 2) - 32).toInt(), onTap: () {}),
                           )
-                        : SizedBox.shrink();
+                        : const SizedBox.shrink();
                   },
                 );
               }

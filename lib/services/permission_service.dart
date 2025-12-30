@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-import 'loger_service.dart';
+import 'package:bapa_sitaram/services/loger_service.dart';
 
 class PermissionService {
   factory PermissionService() => _instance;

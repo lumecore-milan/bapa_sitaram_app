@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-import '../extensions/size_box_extension.dart';
-import '../utils/size_config.dart';
-import '../widget/custom_html_widget.dart';
+import 'package:bapa_sitaram/extensions/size_box_extension.dart';
+import 'package:bapa_sitaram/utils/size_config.dart';
+import 'package:bapa_sitaram/widget/custom_html_widget.dart';
 
 class MenuDetailPage extends StatefulWidget {
-  const MenuDetailPage({super.key, required this.title, required this.detail});
+  const MenuDetailPage({required this.title, required this.detail, super.key});
 
   final String title;
   final List<dynamic> detail;
@@ -26,8 +26,7 @@ class _MenuDetailPageState extends State<MenuDetailPage> {
   Rx<int> currentTabIndex = 0.obs;
 
   @override
-  void initState() {
-    // TODO: implement initState
+  void initState() {    
     super.initState();
     _scrollController.addListener(() {
       currentOffset = _scrollController.offset.toInt();
@@ -52,13 +51,13 @@ class _MenuDetailPageState extends State<MenuDetailPage> {
     return Container(
       height: SizeConfig().height,
       width: SizeConfig().width,
-      padding: .symmetric(horizontal: 10),
+      padding: const .symmetric(horizontal: 10),
       child: Stack(
         children: [
           PageView.builder(
             itemCount: widget.detail.length,
             reverse: false,
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             scrollDirection: Axis.horizontal,
             controller: _pageController,
             itemBuilder: (_, index) {

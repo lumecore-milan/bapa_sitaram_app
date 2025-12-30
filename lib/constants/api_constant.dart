@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'dart:io';
+
 
 import 'package:bapa_sitaram/services/loger_service.dart';
 import 'package:flutter/services.dart';
@@ -13,7 +13,7 @@ class APIConstant {
     try {
      // if (Platform.isAndroid || 1>0)
       {
-        final d = await MethodChannel('flutter.myapp.app/myChannel').invokeMethod('getAllUrl');
+        final d = await const MethodChannel('flutter.myapp.app/myChannel').invokeMethod('getAllUrl');
         Map<String, dynamic> apis = json.decode(d);
         apiMainMenu = apis['main-menu'] ?? '';
         apiLogin = apis['login'] ?? '';
@@ -39,10 +39,10 @@ class APIConstant {
         apiCreateOrder = apis['create-order'] ?? '';
         apiPaymentSuccess = apis['payment-success'] ?? '';
         apiEventById = apis['event-by-id'] ?? '';
-        apiPostById = apis["post-by-id"];
+        apiPostById = apis['post-by-id']??'';
       }
     } catch (e) {
-      LoggerService().log(message: 'error occurred while getting api url');
+      LoggerService().log(message: 'error occurred while getting api url $e');
     }
   }
 

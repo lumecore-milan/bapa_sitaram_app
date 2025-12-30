@@ -6,11 +6,11 @@ import 'package:bapa_sitaram/widget/custom_tabs.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../constants/api_constant.dart';
-import '../services/loger_service.dart';
-import '../utils/size_config.dart';
-import '../widget/image_widget.dart';
-import '../widget/shimmer.dart';
+import 'package:bapa_sitaram/constants/api_constant.dart';
+import 'package:bapa_sitaram/services/loger_service.dart';
+import 'package:bapa_sitaram/utils/size_config.dart';
+import 'package:bapa_sitaram/widget/image_widget.dart';
+import 'package:bapa_sitaram/widget/shimmer.dart';
 
 class GalleryList extends StatefulWidget {
   const GalleryList({super.key});
@@ -71,7 +71,7 @@ class _GalleryListState extends State<GalleryList> {
           //padding: const EdgeInsets.symmetric(horizontal:16.0),
           child: Obx(
             () => isLoading.value
-                ? ShimmerDemo()
+                ? const ShimmerDemo()
                 : Stack(
                     children: [
                       Container(
@@ -82,7 +82,7 @@ class _GalleryListState extends State<GalleryList> {
                           () => PageView.builder(
                             itemCount: list.length,
                             reverse: false,
-                            physics: NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             scrollDirection: Axis.horizontal,
                             controller: _pageController,
                             itemBuilder: (_, index) {

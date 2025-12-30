@@ -9,10 +9,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 
-import '../constants/app_colors.dart';
-import '../services/loger_service.dart';
+import 'package:bapa_sitaram/constants/app_colors.dart';
+import 'package:bapa_sitaram/services/loger_service.dart';
 
-import '../widget/image_widget.dart';
+import 'package:bapa_sitaram/widget/image_widget.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -50,7 +50,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
       _startLeftRoRight5();
       _controller.getData().then((data) {
         HelperService().playSound(sound: 'assets/sound/bapa_sitaram.mp3');
-        Future.delayed(Duration(seconds: 3)).then((y) {
+        Future.delayed(const Duration(seconds: 3)).then((y) {
           if (data.$1 == true) {
             if (PreferenceService().getBoolean(key: AppConstants().prefKeyIsRegistered) == true && PreferenceService().getBoolean(key: AppConstants().prefKeyIsLoggedIn) == false) {
               navigate(context: context, replace: true, path: loginRoute, param: _controller.detail.value);
@@ -267,7 +267,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                     child: Stack(
                       children: [
                         Container(
-                          padding: .symmetric(vertical: 30),
+                          padding: const .symmetric(vertical: 30),
                           height: 200,
                           width: SizeConfig().width,
                           child: ColorFiltered(
@@ -289,7 +289,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                                       child: child,
                                     );
                                   },
-                                  child: ImageWidget(url: 'assets/images/ic_back_circle.png', height: 150, width: 150, fit: .cover),
+                                  child: const ImageWidget(url: 'assets/images/ic_back_circle.png', height: 150, width: 150, fit: .cover),
                                 ),
                                 Positioned(
                                   top: 15,
@@ -301,14 +301,14 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                                             height: 120,
                                             width: 120,
                                             decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
-                                            child: ImageWidget(url: 'assets/images/asram_logo.png'),
+                                            child: const ImageWidget(url: 'assets/images/asram_logo.png'),
                                           ),
                                         )
                                       : Container(
                                           height: 90,
                                           width: 90,
                                           decoration: BoxDecoration(color: CustomColors().white, shape: BoxShape.circle),
-                                          child: ImageWidget(url: 'assets/images/asram_logo.png'),
+                                          child: const ImageWidget(url: 'assets/images/asram_logo.png'),
                                         ),
                                 ),
                               ],

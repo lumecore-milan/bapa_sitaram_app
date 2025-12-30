@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
-import '../utils/svg_helper/svg.dart';
+import 'package:bapa_sitaram/utils/svg_helper/svg.dart';
 
 final class FileList {
   FileList({required this.url, this.storedFileName = ''});

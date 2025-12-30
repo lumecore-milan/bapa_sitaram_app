@@ -1,10 +1,10 @@
 import 'package:bapa_sitaram/utils/size_config.dart';
 import 'package:flutter/material.dart';
-import '../widget/app_bar.dart';
-import '../widget/custom_html_widget.dart';
+import 'package:bapa_sitaram/widget/app_bar.dart';
+import 'package:bapa_sitaram/widget/custom_html_widget.dart';
 
 class PolicyPage extends StatelessWidget {
-  const PolicyPage({super.key, required this.detail, required this.title});
+  const PolicyPage({required this.detail, required this.title, super.key});
 
   final String detail;
   final String title;

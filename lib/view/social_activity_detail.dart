@@ -1,12 +1,12 @@
 import 'package:bapa_sitaram/widget/app_bar.dart';
 import 'package:bapa_sitaram/widget/custom_html_widget.dart';
 import 'package:flutter/material.dart';
-import '../extensions/size_box_extension.dart';
-import '../utils/size_config.dart';
-import '../widget/rounded_image.dart';
+import 'package:bapa_sitaram/extensions/size_box_extension.dart';
+import 'package:bapa_sitaram/utils/size_config.dart';
+import 'package:bapa_sitaram/widget/rounded_image.dart';
 
 class SocialActivityDetail extends StatefulWidget {
-  const SocialActivityDetail({super.key, required this.title, required this.detail});
+  const SocialActivityDetail({required this.title, required this.detail, super.key});
 
   final String title;
   final dynamic detail;
@@ -34,7 +34,7 @@ class _SocialActivityDetailState extends State<SocialActivityDetail> {
     return Container(
       height: SizeConfig().height,
       width: SizeConfig().width,
-      padding: .symmetric(horizontal: 16),
+      padding: const .symmetric(horizontal: 16),
       child: SingleChildScrollView(
         child: Column(
           mainAxisSize: .min,

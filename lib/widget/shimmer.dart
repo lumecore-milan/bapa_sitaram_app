@@ -7,10 +7,10 @@ class ShimmerDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      padding: const EdgeInsets.all(0),
+      padding: EdgeInsets.zero,
       itemCount: count,
       shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (_, index) {
         return const Padding(padding: EdgeInsets.only(bottom: 20), child: ShimmerWidget.rectangular(height: 70));
       },
@@ -19,11 +19,11 @@ class ShimmerDemo extends StatelessWidget {
 }
 
 class ShimmerWidget extends StatefulWidget {
+
+  const ShimmerWidget.rectangular({required this.height, super.key, this.width = double.infinity, this.borderRadius = 12});
   final double width;
   final double height;
   final double borderRadius;
-
-  const ShimmerWidget.rectangular({super.key, this.width = double.infinity, required this.height, this.borderRadius = 12});
 
   @override
   State<ShimmerWidget> createState() => _ShimmerWidgetState();
@@ -55,8 +55,8 @@ class _ShimmerWidgetState extends State<ShimmerWidget> with SingleTickerProvider
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(widget.borderRadius),
             gradient: LinearGradient(
-              begin: Alignment(-1, -0.3),
-              end: Alignment(1, 0.3),
+              begin: const Alignment(-1, -0.3),
+              end: const Alignment(1, 0.3),
               colors: [Colors.grey.shade300, Colors.grey.shade100, Colors.grey.shade300],
               stops: [max(_controller.value - 0.3, 0), _controller.value, min(_controller.value + 0.3, 1)],
             ),

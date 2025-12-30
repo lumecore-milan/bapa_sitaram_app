@@ -40,6 +40,7 @@ import Firebase
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
+      FirebaseApp.configure();
       UNUserNotificationCenter.current().delegate = self
       UIApplication.shared.registerForRemoteNotifications()
  

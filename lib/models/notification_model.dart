@@ -1,4 +1,4 @@
-import 'dart:ui' show Color;
+/*import 'dart:ui' show Color;
 
 import 'package:flutter/material.dart' show Colors;
 
@@ -38,22 +38,22 @@ class MyNotificationModel {
   /// 📌 JSON for logging
   Map<String, dynamic> toJson() {
     return {
-      "title": title,
-      "message": message,
-      "notificationId": notificationId,
-      "action": action,
-      "channelKey": channelKey,
-      "imageURL": imageURL,
-      "largeIcon": largeIcon,
-      "locked": locked,
-      "criticalAlert": criticalAlert,
-      "wakeUpScreen": wakeUpScreen,
-      "autoDismissible": autoDismissible,
-      "backgroundColor": backgroundColor.value,
-      "fontColor": fontColor.value,
-      "notificationTapData": notificationTapData,
-      "notificationSound": notificationSound,
-      "buttons": buttons.map((e) => e.toJson()).toList(),
+      'title': title,
+      'message': message,
+      'notificationId': notificationId,
+      'action': action,
+      'channelKey': channelKey,
+      'imageURL': imageURL,
+      'largeIcon': largeIcon,
+      'locked': locked,
+      'criticalAlert': criticalAlert,
+      'wakeUpScreen': wakeUpScreen,
+      'autoDismissible': autoDismissible,
+      'backgroundColor': backgroundColor.value,
+      'fontColor': fontColor.value,
+      'notificationTapData': notificationTapData,
+      'notificationSound': notificationSound,
+      'buttons': buttons.map((e) => e.toJson()).toList(),
     };
   }
 }
@@ -65,6 +65,7 @@ class MyNotificationButtons {
   final Color color;
 
   Map<String, dynamic> toJson() {
-    return {"key": key, "title": title, "color": color.value};
+    return {'key': key, 'title': title, 'color': color.value};
   }
 }
+*/

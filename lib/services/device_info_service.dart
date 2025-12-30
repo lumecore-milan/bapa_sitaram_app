@@ -5,7 +5,7 @@ import 'package:bapa_sitaram/services/preference_service.dart';
 import 'package:device_info_plus/device_info_plus.dart' as device_info;
 import 'package:flutter/foundation.dart';
 
-import 'loger_service.dart';
+import 'package:bapa_sitaram/services/loger_service.dart';
 
 class DeviceInfoService {
   factory DeviceInfoService() => _instance;

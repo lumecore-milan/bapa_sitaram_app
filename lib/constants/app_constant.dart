@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 class AppConstants {
-  final String androidAppVersion = "9";
-  final String iOSAppVersion = "1";
+  AppConstants._internal();
 
   factory AppConstants() => _instance;
-  AppConstants._internal();
+  final String androidAppVersion = '9';
+  final String iOSAppVersion = '1';
   static final AppConstants _instance = AppConstants._internal();
   bool get isEncryptionEnabled => false;
   bool isDialogOpen = false;
@@ -24,4 +24,5 @@ class AppConstants {
   final String prefKeyNotificationEnabled = 'notificationEnabled';
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
   final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
+
 }

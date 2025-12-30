@@ -11,10 +11,10 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:open_filex/open_filex.dart';
-import '../constants/app_constant.dart';
-import '../extensions/size_box_extension.dart';
-import '../widget/image_widget.dart';
-import 'helper.dart';
+import 'package:bapa_sitaram/constants/app_constant.dart';
+import 'package:bapa_sitaram/extensions/size_box_extension.dart';
+import 'package:bapa_sitaram/widget/image_widget.dart';
+import 'package:bapa_sitaram/utils/helper.dart';
 
 void showLoginDialog({required BuildContext context}) {
   showDialog(
@@ -31,14 +31,14 @@ void showLoginDialog({required BuildContext context}) {
             children: [
               // Warning Icon
               Container(
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(color: CustomColors().white, shape: BoxShape.circle),
                 child: Icon(Icons.info, color: CustomColors().orange300, size: 60),
               ),
               20.h,
-              Text("Login", style: bolder(fontSize: 18, color: CustomColors().black1000)),
+              Text('Login', style: bolder(fontSize: 18, color: CustomColors().black1000)),
               10.h,
-              Text("Please Login First", style: medium(fontSize: 16, color: CustomColors().grey600)),
+              Text('Please Login First', style: medium(fontSize: 16, color: CustomColors().grey600)),
               25.h,
               CommonButton(
                 width: 100,
@@ -87,10 +87,10 @@ void showDarshanTimeDialog1({required BuildContext context}) {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Center(
-                        child: Text("દર્શન સમય", style: semiBold(fontSize: 22, color: CustomColors().blue700)),
+                        child: Text('દર્શન સમય', style: semiBold(fontSize: 22, color: CustomColors().blue700)),
                       ),
                       8.h,
-                      Image.asset("assets/images/ic_decore.png", height: 30, width: SizeConfig().width - 110, fit: BoxFit.fitWidth), // optional floral divider
+                      Image.asset('assets/images/ic_decore.png', height: 30, width: SizeConfig().width - 110, fit: BoxFit.fitWidth), // optional floral divider
                       10.h,
                       Expanded(
                         child: ListView.builder(
@@ -240,9 +240,9 @@ void showDarshanTimeDialog1({required BuildContext context}) {
                         ],
                       ),*/
                       16.h,
-                      Text("ચૌદશ અને પૂનમમાં દર્શન 24 કલાક ચાલુ રહેશે.", style: semiBold(fontSize: 16), textAlign: TextAlign.center),
+                      Text('ચૌદશ અને પૂનમમાં દર્શન 24 કલાક ચાલુ રહેશે.', style: semiBold(fontSize: 16), textAlign: TextAlign.center),
                       16.h,
-                      Image.asset("assets/images/ic_decore.png", height: 30, width: SizeConfig().width - 110, fit: BoxFit.fitWidth),
+                      Image.asset('assets/images/ic_decore.png', height: 30, width: SizeConfig().width - 110, fit: BoxFit.fitWidth),
                     ],
                   ),
                 ),
@@ -255,9 +255,9 @@ void showDarshanTimeDialog1({required BuildContext context}) {
                       Navigator.pop(context);
                     },
                     child: Container(
-                      padding: EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(color: Colors.black.withOpacity(0.4), shape: BoxShape.circle),
-                      child: Icon(Icons.close, color: Colors.white, size: 28),
+                      child: const Icon(Icons.close, color: Colors.white, size: 28),
                     ),
                   ),
                 ),
@@ -289,25 +289,25 @@ void showDarshanTimeDialog({required BuildContext context}) {
               children: [
                 Container(
                   color: Colors.transparent,
-                  constraints: BoxConstraints(maxHeight: 500, minHeight: 400),
-                  padding: .symmetric(vertical: 50),
+                  constraints: const BoxConstraints(maxHeight: 500, minHeight: 400),
+                  padding: const .symmetric(vertical: 50),
                   margin: const EdgeInsets.symmetric(horizontal: 40),
                   child: Container(
-                    constraints: BoxConstraints(maxHeight: 370),
+                    constraints: const BoxConstraints(maxHeight: 370),
                     padding: const EdgeInsets.all(16),
-                    margin: .only(bottom: 20),
+                    margin: const .only(bottom: 20),
                     decoration: BoxDecoration(color: CustomColors().layoutPrimaryBackground, borderRadius: BorderRadius.circular(10)),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Center(
-                          child: Text("દર્શન સમય", style: semiBold(fontSize: 22, color: CustomColors().blue700)),
+                          child: Text('દર્શન સમય', style: semiBold(fontSize: 22, color: CustomColors().blue700)),
                         ),
 
                         8.h,
 
-                        Image.asset("assets/images/ic_decore.png", height: 30, width: SizeConfig().width - 110, fit: BoxFit.fitWidth),
+                        Image.asset('assets/images/ic_decore.png', height: 30, width: SizeConfig().width - 110, fit: BoxFit.fitWidth),
 
                         10.h,
 
@@ -349,7 +349,7 @@ void showDarshanTimeDialog({required BuildContext context}) {
 
                         16.h,
 
-                        Image.asset("assets/images/ic_decore.png", height: 30, width: SizeConfig().width - 110, fit: BoxFit.fitWidth),
+                        Image.asset('assets/images/ic_decore.png', height: 30, width: SizeConfig().width - 110, fit: BoxFit.fitWidth),
                       ],
                     ),
                   ),
@@ -403,16 +403,16 @@ void rateUsDialog({required BuildContext context}) {
                   top: 40, // half outside
                   left: ((SizeConfig().width * 0.70) / 2) - 40,
                   child: Container(
-                    decoration: BoxDecoration(shape: BoxShape.circle),
-                    padding: .all(10),
+                    decoration: const BoxDecoration(shape: BoxShape.circle),
+                    padding: const .all(10),
                     child: Container(
                       decoration: BoxDecoration(shape: BoxShape.circle, color: CustomColors().white),
-                      padding: .all(10),
+                      padding: const .all(10),
                       child: Container(
                         height: 80,
                         width: 80,
                         decoration: BoxDecoration(color: CustomColors().white, shape: BoxShape.circle),
-                        child: ImageWidget(url: 'assets/images/five_star.png'),
+                        child: const ImageWidget(url: 'assets/images/five_star.png'),
                       ),
                     ),
                   ),
@@ -421,13 +421,13 @@ void rateUsDialog({required BuildContext context}) {
             ),
 
             Padding(
-              padding: .all(10),
+              padding: const .all(10),
               child: Column(
                 children: [
                   40.h,
-                  Text("Rate Our App", style: bolder(fontSize: 18, color: CustomColors().black1000)),
+                  Text('Rate Our App', style: bolder(fontSize: 18, color: CustomColors().black1000)),
                   10.h,
-                  Text("If you enjoyed our app. Would you mind rating us on Play Store.", style: semiBold(fontSize: 14, color: CustomColors().grey600)),
+                  Text('If you enjoyed our app. Would you mind rating us on Play Store.', style: semiBold(fontSize: 14, color: CustomColors().grey600)),
                   25.h,
                   Row(
                     mainAxisAlignment: .center,
@@ -480,7 +480,7 @@ void downloadProgress({required Rx<double> progress, required BuildContext conte
             mainAxisSize: MainAxisSize.min,
             children: [
               Container(
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(color: CustomColors().white, shape: BoxShape.circle),
                 child: Obx(() {
                   if (progress.value >= 100) {
@@ -519,7 +519,7 @@ void downloadReceiptDialog({required BuildContext context, required dynamic deta
                 Container(
                   color: Colors.transparent,
                   constraints: BoxConstraints(maxHeight: SizeConfig().height - 250),
-                  padding: .symmetric(vertical: 70),
+                  padding: const .symmetric(vertical: 70),
                   margin: const EdgeInsets.symmetric(horizontal: 40),
                   child: Container(
                     padding: const EdgeInsets.all(16),
@@ -529,11 +529,11 @@ void downloadReceiptDialog({required BuildContext context, required dynamic deta
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Center(
-                          child: Text("Donation for", style: semiBold(fontSize: 22, color: CustomColors().blue700)),
+                          child: Text('Donation for', style: semiBold(fontSize: 22, color: CustomColors().blue700)),
                         ),
 
                         8.h,
-                        Center(child: Text("અન્નક્ષેત્ર", style: bolder(fontSize: 22))),
+                        Center(child: Text('અન્નક્ષેત્ર', style: bolder(fontSize: 22))),
 
                         10.h,
                         Row(
@@ -543,11 +543,11 @@ void downloadReceiptDialog({required BuildContext context, required dynamic deta
                             Column(
                               crossAxisAlignment: .start,
                               children: [
-                                Text("Amount", style: semiBold(fontSize: 16)),
+                                Text('Amount', style: semiBold(fontSize: 16)),
                                 Text('${detail['amount'] ?? ''}', style: bolder(fontSize: 16, color: CustomColors().green700)),
                               ],
                             ),
-                            Text("COMPLETED", style: bolder(fontSize: 18, color: CustomColors().green700)),
+                            Text('COMPLETED', style: bolder(fontSize: 18, color: CustomColors().green700)),
                           ],
                         ),
                         10.h,
@@ -558,14 +558,14 @@ void downloadReceiptDialog({required BuildContext context, required dynamic deta
                             Column(
                               crossAxisAlignment: .start,
                               children: [
-                                Text("Payment ID", style: semiBold(fontSize: 16)),
+                                Text('Payment ID', style: semiBold(fontSize: 16)),
                                 Text(detail['payment_id'], style: medium(fontSize: 16, color: CustomColors().grey600)),
                               ],
                             ),
                             Column(
                               crossAxisAlignment: .start,
                               children: [
-                                Text("Date", style: semiBold(fontSize: 16)),
+                                Text('Date', style: semiBold(fontSize: 16)),
                                 Text(detail['payment_date'], style: medium(fontSize: 16, color: CustomColors().grey600)),
                               ],
                             ),
@@ -575,7 +575,7 @@ void downloadReceiptDialog({required BuildContext context, required dynamic deta
                         Column(
                           crossAxisAlignment: .start,
                           children: [
-                            Text("Your Detail", style: semiBold(fontSize: 16)),
+                            Text('Your Detail', style: semiBold(fontSize: 16)),
                             Text(detail['name'] ?? '', style: medium(fontSize: 16, color: CustomColors().grey600)),
                             Text(detail['mobile'] ?? '', style: medium(fontSize: 16, color: CustomColors().grey600)),
                             Text(detail['email'] ?? '', style: medium(fontSize: 16, color: CustomColors().grey600)),
@@ -651,12 +651,12 @@ void noInternetDialog() {
             child: Material(
               color: Colors.transparent,
               child: Container(
-                constraints: BoxConstraints(maxHeight: 150),
+                constraints: const BoxConstraints(maxHeight: 150),
                 padding: const EdgeInsets.all(16),
-                margin: .all(40),
+                margin: const .all(40),
                 decoration: BoxDecoration(color: CustomColors().layoutPrimaryBackground, borderRadius: BorderRadius.circular(10)),
                 child: Center(
-                  child: Text("No Internet", style: semiBold(fontSize: 22, color: CustomColors().blue700)),
+                  child: Text('No Internet', style: semiBold(fontSize: 22, color: CustomColors().blue700)),
                 ),
               ),
             ),
@@ -684,13 +684,13 @@ void appUpdateDialog({required BuildContext context, required String title, requ
               children: [
                 Container(
                   color: Colors.transparent,
-                  constraints: BoxConstraints(maxHeight: 350, minHeight: 350),
-                  padding: .symmetric(vertical: 50),
+                  constraints: const BoxConstraints(maxHeight: 350, minHeight: 350),
+                  padding: const .symmetric(vertical: 50),
                   margin: const EdgeInsets.symmetric(horizontal: 40),
                   child: Container(
-                    constraints: BoxConstraints(maxHeight: 350),
+                    constraints: const BoxConstraints(maxHeight: 350),
                     padding: const EdgeInsets.all(16),
-                    margin: .only(bottom: 20),
+                    margin: const .only(bottom: 20),
                     decoration: BoxDecoration(color: CustomColors().layoutPrimaryBackground, borderRadius: BorderRadius.circular(10)),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,

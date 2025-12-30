@@ -46,7 +46,7 @@ class FirebaseOtpHelper {
         status = (true, {'name': result.user!.displayName ?? '', 'mobile': result.user!.phoneNumber ?? '', 'email': result.user!.email ?? '', 'profileImage': result.user!.photoURL ?? '', 'userId': result.user!.uid});
       }
     } catch (e) {
-      print("OTP Verification Failed: $e");
+      print('OTP Verification Failed: $e');
     }
     return status;
   }

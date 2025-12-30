@@ -8,23 +8,23 @@ import 'package:bapa_sitaram/utils/route_generate.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
-import '../controllers/feed_controller.dart';
-import '../extensions/size_box_extension.dart';
-import '../services/app_events.dart';
-import '../services/download/download_helper_mobile.dart';
-import '../services/enums.dart';
-import '../services/helper_service.dart';
-import '../services/loger_service.dart';
-import '../services/permission_service.dart';
-import '../services/preference_service.dart';
-import '../utils/custom_dialogs.dart';
-import '../utils/helper.dart';
-import '../utils/size_config.dart';
-import '../widget/custom_html_widget.dart';
-import '../widget/image_widget.dart';
-import '../widget/like_comment_post_bottom_sheet.dart';
-import '../widget/shimmer.dart';
-import '../widget/video_thumbnail.dart';
+import 'package:bapa_sitaram/controllers/feed_controller.dart';
+import 'package:bapa_sitaram/extensions/size_box_extension.dart';
+import 'package:bapa_sitaram/services/app_events.dart';
+import 'package:bapa_sitaram/services/download/download_helper_mobile.dart';
+import 'package:bapa_sitaram/services/enums.dart';
+import 'package:bapa_sitaram/services/helper_service.dart';
+import 'package:bapa_sitaram/services/loger_service.dart';
+import 'package:bapa_sitaram/services/permission_service.dart';
+import 'package:bapa_sitaram/services/preference_service.dart';
+import 'package:bapa_sitaram/utils/custom_dialogs.dart';
+import 'package:bapa_sitaram/utils/helper.dart';
+import 'package:bapa_sitaram/utils/size_config.dart';
+import 'package:bapa_sitaram/widget/custom_html_widget.dart';
+import 'package:bapa_sitaram/widget/image_widget.dart';
+import 'package:bapa_sitaram/widget/like_comment_post_bottom_sheet.dart';
+import 'package:bapa_sitaram/widget/shimmer.dart';
+import 'package:bapa_sitaram/widget/video_thumbnail.dart';
 
 class FeedsPage extends StatefulWidget {
   const FeedsPage({super.key, this.detailId = ''});
@@ -119,20 +119,20 @@ class _FeedsPageState extends State<FeedsPage> {
           padding: const EdgeInsets.all(16),
           child: Obx(
             () => _controller.isLoading.value && _controller.isLoadMore.value == false
-                ? ShimmerDemo()
+                ? const ShimmerDemo()
                 : SingleChildScrollView(
                     controller: _scrollController,
                     child: ListView.separated(
-                      separatorBuilder: (_, index) => SizedBox(height: 10),
+                      separatorBuilder: (_, index) => const SizedBox(height: 10),
                       itemCount: _controller.isLoadMore.value == false ? _controller.posts.length : _controller.posts.length + 1,
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       // controller: _scrollController,
                       itemBuilder: (_, index) {
                         if (index >= _controller.posts.length) {
-                          return _controller.isLoadMore.value == false ? const SizedBox.shrink() : ShimmerDemo(count: 1);
+                          return _controller.isLoadMore.value == false ? const SizedBox.shrink() : const ShimmerDemo(count: 1);
                         } else if (_controller.posts[index].hide == true) {
-                          return SizedBox.shrink();
+                          return const SizedBox.shrink();
                         }
 
                         return Column(
@@ -185,7 +185,7 @@ class _FeedsPageState extends State<FeedsPage> {
                                     child: ImageWidget(url: _controller.posts[index].postImage, width: SizeConfig().width),
                                   )
                                 : _controller.posts[index].postImage.isEmpty
-                                ? SizedBox.shrink()
+                                ? const SizedBox.shrink()
                                 : getThumbNails(
                                     onTap: () {
                                       navigate(context: context, replace: false, path: videoRoute, param: _controller.posts[index].postImage);
@@ -259,7 +259,7 @@ class _FeedsPageState extends State<FeedsPage> {
                                           backgroundColor: CustomColors().layoutPrimaryBackground,
                                           enableDrag: true,
                                           useSafeArea: true,
-                                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+                                          shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
                                           constraints: BoxConstraints(minHeight: SizeConfig().height, maxHeight: SizeConfig().height),
                                           context: context,
                                           builder: (context) => LikeCommentPostBottomSheet(

@@ -1,13 +1,17 @@
+import 'dart:io';
 import 'dart:math';
 import 'package:bapa_sitaram/constants/app_colors.dart';
+import 'package:bapa_sitaram/constants/images.dart';
+import 'package:bapa_sitaram/services/download/download_helper_mobile.dart';
 import 'package:bapa_sitaram/utils/font_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import 'package:url_launcher/url_launcher.dart';
-import '../constants/app_constant.dart';
-import '../services/helper_service.dart';
-import '../services/loger_service.dart';
-import '../widget/custom_loader.dart';
+import 'package:bapa_sitaram/constants/app_constant.dart';
+import 'package:bapa_sitaram/services/helper_service.dart';
+import 'package:bapa_sitaram/services/loger_service.dart';
+import 'package:bapa_sitaram/widget/custom_loader.dart';
 
 class Helper {
   static String generateRandomId({int length = 8}) {
@@ -99,9 +103,9 @@ class Helper {
       SnackBar(
         elevation: 5,
         behavior: behaviour,
-        margin: .only(bottom: 60, left: 20, right: 20),
+        margin: const .only(bottom: 60, left: 20, right: 20),
         backgroundColor: CustomColors().white,
-        padding: .all(10),
+        padding: const .all(10),
         duration: Duration(seconds: durationInSecond),
 
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -121,6 +125,26 @@ class Helper {
       ),
     );
   }
+
+  static Future<void> downloadAllAssets() async {
+    try {
+      final downloadDirectory = await HelperService().getDownloadDirectory();
+      List<Future> futures = [];
+      final entries = images.entries.toList();
+      for (int i = 0; i < entries.length; i++) {
+        String ext = entries[i].value.substring(entries[i].value.lastIndexOf('.') + 1);
+        String originalName = entries[i].value.substring(entries[i].value.lastIndexOf('/') + 1);
+        originalName = originalName.substring(0, originalName.lastIndexOf('.'));
+        bool fileExist = await File('$downloadDirectory/$originalName.$ext').exists();
+        if (!fileExist) {
+          final temp = await DownloadServiceMobile().download(url: entries[i].value, keepOriginalName: true);
+        }
+      }
+      // await Future.wait(futures);
+    } catch (e) {
+      LoggerService().log(message: e.toString());
+    }
+  }
 }
 
 class PanCardInputFormatter1 extends TextInputFormatter {
@@ -129,7 +153,7 @@ class PanCardInputFormatter1 extends TextInputFormatter {
     String text = newValue.text.toUpperCase();
 
     // Remove everything except A–Z, 0–9
-    text = text.replaceAll(RegExp(r'[^A-Z0-9]'), "");
+    text = text.replaceAll(RegExp(r'[^A-Z0-9]'), '');
 
     StringBuffer buffer = StringBuffer();
 

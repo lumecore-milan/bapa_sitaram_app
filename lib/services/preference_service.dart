@@ -5,8 +5,8 @@ import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 
-import 'encryption_service.dart';
-import 'loger_service.dart';
+import 'package:bapa_sitaram/services/encryption_service.dart';
+import 'package:bapa_sitaram/services/loger_service.dart';
 
 class PreferenceService {
   factory PreferenceService() => _instance;

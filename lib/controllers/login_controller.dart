@@ -2,11 +2,11 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../constants/api_constant.dart';
-import '../constants/app_constant.dart';
-import '../services/loger_service.dart';
-import '../services/network/api_mobile.dart';
-import '../services/preference_service.dart';
+import 'package:bapa_sitaram/constants/api_constant.dart';
+import 'package:bapa_sitaram/constants/app_constant.dart';
+import 'package:bapa_sitaram/services/loger_service.dart';
+import 'package:bapa_sitaram/services/network/api_mobile.dart';
+import 'package:bapa_sitaram/services/preference_service.dart';
 import 'package:http/http.dart' as http;
 
 class LoginController extends GetxController {
