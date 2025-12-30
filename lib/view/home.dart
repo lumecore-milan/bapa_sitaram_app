@@ -110,7 +110,7 @@ class _HomePageState extends State<HomePage> {
           }*/
       });
 
-      Helper.downloadAllAssets();
+      // Helper.downloadAllAssets();
     });
   }
 
