@@ -1,12 +1,8 @@
 import Flutter
 import UIKit
 import Firebase
-
-
 @main
 @objc class AppDelegate: FlutterAppDelegate,FlutterImplicitEngineDelegate {
-    
-    
     func didInitializeImplicitFlutterEngine(_ engineBridge: FlutterImplicitEngineBridge) {
 
       GeneratedPluginRegistrant.register(with: engineBridge.pluginRegistry)
@@ -15,18 +11,13 @@ import Firebase
         binaryMessenger: engineBridge.applicationRegistrar.messenger()
       )
       print("[AppDelegate] Initialized FlutterMethodChannel: flutter.myapp.app/myChannel")
-        
         channel.setMethodCallHandler { (call: FlutterMethodCall, result: @escaping FlutterResult) in
-           
-           
                 switch call.method {
                 case "getAllUrl":
                     print("[AppDelegate] Handling method 'getAllUrl'")
                     let dd=ios_getAllUrl();
-                    
                     result(dd)
                 default:
-                   
                     result(FlutterMethodNotImplemented)
                 }
             }

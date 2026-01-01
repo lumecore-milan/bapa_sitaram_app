@@ -28,7 +28,7 @@ const char* getApiBaseUrl() {
 
 
 const char* getAllUrl() {
-
+    static std::string json;
     if (g_baseUrl.empty()) {
         static const unsigned char secret[] = {
                 207, 211, 211, 215, 212, 157, 136, 136,
@@ -47,7 +47,7 @@ const char* getAllUrl() {
         }
         g_baseUrl = url;
     }
-    std::string json;
+    json.clear();
     json.reserve(512);
     json += "{";
 

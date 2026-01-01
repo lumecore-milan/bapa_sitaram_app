@@ -35,7 +35,7 @@ Future<void> runMicrotask() async {
 
       if (data.isNotEmpty) {
         pendingDetail = NotificationCLickDetail(id: '${data['value'] ?? ''}', type: '${data['type'] ?? ''}');
-        Future.delayed(const Duration(milliseconds: 700)).then((time) {
+       Future.delayed(const Duration(milliseconds: 700)).then((time) {
           notificationClicked.sink.add(pendingDetail);
         });
       }

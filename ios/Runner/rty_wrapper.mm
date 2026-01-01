@@ -3,9 +3,9 @@
 #import "rty.h"
 
 NSString * ios_getAllUrl(void) {
-    const char *json = getAllUrl();   // ← call C++ function
+    const char *json = getAllUrl();
     if (json == NULL) {
-        return @"";
+        return @"{}";
     }
     return [NSString stringWithUTF8String:json];
 }

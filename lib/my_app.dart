@@ -3,6 +3,7 @@ import 'package:bapa_sitaram/services/app_events.dart';
 import 'package:bapa_sitaram/services/enums.dart';
 import 'package:bapa_sitaram/services/helper_service.dart';
 import 'package:bapa_sitaram/services/loger_service.dart';
+//import 'package:bapa_sitaram/utils/events.dart';
 import 'package:bapa_sitaram/utils/route_generate.dart';
 import 'package:bapa_sitaram/utils/size_config.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
+
     LoggerService().showLogInReleaseMode = true;
 
     super.initState();
@@ -42,18 +44,6 @@ class _MyAppState extends State<MyApp> {
         //  Helper.closeLoader();
       }
     });
-
-    /*Future.delayed(Duration(seconds: 10)).then((t) {
-      notificationClicked.sink.add(
-        NotificationCLickDetail(
-          id: 'https://vimeo.com/347119375?fl=pl&fe=cm',
-          type: 'liveArti',
-        ),
-      );
-    });*/
-
-
-
   }
 
   @override

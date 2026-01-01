@@ -14,7 +14,10 @@ class APIConstant {
      // if (Platform.isAndroid || 1>0)
       {
         final d = await const MethodChannel('flutter.myapp.app/myChannel').invokeMethod('getAllUrl');
+
+
         Map<String, dynamic> apis = json.decode(d);
+
         apiMainMenu = apis['main-menu'] ?? '';
         apiLogin = apis['login'] ?? '';
         apiContactUs = apis['contact-us'] ?? '';
