@@ -2,6 +2,7 @@ import 'dart:core';
 
 import 'package:bapa_sitaram/view/aarti.dart';
 import 'package:bapa_sitaram/view/about.dart';
+import 'package:bapa_sitaram/view/account_delete.dart';
 import 'package:bapa_sitaram/view/contact.dart';
 import 'package:bapa_sitaram/view/detail_page.dart';
 import 'package:bapa_sitaram/view/donation.dart';
@@ -97,6 +98,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         return MaterialPageRoute(builder: (context) => EventsPage());
       case virtualDarshanRoute:
         return MaterialPageRoute(builder: (context) => const VirtualDarshan());
+      case userDeleteRoute:
+        return MaterialPageRoute(builder: (context) => const DeleteAccountPage(showAppBar: true,));
 
       case imageRoute:
         String url = '';

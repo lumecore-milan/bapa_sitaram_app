@@ -1,5 +1,4 @@
 import 'package:bapa_sitaram/constants/api_constant.dart';
-import 'package:bapa_sitaram/services/connectivity_service.dart';
 import 'package:bapa_sitaram/services/device_info_service.dart';
 import 'package:bapa_sitaram/services/firebase_service.dart';
 import 'package:bapa_sitaram/services/loger_service.dart';
@@ -46,7 +45,6 @@ Future<void> runMicrotask() async {
         event.notification.display();
       }
     });
-    ConnectivityService().setPingUrl(pingUrl: APIConstant().apiMainMenu);
     await Future.wait([
       FirebaseService().initialize(options: const {'apiKey': 'AIzaSyCpwuGMmEgNaJ3v0zvwMEL1z02EnEZmEUs', 'appId': '1:37795912856:android:3ef0533bd290649696c4ed', 'messagingSenderId': '', 'projectId': 'bapa-sitaram-7a3b2'}),
       //NotificationServiceMobile().initialize(),

@@ -137,10 +137,11 @@ class Helper {
         originalName = originalName.substring(0, originalName.lastIndexOf('.'));
         bool fileExist = await File('$downloadDirectory/$originalName.$ext').exists();
         if (!fileExist) {
-          final temp = await DownloadServiceMobile().download(url: entries[i].value, keepOriginalName: true);
+          futures.add(DownloadServiceMobile().download(url: entries[i].value, keepOriginalName: true));
+          //  final temp = await DownloadServiceMobile().download(url: entries[i].value, keepOriginalName: true);
         }
       }
-      // await Future.wait(futures);
+      await Future.wait(futures);
     } catch (e) {
       LoggerService().log(message: e.toString());
     }

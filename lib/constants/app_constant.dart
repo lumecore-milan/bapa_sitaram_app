@@ -1,3 +1,4 @@
+import 'package:bapa_sitaram/models/app_loading.dart';
 import 'package:flutter/material.dart';
 
 class AppConstants {
@@ -24,5 +25,5 @@ class AppConstants {
   final String prefKeyNotificationEnabled = 'notificationEnabled';
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
   final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
-
+  static AppSettingModel detail = AppSettingModel();
 }

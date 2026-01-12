@@ -70,30 +70,40 @@ class DownloadServiceMobile {
         final sink = file.openWrite();
         final contentLength = response.contentLength ?? 0;
         int downloaded = 0;
-        await response.stream
-            .listen(
-              (chunk) {
-                sink.add(chunk);
-                downloaded += chunk.length;
-                if (contentLength > 0) {
-                  final progress = (downloaded / contentLength * 100).toStringAsFixed(2);
-                  sendPort.send(DownloadMessage(progress: double.tryParse(progress) ?? 0, url: param['url']));
-                  LoggerService().log(message: 'Download Progress $progress', level: LogLevel.info);
-                }
-              },
-              onDone: () {
-                sink.close();
-                path = file.path;
-                sendPort.send(DownloadMessage(progress: 100, url: param['url'], filePath: file.path));
-              },
-              onError: (e) {
-                LoggerService().log(message: 'Download error $e', level: LogLevel.info);
-              },
-              cancelOnError: true,
-            )
-            .asFuture();
+        if (ext.toLowerCase().endsWith('svg')) {
+          final response1 = await http.Response.fromStream(response);
 
-        path = file.path;
+          await file.writeAsString(response1.body, flush: true);
+        } else {
+          await response.stream
+              .listen(
+                (chunk) {
+                  sink.add(chunk);
+                  downloaded += chunk.length;
+                  if (contentLength > 0) {
+                    final progress = (downloaded / contentLength * 100).toStringAsFixed(2);
+                    sendPort.send(DownloadMessage(progress: double.tryParse(progress) ?? 0, url: param['url']));
+                    LoggerService().log(message: 'Download Progress $progress', level: LogLevel.info);
+                  }
+                },
+                onDone: () async {
+                  // await sink.flush();
+                  // sink.close();
+                  path = file.path;
+                  sendPort.send(DownloadMessage(progress: 100, url: param['url'], filePath: file.path));
+                },
+                onError: (e) {
+                  LoggerService().log(message: 'Download error $e', level: LogLevel.info);
+                },
+                cancelOnError: true,
+              )
+              .asFuture();
+          path = file.path;
+          await sink.flush();
+          await sink.close();
+          sendPort.send(DownloadMessage(progress: 100, url: param['url'], filePath: file.path));
+          path = file.path;
+        }
       } else {
         LoggerService().log(message: 'error occurred while downloading file ${param['url']} ===>${response.statusCode}');
       }

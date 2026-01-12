@@ -1,8 +1,13 @@
+import 'dart:io';
+
 import 'package:bapa_sitaram/constants/app_colors.dart';
 import 'package:bapa_sitaram/services/app_events.dart';
+import 'package:bapa_sitaram/services/connectivity_service.dart';
 import 'package:bapa_sitaram/services/enums.dart';
 import 'package:bapa_sitaram/services/helper_service.dart';
 import 'package:bapa_sitaram/services/loger_service.dart';
+import 'package:bapa_sitaram/utils/custom_dialogs.dart';
+import 'package:bapa_sitaram/utils/helper.dart';
 //import 'package:bapa_sitaram/utils/events.dart';
 import 'package:bapa_sitaram/utils/route_generate.dart';
 import 'package:bapa_sitaram/utils/size_config.dart';
@@ -33,17 +38,26 @@ class _MyAppState extends State<MyApp> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    //  ConnectivityService().startListening();
 
-    AppEventsStream().stream.listen((event) async {
-      if (event.type == AppEventType.internetDisConnected) {
-        AppConstants().isDialogOpen = true;
-        //  noInternetDialog();
-      } else if (event.type == AppEventType.internetConnected) {
-        AppConstants().isDialogOpen = false;
-        //  Helper.closeLoader();
-      }
-    });
+    if(Platform.isIOS) {
+      ConnectivityService().startListening();
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        AppEventsStream().stream.listen((event) async {
+          if (event.type == AppEventType.internetDisConnected) {
+            if (AppConstants().isDialogOpen == false) {
+              AppConstants().isDialogOpen = true;
+              noInternetDialog();
+            }
+          } else if (event.type == AppEventType.internetConnected) {
+            if (AppConstants().isDialogOpen == true) {
+              AppConstants().isDialogOpen = false;
+              Helper.closeLoader();
+            }
+          }
+        });
+      });
+    }
+
   }
 
   @override

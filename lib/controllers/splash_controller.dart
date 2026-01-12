@@ -20,6 +20,7 @@ class SplashController extends GetxController {
         if (data['httpStatusCode'] == 200 && data.isNotEmpty) {
           resp = (true, '');
           detail.value = AppSettingModel.fromJson(data);
+          AppConstants.detail=detail.value;
           detail.refresh();
         }
       });

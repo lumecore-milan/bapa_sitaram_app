@@ -12,7 +12,7 @@ import 'package:http/http.dart' as http;
 class LoginController extends GetxController {
   final _apiInstance = NetworkServiceMobile();
   Rx<bool> otpSent = false.obs;
-
+  Rx<bool> isUserRegistered = false.obs;
   final TextEditingController type = TextEditingController();
   final TextEditingController name = TextEditingController();
   final TextEditingController mobile = TextEditingController();

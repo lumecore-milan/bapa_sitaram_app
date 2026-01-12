@@ -23,5 +23,6 @@ const String menuDetailRoute = '/menuDetailRoute';
 const String imageRoute = '/image';
 const String socialActivityDetailRoute = '/socialDetail';
 const String userRegistrationRoute = '/userRegistration';
+const String userDeleteRoute = '/userDelete';
 const String myDonationRoute = '/myDonationRoute';
 //const String singleDetailRoute = '/singleDetail';

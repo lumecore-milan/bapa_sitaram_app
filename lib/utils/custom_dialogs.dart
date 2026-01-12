@@ -636,8 +636,12 @@ void downloadReceiptDialog({required BuildContext context, required dynamic deta
 }
 
 void noInternetDialog() {
+  
+  
+  Helper.showMessage(title: 'No Internet Connection', message: 'No Internet Connection. Please check your network settings and try again.', isSuccess: false);
+  
   AppConstants().isDialogOpen = true;
-  showDialog(
+  /*showDialog(
     context: AppConstants().navigatorKey.currentContext!,
     barrierDismissible: false,
     useSafeArea: true,
@@ -664,7 +668,7 @@ void noInternetDialog() {
         ),
       );
     },
-  );
+  );*/
 }
 
 void appUpdateDialog({required BuildContext context, required String title, required String message, bool forceUpdate = false}) {

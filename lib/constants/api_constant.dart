@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 
 import 'package:bapa_sitaram/services/loger_service.dart';
@@ -10,12 +11,12 @@ class APIConstant {
   static const bool isLocalEnv = false;
   static final APIConstant _instance = APIConstant._internal();
   Future<void> setUrl({required bool isDev}) async {
+
+
     try {
-     // if (Platform.isAndroid || 1>0)
+      if(Platform.isAndroid)
       {
         final d = await const MethodChannel('flutter.myapp.app/myChannel').invokeMethod('getAllUrl');
-
-
         Map<String, dynamic> apis = json.decode(d);
 
         apiMainMenu = apis['main-menu'] ?? '';
@@ -43,6 +44,36 @@ class APIConstant {
         apiPaymentSuccess = apis['payment-success'] ?? '';
         apiEventById = apis['event-by-id'] ?? '';
         apiPostById = apis['post-by-id']??'';
+        apiDeleteAccount = 'https://bapasitaramtemple.org/76238Bapa6631bhagat/delete-account';
+      }else{
+        const String baseUrl='https://bapasitaramtemple.org/76238Bapa6631bhagat';
+
+        apiMainMenu        = '$baseUrl/main-menu';
+        apiLogin           = '$baseUrl/login';
+        apiContactUs       = '$baseUrl/contact-us';
+        apiUpdateProfile   = '$baseUrl/update-profile';
+        apiLoading         = '$baseUrl/app-loading';
+        apiHomePage        = '$baseUrl/home-page';
+        apiPunamList       = '$baseUrl/poonam-list';
+        apiPresMedia       = '$baseUrl/press-media';
+        apiMyDonation      = '$baseUrl/my-donation';
+        apiDownloadInvoice = '$baseUrl/download-invoice';
+        apiMenu            = '$baseUrl/menu-detail';
+        apiGallery         = '$baseUrl/gallery';
+        apiSocialActivity  = '$baseUrl/event';
+        apiAboutUs         = '$baseUrl/about-us';
+        apiDownloadPost    = '$baseUrl/download-post';
+        apiPostComment     = '$baseUrl/post-comment';
+        apiPostView        = '$baseUrl/post-view';
+        apiPostShare       = '$baseUrl/post-share';
+        apiPostLike        = '$baseUrl/post-like-unlike';
+        apiFeeds           = '$baseUrl/app-post';
+        apiGetCommentByPost= '$baseUrl/comment-by-post';
+        apiCreateOrder     = '$baseUrl/create-order';
+        apiPaymentSuccess  = '$baseUrl/payment-success';
+        apiEventById       = '$baseUrl/event-by-id';
+        apiPostById        = '$baseUrl/post-by-id';
+        apiDeleteAccount = 'https://bapasitaramtemple.org/76238Bapa6631bhagat/delete-account';
       }
     } catch (e) {
       LoggerService().log(message: 'error occurred while getting api url $e');
@@ -74,4 +105,5 @@ class APIConstant {
   String apiPaymentSuccess = '';
   String apiPostById = '';
   String apiEventById = '';
+  String apiDeleteAccount= '';
 }

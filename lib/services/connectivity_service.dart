@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:bapa_sitaram/constants/api_constant.dart';
 import 'package:bapa_sitaram/services/network/api_mobile.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:bapa_sitaram/services/app_events.dart';
@@ -12,7 +13,7 @@ class ConnectivityService {
   final Connectivity _connectivity = Connectivity();
   StreamSubscription<List<ConnectivityResult>>? _subscription;
   final _apiInstance = NetworkServiceMobile();
-  String _defaultUrlToCheckInternet = 'https://example.com/';
+  final String _defaultUrlToCheckInternet = APIConstant().apiPresMedia;
   void startListening() {
     testInternet().then((result) {
       hasInternet = result;
@@ -43,10 +44,6 @@ class ConnectivityService {
     }
     bool d1 = await testInternet();
     return d1;
-  }
-
-  void setPingUrl({required String pingUrl}) {
-    _defaultUrlToCheckInternet = pingUrl;
   }
 
   Future<bool> testInternet() async {

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bapa_sitaram/constants/app_constant.dart';
 import 'package:bapa_sitaram/constants/routes.dart';
 import 'package:bapa_sitaram/controllers/splash_controller.dart';
@@ -33,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
   final ScrollController _scrollController3 = ScrollController();
   final ScrollController _scrollController4 = ScrollController();
   final ScrollController _scrollController5 = ScrollController();
-
+  Timer t=Timer.periodic(const Duration(hours:1 ),(t){});
   @override
   void initState() {
     _animationController = AnimationController(
@@ -48,6 +50,15 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
       _startScroll3();
       _startLeftRoRight4();
       _startLeftRoRight5();
+       getData();
+    });
+    super.initState();
+    _animationController2.forward();
+  }
+
+  Future<void> getData()async{
+    try{
+
       _controller.getData().then((data) {
         HelperService().playSound(sound: 'assets/sound/bapa_sitaram.mp3');
         Future.delayed(const Duration(seconds: 3)).then((y) {
@@ -62,9 +73,9 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
           }
         });
       });
-    });
-    super.initState();
-    _animationController2.forward();
+    }catch(e){
+      //
+    }
   }
 
   Future<void> _startScroll() async {
@@ -228,6 +239,11 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
 
   @override
   void dispose() {
+    try{
+      t.cancel();
+    }catch(e){
+      //
+    }
     _animationController.dispose();
     _animationController2.dispose();
     _scrollController1.dispose();

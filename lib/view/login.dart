@@ -41,11 +41,12 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _otpController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey();
   Rx<bool> isPrivacyAccepted = false.obs;
-  Rx<bool> isUserRegistered = false.obs;
+
   final LoginController _controller = Get.put(LoginController());
 
   @override
   void initState() {
+
     FirebaseOtpHelper().otpController.stream.listen((d) {
       if (d.sent == true) {
         _controller.otpSent.value = true;
@@ -57,8 +58,8 @@ class _LoginPageState extends State<LoginPage> {
     });
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      isUserRegistered.value = PreferenceService().getBoolean(key: AppConstants().prefKeyIsRegistered);
-      if (isUserRegistered.value == true) {
+      _controller.isUserRegistered.value = PreferenceService().getBoolean(key: AppConstants().prefKeyIsRegistered);
+      if (_controller.isUserRegistered.value == true) {
         _mobileController.text = PreferenceService().getString(key: AppConstants().prefKeyMobile);
       }
     });
@@ -126,7 +127,7 @@ class _LoginPageState extends State<LoginPage> {
                           Text('બાપા સીતારામ', style: bolder(fontSize: 20)),
                           10.h,
                           Obx(
-                            () => isUserRegistered.value == true
+                            () => _controller.isUserRegistered.value == true
                                 ? registrationForm()
                                 : Column(
                                     crossAxisAlignment: .start,
@@ -159,7 +160,16 @@ class _LoginPageState extends State<LoginPage> {
                                             onTap: () {
                                               isPrivacyAccepted.toggle();
                                               if (isPrivacyAccepted.value == true) {
-                                                navigate(context: context, replace: false, path: policyRoute, param: {'title': 'Privacy Policy', 'data': widget.detail.aboutUs.privacyPolicy});
+
+
+                                                String data= AppConstants.detail.aboutUs.privacyPolicy;
+                                                if(data.isEmpty){
+                                                  data=widget.detail.aboutUs.privacyPolicy;
+                                                }
+
+
+
+                                                navigate(context: context, replace: false, path: policyRoute, param: {'title': 'Privacy Policy', 'data': data});
                                               }
                                             },
                                             child: Obx(
@@ -219,9 +229,10 @@ class _LoginPageState extends State<LoginPage> {
                                                               PreferenceService().setInt(key: AppConstants().prefKeyUserId, value: int.parse(loginStatus.$2['userId'] as String));
                                                               PreferenceService().setString(key: AppConstants().prefKeyUserDetail, value: json.encode(userDetail));
                                                               if ((loginStatus.$2['userStatus'] as String) == 'created') {
-                                                                isUserRegistered.value = true;
-                                                                isUserRegistered.refresh();
+                                                                _controller.isUserRegistered.value = true;
+                                                                _controller.isUserRegistered.refresh();
                                                               } else {
+                                                                _mobileController.clear();
                                                                 navigate(context: context, replace: true, path: homeRoute, param: widget.detail, removePreviousRoute: true);
                                                               }
                                                             } else {
@@ -284,9 +295,10 @@ class _LoginPageState extends State<LoginPage> {
                                                   PreferenceService().setInt(key: AppConstants().prefKeyUserId, value: int.parse(loginStatus.$2['userId'] as String));
                                                   PreferenceService().setString(key: AppConstants().prefKeyUserDetail, value: json.encode(userDetail));
                                                   if ((loginStatus.$2['userStatus'] as String) == 'created') {
-                                                    isUserRegistered.value = true;
-                                                    isUserRegistered.refresh();
+                                                    _controller.isUserRegistered.value = true;
+                                                    _controller.isUserRegistered.refresh();
                                                   } else {
+                                                    _mobileController.clear();
                                                     navigate(context: context, replace: true, path: homeRoute, param: widget.detail, removePreviousRoute: true);
                                                   }
                                                 } else {

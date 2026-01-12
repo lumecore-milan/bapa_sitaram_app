@@ -55,7 +55,7 @@ class DownloadedPosts extends StatelessWidget {
             future: getDownloadedFile(),
             builder: (_, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator.adaptive());
               } else if (snapshot.hasError) {
                 // ignore: prefer_single_quotes
                 return Center(child: Text("Error: ${snapshot.error}"));
