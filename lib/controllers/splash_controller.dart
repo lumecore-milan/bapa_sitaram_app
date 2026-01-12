@@ -21,6 +21,11 @@ class SplashController extends GetxController {
           resp = (true, '');
           detail.value = AppSettingModel.fromJson(data);
           AppConstants.detail=detail.value;
+
+          if(detail.value.userInfo.userStatus=='deleted');
+          {
+            PreferenceService().clear();
+          }
           detail.refresh();
         }
       });

@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:bapa_sitaram/constants/app_colors.dart';
 import 'package:bapa_sitaram/controllers/login_controller.dart';
+import 'package:bapa_sitaram/utils/custom_dialogs.dart';
 import 'package:bapa_sitaram/utils/font_styles.dart';
 import 'package:bapa_sitaram/utils/helper.dart';
 import 'package:bapa_sitaram/utils/route_generate.dart';
@@ -209,8 +210,15 @@ class _LoginPageState extends State<LoginPage> {
                                                           if (status.$1 == true) {
                                                             Map<String, dynamic> userDetail = status.$2;
 
-                                                            final loginStatus = await _controller.login(mobileNo: userDetail['mobile']);
-                                                            if (loginStatus.$1 == true) {
+                                                            final loginStatus = await _controller.login(mobileNo: _mobileController.text);
+                                                            if(_controller.isAccountUnderDeletion==true){
+
+                                                              showReActivateAccount(context:context,onTap: ()async{
+                                                                final restoreStatus = await _controller.restore(mobileNo: _mobileController.text);
+                                                                Helper.showMessage(title:restoreStatus.$1==true ? 'Success!': 'Error', message: restoreStatus.$2, isSuccess: restoreStatus.$1==true);
+                                                              });
+                                                            }
+                                                            else if (loginStatus.$1 == true) {
                                                               if ((loginStatus.$2['userStatus'] as String) == 'created') {
                                                                 PreferenceService().setBoolean(key: AppConstants().prefKeyIsRegistered, value: true);
                                                                 PreferenceService().setString(key: AppConstants().prefKeyMobile, value: _mobileController.text);
@@ -225,7 +233,6 @@ class _LoginPageState extends State<LoginPage> {
                                                                 userDetail['profileImage'] = loginStatus.$2['profileImage'] ?? '';
                                                                 PreferenceService().setBoolean(key: AppConstants().prefKeyIsLoggedIn, value: true);
                                                               }
-
                                                               PreferenceService().setInt(key: AppConstants().prefKeyUserId, value: int.parse(loginStatus.$2['userId'] as String));
                                                               PreferenceService().setString(key: AppConstants().prefKeyUserDetail, value: json.encode(userDetail));
                                                               if ((loginStatus.$2['userStatus'] as String) == 'created') {

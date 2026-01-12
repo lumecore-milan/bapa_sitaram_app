@@ -71,7 +71,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                           {'image': 'assets/images/ic_download.svg', 'title': 'ડાઉનલોડ પોસ્ટ', 'navigate': downloadPostRoute},
                           if (PreferenceService().getBoolean(key: AppConstants().prefKeyIsLoggedIn) == false) {'image': 'assets/images/logout.png', 'title': 'Login Now', 'navigate': loginRoute},
                           if (PreferenceService().getBoolean(key: AppConstants().prefKeyIsLoggedIn) == true) {'image': 'assets/images/logout.png', 'title': 'Logout', 'navigate': loginRoute},
-                        //  if (PreferenceService().getBoolean(key: AppConstants().prefKeyIsLoggedIn) == true)
+                          if (PreferenceService().getBoolean(key: AppConstants().prefKeyIsLoggedIn) == true)
                             {'image': 'assets/images/profile.png', 'title': 'Delete Account', 'navigate': userDeleteRoute}
                         ],
                       ),

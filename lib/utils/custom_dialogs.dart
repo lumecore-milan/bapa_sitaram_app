@@ -59,6 +59,117 @@ void showLoginDialog({required BuildContext context}) {
   );
 }
 
+
+void showAccountDeletionDialog({required BuildContext context,required VoidCallback onTap}) {
+  showDialog(
+    context: context,
+    barrierDismissible: true,
+    builder: (context) {
+      return Dialog(
+        backgroundColor: CustomColors().layoutPrimaryBackground,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Warning Icon
+              Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(color: CustomColors().white, shape: BoxShape.circle),
+                child: Icon(Icons.info, color: CustomColors().orange300, size: 60),
+              ),
+              20.h,
+              Text('Delete Account', style: bolder(fontSize: 18, color: CustomColors().black1000)),
+              10.h,
+              Text('Are you sure to delete account ?. Once you delete your account, it cannot be recovered. All your data will be permanently removed.', style: medium(fontSize: 16, color: CustomColors().red500)),
+              25.h,
+              Row(
+                mainAxisAlignment: .end,
+                children: [
+                  CommonButton(
+                    width: 100,
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    title: 'Cancel',
+                    color: CustomColors().grey500,
+                    fullWidth: false,
+                  ),
+                  20.w,
+                  CommonButton(
+                    width: 100,
+                    onTap:onTap,
+                    title: 'OK',
+                    color: CustomColors().orange600,
+                    fullWidth: false,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      );
+    },
+  );
+}
+
+void showReActivateAccount({required BuildContext context,required VoidCallback onTap}) {
+  showDialog(
+    context: context,
+    barrierDismissible: true,
+    builder: (context) {
+      return Dialog(
+        backgroundColor: CustomColors().layoutPrimaryBackground,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Warning Icon
+              Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(color: CustomColors().white, shape: BoxShape.circle),
+                child: Icon(Icons.info, color: CustomColors().orange300, size: 60),
+              ),
+              20.h,
+              Text('Account Reactivation', style: bolder(fontSize: 18, color: CustomColors().black1000)),
+              10.h,
+              Text('Your account is under deletion, are you sure to reactivate?', style: medium(fontSize: 16, color: CustomColors().red500)),
+              25.h,
+              Row(
+                mainAxisAlignment: .end,
+                children: [
+                  CommonButton(
+                    width: 100,
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    title: 'Cancel',
+                    color: CustomColors().grey500,
+                    fullWidth: false,
+                  ),
+                  20.w,
+                  CommonButton(
+                    width: 100,
+                    onTap:(){
+                      Navigator.pop(context);
+                      onTap();
+                    },
+                    title: 'Restore',
+                    color: CustomColors().orange600,
+                    fullWidth: false,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      );
+    },
+  );
+}
 void showDarshanTimeDialog1({required BuildContext context}) {
   final HomeDetailController controller = Get.find<HomeDetailController>();
   showDialog(

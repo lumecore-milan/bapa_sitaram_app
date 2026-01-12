@@ -21,7 +21,9 @@ class LoginController extends GetxController {
   final TextEditingController pinCode = TextEditingController();
   final TextEditingController address = TextEditingController();
   final TextEditingController panCard = TextEditingController();
+  bool isAccountUnderDeletion=false;
   Rx<String> profileImagePath = ''.obs;
+  Map<String,dynamic> tempData={};
 
   Future<(bool, Map<String, String>)> login({required String mobileNo}) async {
     (bool, Map<String, String>) resp = (false, {});
@@ -29,7 +31,12 @@ class LoginController extends GetxController {
       await _apiInstance.post(url: APIConstant().apiLogin, requestBody: {'mobile_no': mobileNo}, isFormData: true).then((data) {
         if (data.isNotEmpty) {
           if (data['httpStatusCode'] == 200) {
-            resp = (
+
+            if(data['status']=='Error' && data['message']=='Your account is deleted.'){
+              isAccountUnderDeletion=true;
+              resp = (false, {'error': data['message']});
+            }else {
+              resp = (
               true,
               {
                 'userId': '${data['user_id']}',
@@ -42,12 +49,36 @@ class LoginController extends GetxController {
                 'pinCode': '${data['user_pincode'] ?? ''}',
                 'profileImage': '${data['user_profile_photo']}',
               },
-            );
+              );
+            }
           } else {
             resp = (false, {'error': 'Something went wrong'});
           }
         } else {
           resp = (false, {'error': 'Something went wrong'});
+        }
+      });
+    } catch (e) {
+      LoggerService().log(message: e.toString());
+    }
+    return resp;
+  }
+
+  Future<(bool, String)> restore({required String mobileNo}) async {
+    (bool, String) resp = (false, '');
+    try {
+      await _apiInstance.post(url: APIConstant().apiRestoreAccount, requestBody: {'mobile_no': mobileNo}, isFormData: true).then((data) {
+        if (data.isNotEmpty) {
+          if (data['httpStatusCode'] == 200) {
+            isAccountUnderDeletion=false;
+            otpSent.value=false;
+            otpSent.refresh();
+            resp = (true,data['message']);
+          } else {
+            resp = (false,data['error']);
+          }
+        } else {
+          resp = (false,'Something went wrong');
         }
       });
     } catch (e) {

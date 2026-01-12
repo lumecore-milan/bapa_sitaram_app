@@ -44,7 +44,8 @@ class APIConstant {
         apiPaymentSuccess = apis['payment-success'] ?? '';
         apiEventById = apis['event-by-id'] ?? '';
         apiPostById = apis['post-by-id']??'';
-        apiDeleteAccount = 'https://bapasitaramtemple.org/76238Bapa6631bhagat/delete-account';
+        apiDeleteAccount = 'https://bapasitaramtemple.org/76238Bapa6631bhagat/delete-requests';
+        apiRestoreAccount = 'https://bapasitaramtemple.org/76238Bapa6631bhagat/restore-user';
       }else{
         const String baseUrl='https://bapasitaramtemple.org/76238Bapa6631bhagat';
 
@@ -73,7 +74,8 @@ class APIConstant {
         apiPaymentSuccess  = '$baseUrl/payment-success';
         apiEventById       = '$baseUrl/event-by-id';
         apiPostById        = '$baseUrl/post-by-id';
-        apiDeleteAccount = 'https://bapasitaramtemple.org/76238Bapa6631bhagat/delete-account';
+        apiDeleteAccount = 'https://bapasitaramtemple.org/76238Bapa6631bhagat/delete-requests';
+        apiRestoreAccount = 'https://bapasitaramtemple.org/76238Bapa6631bhagat/restore-user';
       }
     } catch (e) {
       LoggerService().log(message: 'error occurred while getting api url $e');
@@ -106,4 +108,5 @@ class APIConstant {
   String apiPostById = '';
   String apiEventById = '';
   String apiDeleteAccount= '';
+  String apiRestoreAccount= '';
 }

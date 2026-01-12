@@ -22,7 +22,7 @@ analyzer:
     empty_constructor_bodies: error
     unnecessary_string_interpolations: error
     unnecessary_null_checks: error
-    unused_import: error
+    unused_import: warning
     always_use_package_imports: error
     empty_catches: error
     dead_code: error
