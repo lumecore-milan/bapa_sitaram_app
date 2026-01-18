@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:bapa_sitaram/constants/app_colors.dart';
 import 'package:bapa_sitaram/controllers/login_controller.dart';
@@ -75,10 +76,15 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _mobile({required BuildContext context}) {
     return PopScope(
-      canPop: false,
+      canPop: Platform.isAndroid ? false : true,
       onPopInvoked: (didPop) {
-        if (didPop) return;
-        navigate(context: context, replace: false, path: homeRoute, param: AppConstants.detail);
+        print('back button press');
+        if (Platform.isAndroid) {
+          if (didPop) return;
+          navigate(context: context, replace: false, path: homeRoute, param: AppConstants.detail);
+        } else {
+          navigate(context: context, replace: false, path: homeRoute, param: AppConstants.detail);
+        }
       },
       child: Scaffold(
         body: SafeArea(

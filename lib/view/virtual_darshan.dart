@@ -1,7 +1,9 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:bapa_sitaram/constants/app_colors.dart';
 import 'package:bapa_sitaram/services/helper_service.dart';
+import 'package:bapa_sitaram/utils/events.dart';
 import 'package:bapa_sitaram/utils/font_styles.dart';
 import 'package:bapa_sitaram/utils/helper.dart';
 import 'package:bapa_sitaram/widget/app_bar.dart';
@@ -40,6 +42,7 @@ class _VirtualDarshanState extends State<VirtualDarshan> with TickerProviderStat
 
   @override
   void dispose() {
+    _soundCompletedSubscription.cancel();
     _curtainController.dispose();
     _diyaController.dispose();
     _shankhController.dispose();
@@ -52,9 +55,21 @@ class _VirtualDarshanState extends State<VirtualDarshan> with TickerProviderStat
   }
 
   late Animation<Offset> _moveAnimation;
-
+  late StreamSubscription<String> _soundCompletedSubscription;
   @override
   void initState() {
+    _soundCompletedSubscription = soundCompleted.stream.listen((sound) {
+      if (sound == 'assets/sound/aarti_sound_final.mp3') {
+        isArtiRunning.value = false;
+        _aartiController.reset();
+        _aartiController.stop();
+        _shankhController.reset();
+        _shankhController.stop();
+        _pushpaController.reset();
+        _pushpaController.stop();
+      }
+    });
+
     _shankhController = AnimationController(vsync: this, duration: const Duration(milliseconds: 6000));
     _diyaController = AnimationController(vsync: this, duration: const Duration(seconds: 3));
     _pushpaController = AnimationController(vsync: this, duration: const Duration(seconds: 3));
@@ -115,23 +130,23 @@ class _VirtualDarshanState extends State<VirtualDarshan> with TickerProviderStat
                               const Expanded(flex: 1, child: SizedBox()),
                               Obx(
                                 () => Expanded(
-                                  flex: 5,
+                                  flex: 10,
                                   child: ImageWidget(width: width, url: isTempleToggle.value == false ? 'assets/images/main_img_1.png' : 'assets/images/main_img_3.png'),
                                 ),
                               ),
                             ],
                           ),
                           Positioned(
-                            top: 0,
+                            top: -10,
                             left: 0,
-                            child: ImageWidget(url: 'assets/images/top1.png', width: width, height: height / 3),
+                            child: ImageWidget(url: 'assets/images/top1.png', width: width, height: height / 5, fit: .fill),
                           ),
                           //shankh pushpa
                           Positioned(
-                            top: 250,
+                            top: 150,
                             left: 50,
                             child: SizedBox(
-                              width: width / 1.5,
+                              width: width / 1.4,
                               child: LottieBuilder.asset(
                                 fit: .cover,
                                 controller: _pushpaController,
@@ -146,10 +161,10 @@ class _VirtualDarshanState extends State<VirtualDarshan> with TickerProviderStat
                             ),
                           ),
                           Positioned(
-                            top: 250,
+                            top: 150,
                             left: 50,
                             child: SizedBox(
-                              width: width / 1.5,
+                              width: width / 1.4,
                               child: LottieBuilder.asset(
                                 fit: .cover,
                                 controller: _shankhController,
@@ -163,7 +178,7 @@ class _VirtualDarshanState extends State<VirtualDarshan> with TickerProviderStat
                             ),
                           ),
                           Positioned(
-                            top: 260,
+                            top: 130,
                             left: 0,
                             child: SizedBox(
                               // color: Colors.red,
@@ -182,7 +197,7 @@ class _VirtualDarshanState extends State<VirtualDarshan> with TickerProviderStat
                             ),
                           ),
                           Positioned(
-                            top: 220,
+                            top: 120,
                             left: 0,
                             child: SizedBox(
                               width: SizeConfig().width,
@@ -274,7 +289,6 @@ class _VirtualDarshanState extends State<VirtualDarshan> with TickerProviderStat
                                             InkWell(
                                               onTap: () {
                                                 if (isArtiRunning.value == false) {
-                                                  HelperService().playSound(sound: 'assets/sound/aarti_sound_final.mp3');
                                                   if (isThalRunning.value == true) {
                                                     Helper.showMessage(title: 'Error', message: 'થાળ ચાલુ છે', isSuccess: false);
                                                     return;
@@ -283,6 +297,7 @@ class _VirtualDarshanState extends State<VirtualDarshan> with TickerProviderStat
                                                     return;
                                                   }
                                                 }
+                                                HelperService().playSound(sound: 'assets/sound/aarti_sound_final.mp3');
                                                 isArtiRunning.toggle();
                                                 if (isArtiRunning.value == true) {
                                                   _aartiController.repeat();

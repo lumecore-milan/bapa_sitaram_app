@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:math' show Random;
 
+import 'package:bapa_sitaram/utils/events.dart';
 import 'package:bapa_sitaram/utils/helper.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:just_audio/just_audio.dart';
@@ -50,6 +51,12 @@ class HelperService {
       }
       player.seek(Duration.zero); // restart
       player.play();
+      player.playerStateStream.listen((PlayerState state) {
+        if (state.processingState == ProcessingState.completed) {
+          soundCompleted.sink.add(sound);
+          LoggerService().log(message: 'Sound completed $sound');
+        }
+      });
     } catch (e) {
       LoggerService().log(message: e.toString());
     }
