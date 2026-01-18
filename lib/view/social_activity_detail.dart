@@ -1,9 +1,7 @@
 import 'package:bapa_sitaram/widget/app_bar.dart';
 import 'package:bapa_sitaram/widget/custom_html_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:bapa_sitaram/extensions/size_box_extension.dart';
 import 'package:bapa_sitaram/utils/size_config.dart';
-import 'package:bapa_sitaram/widget/rounded_image.dart';
 
 class SocialActivityDetail extends StatefulWidget {
   const SocialActivityDetail({required this.title, required this.detail, super.key});
@@ -31,22 +29,10 @@ class _SocialActivityDetailState extends State<SocialActivityDetail> {
   }
 
   Widget _getBody() {
-    return Container(
+    return SizedBox(
       height: SizeConfig().height,
       width: SizeConfig().width,
-      padding: const .symmetric(horizontal: 16),
-      child: SingleChildScrollView(
-        child: Column(
-          mainAxisSize: .min,
-          children: [
-            20.h,
-            Column(
-              children: [RoundedImage(height: 180, width: SizeConfig().width, fit: .cover, url: widget.detail['event_image'])],
-            ),
-            CustomHtmlWidget(content: widget.detail['event_desc'], title: widget.title, image: ''),
-          ],
-        ),
-      ),
+      child: CustomHtmlWidget(content: widget.detail['event_desc'], title: widget.title, image: widget.detail['event_image']),
     );
   }
 }

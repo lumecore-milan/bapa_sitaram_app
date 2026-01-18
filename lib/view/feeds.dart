@@ -39,7 +39,7 @@ class _FeedsPageState extends State<FeedsPage> {
   final FeedController _controller = Get.put(FeedController());
   final TextEditingController message = TextEditingController();
   final ScrollController _scrollController = ScrollController();
-  Rx<double> progress = (0.0).obs;
+
   String downloadPath = '';
 
   bool shareDialogOpen = false;
@@ -57,7 +57,7 @@ class _FeedsPageState extends State<FeedsPage> {
       AppEventsStream().stream.listen((event) async {
         if (mounted && event.type == AppEventType.downloadProgress) {
           final d = event.data as DownloadMessage;
-          progress.value = d.progress;
+          _controller.progress.value = d.progress;
 
           if (d.filePath != null && shareDialogOpen == false) {
             shareDialogOpen = true;
@@ -95,12 +95,16 @@ class _FeedsPageState extends State<FeedsPage> {
         if (_controller.posts.isNotEmpty && widget.detailId.isNotEmpty) {
           int ind = _controller.posts.indexWhere((e) => '${e.postId}' == widget.detailId);
           if (ind >= 0) {
-            navigate(context: context, replace: false, path: videoRoute, param: _controller.posts[ind].postImage);
+            if (mounted && context.mounted) {
+              navigate(context: context, replace: false, path: videoRoute, param: _controller.posts[ind].postImage);
+            }
           } else {
             _controller.getPostBySpecificId(postId: widget.detailId).then((post) {
               int ind = _controller.posts.indexWhere((e) => '${e.postId}' == widget.detailId);
               if (ind >= 0) {
-                navigate(context: context, replace: false, path: videoRoute, param: _controller.posts[ind].postImage);
+                if (mounted && context.mounted) {
+                  navigate(context: context, replace: false, path: videoRoute, param: _controller.posts[ind].postImage);
+                }
               }
             });
           }
@@ -290,7 +294,8 @@ class _FeedsPageState extends State<FeedsPage> {
                                   ),
                                   GestureDetector(
                                     onTap: () async {
-                                      if (PreferenceService().getBoolean(key: AppConstants().prefKeyIsLoggedIn)) {
+                                      // if (PreferenceService().getBoolean(key: AppConstants().prefKeyIsLoggedIn))
+                                      {
                                         try {
                                           final b = await PermissionService().manageExternalStorage();
                                           if (b) {
@@ -300,7 +305,9 @@ class _FeedsPageState extends State<FeedsPage> {
                                             if (!isExist) {
                                               await directory.create(recursive: false);
                                             }
-                                            downloadProgress(progress: progress, context: context);
+                                            if (mounted && context.mounted) {
+                                              downloadProgress(progress: _controller.progress, context: context);
+                                            }
                                             _controller.shareIndex = index;
                                             DownloadServiceMobile().download(url: _controller.posts[index].postImage);
                                           } else {
@@ -309,9 +316,9 @@ class _FeedsPageState extends State<FeedsPage> {
                                         } catch (e) {
                                           LoggerService().log(message: e.toString());
                                         }
-                                      } else {
+                                      } /*else {
                                         showLoginDialog(context: context);
-                                      }
+                                      }*/
                                     },
                                     child: Row(
                                       children: [

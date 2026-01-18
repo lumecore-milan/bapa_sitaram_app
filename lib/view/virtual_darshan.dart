@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:bapa_sitaram/constants/app_colors.dart';
 import 'package:bapa_sitaram/services/helper_service.dart';
 import 'package:bapa_sitaram/utils/font_styles.dart';
+import 'package:bapa_sitaram/utils/helper.dart';
 import 'package:bapa_sitaram/widget/app_bar.dart';
 import 'package:bapa_sitaram/widget/rounded_image.dart';
 import 'package:flutter/material.dart';
@@ -220,6 +221,17 @@ class _VirtualDarshanState extends State<VirtualDarshan> with TickerProviderStat
                                           children: [
                                             InkWell(
                                               onTap: () {
+                                                if (isArtiRunning.value == true) {
+                                                  Helper.showMessage(title: 'Error', message: 'આરતી ચાલુ છે', isSuccess: false);
+                                                  return;
+                                                } else if (isThalRunning.value == true) {
+                                                  Helper.showMessage(title: 'Error', message: 'થાળ ચાલુ છે', isSuccess: false);
+                                                  return;
+                                                } else if (_pushpaController.isAnimating == true) {
+                                                  Helper.showMessage(title: 'Error', message: 'પુષ્પ ચાલુ છે', isSuccess: false);
+                                                  return;
+                                                }
+                                                HelperService().stopSound(sound: 'assets/sound/shankh_audio.mp3');
                                                 HelperService().playSound(sound: 'assets/sound/shankh_audio.mp3');
                                                 _shankhController
                                                   ..reset()
@@ -235,6 +247,18 @@ class _VirtualDarshanState extends State<VirtualDarshan> with TickerProviderStat
                                           children: [
                                             InkWell(
                                               onTap: () {
+                                                if (isArtiRunning.value == true) {
+                                                  Helper.showMessage(title: 'Error', message: 'આરતી ચાલુ છે', isSuccess: false);
+                                                  return;
+                                                } else if (isThalRunning.value == true) {
+                                                  Helper.showMessage(title: 'Error', message: 'થાળ ચાલુ છે', isSuccess: false);
+                                                  return;
+                                                } else if (_shankhController.isAnimating == true) {
+                                                  Helper.showMessage(title: 'Error', message: 'શંખનાદ ચાલુ છે', isSuccess: false);
+                                                  return;
+                                                }
+                                                HelperService().stopSound(sound: 'assets/sound/bg_devotional_1.mp3');
+                                                HelperService().playSound(sound: 'assets/sound/bg_devotional_1.mp3');
                                                 _pushpaController
                                                   ..reset()
                                                   ..forward();
@@ -249,8 +273,15 @@ class _VirtualDarshanState extends State<VirtualDarshan> with TickerProviderStat
                                           children: [
                                             InkWell(
                                               onTap: () {
-                                                if (isThalRunning.value == true) {
-                                                  return;
+                                                if (isArtiRunning.value == false) {
+                                                  HelperService().playSound(sound: 'assets/sound/aarti_sound_final.mp3');
+                                                  if (isThalRunning.value == true) {
+                                                    Helper.showMessage(title: 'Error', message: 'થાળ ચાલુ છે', isSuccess: false);
+                                                    return;
+                                                  } else if (_pushpaController.isAnimating == true) {
+                                                    Helper.showMessage(title: 'Error', message: 'પુષ્પ ચાલુ છે', isSuccess: false);
+                                                    return;
+                                                  }
                                                 }
                                                 isArtiRunning.toggle();
                                                 if (isArtiRunning.value == true) {
@@ -258,6 +289,7 @@ class _VirtualDarshanState extends State<VirtualDarshan> with TickerProviderStat
                                                   _shankhController.repeat();
                                                   _pushpaController.repeat();
                                                 } else {
+                                                  HelperService().stopSound(sound: 'assets/sound/aarti_sound_final.mp3');
                                                   _aartiController.reset();
                                                   _aartiController.stop();
 
@@ -278,9 +310,20 @@ class _VirtualDarshanState extends State<VirtualDarshan> with TickerProviderStat
                                             InkWell(
                                               onTap: () {
                                                 if (isArtiRunning.value == true) {
+                                                  Helper.showMessage(title: 'Error', message: 'આરતી ચાલુ છે', isSuccess: false);
+                                                  return;
+                                                } else if (_pushpaController.isAnimating == true) {
+                                                  Helper.showMessage(title: 'Error', message: 'પુષ્પ ચાલુ છે', isSuccess: false);
+                                                  return;
+                                                } else if (_shankhController.isAnimating == true) {
+                                                  Helper.showMessage(title: 'Error', message: 'શંખનાદ ચાલુ છે', isSuccess: false);
                                                   return;
                                                 }
 
+                                                if (isThalRunning.value == true) {
+                                                  HelperService().stopSound(sound: 'assets/sound/bg_devotional.mp3');
+                                                }
+                                                HelperService().playSound(sound: 'assets/sound/bg_devotional.mp3');
                                                 _thalController.reset();
                                                 _thalController.forward();
                                                 _diyaController.reset();
@@ -290,6 +333,7 @@ class _VirtualDarshanState extends State<VirtualDarshan> with TickerProviderStat
                                                 Future.delayed(const Duration(seconds: 6)).then((t) {
                                                   _thalController.reverse().then((t) {
                                                     isThalRunning.value = false;
+                                                    HelperService().stopSound(sound: 'assets/sound/bg_devotional.mp3');
                                                   });
                                                 });
                                               },

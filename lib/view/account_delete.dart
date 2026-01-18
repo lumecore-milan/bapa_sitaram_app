@@ -46,7 +46,7 @@ class _DeleteAccountPageState extends State<DeleteAccountPage> {
 
   @override
   Widget build(BuildContext context) {
-    print(widget.showAppBar);
+   
     return Scaffold(
       appBar: widget.showAppBar == false
           ? null
@@ -119,7 +119,9 @@ class _DeleteAccountPageState extends State<DeleteAccountPage> {
                                 if (data.isNotEmpty) {
                                   if(data['httpStatusCode'] == 200 && data['status']=='success') {
                                     PreferenceService().clear();
+                                     if (mounted && context.mounted) {
                                     navigate(context: context, replace: true, path: loginRoute,removePreviousRoute: true);
+                                     }
                                     Helper.showMessage(title: 'Success', message: data['message'], isSuccess: true);
                                   } else {
                                     Helper.showMessage(title: 'Success', message: data['message'], isSuccess: false);

@@ -15,31 +15,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:bapa_sitaram/constants/app_constant.dart';
 import 'package:bapa_sitaram/constants/routes.dart';
+
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
   @override
   State<MyApp> createState() => _MyAppState();
 }
+
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
-
     LoggerService().showLogInReleaseMode = true;
 
     super.initState();
     HelperService().initSoundSources(
-      soundFiles: [
-        'assets/sound/shankh_audio.mp3',
-        'assets/sound/bell_audio.mp3',
-        'assets/sound/bapa_sitaram.mp3',
-      ],
+      soundFiles: ['assets/sound/shankh_audio.mp3', 'assets/sound/bell_audio.mp3', 'assets/sound/bapa_sitaram.mp3', 'assets/sound/aarti_sound_final.mp3', 'assets/sound/bg_devotional.mp3', 'assets/sound/bg_devotional_1.mp3'],
     );
-    SystemChrome.setPreferredOrientations(<DeviceOrientation>[
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
+    SystemChrome.setPreferredOrientations(<DeviceOrientation>[DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
-    if(Platform.isIOS) {
+    if (Platform.isIOS) {
       ConnectivityService().startListening();
       WidgetsBinding.instance.addPostFrameCallback((_) {
         AppEventsStream().stream.listen((event) async {
@@ -57,7 +51,6 @@ class _MyAppState extends State<MyApp> {
         });
       });
     }
-
   }
 
   @override
@@ -71,9 +64,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       supportedLocales: const <Locale>[Locale('en'), Locale('de')],
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        scaffoldBackgroundColor: CustomColors().layoutPrimaryBackground,
-      ),
+      theme: ThemeData(scaffoldBackgroundColor: CustomColors().layoutPrimaryBackground),
       scaffoldMessengerKey: AppConstants().scaffoldMessengerKey,
       navigatorKey: AppConstants().navigatorKey,
       title: 'Flutter Demo',

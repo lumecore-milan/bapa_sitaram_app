@@ -137,7 +137,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
       {'title': 'પ્રસંગ', 'image': 'assets/images/ic_event_clr.svg', 'navigate': eventsRoute, 'color': CustomColors().red50},
       {'title': 'પૂનમ લિસ્ટ', 'image': 'assets/images/ic_poonam_clr.svg', 'navigate': punamListRoute, 'color': CustomColors().teal50},
       {'title': 'ગેલેરી', 'image': 'assets/images/ic_gallery_clr.svg', 'navigate': galleryRoute, 'color': CustomColors().brown50},
-    //  {"title": "ડોનેશન", 'image': "assets/images/ic_donation_clr.svg", 'navigate': donationRoute, 'color': CustomColors().blue50},
+      //  {"title": "ડોનેશન", 'image': "assets/images/ic_donation_clr.svg", 'navigate': donationRoute, 'color': CustomColors().blue50},
       {'title': 'આરતી', 'image': 'assets/images/ic_aarti_clr.svg', 'navigate': aartiRoute, 'color': CustomColors().yellow50},
     ];
 
@@ -165,7 +165,9 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                 } else {
                   await _controller.getMenuDetail(menu: e['title']).then((data) {
                     if (data.isNotEmpty) {
-                      navigate(context: context, replace: false, path: e['navigate'], param: {'title': e['title'], 'data': data});
+                      if (mounted && context.mounted) {
+                        navigate(context: context, replace: false, path: e['navigate'], param: {'title': e['title'], 'data': data});
+                      }
                     }
                   });
                 }

@@ -2,11 +2,11 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:bapa_sitaram/constants/app_colors.dart';
-import 'package:bapa_sitaram/constants/routes.dart';
+
 
 import 'package:bapa_sitaram/utils/custom_dialogs.dart';
 import 'package:bapa_sitaram/utils/font_styles.dart';
-import 'package:bapa_sitaram/utils/route_generate.dart';
+
 import 'package:bapa_sitaram/utils/size_config.dart';
 import 'package:bapa_sitaram/widget/app_bar.dart';
 import 'package:bapa_sitaram/widget/image_widget.dart';
@@ -115,12 +115,12 @@ class _MyDonationListState extends State<MyDonationList> {
                                 mainAxisAlignment: .spaceBetween,
                                 children: [
                                   Text('My Total Donation', style: semiBold(fontSize: 14, color: CustomColors().white)),
-                                  InkWell(
+                                  /*InkWell(
                                     onTap: () {
                                       navigate(context: context, replace: false, path: donationRoute, param: true);
                                     },
                                     child: Icon(Icons.add, size: 24, color: CustomColors().white),
-                                  ),
+                                  ),*/
                                 ],
                               ),
                               50.h,
@@ -159,7 +159,9 @@ class _MyDonationListState extends State<MyDonationList> {
                                 downloadReceipt(id: list[index]['id']).then((url) {
                                   Helper.closeLoader();
                                   if (url.isNotEmpty) {
+                                     if (mounted && context.mounted) {
                                     downloadReceiptDialog(context: context, detail: list[index], url: url);
+                                     }
                                   }
                                 });
                               },

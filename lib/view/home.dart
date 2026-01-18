@@ -4,7 +4,9 @@ import 'package:bapa_sitaram/constants/app_colors.dart';
 import 'package:bapa_sitaram/constants/routes.dart';
 import 'package:bapa_sitaram/services/loger_service.dart';
 import 'package:bapa_sitaram/services/preference_service.dart';
-import 'package:bapa_sitaram/view/donation.dart';
+import 'package:bapa_sitaram/view/contact.dart';
+import 'package:bapa_sitaram/view/events.dart';
+
 import 'package:bapa_sitaram/view/punam_list.dart';
 import 'package:bapa_sitaram/widget/custom_drawer.dart';
 import 'package:flutter/material.dart';
@@ -99,7 +101,9 @@ class _HomePageState extends State<HomePage> {
       Future.delayed(const Duration(seconds: 10)).then((t) async {
         String appVersion = Platform.isAndroid ? AppConstants().androidAppVersion : AppConstants().iOSAppVersion;
         if (widget.detail.version.versionNo.isNotEmpty && appVersion != widget.detail.version.versionNo) {
-          appUpdateDialog(context: context, title: widget.detail.version.versionTitle, message: widget.detail.version.versionMessage, forceUpdate: widget.detail.version.versionForceUpdate == '1');
+          if (mounted && context.mounted) {
+            appUpdateDialog(context: context, title: widget.detail.version.versionTitle, message: widget.detail.version.versionMessage, forceUpdate: widget.detail.version.versionForceUpdate == '1');
+          }
         }
         /* final status=await PermissionService().requestNotificationPermission();
           if(status){
@@ -122,12 +126,16 @@ class _HomePageState extends State<HomePage> {
         Future.delayed(const Duration(milliseconds: 500)).then((t) {
           int ind = homeController.homeDetail.value.events.indexWhere((e) => e.eventId == int.parse(data.id));
           if (ind >= 0) {
-            navigate(context: context, replace: false, path: detailRoute, param: {'showAppbar': false, 'index': ind});
+            if (mounted && context.mounted) {
+              navigate(context: context, replace: false, path: detailRoute, param: {'showAppbar': false, 'index': ind});
+            }
           } else {
             homeController.getEventById(eventId: data.id).then((value) {
               int newInd = homeController.homeDetail.value.events.indexWhere((e) => e.eventId == int.parse(data.id));
               if (newInd >= 0) {
-                navigate(context: context, replace: false, path: detailRoute, param: {'showAppbar': false, 'index': newInd});
+                if (mounted && context.mounted) {
+                  navigate(context: context, replace: false, path: detailRoute, param: {'showAppbar': false, 'index': newInd});
+                }
               }
             });
           }
@@ -208,6 +216,11 @@ class _HomePageState extends State<HomePage> {
                       } else if (path == aartiRoute) {
                         final HomeDetailController controller = Get.find<HomeDetailController>();
                         navigate(context: context, replace: false, path: aartiRoute, param: controller.homeDetail.value.arti);
+                      } else if (path == contactRoute) {
+                       
+                        if (ModalRoute.of(context)?.settings.name != null && ModalRoute.of(context)?.settings.name != contactRoute) {
+                          navigate(context: context, replace: false, path: contactRoute);
+                        }
                       } else {
                         navigate(context: context, replace: false, path: path);
                       }
@@ -277,6 +290,8 @@ class _HomePageState extends State<HomePage> {
               } else if (pageIndex == 3) {
                 appBarTitle.value = 'પૂનમ લિસ્ટ';
               } else if (pageIndex == 4) {
+                appBarTitle.value = 'Contact Us';
+              } else if (pageIndex == 5) {
                 appBarTitle.value = 'ડોનેશન';
               }
               _pageController.jumpToPage(pageIndex);
@@ -300,7 +315,7 @@ class _HomePageState extends State<HomePage> {
             } else if (index == 3) {
               return PunamListPage();
             } else if (index == 4) {
-              return const DonationPage();
+              return const ContactUs(isFromBottommenu: true);
             } else {
               return const SizedBox();
             }

@@ -21,7 +21,9 @@ class BottomBar extends StatelessWidget {
     BottomList(image: 'assets/images/ic_temple.svg', title: 'મંદિર'),
     BottomList(image: 'assets/images/feed.svg', title: 'ફીડ'),
     BottomList(image: 'assets/images/ic_poonam_menu.svg', title: 'પૂનમ લિસ્ટ'),
-  //  BottomList(image: 'assets/images/ic_donation_menu.svg', title: 'ડોનેશન'),
+    BottomList(image: 'assets/images/ic_contact.svg', title: 'સંપર્ક કરો'),
+
+    //  BottomList(image: 'assets/images/ic_donation_menu.svg', title: 'ડોનેશન'),
   ];
 
   @override
@@ -48,12 +50,12 @@ class BottomBar extends StatelessWidget {
                     width: 60,
                     padding: const .only(top: 3, bottom: 3),
                     alignment: .center,
-                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: _bottomList.indexOf(e) == currentIndex ? CustomColors().deepPurple200 : null),
+                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: _bottomList.indexOf(e) == currentIndex ? CustomColors().deepPurple50 : null),
                     child: ImageWidget(url: e.image, width: 24, height: 24),
                   ),
 
                   const SizedBox(height: 5),
-                  Text(e.title, style: medium(fontSize: 10, color: _bottomList.indexOf(e) == currentIndex ? CustomColors().primaryColorDark : null)),
+                  Text(e.title, style: bolder(fontSize: 10, color: _bottomList.indexOf(e) == currentIndex ? CustomColors().primaryColorDark : null)),
                 ],
               ),
             ),

@@ -96,7 +96,7 @@ class Helper {
     }
   }
 
-  static void showMessage({required String title, required String message, required bool isSuccess, int durationInSecond = 4, bool showIcon = true}) {
+  static void showMessage({required String title, required String message, required bool isSuccess, int durationInSecond = 4, bool showIcon = true, Widget? actionWidget}) {
     HelperService().hideKeyboard(context: AppConstants().scaffoldMessengerKey.currentState!.context);
     SnackBarBehavior behaviour = SnackBarBehavior.floating;
     AppConstants().scaffoldMessengerKey.currentState!.showSnackBar(
@@ -120,6 +120,8 @@ class Helper {
                 style: isSuccess ? bolder(fontSize: 14, color: CustomColors().green500) : semiBold(fontSize: 14, color: CustomColors().red500),
               ),
             ),
+            const SizedBox(width: 10),
+            if (actionWidget != null) actionWidget,
           ],
         ),
       ),

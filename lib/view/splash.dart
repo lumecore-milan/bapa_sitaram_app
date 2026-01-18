@@ -5,6 +5,7 @@ import 'package:bapa_sitaram/constants/routes.dart';
 import 'package:bapa_sitaram/controllers/splash_controller.dart';
 import 'package:bapa_sitaram/services/helper_service.dart';
 import 'package:bapa_sitaram/services/preference_service.dart';
+import 'package:bapa_sitaram/utils/helper.dart';
 import 'package:bapa_sitaram/utils/route_generate.dart';
 import 'package:bapa_sitaram/utils/size_config.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +36,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
   final ScrollController _scrollController3 = ScrollController();
   final ScrollController _scrollController4 = ScrollController();
   final ScrollController _scrollController5 = ScrollController();
-  Timer t=Timer.periodic(const Duration(hours:1 ),(t){});
+  Timer t = Timer.periodic(const Duration(hours: 1), (t) {});
   @override
   void initState() {
     _animationController = AnimationController(
@@ -50,30 +51,45 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
       _startScroll3();
       _startLeftRoRight4();
       _startLeftRoRight5();
-       getData();
+      getData();
     });
     super.initState();
     _animationController2.forward();
   }
 
-  Future<void> getData()async{
-    try{
-
+  Future<void> getData() async {
+    try {
       _controller.getData().then((data) {
         HelperService().playSound(sound: 'assets/sound/bapa_sitaram.mp3');
         Future.delayed(const Duration(seconds: 3)).then((y) {
           if (data.$1 == true) {
             if (PreferenceService().getBoolean(key: AppConstants().prefKeyIsRegistered) == true && PreferenceService().getBoolean(key: AppConstants().prefKeyIsLoggedIn) == false) {
-              navigate(context: context, replace: true, path: loginRoute, param: _controller.detail.value);
+              if (mounted && context.mounted) {
+                navigate(context: context, replace: true, path: loginRoute, param: _controller.detail.value);
+              }
             } else {
-              navigate(context: context, replace: true, path: homeRoute, param: _controller.detail.value);
+              if (mounted && context.mounted) {
+                navigate(context: context, replace: true, path: homeRoute, param: _controller.detail.value);
+              }
             }
           } else {
-            navigate(context: context, replace: true, path: homeRoute, param: _controller.detail.value);
+            Helper.showMessage(
+              title: 'Error',
+              message: 'Unable to load data, please try again.',
+              isSuccess: false,
+              durationInSecond: 10,
+              actionWidget: InkWell(
+                onTap: () {
+                  AppConstants().scaffoldMessengerKey.currentState?.hideCurrentSnackBar();
+                  getData();
+                },
+                child: Icon(Icons.refresh, color: CustomColors().primaryColorDark, size: 24),
+              ),
+            );
           }
         });
       });
-    }catch(e){
+    } catch (e) {
       //
     }
   }
@@ -239,9 +255,9 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
 
   @override
   void dispose() {
-    try{
+    try {
       t.cancel();
-    }catch(e){
+    } catch (e) {
       //
     }
     _animationController.dispose();

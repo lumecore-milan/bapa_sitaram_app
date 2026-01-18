@@ -39,11 +39,11 @@ class LoginController extends GetxController {
               resp = (
               true,
               {
-                'userId': '${data['user_id']}',
-                'userStatus': '${data['status']}',
-                'name': '${data['user_name']}',
-                'email': '${data['user_email']}',
-                'mobile': '${data['user_mobile']}',
+                'userId': '${data['user_id']??''}',
+                'userStatus': '${data['status']??''}',
+                'name': '${data['user_name']??''}',
+                'email': '${data['user_email']??''}',
+                'mobile': '${data['user_mobile']??''}',
                 'panCard': '${data['user_panCard'] ?? ''}',
                 'address': '${data['user_address'] ?? ''}',
                 'pinCode': '${data['user_pincode'] ?? ''}',

@@ -174,7 +174,9 @@ class _UserRegistrationPageState extends State<UserRegistrationPage> {
                                       await _controller.register().then((result) {
                                         Helper.closeLoader();
                                         if (result.$1 == true) {
+                                           if (mounted && context.mounted) {
                                           navigate(context: context, replace: true, path: homeRoute);
+                                           }
                                         } else {
                                           Helper.showMessage(title: 'Error', message: result.$2, isSuccess: false);
                                         }

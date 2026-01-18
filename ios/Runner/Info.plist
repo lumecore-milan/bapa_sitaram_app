@@ -2,10 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>NSPhotoLibraryUsageDescription</key>
-    <string>This app requires access to your photo library to allow you to select and upload profile image.</string>
-    <key>NSLocationWhenInUseUsageDescription</key>
-    <string>Location access is used to support core app features and ensure proper functionality.</string>
 	<key>AwnAppGroupName</key>
 	<string>group.awn.fixedAppGroup</string>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
@@ -28,10 +24,27 @@
 	<string>$(FLUTTER_BUILD_NAME)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>app-1-37795912856-ios-3f0eb7a336bc171b96c4ed</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<key>FirebaseAppDelegateProxyEnabled</key>
+	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Location access is used to support core app features and ensure proper functionality.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app requires access to your photo library to allow you to select and upload profile image.</string>
 	<key>NSUserNotificationAlertStyle</key>
 	<string>alert</string>
 	<key>UIApplicationSceneManifest</key>

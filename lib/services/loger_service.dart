@@ -50,7 +50,7 @@ class LoggerService {
     }
 
     if (showLogInReleaseMode) {
-      print(coloredMessage);
+     
     } else {
       developer.log(coloredMessage);
     }

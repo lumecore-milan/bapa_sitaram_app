@@ -43,11 +43,7 @@ class _MarqueeTextState extends State<MarqueeText> with SingleTickerProviderStat
   Future<void> _startScroll() async {
     try {
       while (_isScrolling) {
-        await _controller.animateTo(
-          _controller.position.maxScrollExtent,
-          duration: const Duration(seconds: 20), // adjust speed
-          curve: Curves.linear,
-        );
+        await _controller.animateTo(_controller.position.maxScrollExtent, duration: const Duration(seconds: 30), curve: Curves.linear);
 
         if (_isScrolling) {
           _controller.jumpTo(0);

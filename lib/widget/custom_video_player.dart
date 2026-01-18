@@ -50,13 +50,13 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
   }
 
   late PageController _pageController;
-
+  final TextEditingController message = TextEditingController();
   Future<void> view({required int index}) async {
     await controller.view(postId: controller.posts[index].postId);
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext rootContext) {
     return SafeArea(
       child: Material(
         child: PageView.builder(
@@ -272,13 +272,47 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
                             5.h,
                             Text('Save', style: semiBold(fontSize: 12, color: CustomColors().white)),
                             10.h,
-                            ImageWidget(url: 'assets/images/ic_comment.svg', height: 24, width: 24, color: CustomColors().white),
+                            InkWell(
+                              onTap: () {
+                                if (PreferenceService().getBoolean(key: AppConstants().prefKeyIsLoggedIn)) {
+                                  controller.getCommentByPostId(postId: controller.posts[index].postId);
+
+                                  showModalBottomSheet(
+                                    isScrollControlled: true,
+                                    backgroundColor: CustomColors().layoutPrimaryBackground,
+                                    enableDrag: true,
+                                    useSafeArea: true,
+                                    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+                                    constraints: BoxConstraints(minHeight: SizeConfig().height, maxHeight: SizeConfig().height),
+                                    context: context,
+                                    builder: (context) => LikeCommentPostBottomSheet(
+                                      message: message,
+
+                                      onSend: (msg) async {
+                                        Helper.showLoader();
+                                        await controller.comment(comment: msg, postId: controller.posts[index].postId).then((t) {
+                                          Helper.closeLoader();
+                                          if (t == true) {
+                                            message.clear();
+                                          }
+                                        });
+                                      },
+                                    ),
+                                  );
+                                } else {
+                                  showLoginDialog(context: context);
+                                }
+                              },
+
+                              child: ImageWidget(url: 'assets/images/ic_comment.svg', height: 24, width: 24, color: CustomColors().white),
+                            ),
                             5.h,
                             Obx(() => Text('${controller.posts[index].commentCount}', style: semiBold(fontSize: 12, color: CustomColors().white))),
                             10.h,
                             InkWell(
                               onTap: () async {
-                                if (PreferenceService().getBoolean(key: AppConstants().prefKeyIsLoggedIn)) {
+                                // if (PreferenceService().getBoolean(key: AppConstants().prefKeyIsLoggedIn))
+                                {
                                   try {
                                     final b = await PermissionService().manageExternalStorage();
                                     if (b) {
@@ -288,6 +322,9 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
                                       if (!isExist) {
                                         await directory.create(recursive: false);
                                       }
+                                      if (mounted && rootContext.mounted) {
+                                        downloadProgress(progress: controller.progress, context: rootContext);
+                                      }
                                       controller.shareIndex = index;
                                       await DownloadServiceMobile().download(url: controller.posts[index].postImage);
                                     } else {
@@ -296,9 +333,9 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
                                   } catch (e) {
                                     LoggerService().log(message: e.toString());
                                   }
-                                } else {
+                                } /*else {
                                   showLoginDialog(context: context);
-                                }
+                                }*/
                               },
                               child: ImageWidget(url: 'assets/images/whatsapp.svg', height: 20, width: 24, color: CustomColors().white),
                             ),

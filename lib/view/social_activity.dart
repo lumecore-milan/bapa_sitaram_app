@@ -38,7 +38,7 @@ class SocialActivities extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppbar(
-        title: 'પ્રેસ મીડિયા',
+        title: 'સામાજિક પ્રવૃત્તિ',
         showDrawerIcon: false,
         onBackTap: () {
           Navigator.pop(context);
@@ -62,27 +62,27 @@ class SocialActivities extends StatelessWidget {
                   itemCount: data.length,
                   separatorBuilder: (_, index) => const SizedBox(height: 10),
                   itemBuilder: (_, index) {
-                    return Stack(
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            navigate(context: context, replace: false, path: socialActivityDetailRoute, param: {'title': data[index]['event_title'], 'data': data[index]});
-                          },
-                          child: RoundedImage(height: 180, width: SizeConfig().width, url: data[index]['event_image'], fit: .cover),
-                        ),
-                        Positioned.fill(
-                          child: Container(
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [Colors.transparent, Colors.transparent, CustomColors().black1000.withOpacity(0.7)], stops: [0.0, 0.6, 1.0]),
+                    return InkWell(
+                      onTap: () {
+                        navigate(context: context, replace: false, path: socialActivityDetailRoute, param: {'title': data[index]['event_title'], 'data': data[index]});
+                      },
+                      child: Stack(
+                        children: [
+                          RoundedImage(height: 180, width: SizeConfig().width, url: data[index]['event_image'], fit: .cover),
+                          Positioned.fill(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [Colors.transparent, Colors.transparent, CustomColors().black1000.withOpacity(0.7)], stops: [0.0, 0.6, 1.0]),
+                              ),
                             ),
                           ),
-                        ),
-                        Positioned(
-                          bottom: 10,
-                          left: 20,
-                          child: Text(data[index]['event_title'], style: semiBold(fontSize: 14, color: CustomColors().white)),
-                        ),
-                      ],
+                          Positioned(
+                            bottom: 10,
+                            left: 20,
+                            child: Text(data[index]['event_title'], style: semiBold(fontSize: 14, color: CustomColors().white)),
+                          ),
+                        ],
+                      ),
                     );
                   },
                 );

@@ -9,7 +9,6 @@ import 'package:bapa_sitaram/utils/size_config.dart';
 import 'package:bapa_sitaram/widget/image_widget.dart';
 
 final class DrawerItem {
-
   DrawerItem({required this.mainTitle, required this.subItems});
   final String mainTitle;
   final List<Map<String, dynamic>> subItems;
@@ -47,7 +46,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                           {'image': 'assets/images/ic_home.svg', 'title': 'હોમ', 'navigate': homeRoute},
                           {'image': 'assets/images/ic_poonam_clr.svg', 'title': 'પૂનમ લિસ્ટ', 'navigate': punamListRoute},
                           {'image': 'assets/images/ic_aarti_clr.svg', 'title': 'આરતી', 'navigate': aartiRoute},
-                        //  {'image': "assets/images/ic_donation_clr.svg", 'title': "ડોનેશન", 'navigate': donationRoute},
+                          //  {'image': "assets/images/ic_donation_clr.svg", 'title': "ડોનેશન", 'navigate': donationRoute},
                         ],
                       ),
                     ),
@@ -71,8 +70,6 @@ class _CustomDrawerState extends State<CustomDrawer> {
                           {'image': 'assets/images/ic_download.svg', 'title': 'ડાઉનલોડ પોસ્ટ', 'navigate': downloadPostRoute},
                           if (PreferenceService().getBoolean(key: AppConstants().prefKeyIsLoggedIn) == false) {'image': 'assets/images/logout.png', 'title': 'Login Now', 'navigate': loginRoute},
                           if (PreferenceService().getBoolean(key: AppConstants().prefKeyIsLoggedIn) == true) {'image': 'assets/images/logout.png', 'title': 'Logout', 'navigate': loginRoute},
-                          if (PreferenceService().getBoolean(key: AppConstants().prefKeyIsLoggedIn) == true)
-                            {'image': 'assets/images/profile.png', 'title': 'Delete Account', 'navigate': userDeleteRoute}
                         ],
                       ),
                     ),
@@ -81,6 +78,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                         mainTitle: 'Application',
                         subItems: [
                           {'image': 'assets/images/ic_setting.svg', 'title': 'સેટિંગ્સ', 'navigate': settingRoute},
+                          if (PreferenceService().getBoolean(key: AppConstants().prefKeyIsLoggedIn) == true) {'image': 'assets/images/profile.png', 'title': 'Delete Account', 'navigate': userDeleteRoute},
                           {'image': 'assets/images/info.png', 'title': 'અમારા વિશે', 'navigate': aboutRoute},
                         ],
                       ),

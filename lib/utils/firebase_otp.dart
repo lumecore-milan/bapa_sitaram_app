@@ -15,26 +15,35 @@ class FirebaseOtpHelper {
   final StreamController<OTPDetail> otpController = StreamController<OTPDetail>.broadcast();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   String verificationId = '';
-  Future<void> sendOTP({required String mobile}) async {
+  Future<bool> sendOTP({required String mobile}) async {
+    bool isCodeSent = false;
     verificationId = '';
-    await _auth.verifyPhoneNumber(
-      phoneNumber: mobile,
-      verificationCompleted: (PhoneAuthCredential credential) async {
-        otpController.sink.add(OTPDetail(sent: true, success: true, error: '', otp: credential.smsCode ?? ''));
-        await _auth.signInWithCredential(credential);
-      },
-      verificationFailed: (FirebaseAuthException e) {
-        otpController.sink.add(OTPDetail(sent: true, success: false, error: e.message ?? '', otp: ''));
-      },
-      codeSent: (String verificationIdParam, int? resendToken) {
-        verificationId = verificationIdParam;
+    try {
+      //  String temp = Platform.isAndroid ? mobile : '${mobile.substring(0, 3)} ${mobile.substring(3, 8)} ${mobile.substring(8, 12)}';
+      //  print(temp);
+      await _auth.verifyPhoneNumber(
+        phoneNumber: mobile,
+        verificationCompleted: (PhoneAuthCredential credential) async {
+          otpController.sink.add(OTPDetail(sent: true, success: true, error: '', otp: credential.smsCode ?? ''));
+          await _auth.signInWithCredential(credential);
+        },
+        verificationFailed: (FirebaseAuthException e) {
+          otpController.sink.add(OTPDetail(sent: true, success: false, error: e.message ?? '', otp: ''));
+        },
+        codeSent: (String verificationIdParam, int? resendToken) {
+          isCodeSent = true;
+          verificationId = verificationIdParam;
 
-        otpController.sink.add(OTPDetail(sent: true, success: false, error: '', otp: ''));
-      },
-      codeAutoRetrievalTimeout: (String verificationId) {
-        otpController.sink.add(OTPDetail(sent: true, success: false, error: verificationId, otp: ''));
-      },
-    );
+          otpController.sink.add(OTPDetail(sent: true, success: false, error: '', otp: ''));
+        },
+        codeAutoRetrievalTimeout: (String verificationId) {
+          otpController.sink.add(OTPDetail(sent: true, success: false, error: verificationId, otp: ''));
+        },
+      );
+    } catch (e) {
+      print('error while send otp $e');
+    }
+    return isCodeSent;
   }
 
   Future<(bool, Map<String, dynamic>)> verifyOTP({required String otp}) async {
@@ -46,7 +55,7 @@ class FirebaseOtpHelper {
         status = (true, {'name': result.user!.displayName ?? '', 'mobile': result.user!.phoneNumber ?? '', 'email': result.user!.email ?? '', 'profileImage': result.user!.photoURL ?? '', 'userId': result.user!.uid});
       }
     } catch (e) {
-      print('OTP Verification Failed: $e');
+      print('error  while verify otp $e');
     }
     return status;
   }

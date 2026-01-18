@@ -11,6 +11,7 @@ import 'package:bapa_sitaram/services/network/api_mobile.dart';
 import 'package:bapa_sitaram/services/preference_service.dart';
 
 class FeedController extends GetxController {
+    Rx<double> progress = (0.0).obs;
   int shareIndex = -1;
   final _apiInstance = NetworkServiceMobile();
   RxList<PostModel> posts = RxList();

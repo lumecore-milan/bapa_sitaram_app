@@ -88,8 +88,8 @@ import 'package:bapa_sitaram/widget/custom_text_field.dart';
 import 'package:bapa_sitaram/widget/image_widget.dart';
 
 class ContactUs extends StatefulWidget {
-  const ContactUs({super.key});
-
+  const ContactUs({super.key, this.isFromBottommenu = false});
+  final bool isFromBottommenu;
   @override
   State<ContactUs> createState() => _ContactUsState();
 }
@@ -115,158 +115,164 @@ class _ContactUsState extends State<ContactUs> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppbar(
-        title: 'Contact Us',
-        showDrawerIcon: false,
-        onBackTap: () {
-          Navigator.pop(context);
-        },
-      ),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                10.h,
-                Material(
-                  elevation: 8,
-                  borderRadius: BorderRadius.circular(10),
-                  child: Container(
-                    padding: const .all(10),
-                    decoration: BoxDecoration(
-                      borderRadius: .circular(10),
-                      color: CustomColors().white,
-                      boxShadow: [
-                        BoxShadow(
-                          color: CustomColors().green50,
-                          blurRadius: 10,
-                          spreadRadius: 2, // keep this 0 for OUTSIDE only
-                          offset: Offset.zero,
-                        ),
-                      ],
-                    ),
-
-                    child: Column(
-                      crossAxisAlignment: .start,
-                      children: [
-                        _contactDetail(image: 'assets/images/ic_phone.svg', title: 'મોબાઈલ  નંબર', value: controller.aboutUs['about_phone']),
-                        _contactDetail(image: 'assets/images/ic_email.svg', title: 'ઈમેલ', value: controller.aboutUs['about_email']),
-                        _contactDetail(image: 'assets/images/ic_address.svg', title: 'સરનામું', value: controller.aboutUs['address']),
-                      ],
-                    ),
-                  ),
-                ),
-                20.h,
-                Form(
-                  key: _formKey,
-                  child: Column(
-                    children: [
-                      10.h,
-                      CustomTextFormField(
-                        validator: (val) {
-                          if ((val ?? '').trim().isEmpty) {
-                            return 'નામ દાખલ કરો';
-                          }
-                          return null;
-                        },
-                        required: true,
-                        greyBorder: true,
-                        formatter: [formatterAllowOnlyAlphabetsWithSpace],
-                        controller: name,
-                        label: 'નામ*',
-                        hint: 'નામ દાખલ કરો',
-                        errorMessage: 'નામ દાખલ કરો',
-                      ),
-                      10.h,
-                      CustomTextFormField(
-                        validator: (val) {
-                          if ((val ?? '').trim().length != 10) {
-                            return 'મોબાઈલ નંબર દાખલ કરો';
-                          }
-                          return null;
-                        },
-                        greyBorder: true,
-                        required: true,
-                        isMobile: true,
-                        formatter: [formatterDigitsOnly, LengthLimitingTextInputFormatter(10)],
-                        inputType: const TextInputType.numberWithOptions(decimal: false, signed: true),
-                        controller: mobile,
-                        label: 'મોબાઈલ  નંબર*',
-                        hint: 'મોબાઈલ  નંબર દાખલ કરો',
-                        errorMessage: 'મોબાઈલ નંબર દાખલ કરો',
-                      ),
-                      10.h,
-                      CustomTextFormField(
-                        validator: (val) {
-                          if ((val ?? '').trim().isEmpty || GetUtils.isEmail(val ?? '') == false) {
-                            return 'ઈમેલ દાખલ કરો';
-                          }
-                          return null;
-                        },
-                        greyBorder: true,
-                        required: true,
-                        isMobile: true,
-                        formatter: [formatterEmail],
-                        inputType: TextInputType.emailAddress,
-                        controller: email,
-                        label: 'ઈમેલ*',
-                        hint: 'ઈમેલ દાખલ કરો',
-                        errorMessage: 'ઈમેલ દાખલ કરો',
-                      ),
-                      10.h,
-                      CustomTextFormField(
-                        validator: (val) {
-                          if ((val ?? '').trim().isEmpty) {
-                            return 'સંદેશ દાખલ કરો';
-                          }
-                          return null;
-                        },
-                        greyBorder: true,
-                        required: true,
-                        maxLines: 5,
-                        isMobile: true,
-                        formatter: [LengthLimitingTextInputFormatter(200)],
-                        controller: message,
-                        inputType: TextInputType.streetAddress,
-                        label: 'સંદેશ*',
-                        hint: 'સંદેશ',
-                        errorMessage: 'સંદેશ દાખલ કરો',
-                      ),
-
-                      20.h,
-                      CommonButton(
-                        color: CustomColors().blue700,
-                        onTap: () async {
-                          if (_formKey.currentState!.validate()) {
-                            try {
-                              Helper.showLoader();
-                              await NetworkServiceMobile().post(url: APIConstant().apiContactUs, requestBody: {'name': name.text, 'mobile_no': mobile.text, 'email': email.text, 'message': message.text}, isFormData: true).then((data) {
-                                Helper.closeLoader();
-                                Helper.showMessage(title: data['httpStatusCode'] == 200 ? 'Success' : 'Error', message: data['message'], isSuccess: data['httpStatusCode'] == 200);
-
-                                if (data['httpStatusCode'] == 200) {
-                                  name.clear();
-                                  mobile.clear();
-                                  email.clear();
-                                  message.clear();
-                                  _formKey.currentState?.reset();
-                                }
-                              });
-                            } catch (e) {
-                              LoggerService().log(message: e.toString());
-                            }
-                          }
-                        },
-                        title: 'સંદેશ મોકલો',
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+    return widget.isFromBottommenu == true
+        ? detailContent()
+        : Scaffold(
+            appBar: CustomAppbar(
+              title: 'Contact Us',
+              showDrawerIcon: false,
+              onBackTap: () {
+                Navigator.pop(context);
+              },
             ),
-          ),
+            body: SafeArea(child: detailContent()),
+          );
+  }
+
+  Widget detailContent() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            10.h,
+            Material(
+              elevation: 8,
+              borderRadius: BorderRadius.circular(10),
+              child: Container(
+                padding: const .all(10),
+                decoration: BoxDecoration(
+                  borderRadius: .circular(10),
+                  color: CustomColors().white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: CustomColors().green50,
+                      blurRadius: 10,
+                      spreadRadius: 2, // keep this 0 for OUTSIDE only
+                      offset: Offset.zero,
+                    ),
+                  ],
+                ),
+
+                child: Column(
+                  crossAxisAlignment: .start,
+                  children: [
+                    _contactDetail(image: 'assets/images/ic_phone.svg', title: 'મોબાઈલ  નંબર', value: controller.aboutUs['about_phone']),
+                    _contactDetail(image: 'assets/images/ic_email.svg', title: 'ઈમેલ', value: controller.aboutUs['about_email']),
+                    _contactDetail(image: 'assets/images/ic_address.svg', title: 'સરનામું', value: controller.aboutUs['address']),
+                  ],
+                ),
+              ),
+            ),
+            20.h,
+            Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  10.h,
+                  CustomTextFormField(
+                    validator: (val) {
+                      if ((val ?? '').trim().isEmpty) {
+                        return 'નામ દાખલ કરો';
+                      }
+                      return null;
+                    },
+                    required: true,
+                    greyBorder: true,
+                    formatter: [formatterAllowOnlyAlphabetsWithSpace],
+                    controller: name,
+                    label: 'નામ*',
+                    hint: 'નામ દાખલ કરો',
+                    errorMessage: 'નામ દાખલ કરો',
+                  ),
+                  10.h,
+                  CustomTextFormField(
+                    validator: (val) {
+                      if ((val ?? '').trim().length != 10) {
+                        return 'મોબાઈલ નંબર દાખલ કરો';
+                      }
+                      return null;
+                    },
+                    greyBorder: true,
+                    required: true,
+                    isMobile: true,
+                    formatter: [formatterDigitsOnly, LengthLimitingTextInputFormatter(10)],
+                    inputType: const TextInputType.numberWithOptions(decimal: false, signed: true),
+                    controller: mobile,
+                    label: 'મોબાઈલ  નંબર*',
+                    hint: 'મોબાઈલ  નંબર દાખલ કરો',
+                    errorMessage: 'મોબાઈલ નંબર દાખલ કરો',
+                  ),
+                  10.h,
+                  CustomTextFormField(
+                    validator: (val) {
+                      if ((val ?? '').trim().isEmpty || GetUtils.isEmail(val ?? '') == false) {
+                        return 'ઈમેલ દાખલ કરો';
+                      }
+                      return null;
+                    },
+                    greyBorder: true,
+                    required: true,
+                    isMobile: true,
+                    formatter: [formatterEmail],
+                    inputType: TextInputType.emailAddress,
+                    controller: email,
+                    label: 'ઈમેલ*',
+                    hint: 'ઈમેલ દાખલ કરો',
+                    errorMessage: 'ઈમેલ દાખલ કરો',
+                  ),
+                  10.h,
+                  CustomTextFormField(
+                    validator: (val) {
+                      if ((val ?? '').trim().isEmpty) {
+                        return 'સંદેશ દાખલ કરો';
+                      }
+                      return null;
+                    },
+                    greyBorder: true,
+                    required: true,
+                    maxLines: 5,
+                    isMobile: true,
+                    formatter: [LengthLimitingTextInputFormatter(200)],
+                    controller: message,
+                    inputType: TextInputType.streetAddress,
+                    label: 'સંદેશ*',
+                    hint: 'સંદેશ',
+                    errorMessage: 'સંદેશ દાખલ કરો',
+                  ),
+
+                  20.h,
+                  CommonButton(
+                    color: CustomColors().blue700,
+                    onTap: () async {
+                      if (_formKey.currentState!.validate()) {
+                        try {
+                          Helper.showLoader();
+                          await NetworkServiceMobile().post(url: APIConstant().apiContactUs, requestBody: {'name': name.text, 'mobile_no': mobile.text, 'email': email.text, 'message': message.text}, isFormData: true).then((data) {
+                            Helper.closeLoader();
+                            Helper.showMessage(title: data['httpStatusCode'] == 200 ? 'Success' : 'Error', message: data['message'], isSuccess: data['httpStatusCode'] == 200);
+
+                            if (data['httpStatusCode'] == 200) {
+                              name.clear();
+                              mobile.clear();
+                              email.clear();
+                              message.clear();
+                              _formKey.currentState?.reset();
+                            }
+                          });
+                        } catch (e) {
+                          LoggerService().log(message: e.toString());
+                        }
+                      }
+                    },
+                    title: 'સંદેશ મોકલો',
+                  ),
+                ],
+              ),
+            ),
+
+            50.h,
+          ],
         ),
       ),
     );

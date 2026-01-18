@@ -5,7 +5,7 @@ import 'package:bapa_sitaram/view/about.dart';
 import 'package:bapa_sitaram/view/account_delete.dart';
 import 'package:bapa_sitaram/view/contact.dart';
 import 'package:bapa_sitaram/view/detail_page.dart';
-import 'package:bapa_sitaram/view/donation.dart';
+
 import 'package:bapa_sitaram/view/my_donation.dart';
 import 'package:bapa_sitaram/view/press_media.dart';
 import 'package:bapa_sitaram/view/punam_list.dart';
@@ -74,12 +74,12 @@ Route<dynamic> generateRoute(RouteSettings settings) {
           detail = settings.arguments as Arti;
         }
         return MaterialPageRoute(builder: (context) => AartiPage(detail: detail));
-      case donationRoute:
+    /*  case donationRoute:
         bool showAppBBar = false;
         if (settings.arguments != null) {
           showAppBBar = settings.arguments as bool;
         }
-        return MaterialPageRoute(builder: (context) => DonationPage(showAppBar: showAppBBar));
+        return MaterialPageRoute(builder: (context) => DonationPage(showAppBar: showAppBBar));*/
       case pressRoute:
         return MaterialPageRoute(builder: (context) => const PressMedia());
       case socialActivityRoute:

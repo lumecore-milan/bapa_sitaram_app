@@ -55,6 +55,18 @@ class HelperService {
     }
   }
 
+  Future<void> stopSound({required String sound}) async {
+    try {
+      final player = _players[sound];
+      if (player == null) return;
+      if (player.playing) {
+        player.stop();
+      }
+    } catch (e) {
+      LoggerService().log(message: e.toString());
+    }
+  }
+
   Future<String?> pickFile({required AllowedFileType fileType, int defaultFileSizeINKB = 4096, String dialogTitle = 'Select file'}) async {
     try {
       List<String> allowedFileType = ['jpg', 'jpeg', 'png', 'pdf', 'heic'];

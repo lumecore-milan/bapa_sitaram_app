@@ -1,37 +1,20 @@
-import 'dart:io';
-
-import 'package:flutter/foundation.dart';
-
-import 'package:hive/hive.dart';
-import 'package:path_provider/path_provider.dart';
-
 import 'package:bapa_sitaram/services/encryption_service.dart';
 import 'package:bapa_sitaram/services/loger_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PreferenceService {
   factory PreferenceService() => _instance;
   PreferenceService._internal();
   static final PreferenceService _instance = PreferenceService._internal();
-  late final Box<dynamic> _box;
+  late final SharedPreferences _box;
   bool isInitialized = false;
-  bool isEncryptionEnabled = true;
-  Future<void> initPreference({bool encryptionEnabled = false}) async {
+  bool isEncryptionEnabled = false;
+  Future<void> initPreference() async {
     try {
-      isEncryptionEnabled = encryptionEnabled;
-      if (kIsWeb) {
-        if (isInitialized == false) {
-          _box = await Hive.openBox('prefs');
+          _box = await SharedPreferences.getInstance();
           isInitialized = true;
-        }
-      } else {
-        if (isInitialized == false) {
-          Directory dir = await getApplicationDocumentsDirectory();
-          Hive.init(dir.path);
-          _box = await Hive.openBox('prefs');
-          isInitialized = true;
-        }
-      }
     } catch (e) {
+      
       LoggerService().log(message: e);
     }
   }
@@ -48,7 +31,7 @@ class PreferenceService {
     if (isEncryptionEnabled) {
       setString(key: key, value: value.toString());
     } else {
-      _box.put(key, value);
+      _box.setInt(key, value);
     }
   }
 
@@ -62,7 +45,7 @@ class PreferenceService {
         return defaultValue;
       }
     } else {
-      return _box.get(key, defaultValue: defaultValue) ?? defaultValue;
+      return _box.getInt(key) ?? defaultValue;
     }
   }
 
@@ -70,13 +53,13 @@ class PreferenceService {
     try {
       if (isEncryptionEnabled) {
         if (value.isEmpty) {
-          _box.put(key, '');
+          _box.setString(key, '');
         } else {
           String encrypted = EncryptionService().encrypt(content: value);
-          _box.put(key, encrypted);
+          _box.setString(key, encrypted);
         }
       } else {
-        _box.put(key, value);
+        _box.setString(key, value);
       }
     } catch (e) {
       LoggerService().log(message: e);
@@ -86,7 +69,7 @@ class PreferenceService {
 
   String getString({required String key, String defaultValue = ''}) {
     try {
-      String value = _box.get(key, defaultValue: defaultValue);
+      String value = _box.getString(key)??defaultValue;
       if (isEncryptionEnabled) {
         if (value == defaultValue || value.isEmpty) return value;
         return EncryptionService().decrypt(encryptedContent: value);
@@ -102,7 +85,7 @@ class PreferenceService {
     if (isEncryptionEnabled) {
       setString(key: key, value: value.toString());
     } else {
-      _box.put(key, value);
+      _box.setBool(key, value);
     }
   }
 
@@ -111,7 +94,7 @@ class PreferenceService {
       String temp = getString(key: key);
       return temp == 'true';
     } else {
-      return _box.get(key, defaultValue: defaultValue) ?? defaultValue;
+      return _box.getBool(key) ?? defaultValue;
     }
   }
 
@@ -119,7 +102,7 @@ class PreferenceService {
     if (isEncryptionEnabled) {
       setString(key: key, value: value.toString());
     } else {
-      _box.put(key, value);
+      _box.setDouble(key, value);
     }
   }
 
@@ -128,7 +111,7 @@ class PreferenceService {
       String temp = getString(key: key);
       return double.tryParse(temp) ?? 0.0;
     } else {
-      return _box.get(key, defaultValue: 0.0) ?? 0.0;
+      return _box.getDouble(key) ?? 0.0;
     }
   }
 
@@ -145,11 +128,11 @@ class PreferenceService {
     } else {
       temp = value;
     }
-    _box.put(key, temp);
+    _box.setStringList(key, temp);
   }
 
   List<String> getStringList({required String key}) {
-    List<String> temp = (_box.get(key, defaultValue: <String>[]) as List?)?.cast<String>() ?? [];
+    List<String> temp = (_box.getStringList(key) as List?)?.cast<String>() ?? [];
     if (isEncryptionEnabled) {
       for (int i = 0; i < temp.length; i++) {
         if (temp[i].isNotEmpty) {
@@ -158,9 +141,5 @@ class PreferenceService {
       }
     }
     return temp;
-  }
-
-  void remove({required String key}) {
-    _box.delete(key);
   }
 }

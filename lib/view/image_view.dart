@@ -9,10 +9,16 @@ import 'package:bapa_sitaram/services/download/download_helper_mobile.dart';
 import 'package:bapa_sitaram/utils/route_generate.dart';
 import 'package:bapa_sitaram/widget/image_widget.dart';
 
-class ImageView extends StatelessWidget {
+class ImageView extends StatefulWidget {
   const ImageView({required this.url, required this.showDownloadIcon, super.key});
   final String url;
   final bool showDownloadIcon;
+
+  @override
+  State<ImageView> createState() => _ImageViewState();
+}
+
+class _ImageViewState extends State<ImageView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,17 +29,19 @@ class ImageView extends StatelessWidget {
           Navigator.pop(context);
         },
         showDownloadButton: true,
-        actions: showDownloadIcon == false
+        actions: widget.showDownloadIcon == false
             ? []
             : [
                 InkWell(
                   onTap: () async {
                     Helper.showLoader();
-                    await DownloadServiceMobile().download(url: url).then((t) {
+                    await DownloadServiceMobile().download(url: widget.url).then((t) {
                       Helper.closeLoader();
 
                       if (t != null) {
+                         if (mounted && context.mounted) {
                         navigate(context: context, replace: false, path: downloadPostRoute);
+                         }
                       }
                     });
                   },
@@ -46,7 +54,7 @@ class ImageView extends StatelessWidget {
           mainAxisAlignment: .center,
           children: [
             Expanded(child: Container()),
-            ImageWidget(url: url),
+            ImageWidget(url: widget.url),
             Expanded(child: Container()),
           ],
         ),

@@ -1,4 +1,5 @@
 import 'package:bapa_sitaram/constants/app_constant.dart';
+import 'package:flutter/foundation.dart';
 
 import 'package:get/get.dart';
 
@@ -20,10 +21,9 @@ class SplashController extends GetxController {
         if (data['httpStatusCode'] == 200 && data.isNotEmpty) {
           resp = (true, '');
           detail.value = AppSettingModel.fromJson(data);
-          AppConstants.detail=detail.value;
+          AppConstants.detail = detail.value;
 
-          if(detail.value.userInfo.userStatus=='deleted');
-          {
+          if (detail.value.userInfo.userStatus == 'deleted') {
             PreferenceService().clear();
           }
           detail.refresh();

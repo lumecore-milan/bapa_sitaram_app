@@ -45,7 +45,7 @@ void showLoginDialog({required BuildContext context}) {
                 onTap: () {
                   final d = Get.find<HomeDetailController>().appSetting;
                   Navigator.pop(context);
-                  navigate(context: context, replace: false, path: loginRoute, param: d);
+                  navigate(context: context, replace: true, path: loginRoute, param: d, removePreviousRoute: true);
                 },
                 title: 'OK',
                 color: CustomColors().orange600,
@@ -59,8 +59,7 @@ void showLoginDialog({required BuildContext context}) {
   );
 }
 
-
-void showAccountDeletionDialog({required BuildContext context,required VoidCallback onTap}) {
+void showAccountDeletionDialog({required BuildContext context, required VoidCallback onTap}) {
   showDialog(
     context: context,
     barrierDismissible: true,
@@ -97,13 +96,7 @@ void showAccountDeletionDialog({required BuildContext context,required VoidCallb
                     fullWidth: false,
                   ),
                   20.w,
-                  CommonButton(
-                    width: 100,
-                    onTap:onTap,
-                    title: 'OK',
-                    color: CustomColors().orange600,
-                    fullWidth: false,
-                  ),
+                  CommonButton(width: 100, onTap: onTap, title: 'OK', color: CustomColors().orange600, fullWidth: false),
                 ],
               ),
             ],
@@ -114,7 +107,7 @@ void showAccountDeletionDialog({required BuildContext context,required VoidCallb
   );
 }
 
-void showReActivateAccount({required BuildContext context,required VoidCallback onTap}) {
+void showReActivateAccount({required BuildContext context, required VoidCallback onTap}) {
   showDialog(
     context: context,
     barrierDismissible: true,
@@ -153,7 +146,7 @@ void showReActivateAccount({required BuildContext context,required VoidCallback 
                   20.w,
                   CommonButton(
                     width: 100,
-                    onTap:(){
+                    onTap: () {
                       Navigator.pop(context);
                       onTap();
                     },
@@ -170,6 +163,7 @@ void showReActivateAccount({required BuildContext context,required VoidCallback 
     },
   );
 }
+
 void showDarshanTimeDialog1({required BuildContext context}) {
   final HomeDetailController controller = Get.find<HomeDetailController>();
   showDialog(
@@ -426,8 +420,6 @@ void showDarshanTimeDialog({required BuildContext context}) {
                           shrinkWrap: true,
                           itemCount: 3,
                           itemBuilder: (_, index) {
-                           
-
                             return Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -596,8 +588,10 @@ void downloadProgress({required Rx<double> progress, required BuildContext conte
                 child: Obx(() {
                   if (progress.value >= 100) {
                     Future.microtask(() {
-                      if (Navigator.canPop(context)) {
-                        Navigator.pop(context);
+                      if (context.mounted) {
+                        if (Navigator.canPop(context)) {
+                          Navigator.pop(context);
+                        }
                       }
                     });
                   }
@@ -702,7 +696,9 @@ void downloadReceiptDialog({required BuildContext context, required dynamic deta
                             Helper.showLoader();
                             await DownloadServiceMobile().download(url: url).then((d) async {
                               Helper.closeLoader();
-                              Navigator.pop(context);
+                              if (context.mounted) {
+                                Navigator.pop(context);
+                              }
                               if (d != null) {
                                 final result = await OpenFilex.open(d);
 
@@ -747,10 +743,8 @@ void downloadReceiptDialog({required BuildContext context, required dynamic deta
 }
 
 void noInternetDialog() {
-  
-  
   Helper.showMessage(title: 'No Internet Connection', message: 'No Internet Connection. Please check your network settings and try again.', isSuccess: false);
-  
+
   AppConstants().isDialogOpen = true;
   /*showDialog(
     context: AppConstants().navigatorKey.currentContext!,
