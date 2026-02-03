@@ -4,6 +4,7 @@ import 'package:bapa_sitaram/services/firebase_service.dart';
 import 'package:bapa_sitaram/services/loger_service.dart';
 import 'package:bapa_sitaram/services/preference_service.dart';
 import 'package:bapa_sitaram/utils/events.dart';
+import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +35,7 @@ Future<void> runMicrotask() async {
 
       if (data.isNotEmpty) {
         pendingDetail = NotificationCLickDetail(id: '${data['value'] ?? ''}', type: '${data['type'] ?? ''}');
-       Future.delayed(const Duration(milliseconds: 700)).then((time) {
+        Future.delayed(const Duration(milliseconds: 700)).then((time) {
           notificationClicked.sink.add(pendingDetail);
         });
       }
@@ -49,6 +50,7 @@ Future<void> runMicrotask() async {
       FirebaseService().initialize(options: const {'apiKey': 'AIzaSyCpwuGMmEgNaJ3v0zvwMEL1z02EnEZmEUs', 'appId': '1:37795912856:android:3ef0533bd290649696c4ed', 'messagingSenderId': '', 'projectId': 'bapa-sitaram-7a3b2'}),
       //NotificationServiceMobile().initialize(),
     ]);
+    await FirebaseAppCheck.instance.activate(providerAndroid: const AndroidPlayIntegrityProvider(), providerApple: const AppleAppAttestProvider());
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
 
     PlatformDispatcher.instance.onError = (error, stack) {

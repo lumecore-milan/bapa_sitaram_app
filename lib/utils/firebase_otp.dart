@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:bapa_sitaram/utils/helper.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 final class OTPDetail {
@@ -19,15 +20,18 @@ class FirebaseOtpHelper {
     bool isCodeSent = false;
     verificationId = '';
     try {
+      // await _auth.setSettings(appVerificationDisabledForTesting: true);
       //  String temp = Platform.isAndroid ? mobile : '${mobile.substring(0, 3)} ${mobile.substring(3, 8)} ${mobile.substring(8, 12)}';
       //  print(temp);
       await _auth.verifyPhoneNumber(
         phoneNumber: mobile,
         verificationCompleted: (PhoneAuthCredential credential) async {
+          print('✅ SILENT PUSH VERIFICATION SUCCEEDED');
           otpController.sink.add(OTPDetail(sent: true, success: true, error: '', otp: credential.smsCode ?? ''));
           await _auth.signInWithCredential(credential);
         },
         verificationFailed: (FirebaseAuthException e) {
+          Helper.showMessage(title: 'Error', message: e.toString(), isSuccess: false);
           otpController.sink.add(OTPDetail(sent: true, success: false, error: e.message ?? '', otp: ''));
         },
         codeSent: (String verificationIdParam, int? resendToken) {

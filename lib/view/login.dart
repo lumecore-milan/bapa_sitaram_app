@@ -63,9 +63,9 @@ class _LoginPageState extends State<LoginPage> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _controller.isUserRegistered.value = PreferenceService().getBoolean(key: AppConstants().prefKeyIsRegistered);
-      if (_controller.isUserRegistered.value == true) {
+      /*if (_controller.isUserRegistered.value == true) {
         _mobileController.text = PreferenceService().getString(key: AppConstants().prefKeyMobile);
-      }
+      }*/
     });
   }
 
@@ -142,7 +142,7 @@ class _LoginPageState extends State<LoginPage> {
                             Text('બાપા સીતારામ', style: bolder(fontSize: 20)),
                             10.h,
                             Obx(
-                              () => _controller.isUserRegistered.value == true
+                              () => _controller.isUserRegistered.value == true && 1 < 0
                                   ? registrationForm()
                                   : Column(
                                       crossAxisAlignment: .start,
@@ -217,7 +217,7 @@ class _LoginPageState extends State<LoginPage> {
                                                           Helper.showLoader();
                                                           await FirebaseOtpHelper().verifyOTP(otp: val).then((status) async {
                                                             Helper.closeLoader();
-                                                            if (mounted && context.mounted) {
+                                                            if (status.$1 == true && context.mounted) {
                                                               await _login(context: context, status: status);
                                                             }
                                                             /* if (status.$1 == true) {
@@ -292,6 +292,7 @@ class _LoginPageState extends State<LoginPage> {
                                                   return;
                                                 }
                                                 Helper.showLoader();
+                                                _otpController.clear();
                                                 await FirebaseOtpHelper().sendOTP(mobile: '+91${_mobileController.text}');
 
                                                 /* if (Platform.isAndroid) {
@@ -347,10 +348,11 @@ class _LoginPageState extends State<LoginPage> {
             );
           }
         } else if (loginStatus.$1 == true) {
-          if ((loginStatus.$2['userStatus'] as String) == 'created') {
+          /*if ((loginStatus.$2['userStatus'] as String) == 'created') {
             PreferenceService().setBoolean(key: AppConstants().prefKeyIsRegistered, value: true);
             PreferenceService().setString(key: AppConstants().prefKeyMobile, value: _mobileController.text);
-          } else {
+          } else*/
+          {
             userDetail['userId'] = loginStatus.$2['userId'] ?? '';
             userDetail['mobile'] = loginStatus.$2['mobile'] ?? '';
             userDetail['name'] = loginStatus.$2['name'] ?? '';
@@ -363,10 +365,11 @@ class _LoginPageState extends State<LoginPage> {
           }
           PreferenceService().setInt(key: AppConstants().prefKeyUserId, value: int.parse(loginStatus.$2['userId'] as String));
           PreferenceService().setString(key: AppConstants().prefKeyUserDetail, value: json.encode(userDetail));
-          if ((loginStatus.$2['userStatus'] as String) == 'created') {
+          /*if ((loginStatus.$2['userStatus'] as String) == 'created') {
             _controller.isUserRegistered.value = true;
             _controller.isUserRegistered.refresh();
-          } else {
+          } else*/
+          {
             _mobileController.clear();
             if (mounted && context.mounted) {
               navigate(context: context, replace: true, path: homeRoute, param: widget.detail, removePreviousRoute: true);
